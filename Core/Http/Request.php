@@ -1,6 +1,6 @@
 <?php
 
-namespace Ptf\Core;
+namespace Ptf\Core\Http;
 
 /**
  * Encapsulates the server request

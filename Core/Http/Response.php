@@ -1,6 +1,6 @@
 <?php
 
-namespace Ptf\Core;
+namespace Ptf\Core\Http;
 
 /**
  * Encapsulates the server response
@@ -32,7 +32,7 @@ class Response
      *
      * @param   string $header              The header to set
      * @param   integer $responseCode       The response code to send with the header
-     * @return  \Ptf\Core\Response          The response object (for fluent interface)
+     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function setHeader($header, $responseCode = null)
     {
@@ -44,7 +44,7 @@ class Response
     /**
      * Set a "404 Not Found" header
      *
-     * @return  \Ptf\Core\Response          The response object (for fluent interface)
+     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function set404Header()
     {
@@ -56,7 +56,7 @@ class Response
      *
      * @param   string $url                 The URL to redirect to
      * @param   integer $responseCode       The redirect response code
-     * @return  \Ptf\Core\Response          The response object (for fluent interface)
+     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function setRedirectHeader($url, $responseCode = 302)
     {
@@ -67,7 +67,7 @@ class Response
      * Set a "Content-type" header
      *
      * @param   string $contentType         The content type to set
-     * @return  \Ptf\Core\Response          The response object (for fluent interface)
+     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function setContentTypeHeader($contentType)
     {
@@ -77,7 +77,7 @@ class Response
     /**
      * Set a JSON content type header
      *
-     * @return  \Ptf\Core\Response          The response object (for fluent interface)
+     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function setJsonHeader()
     {
@@ -87,7 +87,7 @@ class Response
     /**
      * Set a header to bypass the browser cache
      *
-     * @return  \Ptf\Core\Response          The response object (for fluent interface)
+     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function setNoCacheHeader()
     {
@@ -98,7 +98,7 @@ class Response
     /**
      * Clear all set headers
      *
-     * @return  \Ptf\Core\Response          The response object (for fluent interface)
+     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function clearHeaders()
     {
@@ -111,7 +111,7 @@ class Response
      * Set the content to send
      *
      * @param   string $content             The content to set
-     * @return  \Ptf\Core\Response          The response object (for fluent interface)
+     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function setContent($content)
     {
@@ -133,7 +133,7 @@ class Response
     /**
      * Send the set headers to the client
      *
-     * @return  \Ptf\Core\Response          The response object (for fluent interface)
+     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function sendHeaders()
     {
@@ -146,7 +146,7 @@ class Response
     /**
      * Send the set content to the client
      *
-     * @return  \Ptf\Core\Response          The response object (for fluent interface)
+     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function sendContent()
     {
@@ -158,7 +158,7 @@ class Response
     /**
      * Send the set headers and the content
      *
-     * @return  \Ptf\Core\Response          The response object (for fluent interface)
+     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function send()
     {

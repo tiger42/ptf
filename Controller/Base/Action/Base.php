@@ -55,9 +55,9 @@ abstract class Base
     /**
      * Execute the action
      *
-     * @param   \Ptf\Core\Request $request   The current request object
-     * @param   \Ptf\Core\Response $response The response object
+     * @param   \Ptf\Core\Http\Request $request   The current request object
+     * @param   \Ptf\Core\Http\Response $response The response object
      */
-    abstract public function execute(\Ptf\Core\Request $request, \Ptf\Core\Response $response);
+    abstract public function execute(\Ptf\Core\Http\Request $request, \Ptf\Core\Http\Response $response);
 
 }

@@ -13,12 +13,12 @@ abstract class Context
 
     /**
      * The request object
-     * @var \Ptf\Core\Request
+     * @var \Ptf\Core\Http\Request
      */
     protected $request;
     /**
      * The response object
-     * @var \Ptf\Core\Response
+     * @var \Ptf\Core\Http\Response
      */
     protected $response;
     /**
@@ -52,8 +52,8 @@ abstract class Context
      */
     private function __construct()
     {
-        $this->request  = new \Ptf\Core\Request();
-        $this->response = new \Ptf\Core\Response();
+        $this->request  = new \Ptf\Core\Http\Request();
+        $this->response = new \Ptf\Core\Http\Response();
         $this->configs  = [];
         $this->routingTable = [];
 
@@ -97,7 +97,7 @@ abstract class Context
     /**
      * Get the request object
      *
-     * @return  \Ptf\Core\Request           The request object
+     * @return  \Ptf\Core\Http\Request      The request object
      */
     public function getRequest()
     {
@@ -107,7 +107,7 @@ abstract class Context
     /**
      * Get the response object
      *
-     * @return  \Ptf\Core\Response          The response object
+     * @return  \Ptf\Core\Http\Response     The response object
      */
     public function getResponse()
     {
