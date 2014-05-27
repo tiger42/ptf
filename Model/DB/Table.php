@@ -126,7 +126,7 @@ class Table implements \ArrayAccess
         $this->tableName  = $tableName;
         $this->quotedName = $this->db->quoteIdentifier($tableName);
 
-        $this->initFetchVars(true);
+        $this->initFetchVars();
 
         $this->logger    = $context->getLogger('system');
         $this->errLogger = $context->getLogger('error');
@@ -291,22 +291,31 @@ class Table implements \ArrayAccess
 
     /**
      * Initialize the member variables for fetch() function
+     *
+     * @param   boolean $unjoinTables       Also remove all table joins?
      */
-    protected function initFetchVars()
+    protected function initFetchVars($unjoinTables = true)
     {
         $this->fields     = [];
         $this->aliases    = [];
         $this->fetched    = false;
-        $this->joinTables = [];
         $this->compModes  = [];
+        $this->order      = [];
+        $this->suppressAsterisk = false;
+
+        if ($unjoinTables) {
+            $this->joinTables = [];
+        }
     }
 
     /**
      * Clear all values, reset the search
+     *
+     * @param   boolean $unjoinTables       Also remove all table joins?
      */
-    public function clear()
+    public function clear($unjoinTables = true)
     {
-        $this->initFetchVars();
+        $this->initFetchVars($unjoinTables);
     }
 
     /**
