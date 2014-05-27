@@ -45,11 +45,12 @@ abstract class Auth
     }
 
     /**
-     * Check user authentication
+     * Check the user authentication and optionally refresh the expiry time
      *
+     * @param   boolean $refresh            Refresh the expiry time?
      * @return  boolean                     Is the user authenticated?
      */
-    final public function checkAuth()
+    final public function checkAuth($refresh = true)
     {
         $data = $this->session->authData;
 
@@ -61,9 +62,11 @@ abstract class Auth
             && time() <= $data['expiry'])
         {
             // Refresh the expiry time
-            $data['expiry']    = time() + $this->config->getIdletime();
-            $data['checkhash'] = md5($data['username'] . $data['expiry'] . $this->config->getSalt());
-            $this->session->authData = $data;
+            if ($refresh) {
+                $data['expiry']    = time() + $this->config->getIdletime();
+                $data['checkhash'] = md5($data['username'] . $data['expiry'] . $this->config->getSalt());
+                $this->session->authData = $data;
+            }
             return true;
         }
         $this->logout();
