@@ -41,6 +41,11 @@ class Table implements \ArrayAccess
     const COMP_CI   = 128;
 
     /**
+     * The application's context
+     * @var \Ptf\App\Context
+     */
+    protected $context;
+    /**
      * Database object
      * @var \Ptf\Model\DB
      */
@@ -121,6 +126,7 @@ class Table implements \ArrayAccess
      */
     public function __construct($tableName, \Ptf\App\Config\DB $config, \Ptf\App\Context $context, $id = '')
     {
+        $this->context    = $context;
         $this->db         = \Ptf\Model\DB::getInstance($config, $context, $id);
         $this->dbName     = $config->getDatabase();
         $this->tableName  = $tableName;
@@ -235,10 +241,13 @@ class Table implements \ArrayAccess
      *
      * @param   string $col                 The column to set the alias for
      * @param   string $alias               The name of the alias to set
+     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
      */
     public function setAlias($col, $alias)
     {
         $this->aliases[strtolower($col)] = $alias;
+
+        return $this;
     }
 
     /**
@@ -246,10 +255,13 @@ class Table implements \ArrayAccess
      *
      * @param   string $col                 The column to set the compare mode of
      * @param   integer $mode               The mode to set
+     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
      */
     public function setCompareMode($col, $mode)
     {
         $this->compModes[strtolower($col)] = $mode;
+
+        return $this;
     }
 
     /**
@@ -281,12 +293,14 @@ class Table implements \ArrayAccess
      * Copy all fields from the given source array into the internal fields array
      *
      * @param   array $source               The source array to copy from
+     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
      */
     public function fromArray(array $source)
     {
         foreach ($source as $key => $value) {
             $this->$key = $value;
         }
+        return $this;
     }
 
     /**
@@ -312,10 +326,13 @@ class Table implements \ArrayAccess
      * Clear all values, reset the search
      *
      * @param   boolean $unjoinTables       Also remove all table joins?
+     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
      */
     public function clear($unjoinTables = true)
     {
         $this->initFetchVars($unjoinTables);
+
+        return $this;
     }
 
     /**
@@ -323,6 +340,7 @@ class Table implements \ArrayAccess
      *
      * @param   string $orderBy             Name of column to order by
      * @param   string $orderDir            The order direction ("ASC" or "DESC")
+     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
      */
     public function setOrder($orderBy, $orderDir = 'ASC')
     {
@@ -342,6 +360,8 @@ class Table implements \ArrayAccess
         }
 
         $this->order[$orderBy] = $orderDir;
+
+        return $this;
     }
 
     /**
@@ -350,6 +370,7 @@ class Table implements \ArrayAccess
      * @param   \Ptf\Model\DB\Table $table  The table to join with
      * @param   string $onCond              The "ON" part of the join
      * @param   string $type                The join type
+     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
      * @throws  \InvalidArgumentException   If an invalid join type was given
      */
     public function join(\Ptf\Model\DB\Table $table, $onCond, $type = self::INNER_JOIN)
@@ -366,6 +387,8 @@ class Table implements \ArrayAccess
         ];
         $key = $table->getDBName() . '.' . $table->getName();
         $this->joinTables[$key] = $joinTbl;
+
+        return $this;
     }
 
     /**
@@ -620,6 +643,7 @@ class Table implements \ArrayAccess
      * Insert a row into the database table
      *
      * @param   boolean $replace            Use "REPLACE" instead of "INSERT"? (MySQL specific)
+     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
      */
     public function insert($replace = false)
     {
@@ -639,12 +663,15 @@ class Table implements \ArrayAccess
         $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, $sql);
 
         $this->db->execSql($sql);
+
+        return $this;
     }
 
     /**
      * Update rows of the database table
      *
      * @param   string $where               "WHERE" part of the update statement
+     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
      */
     public function update($where)
     {
@@ -666,12 +693,15 @@ class Table implements \ArrayAccess
         $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, $sql);
 
         $this->db->execSql($sql);
+
+        return $this;
     }
 
     /**
      * Delete rows from the database table
      *
      * @param   string $where               "WHERE" part of the delete statement (overrides set fields!)
+     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
      * @throws  \InvalidArgumentException   If no valid "WHERE" condition was given
      */
     public function delete($where = '')
@@ -699,6 +729,8 @@ class Table implements \ArrayAccess
         $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, $sql);
 
         $this->db->execSql($sql);
+
+        return $this;
     }
 
     /**
