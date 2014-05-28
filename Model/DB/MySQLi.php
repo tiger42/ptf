@@ -137,7 +137,7 @@ class MySQLi extends \Ptf\Model\DB
     }
 
     /**
-     * Return the last insert ID after an "INSERT" statement (only for autoincrement keys!)
+     * Return the last insert ID after an "INSERT" statement (works only for tables with autoincrement key!)
      *
      * @return  integer                     The last insert ID
      */
@@ -152,7 +152,7 @@ class MySQLi extends \Ptf\Model\DB
      * @param   string $tableName           Name of the table to determine the column names of
      * @return  string[]                    The names of the table's columns
      */
-    public function getColumnNames($tableName)
+    protected function getColumnNamesImpl($tableName)
     {
         $this->query('DESCRIBE ' . $this->quoteIdentifier($tableName));
         $columns = [];

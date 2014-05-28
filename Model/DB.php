@@ -37,6 +37,11 @@ abstract class DB
      * @var \Ptf\App\Context
      */
     protected $context;
+    /**
+     * Cache for column names per table
+     * @var array
+     */
+    protected $columnNames;
 
     /**
      * Initialize the member variables and connect to the database
@@ -47,9 +52,10 @@ abstract class DB
      */
     protected function __construct(\Ptf\App\Config\DB $config, \Ptf\App\Context $context, $id = '')
     {
-        $this->config     = $config;
-        $this->context    = $context;
-        $this->instanceId = $id;
+        $this->config      = $config;
+        $this->context     = $context;
+        $this->instanceId  = $id;
+        $this->columnNames = [];
 
         $this->logger    = $context->getLogger('system');
         $this->errLogger = $context->getLogger('error');
@@ -223,7 +229,7 @@ abstract class DB
     }
 
     /**
-     * Return the last insert ID after an "INSERT" statement (only for autoincrement keys!).<br />
+     * Return the last insert ID after an "INSERT" statement (works only for tables with autoincrement key!).<br />
      * (to be implemented by child classes)
      *
      * @return  integer                     The last insert ID
@@ -236,7 +242,22 @@ abstract class DB
      * @param   string $tableName           Name of the table to determine the column names of
      * @return  string[]                    The names of the table's columns
      */
-    abstract public function getColumnNames($tableName);
+    final public function getColumnNames($tableName)
+    {
+        if (!array_key_exists($tableName, $this->columnNames)) {
+            $this->columnNames[$tableName] = $this->getColumnNamesImpl($tableName);
+        }
+        return $this->columnNames[$tableName];
+    }
+
+    /**
+     * Return all column names of the given table.<br />
+     * (to be implemented by child classes)
+     *
+     * @param   string $tableName           Name of the table to determine the column names of
+     * @return  string[]                    The names of the table's columns
+     */
+    abstract protected function getColumnNamesImpl($tableName);
 
     /**
      * Start a transaction

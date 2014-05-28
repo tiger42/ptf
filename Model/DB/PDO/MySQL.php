@@ -50,7 +50,7 @@ class MySQL extends \Ptf\Model\DB\PDO
      * @param   string $tableName           The table to determine the column names of
      * @return  string[]                    The names of the table's columns
      */
-    public function getColumnNames($tableName)
+    protected function getColumnNamesImpl($tableName)
     {
         $this->query('DESCRIBE ' . $this->quoteIdentifier($tableName));
         $columns = [];

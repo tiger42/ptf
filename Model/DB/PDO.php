@@ -114,7 +114,7 @@ abstract class PDO extends \Ptf\Model\DB
     }
 
     /**
-     * Return the last insert ID after an "INSERT" statement (only for autoincrement keys!)
+     * Return the last insert ID after an "INSERT" statement (works only for tables with autoincrement key!)
      *
      * @return  integer                     The last insert ID
      */
