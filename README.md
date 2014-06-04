@@ -16,4 +16,4 @@ Optional dependencies
 ---------------------
 * Smarty 3.1+ template engine [(http://smarty.net)](http://smarty.net)
 * Memcached daemon for session storage [(http://memcached.org)](http://memcached.org).
-The PHP Memcache__d__ (__not__ Memcache!) extension must also be installed in order to use Memcached.
+The PHP Memcached (with "d" - __not__ Memcache!) extension must also be installed in order to use Memcached.
