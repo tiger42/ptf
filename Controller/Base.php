@@ -17,6 +17,11 @@ class Base
      * @var \Ptf\App\Context
      */
     protected $context;
+    /**
+     * The called action
+     * @var \Ptf\Controller\Base\Action\Base
+     */
+    protected $action;
 
     /**
      * Initialize the member variables
@@ -28,6 +33,7 @@ class Base
     {
         $this->name    = $controllerName;
         $this->context = $context;
+        $this->action  = null;
     }
 
     /**
@@ -49,13 +55,24 @@ class Base
             throw new \Ptf\Core\Exception\InvalidAction(get_class($this) . "::" . __FUNCTION__ . ": Action class not found: " . $className);
         }
 
-        $action = new $className($this);
+        $action = new $className($actionName, $this);
         if (!($action instanceof \Ptf\Controller\Base\Action\Base)) {
             throw new \Exception(get_class($this) . "::" . __FUNCTION__ . ": Action must extend base action: " . $className);
         }
+        $this->action = $action;
         $this->context->getLogger()->logSys(get_class($this) . "::" . __FUNCTION__, "Executing action: " . $className);
 
         $action->execute($this->context->getRequest(), $this->context->getResponse());
+    }
+
+    /**
+     * Get the controller's name
+     *
+     * @return  string                      The name of the controller
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -66,6 +83,16 @@ class Base
     public function getDefaultActionName()
     {
         return 'Index';
+    }
+
+    /**
+     * Get the called action
+     *
+     * @return  \Ptf\Controller\Base\Action\Base The called action
+     */
+    public function getAction()
+    {
+        return $this->action;
     }
 
     /**

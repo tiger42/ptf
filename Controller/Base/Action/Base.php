@@ -8,6 +8,11 @@ namespace Ptf\Controller\Base\Action;
 abstract class Base
 {
     /**
+     * The action's name
+     * @var string
+     */
+    protected $name;
+    /**
      * The controller owning the action
      * @var \Ptf\Controller\Base
      */
@@ -18,9 +23,20 @@ abstract class Base
      *
      * @param   \Ptf\Controller\Base $controller The action's controller
      */
-    public function __construct(\Ptf\Controller\Base $controller)
+    public function __construct($actionName, \Ptf\Controller\Base $controller)
     {
+        $this->name = $actionName;
         $this->controller = $controller;
+    }
+
+    /**
+     * Return the action's name
+     *
+     * @return  string                      The name of the action
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
