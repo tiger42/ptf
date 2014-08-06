@@ -59,8 +59,8 @@ class IniFile
     public function getValue($section, $key)
     {
         if (isset($this->data[$section])
-            && array_key_exists($key, $this->data[$section]))
-        {
+            && array_key_exists($key, $this->data[$section])
+        ) {
             return $this->data[$section][$key];
         }
         return null;

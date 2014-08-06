@@ -36,8 +36,8 @@ class DB extends \Ptf\Core\Auth
             $dbTable->{$this->config->getColIsActive()} = 1;
         }
         if ($dbTable->fetch()
-            && $this->checkPassword($password, $dbTable->{$this->config->getColPassword()}))
-        {
+            && $this->checkPassword($password, $dbTable->{$this->config->getColPassword()})
+        ) {
             $data = $this->session->authData;
             if (strlen($this->config->getColUserId())) {
                 $data['userid'] = $dbTable->{$this->config->getColUserId()};

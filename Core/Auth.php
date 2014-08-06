@@ -59,8 +59,8 @@ abstract class Auth
             && isset($data['expiry'])
             && isset($data['checkhash'])
             && md5($data['username'] . $data['expiry'] . $this->config->getSalt()) == $data['checkhash']
-            && time() <= $data['expiry'])
-        {
+            && time() <= $data['expiry']
+        ) {
             // Refresh the expiry time
             if ($refresh) {
                 $data['expiry']    = time() + $this->config->getIdletime();

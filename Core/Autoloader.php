@@ -50,8 +50,8 @@ class Autoloader
     public function load($className)
     {
         if (isset($this->fileMapping[$className])
-            && (@include $this->fileMapping[$className]) !== false)
-        {
+            && (@include $this->fileMapping[$className]) !== false
+        ) {
             return;
         }
 
@@ -87,8 +87,9 @@ class Autoloader
         if ((@include $filename) !== false
                 && (class_exists($className, false)
                     || trait_exists($className, false)
-                    || interface_exists($className, false)))
-        {
+                    || interface_exists($className, false)
+                )
+        ) {
             $this->fileMapping[$className] = $filename;
             $this->writeCacheFile();
             return true;

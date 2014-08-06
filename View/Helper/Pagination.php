@@ -47,8 +47,8 @@ class Pagination
     public function __construct($curPage, $itemsPerPage, $itemCount, $listCount = 5)
     {
         if (!Util\is_whole_number($curPage) || !Util\is_whole_number($itemsPerPage)
-            || !Util\is_whole_number($itemCount) || !Util\is_whole_number($listCount))
-        {
+            || !Util\is_whole_number($itemCount) || !Util\is_whole_number($listCount)
+        ) {
             throw new \InvalidArgumentException(get_class($this) . "::" . __FUNCTION__ . ": Non-integer parameter given");
         }
         $this->itemsPerPage = $itemsPerPage;

@@ -106,8 +106,8 @@ class Base
 
         // Only an action (w/o controller) was given or controller is current controller
         if (strpos($route, '/') === false
-            || strpos(strtolower($route), strtolower($this->name) . '/') === 0)
-        {
+            || strpos(strtolower($route), strtolower($this->name) . '/') === 0
+        ) {
             $this->dispatch($route);
         } else {
             \Ptf\Core\Router::matchRoute($route, $this->context);
