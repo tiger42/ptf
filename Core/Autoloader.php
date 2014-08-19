@@ -149,7 +149,7 @@ class Autoloader
         }
 
         $str = "\$mapping = " . var_export($this->fileMapping, true) . ";\n";
-        $ret = fwrite($handle, "<?php\n// Generated on: " . \Ptf\Util\now() . "\n\n" . $str);
+        fwrite($handle, "<?php\n// Generated on: " . \Ptf\Util\now() . "\n\n" . $str);
         flock($handle, LOCK_UN);
         fclose($handle);
         rename($this->cacheFilename . '.tmp', $this->cacheFilename);

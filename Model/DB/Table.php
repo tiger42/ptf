@@ -448,7 +448,7 @@ class Table implements \ArrayAccess
             $str .= implode(' AND ', $cond);
         }
 
-        foreach ($this->joinTables as $key => $joinTbl) {
+        foreach ($this->joinTables as $joinTbl) {
             $table = $joinTbl['table'];
             $cond  = $table->getWhereCondition();
             $str .= strlen($cond) ? ' AND ' . $cond : '';
@@ -505,7 +505,7 @@ class Table implements \ArrayAccess
                     $query .= ', ' . implode(', ', $additional);
                 }
 
-                foreach ($this->joinTables as $key => $joinTbl) {
+                foreach ($this->joinTables as $joinTbl) {
                     $arr = [];
                     foreach ($joinTbl['table']->getColumnNames() as $col) {
                         $col = strtolower($col);

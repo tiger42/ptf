@@ -153,17 +153,17 @@ class Pagination
         if (Util\even($this->listCount)) {
             $start++;
         }
-        while ($start < 1) {
-            $start++;
+        if ($start < 1) {
+        	$start = 1;
         }
         $end = $start + $this->listCount - 1;
-        while ($end > $this->getPageCount()) {
+        $pageCount = $this->getPageCount();
+        while ($end > $pageCount) {
             $start--;
             $end--;
         }
 
         $pages = [];
-        $pagecount = $this->getPageCount();
         for ($i = $start; $i <= $end; $i++) {
             $pages[] = $i;
         }
@@ -208,5 +208,5 @@ class Pagination
         }
         return $paramsStr;
     }
-
+    
 }
