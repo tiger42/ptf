@@ -51,6 +51,7 @@ class Plain extends Base
      * Fetch the content of the set template as a string
      *
      * @param   string $cacheId             An additional cache ID, if multiple caches for the template are used
+     * @return  string                      The fetched template
      * @throws  \RuntimeException           If no template has been set
      */
     public function fetch($cacheId = null)
