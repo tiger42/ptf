@@ -33,6 +33,7 @@ abstract class Base implements \ArrayAccess
     public function __construct(\Ptf\App\Config\View $config)
     {
         $this->config = $config;
+        $this->assignedVars = [];
     }
 
     /**
