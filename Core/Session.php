@@ -30,9 +30,8 @@ abstract class Session
      */
     protected $sessionName;
 
-
     /**
-     * Initialize the session object
+     * Initialize the session object, must be called before start()
      *
      * @param   \Ptf\App\Config\Session $config The configuration to initialize with
      * @param   \Ptf\App\Context $context       The application's context

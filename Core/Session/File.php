@@ -10,14 +10,19 @@ namespace Ptf\Core\Session;
 class File extends \Ptf\Core\Session
 {
     /**
-     * Initialize the member variables
+     * Initialize the File session, must be called before start()
      *
      * @param   \Ptf\App\Config\SessionFile $config The configuration to initialize with
      * @param   \Ptf\App\Context $context           The application's context
+     * @throws  \InvalidArgumentException           If the Config object has the wrong type
      * @throws  \RuntimeException                   If the session save path is not writable
      */
-    public function init(\Ptf\App\Config\SessionFile $config, \Ptf\App\Context $context)
+    public function init(\Ptf\App\Config\Session $config, \Ptf\App\Context $context)
     {
+        if (!($config instanceof \Ptf\App\Config\SessionFile)) {
+            throw new \InvalidArgumentException(get_class($this) . "::" . __FUNCTION__ . ": \$config must be instance of class \\Ptf\\App\\Config\\SessionFile");
+        }
+
         parent::init($config, $context);
 
         if (!is_writable(session_save_path())) {
