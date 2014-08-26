@@ -1,0 +1,1 @@
+included:<?php $this->include_tpl('test.tpl', ['param' => 'asdf']); ?>:end

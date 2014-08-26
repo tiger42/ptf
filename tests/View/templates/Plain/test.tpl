@@ -1,0 +1,1 @@
+foo<?= "bar" ?><?= $this->test ?>ba<?= $param ?>z

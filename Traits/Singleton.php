@@ -35,6 +35,7 @@ trait Singleton
 
     /**
      * Prevent Singleton instance of the class from being cloned
+     * @codeCoverageIgnore
      */
     final private function __clone()
     {
@@ -42,6 +43,7 @@ trait Singleton
 
     /**
      * Prevent Singleton instance of the class from being unserialized
+     * @codeCoverageIgnore
      */
     final private function __wakeup()
     {

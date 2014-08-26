@@ -1,0 +1,21 @@
+<phpunit
+    colors    = "true"
+    bootstrap = "tests/bootstrap.php"
+    backupGlobals = "false"
+>
+    <testsuites>
+        <testsuite name="Ptf">
+            <directory>tests/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">*</directory>
+            <exclude>
+                <directory>tests</directory>
+                <directory>3rdparty</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
