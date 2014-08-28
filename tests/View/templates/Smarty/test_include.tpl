@@ -1,0 +1,1 @@
+included:{include file="test.tpl" param="asdf"}:end

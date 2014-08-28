@@ -1,0 +1,1 @@
+This is our own <?= "404" ?> template.

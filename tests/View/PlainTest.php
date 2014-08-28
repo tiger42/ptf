@@ -67,9 +67,8 @@ class PlainTest extends \PHPUnit_Framework_TestCase
 
     public function testFetch404Page()
     {
-        $config = new \Ptf\App\Config\ViewPlain();
-        $config->template_dir = __DIR__ . '/templates';
-        $config->template_404 = 'test_404.phtml';
+        $config = $this->createConfig();
+        $config->template_404 = 'test_404.tpl';
         $view = new \Ptf\View\Plain($config);
         $this->assertSame('This is our own 404 template.', $view->fetch404Page());
     }
@@ -83,7 +82,7 @@ class PlainTest extends \PHPUnit_Framework_TestCase
     public function testPlugin()
     {
         $view = $this->createView('test_plugin.tpl');
-        $view->registerPlugin('sum', function ($params, \Ptf\View\Plain $view) {
+        $view->registerPlugin('sum', function (array $params, \Ptf\View\Plain $view) {
             return $params[0] + $params[1];
         });
         $view->registerPlugin('helloWorld', function (\Ptf\View\Plain $view) {
