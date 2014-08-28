@@ -77,6 +77,16 @@ class Smarty extends Base
     }
 
     /**
+     * Get the internal Smarty object
+     *
+     * @return    \Smarty                   The internal Smarty object
+     */
+    public function getSmartyObject()
+    {
+        return $this->smarty;
+    }
+
+    /**
      * Clear the complete cache and the compiled templates dir
      */
     public function clearAll()
