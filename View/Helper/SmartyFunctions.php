@@ -49,7 +49,7 @@ class SmartyFunctions
     public static function paginationFirst(array $params, \Smarty_Internal_Template $template)
     {
         $pagination = $template->getTemplateVars('pagination');
-        if (!($pagination instanceof \Ptf\View\Helper\Pagination)) {
+        if (!($pagination instanceof Pagination)) {
             trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
         }
 
@@ -66,7 +66,7 @@ class SmartyFunctions
                 $link = isset($params['link']) ? $params['link'] : $default;
                 $urlParams = $pagination->generateUrlParamsString($params);
 
-                return '<a href="' . $params['url'] .'?page=' . $pagination->getFirstPage() . $urlParams . '">' . $link . '</a>';
+                return '<a href="' . $params['url'] . '?page=' . $pagination->getFirstPage() . $urlParams . '">' . $link . '</a>';
             }
         }
         return $pagination->getFirstPage();
@@ -96,7 +96,7 @@ class SmartyFunctions
     public static function paginationPrev(array $params, \Smarty_Internal_Template $template)
     {
         $pagination = $template->getTemplateVars('pagination');
-        if (!($pagination instanceof \Ptf\View\Helper\Pagination)) {
+        if (!($pagination instanceof Pagination)) {
             trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
         }
 
@@ -113,7 +113,7 @@ class SmartyFunctions
                 $link = isset($params['link']) ? $params['link'] : $default;
                 $urlParams = $pagination->generateUrlParamsString($params);
 
-                return '<a href="' . $params['url'] .'?page=' . $pagination->getPrevPage() . $urlParams . '">' . $link . '</a>';
+                return '<a href="' . $params['url'] . '?page=' . $pagination->getPrevPage() . $urlParams . '">' . $link . '</a>';
             }
         }
         return $pagination->getPrevPage();
@@ -143,7 +143,7 @@ class SmartyFunctions
     public static function paginationNext(array $params, \Smarty_Internal_Template $template)
     {
         $pagination = $template->getTemplateVars('pagination');
-        if (!($pagination instanceof \Ptf\View\Helper\Pagination)) {
+        if (!($pagination instanceof Pagination)) {
             trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
         }
 
@@ -160,7 +160,7 @@ class SmartyFunctions
                 $link = isset($params['link']) ? $params['link'] : $default;
                 $urlParams = $pagination->generateUrlParamsString($params);
 
-                return '<a href="' . $params['url'] .'?page=' . $pagination->getNextPage() . $urlParams . '">' . $link . '</a>';
+                return '<a href="' . $params['url'] . '?page=' . $pagination->getNextPage() . $urlParams . '">' . $link . '</a>';
             }
         }
         return $pagination->getNextPage();
@@ -190,7 +190,7 @@ class SmartyFunctions
     public static function paginationLast(array $params, \Smarty_Internal_Template $template)
     {
         $pagination = $template->getTemplateVars('pagination');
-        if (!($pagination instanceof \Ptf\View\Helper\Pagination)) {
+        if (!($pagination instanceof Pagination)) {
             trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
         }
 
@@ -207,7 +207,7 @@ class SmartyFunctions
                 $link = isset($params['link']) ? $params['link'] : $default;
                 $urlParams = $pagination->generateUrlParamsString($params);
 
-                return '<a href="' . $params['url'] .'?page=' . $pagination->getLastPage() . $urlParams . '">' . $link . '</a>';
+                return '<a href="' . $params['url'] . '?page=' . $pagination->getLastPage() . $urlParams . '">' . $link . '</a>';
             }
         }
         return $pagination->getLastPage();
@@ -231,7 +231,7 @@ class SmartyFunctions
     public static function paginationList(array $params, \Smarty_Internal_Template $template)
     {
         $pagination = $template->getTemplateVars('pagination');
-        if (!($pagination instanceof \Ptf\View\Helper\Pagination)) {
+        if (!($pagination instanceof Pagination)) {
             trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
         }
 
@@ -263,7 +263,7 @@ class SmartyFunctions
     public static function paginationCount(array $params, \Smarty_Internal_Template $template)
     {
         $pagination = $template->getTemplateVars('pagination');
-        if (!($pagination instanceof \Ptf\View\Helper\Pagination)) {
+        if (!($pagination instanceof Pagination)) {
             trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
         }
 
@@ -271,7 +271,7 @@ class SmartyFunctions
     }
 
     /**
-     * Insert the value of the SID constant
+     * Get the value of the SID constant
      *
      * @return  string                      The SID constant
      */

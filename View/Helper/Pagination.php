@@ -80,7 +80,7 @@ class Pagination
                 $this->pageCount++;
             }
         }
-        return $this->pageCount;
+        return (int)$this->pageCount;
     }
 
     /**
@@ -203,7 +203,7 @@ class Pagination
         if (strlen($paramsStr)) {
             $paramsStr = '&amp;' . $paramsStr;
         }
-        if (strlen(SID)) {
+        if (defined('SID') && strlen(SID)) {
             $paramsStr .= '&amp;' . SID;
         }
         return $paramsStr;
