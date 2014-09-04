@@ -4,17 +4,11 @@ namespace PtfTest;
 
 class SmartyTest extends \PHPUnit_Framework_TestCase
 {
-	public function __destruct()
-	{
-		@rmdir(sys_get_temp_dir() . '/ptf_test');
-	}
-
     public function testRender()
     {
         $view = $this->createView();
         $view->render();
         $this->expectOutputString('foobarbaz');
-        $view->clearAll();
     }
 
     public function testRender2()
@@ -23,7 +17,6 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $view->test = 'hello';
         $view->render();
         $this->expectOutputString('foobarhellobaz');
-        $view->clearAll();
     }
 
     public function testRender3()
@@ -32,7 +25,6 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $view['test'] = 'world';
         $view->render();
         $this->expectOutputString('foobarworldbaz');
-        $view->clearAll();
     }
 
     public function testRenderException()
@@ -48,7 +40,6 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     {
         $view = $this->createView();
         $this->assertSame('foobarbaz', $view->fetch());
-        $view->clearAll();
     }
 
     public function testFetch2()
@@ -56,7 +47,6 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $view = $this->createView();
         $view->test = 'hello';
         $this->assertSame("foobarhellobaz", $view->fetch());
-        $view->clearAll();
     }
 
     public function testFetch3()
@@ -64,7 +54,6 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $view = $this->createView();
         $view['test'] = 'world';
         $this->assertSame('foobarworldbaz', $view->fetch());
-        $view->clearAll();
     }
 
     public function testFetchException()
@@ -82,27 +71,49 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $config->template_404 = 'test_404.tpl';
         $view = new \Ptf\View\Smarty($config);
         $this->assertSame('This is our own 404 template.', $view->fetch404Page());
-        $view->clearAll();
     }
 
     public function testInclude()
     {
         $view = $this->createView('test_include.tpl');
         $this->assertSame('included:foobarbaasdfz:end', $view->fetch());
-        $view->clearAll();
     }
-    
+
     public function testGettersAndSetters()
-    {	
-    	$view = $this->createView();
-    	$smarty = $view->getSmartyObject();
-    	$view->foo = 'bar';
-    	$view['bar'] = 'foo';
-    	$this->assertSame('bar', $smarty->getTemplateVars('foo'));
-    	$this->assertSame('foo', $smarty->getTemplateVars('bar'));
-    	unset($view['foo']);
-    	$this->assertNull($smarty->getTemplateVars('foo'));
-    	$this->assertSame('foo', $smarty->getTemplateVars('bar'));
+    {
+        $view = $this->createView();
+        $smarty = $view->getSmartyObject();
+        $view->foo = 'bar';
+        $view['bar'] = 'foo';
+        $this->assertSame('bar', $smarty->getTemplateVars('foo'));
+        $this->assertSame('foo', $smarty->getTemplateVars('bar'));
+        unset($view['foo']);
+        $this->assertNull($smarty->getTemplateVars('foo'));
+        $this->assertSame('foo', $smarty->getTemplateVars('bar'));
+    }
+
+    public function testGetSmartyObject()
+    {
+        $view = $this->createView();
+        $smarty = $view->getSmartyObject();
+        $this->assertInstanceOf('\\Smarty', $smarty);
+    }
+
+    public function testClearAll()
+    {
+        $config = $this->createConfig();
+        $config->caching = 1;
+        $view = new \Ptf\View\Smarty($config);
+        $view->setTemplateName('test.tpl');
+        $directory = sys_get_temp_dir() . '/ptf_test';
+        $files = array_diff(scandir($directory), ['..', '.']);
+        $this->assertCount(0, $files);
+        $view->fetch();
+        $files = array_diff(scandir($directory), ['..', '.']);
+        $this->assertCount(2, $files);
+        $view->clearAll();
+        $files = array_diff(scandir($directory), ['..', '.']);
+        $this->assertCount(0, $files);
     }
 
     public function testIsCached()
@@ -113,7 +124,6 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $view->fetch();
         $this->assertFalse($view->isCached());
         $this->assertFalse($view->isCached('test.tpl'));
-        $view->clearAll();
     }
 
     public function testIsCached2()
@@ -128,7 +138,6 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($view->isCached('test.tpl', 'unknownId'));
         $view->clearCache();
         $this->assertFalse($view->isCached());
-        $view->clearAll();
     }
 
     public function testIsCached3()
@@ -144,7 +153,17 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($view->isCached('test.tpl', 'testCacheId'));
         $view->clearCache();
         $this->assertFalse($view->isCached('test.tpl', 'testCacheId'));
+    }
+
+    public function tearDown()
+    {
+        $view = $this->createView();
         $view->clearAll();
+    }
+
+    public static function tearDownAfterClass()
+    {
+        @rmdir(sys_get_temp_dir() . '/ptf_test');
     }
 
     private function createView($templateName = 'test.tpl')
@@ -160,8 +179,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     {
         $config = new \Ptf\App\Config\ViewSmarty();
         $config->template_dir = __DIR__ . '/templates/Smarty';
-        $config->compile_dir  = sys_get_temp_dir() . '/ptf_test';
-        $config->cache_dir    = sys_get_temp_dir() . '/ptf_test';
+        $config->compile_dir = $config->cache_dir = sys_get_temp_dir() . '/ptf_test';
 
         return $config;
     }
