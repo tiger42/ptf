@@ -1,6 +1,6 @@
 <?php
 
-namespace PtfTest;
+namespace PtfTest\Traits;
 
 class SingletonTest extends \PHPUnit_Framework_TestCase
 {

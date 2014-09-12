@@ -1,6 +1,6 @@
 <?php
 
-namespace PtfTest;
+namespace PtfTest\View\Helper;
 
 use \Ptf\View\Helper\Pagination;
 

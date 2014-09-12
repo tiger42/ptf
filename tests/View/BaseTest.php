@@ -1,6 +1,6 @@
 <?php
 
-namespace PtfTest;
+namespace PtfTest\View;
 
 class BaseTest extends \PHPUnit_Framework_TestCase
 {

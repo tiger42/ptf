@@ -1,6 +1,6 @@
 <?php
 
-namespace PtfTest;
+namespace PtfTest\View;
 
 class SmartyTest extends \PHPUnit_Framework_TestCase
 {
