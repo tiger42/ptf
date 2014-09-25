@@ -135,7 +135,7 @@ abstract class Context
      */
     public function getLogger($logger = 'system')
     {
-        return isset($this->loggers[$logger]) ? $this->loggers[$logger] : \Ptf\Util\Logger\DevNull::getInstance('dummy');
+        return isset($this->loggers[$logger]) ? $this->loggers[$logger] : \Ptf\Util\Logger\DevNull::getInstance('dummy', $this);
     }
 
     /**
