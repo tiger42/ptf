@@ -2,6 +2,6 @@
 
 namespace PtfTest;
 
-require_once 'tests/Application.php';
+require_once 'tests/src/Application.php';
 
 Application::run();

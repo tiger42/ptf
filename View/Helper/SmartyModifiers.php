@@ -25,7 +25,7 @@ class SmartyModifiers
      */
     public static function dblbr2p($string)
     {
-        return preg_replace('/<br *\/?>\s*<br *\/?>/m', "\n</p>\n<p>", $string);
+        return preg_replace('/<br[\s]*\/?>\s*<br[\s]*\/?>/m', "\n</p>\n<p>", $string);
     }
 
 }

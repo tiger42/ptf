@@ -14,12 +14,12 @@ class Application extends \Ptf\Application
 
     public static function getContext()
     {
-        return \PtfTest\Context::getInstance();
+        return \PtfTest\App\Context::getInstance();
     }
 
     protected static function initAutoloader(\Ptf\Core\Autoloader $autoloader)
     {
-        $autoloader->registerNamespace('PtfTest', 'tests');
+        $autoloader->registerNamespace('PtfTest', 'tests/src');
     }
 
 }
