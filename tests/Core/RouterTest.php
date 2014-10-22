@@ -10,9 +10,10 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     {
         $context = \Ptf\Application::getContext();
 
-        $this->assertTrue(Router::matchRoute('test/dummy', $context));
-        $this->assertFalse(Router::matchRoute('Dummy', $context));
-        $this->assertFalse(Router::matchRoute('/dummy', $context));
+        $this->assertTrue(Router::matchRoute('test/dummy_action', $context));
+        $this->assertTrue(Router::matchRoute('test/DummyAction', $context));
+        $this->assertFalse(Router::matchRoute('DummyAction', $context));
+        $this->assertFalse(Router::matchRoute('/dummy_action', $context));
         $this->assertTrue(Router::matchRoute('test/index', $context));
         $this->assertTrue(Router::matchRoute('test/INDEX', $context));
         $this->assertTrue(Router::matchRoute('Test', $context));
@@ -22,44 +23,44 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Router::matchRoute('', $context));
 
         $this->assertFalse(Router::matchRoute('foo', $context));
-        $this->assertTrue(Router::matchRoute('bar', $context));
-        $this->assertTrue(Router::matchRoute('foo/bar', $context));
-        $this->assertFalse(Router::matchRoute('baz', $context));
+        $this->assertTrue(Router::matchRoute('bar', $context));   // => test/DummyAction
+        $this->assertTrue(Router::matchRoute('foo/bar', $context));   // => /index
+        $this->assertFalse(Router::matchRoute('baz', $context));    // => index
     }
 
     public function testMatchRequestRoute()
     {
         $context = \Ptf\Application::getContext();
 
-        // /index => base/index
+        // /index => Base/Index
         $_REQUEST['action'] = 'index';
         $this->assertTrue(Router::matchRequestRoute($context));
 
-        // /Dummy => base/dummy
-        $_REQUEST['action'] = 'dummy';
+        // /Dummy_action => Base/DummyAction
+        $_REQUEST['action'] = 'Dummy_action';
         $this->assertFalse(Router::matchRequestRoute($context));
 
-        // Test/Dummy => test/dummy
+        // Test/Dummy_action => Test/DummyAction
         $_REQUEST['controller'] = 'Test';
         $this->assertTrue(Router::matchRequestRoute($context));
 
-        // BasE/Dummy => base/dummy
+        // BasE/Dummy_action => Base/DummyAction
         $_REQUEST['controller'] = 'BasE';
         $this->assertFalse(Router::matchRequestRoute($context));
 
-        // BasE/foo => base/foo
+        // BasE/foo => Base/Foo
         $_REQUEST['action'] = 'foo';
         $this->assertFalse(Router::matchRequestRoute($context));
 
-        // BasE/INDEX => base/index
+        // BasE/INDEX => Base/Index
         $_REQUEST['action'] = 'INDEX';
         $this->assertTrue(Router::matchRequestRoute($context));
 
-        // BasE/ => base/index
+        // BasE/ => Base/Index
         unset($_REQUEST['action']);
         $this->assertTrue(Router::matchRequestRoute($context));
 
-        // / => base/index
+        // / => Base/Index
         unset($_REQUEST['controller']);
         $this->assertTrue(Router::matchRequestRoute($context));
     }

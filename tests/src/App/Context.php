@@ -12,14 +12,14 @@ class Context extends \Ptf\App\Context
     protected function init()
     {
         $this->routingTable = [
-                'bar'     => 'test/dummy',
+                'bar'     => 'test/DummyAction',
                 'FOO/Bar' => '/index',
                 'baz'     => 'index'
         ];
         $this->loggers = [];
         $this->view = [];
 
-        $this->request  = new \Ptf\Core\Http\Request();
+        $this->request = new \Ptf\Core\Http\Request();
     }
 
 }
