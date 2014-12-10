@@ -14,8 +14,12 @@ class Request
      */
     public function getRemoteAddr()
     {
-        if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
-            return $_SERVER['HTTP_X_FORWARDED_FOR'];
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $addresses = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            return trim($addresses[0]);
+        }
+        if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+            return $_SERVER['HTTP_CLIENT_IP'];
         }
         return $_SERVER['REMOTE_ADDR'];
     }
