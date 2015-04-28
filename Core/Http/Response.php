@@ -127,7 +127,7 @@ class Response
      */
     public function hasContent()
     {
-        return isset($this->content);
+        return $this->content !== null;
     }
 
     /**
