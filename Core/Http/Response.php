@@ -103,6 +103,7 @@ class Response
     public function clearHeaders()
     {
         $this->headers = [];
+        header_remove();
 
         return $this;
     }
