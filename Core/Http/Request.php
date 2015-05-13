@@ -189,10 +189,10 @@ class Request
         foreach ($acceptLangs as $acceptLang) {
             $parts = explode(';', trim($acceptLang));
             if (!isset($parts[1])) {
-                $languages[strtolower($parts[0])] = 1;
+                $languages[strtolower($parts[0])] = '1';
             } else {
                 $q = explode('=', $parts[1]);
-                if ($q[1] == 0) {
+                if ($q[1] == '0') {
                     continue;
                 }
                 $languages[strtolower($parts[0])] = $q[1];
