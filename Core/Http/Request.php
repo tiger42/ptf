@@ -219,7 +219,7 @@ class Request
         $acceptLang = $this->getAcceptLanguage();
         $prefLang   = key($acceptLang);
 
-        if ($withoutCountry) {
+        if ($withoutCountry && $prefLang !== null) {
             $parts = explode('-', $prefLang);
             $prefLang = $parts[0];
         }
