@@ -195,7 +195,7 @@ class Request
                 if ($q[1] == 0) {
                     continue;
                 }
-                $languages[strtolower($parts[0])] = +$q[1];
+                $languages[strtolower($parts[0])] = $q[1];
             }
         }
         asort($languages);
