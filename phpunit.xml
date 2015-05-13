@@ -2,6 +2,7 @@
     colors    = "true"
     bootstrap = "tests/bootstrap.php"
     backupGlobals = "false"
+    stderr = "true"
 >
     <testsuites>
         <testsuite name="Ptf">
