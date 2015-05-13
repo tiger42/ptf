@@ -182,6 +182,10 @@ class Request
      */
     public function getAcceptLanguage()
     {
+        if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            return [];
+        }
+
         $acceptLangs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
         // Example: "de-de, de;q=0.8, en-us;q=0.5, en;q=0.3, *;q=0.6"
 
