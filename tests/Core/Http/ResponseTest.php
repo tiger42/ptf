@@ -8,66 +8,66 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 {
     public function testSetHeader()
     {
-        $response = new MockResponse();
-        $this->assertSame([], $response->headers);
+        $response = new Response();
+        $this->assertSame([], $response->getHeaders());
         $response
             ->setHeader('foo', 'bar')
             ->setHeader('baz');
-        $this->assertSame(['foo' => 'bar', 'baz' => null], $response->headers);
+        $this->assertSame(['foo' => 'bar', 'baz' => null], $response->getHeaders());
         $response->clearHeaders();
-        $this->assertSame([], $response->headers);
+        $this->assertSame([], $response->getHeaders());
     }
 
     public function testSet404Header()
     {
-        $response = new MockResponse();
+        $response = new Response();
         $response->set404Header();
-        $this->assertSame(['HTTP/1.0 404 Not Found' => null], $response->headers);
+        $this->assertSame(['HTTP/1.0 404 Not Found' => null], $response->getHeaders());
     }
 
     public function testSetRedirectHeader()
     {
-        $response = new MockResponse();
+        $response = new Response();
         $response
             ->setRedirectHeader('http://www.example.com')
             ->setRedirectHeader('https://www.google.com', 301);
         $this->assertSame([
             'Location: http://www.example.com' => 302,
             'Location: https://www.google.com' => 301
-        ], $response->headers);
+        ], $response->getHeaders());
     }
 
     public function testSetContentTypeHeader()
     {
-        $response = new MockResponse();
+        $response = new Response();
         $response->setContentTypeHeader('text/html');
-        $this->assertSame(['Content-type: text/html' => null], $response->headers);
+        $this->assertSame(['Content-type: text/html' => null], $response->getHeaders());
     }
 
     public function testSetJsonHeader()
     {
-        $response = new MockResponse();
+        $response = new Response();
         $response->setJsonHeader();
-        $this->assertSame(['Content-type: application/json' => null], $response->headers);
+        $this->assertSame(['Content-type: application/json' => null], $response->getHeaders());
     }
 
     public function testSetNoCacheHeader()
     {
-        $response = new MockResponse();
+        $response = new Response();
         $response->setNoCacheHeader();
         $this->assertSame([
             'Cache-Control: no-cache, must-revalidate' => null,
             'Expires: Thu, 01 Jan 1970 00:00:00 GMT' => null
-        ], $response->headers);
+        ], $response->getHeaders());
     }
 
     public function testSetContent()
     {
-        $response = new MockResponse();
-        $this->assertNull($response->content);
+        $response = new Response();
+        $this->assertNull($response->getContent());
         $this->assertFalse($response->hasContent());
         $response->setContent('this is the content');
-        $this->assertSame('this is the content', $response->content);
+        $this->assertSame('this is the content', $response->getContent());
         $this->assertTrue($response->hasContent());
     }
 
@@ -120,12 +120,5 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
             $this->assertSame(['some header'], headers_list());
         }
     }
-
-}
-
-class MockResponse extends Response
-{
-    public $headers;
-    public $content;
 
 }

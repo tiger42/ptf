@@ -98,7 +98,7 @@ class Autoloader
     }
 
     /**
-     * Register a namespace with its base directory.<br />
+     * Register a namespace along with its base directory.<br />
      * The specific subdirectory of each class will be determined automatically
      *
      * @param   string $namespace           The namespace to register
@@ -107,6 +107,18 @@ class Autoloader
     public function registerNamespace($namespace, $dir)
     {
         $this->nsMapping[$namespace] = $dir;
+    }
+
+    /**
+     * Register multiple namespaces along with their base directories
+     *
+     * @param   array $namespaces           The namespaces with their base directories to register
+     */
+    public function registerNamespaces(array $namespaces)
+    {
+        foreach ($namespaces as $namespace => $dir) {
+            $this->registerNamespace($namespace, $dir);
+        }
     }
 
     /**

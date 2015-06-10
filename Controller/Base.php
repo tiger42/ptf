@@ -43,7 +43,7 @@ class Base
      * @throws  \Ptf\Core\Exception\InvalidAction If the given action does not exist
      * @throws  \Exception                        If the Action object could not be instantiated
      */
-    public function dispatch($actionName)
+    public function dispatch($actionName = null)
     {
         if (!$actionName) {
             $actionName = $this->getDefaultActionName();

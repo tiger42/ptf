@@ -96,6 +96,16 @@ class Response
     }
 
     /**
+     * Get all headers that will be sent
+     *
+     * @return    array                     The headers to be sent
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    /**
      * Clear all set headers
      *
      * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
@@ -119,6 +129,16 @@ class Response
         $this->content = $content;
 
         return $this;
+    }
+
+    /**
+     * Get the content which will be sent
+     *
+     * @return  string                      The content to be sent
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 
     /**
