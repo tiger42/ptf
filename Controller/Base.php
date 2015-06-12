@@ -105,10 +105,11 @@ class Base
         $this->context->getLogger()->logSys(get_class($this) . "::" . __FUNCTION__, "Forwarding to: " . $route);
 
         // Only an action (w/o controller) was given or controller is current controller
-        if (strpos($route, '/') === false
-            || strpos(strtolower($route), strtolower($this->name) . '/') === 0
-        ) {
+        if (strpos($route, '/') === false) {
             $this->dispatch($route);
+        } elseif (strpos(strtolower($route), strtolower($this->name) . '/') === 0) {
+            $parts = explode('/', $route);
+            $this->dispatch($parts[1]);
         } else {
             \Ptf\Core\Router::matchRoute($route, $this->context);
         }
