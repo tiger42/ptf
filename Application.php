@@ -26,14 +26,17 @@ abstract class Application
 
         $context = static::getContext();
 
-        if (!Core\Router::matchRequestRoute($context)) {
-            $context->getController()->forward404();   // This will terminate the application
+        try {
+            if (!Core\Router::matchRequestRoute($context)) {
+                $context->getController()->forward404();   // This will throw a SystemExit exception
+            }
+            $response = $context->getResponse();
+            if (!$response->hasContent()) {
+                $response->setContent($context->getView()->fetch());
+            }
+            $response->send();
+        } catch (Core\Exception\SystemExit $e) {
         }
-        $response = $context->getResponse();
-        if (!$response->hasContent()) {
-            $response->setContent($context->getView()->fetch());
-        }
-        $response->send();
     }
 
     /**

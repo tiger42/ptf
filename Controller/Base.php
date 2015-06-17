@@ -118,6 +118,8 @@ class Base
     /**
      * Forward to the current view's configured 404 page.<br />
      * This function will terminate the application!
+     *
+     * @throws  \Ptf\Core\Exception\SystemExit
      */
     public function forward404()
     {
@@ -125,7 +127,7 @@ class Base
             ->set404Header()
             ->setContent($this->context->getView()->fetch404Page())
             ->send();
-        exit;
+        throw new \Ptf\Core\Exception\SystemExit();
     }
 
     /**
@@ -134,13 +136,14 @@ class Base
      *
      * @param   string $url                 The URL to redirect to
      * @param   integer $responseCode       The HTTP response code to send
+     * @throws  \Ptf\Core\Exception\SystemExit
      */
     public function redirect($url, $responseCode = 302)
     {
         $this->context->getResponse()
             ->setRedirectHeader($url, $responseCode)
             ->sendHeaders();
-        exit;
+        throw new \Ptf\Core\Exception\SystemExit();
     }
 
 }
