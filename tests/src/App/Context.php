@@ -17,7 +17,9 @@ class Context extends \Ptf\App\Context
                 'baz'     => 'index'
         ];
         $this->loggers = [];
-        $this->view = [];
+
+        $config = new \Ptf\App\Config\View();
+        $this->view = new \PtfTest\View\Dummy($config);
 
         $this->request = new \Ptf\Core\Http\Request();
     }

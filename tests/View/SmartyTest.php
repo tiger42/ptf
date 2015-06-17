@@ -31,7 +31,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     {
         $view = new \Ptf\View\Smarty($this->createConfig());
         $this->setExpectedException(
-            'RuntimeException',
+            '\\RuntimeException',
             'Ptf\View\Smarty::render: Smarty template has not been set');
         $view->render();
     }
@@ -60,7 +60,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     {
         $view = new \Ptf\View\Smarty($this->createConfig());
         $this->setExpectedException(
-            'RuntimeException',
+            '\\RuntimeException',
             'Ptf\View\Smarty::fetch: Smarty template has not been set');
         $view->fetch();
     }
