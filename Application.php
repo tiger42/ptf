@@ -58,7 +58,7 @@ abstract class Application
      */
     protected static function initAutoloader(Core\Autoloader $autoloader)
     {
-        $autoloader->setCacheFilename(dirname($_SERVER['SCRIPT_FILENAME']) . '/autoload_cache.php');
+        $autoloader->setCacheFilename(dirname($_SERVER['SCRIPT_FILENAME']) . '/var/autoload_cache.php');
     }
 
     /**
