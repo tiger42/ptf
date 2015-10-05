@@ -138,7 +138,7 @@ abstract class Logger
     {
         if ($logLevel >= $this->logLevelLimit) {
             $timestamp  = \Ptf\Util\now();
-            $remoteAddr = $this->context->getRequest()->getRemoteAddr();
+            $remoteAddr = $this->context->isCli() ? 'CLI' : $this->context->getRequest()->getRemoteAddr();
 
             $this->openLog();
             $this->logImpl($message, $logLevel, $timestamp, $remoteAddr);

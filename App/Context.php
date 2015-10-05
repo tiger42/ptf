@@ -50,7 +50,7 @@ abstract class Context
     /**
      * Initialize the member variables
      */
-    private function __construct()
+    protected function __construct()
     {
         $this->request  = new \Ptf\Core\Http\Request();
         $this->response = new \Ptf\Core\Http\Response();
@@ -165,7 +165,7 @@ abstract class Context
      * @return  \Ptf\App\Config             The requested configuration object
      * @throws  \RuntimeException           If the requested config object does not exist
      */
-    public function getConfig($configName)
+    public function getConfig($configName = 'General')
     {
         if (!isset($this->configs[$configName])) {
             $className = $this->getAppNamespace() . '\\App\\Config\\' . $configName;
@@ -204,6 +204,16 @@ abstract class Context
         $scriptPath = $withScriptName ? $_SERVER['PHP_SELF'] : dirname($_SERVER['PHP_SELF']);
 
         return strtolower($this->request->getProtocol()) . '://' . $this->request->getHost() . $scriptPath;
+    }
+
+    /**
+     * Determine, whether the application was called from the command line interface
+     *
+     * @return  boolean                     Was the application called from CLI?
+     */
+    public function isCli()
+    {
+        return php_sapi_name() == 'cli' || defined('STDIN');
     }
 
 }
