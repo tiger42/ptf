@@ -55,7 +55,9 @@ abstract class Base
     public function forward404()
     {
         $this->controller->forward404();
+    // @codeCoverageIgnoreStart
     }
+    // @codeCoverageIgnoreEnd
 
     /**
      * Do a HTTP redirect to the given URL
@@ -66,7 +68,9 @@ abstract class Base
     public function redirect($url, $responseCode = 302)
     {
         $this->controller->redirect($url, $responseCode);
+    // @codeCoverageIgnoreStart
     }
+    // @codeCoverageIgnoreEnd
 
     /**
      * Execute the action
