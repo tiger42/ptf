@@ -23,7 +23,7 @@ function now()
  */
 function is_whole_number($val)
 {
-    return (is_numeric($val) && (int)$val == (float)$val);
+    return is_numeric($val) && (int)$val == (float)$val;
 }
 
 /**
@@ -34,7 +34,7 @@ function is_whole_number($val)
  */
 function even($number)
 {
-    return ($number % 2 == 0);
+    return is_whole_number($number) && !($number & 1);
 }
 
 /**
@@ -45,7 +45,7 @@ function even($number)
  */
 function odd($number)
 {
-    return ($number % 2 != 0);
+    return is_whole_number($number) && ($number & 1);
 }
 
 /**
