@@ -57,12 +57,7 @@ abstract class Context
         $this->configs  = [];
         $this->routingTable = [];
 
-        $logLevelLimit = (int)$this->getConfig('General')->getLogLevel();
-        $this->loggers = [
-            'system' => \Ptf\Util\Logger\File::getInstance('var/log/system.log', $this, $logLevelLimit),
-            'error'  => \Ptf\Util\Logger\File::getInstance('var/log/error.log', $this, $logLevelLimit)
-        ];
-
+        $this->initLoggers();
         $this->init();
 
         $view = $this->getView();
@@ -75,6 +70,18 @@ abstract class Context
      */
     protected function init()
     {
+    }
+
+    /**
+     * Initialize the Logger objects
+     */
+    protected function initLoggers()
+    {
+        $logLevelLimit = (int)$this->getConfig('General')->getLogLevel();
+        $this->loggers = [
+            'system' => \Ptf\Util\Logger\File::getInstance('var/log/system.log', $this, $logLevelLimit),
+            'error'  => \Ptf\Util\Logger\File::getInstance('var/log/error.log', $this, $logLevelLimit)
+        ];
     }
 
     /**
@@ -194,6 +201,17 @@ abstract class Context
     }
 
     /**
+     * Get the application's base path
+     *
+     * @param   string $withScriptName      Append the filename of the bootstrap script?
+     * @return  string                      The base path
+     */
+    public function getBasePath($withScriptName = false)
+    {
+        return $withScriptName ? $_SERVER['PHP_SELF'] : dirname($_SERVER['PHP_SELF']);
+    }
+
+    /**
      * Get the application's base URL
      *
      * @param   string $withScriptName      Append the filename of the bootstrap script?
@@ -201,9 +219,13 @@ abstract class Context
      */
     public function getBaseUrl($withScriptName = false)
     {
-        $scriptPath = $withScriptName ? $_SERVER['PHP_SELF'] : dirname($_SERVER['PHP_SELF']);
+        if (!$this->isCli()) {
+            $url = strtolower($this->request->getProtocol()) . '://' . $this->request->getHost();
+        }
 
-        return strtolower($this->request->getProtocol()) . '://' . $this->request->getHost() . $scriptPath;
+        $url .= $this->getBasePath($withScriptName);
+
+        return $url;
     }
 
     /**
