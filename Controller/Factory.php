@@ -23,8 +23,14 @@ class Factory
         $controllerName = \Ptf\Util\camelize($controllerName);
 
         $className = $context->getAppNamespace() . '\\Controller\\' . $controllerName;
+
         if (!class_exists($className)) {
-            $className = '\\Ptf\\Controller\\Base';
+            $className = $context->isCli() ? '\\Ptf\\Controller\\Cli' : '\\Ptf\\Controller\\Http';
+
+            // FIXME: This is just for unit tests, find a better solution!
+            if (property_exists($context, 'controllerType')) {
+                $className = '\\Ptf\\Controller\\' . $context->controllerType;
+            }
         }
 
         $controller = new $className($controllerName, $context);

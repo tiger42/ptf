@@ -16,6 +16,8 @@
             <exclude>
                 <directory>tests</directory>
                 <directory>3rdparty</directory>
+                <directory>bin</directory>
+                <directory>app_templates</directory>
             </exclude>
         </whitelist>
     </filter>

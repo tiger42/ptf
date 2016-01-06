@@ -12,7 +12,7 @@ class Router
      *
      * @param   string $route               The route string to match (case insensitive)
      * @param   \Ptf\App\Context $context   The application's context
-     * @return  boolean                     Was a matching controller and action found?
+     * @return  \Ptf\Controller\Base|false  The matching controller or FALSE if route could not be resolved
      */
     public static function matchRoute($route, \Ptf\App\Context $context)
     {
@@ -29,7 +29,7 @@ class Router
             $context->getLogger('error')->logSys(__METHOD__, $e->getMessage(), \Ptf\Util\Logger::ERROR);
             return false;
         }
-        return true;
+        return $controller;
     }
 
     /**
@@ -57,13 +57,13 @@ class Router
     private static function lookup($route, \Ptf\App\Context $context)
     {
         $routingTable = $context->getRoutingTable();
-        $route = strtolower($route);
+        $newRoute = strtolower($route);
 
         // We have to do this in a loop, as array_key_exists is case sensitive
         foreach ($routingTable as $source => $target) {
-            if (strtolower($source) == $route) {
+            if (strtolower($source) == $newRoute) {
                 $route = $target;
-                $context->getLogger()->logSys(__METHOD__, "Mapping route to: " . $route);
+                $context->getLogger()->logSys(__METHOD__, "Mapping route to: " . $newRoute);
                 break;
             }
         }

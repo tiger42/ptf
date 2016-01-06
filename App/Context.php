@@ -12,15 +12,25 @@ abstract class Context
     use \Ptf\Traits\Singleton;
 
     /**
-     * The request object
+     * The request object (for web applications only)
      * @var \Ptf\Core\Http\Request
      */
     protected $request;
     /**
-     * The response object
+     * The response object (for web applications only)
      * @var \Ptf\Core\Http\Response
      */
     protected $response;
+    /**
+     * The command line parameters (for CLI applications only)
+     * @var \Ptf\Core\Cli\Params
+     */
+    protected $cliParams;
+    /**
+     * The console output (for CLI applications only)
+     * @var \Ptf\Core\Cli\Output
+     */
+    protected $cliOutput;
     /**
      * The application's view object
      * @var \Ptf\View\Base
@@ -52,8 +62,14 @@ abstract class Context
      */
     protected function __construct()
     {
-        $this->request  = new \Ptf\Core\Http\Request();
-        $this->response = new \Ptf\Core\Http\Response();
+        if ($this->isCli()) {
+            $this->cliParams = new \Ptf\Core\Cli\Params();
+            $this->cliOutput = new \Ptf\Core\Cli\Output();
+        } else {
+            $this->request  = new \Ptf\Core\Http\Request();
+            $this->response = new \Ptf\Core\Http\Response();
+        }
+
         $this->configs  = [];
         $this->routingTable = [];
 
@@ -119,6 +135,26 @@ abstract class Context
     public function getResponse()
     {
         return $this->response;
+    }
+
+    /**
+     * Get the CLI parameters object
+     *
+     * @return \Ptf\Core\Cli\Params         The CLI parameters object
+     */
+    public function getCliParams()
+    {
+        return $this->cliParams;
+    }
+
+    /**
+     * Get the console output object
+     *
+     * @return \Ptf\Core\Cli\Output         The CLI output object
+     */
+    public function getCliOutput()
+    {
+        return $this->cliOutput;
     }
 
     /**
@@ -219,6 +255,7 @@ abstract class Context
      */
     public function getBaseUrl($withScriptName = false)
     {
+        $url = '';
         if (!$this->isCli()) {
             $url = strtolower($this->request->getProtocol()) . '://' . $this->request->getHost();
         }

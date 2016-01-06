@@ -23,17 +23,29 @@ abstract class CliApplication extends Application
         $context = static::getContext();
 
         $args = $_SERVER['argv'];
-        $route = str_replace(':', '/', $args[1]);
+        $route = strpos($args[1], ':') !== false ? str_replace(':', '/', $args[1]) : null;
         if (!Core\Router::matchRoute($route, $context)) {
-            echo "Unknown action: \"" . $args[1] . "\"\n";
+            echo "Unknown command \"{$args[1]}\"\n\n";
+            static::showUsage($args);
             return;
         }
-        $response = $context->getResponse();
-        if ($response->hasContent()) {
-            echo $response->getContent();
+        $output = $context->getCliOutput();
+        if ($output->hasContent()) {
+            echo $output->getContent();
         } else {
             echo $context->getView()->fetch();
         }
+    }
+
+    /**
+     * Display a usage message for the application.<br />
+     * Overwrite this function to display an individual message.
+     */
+    public static function showUsage()
+    {
+        $context = static::getContext();
+
+        echo "Usage: php {$context->getBasePath(true)} controller:action [options]\n";
     }
 
 }

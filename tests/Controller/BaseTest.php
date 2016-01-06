@@ -6,17 +6,47 @@ use \Ptf\Controller\Base as BaseController;
 
 class BaseTest extends \PHPUnit_Framework_TestCase
 {
+    public function testCheckAction()
+    {
+        $context = \Ptf\Application::getContext();
+
+        $controller = new MyBaseController('Base', $context);
+        $action = new \PtfTest\Controller\Base\Action\Index('Index', $controller);
+        $this->assertTrue($controller->checkAction($action));
+
+        $action = new \PtfTest\Controller\Base\Action\WrongClass();
+        $this->assertFalse($controller->checkAction($action));
+
+        $this->assertFalse($controller->checkAction(null));
+    }
+
+    public function testExecuteAction()
+    {
+        $context = \Ptf\Application::getContext();
+
+        $controller = new MyBaseController('Base', $context);
+        $action = new \PtfTest\Controller\Base\Action\Index('Index', $controller);
+        ob_start();
+        $controller->executeAction($action);
+        $returnValue = ob_get_clean();
+        $this->assertSame('Base/Index', $returnValue);
+    }
+
     public function testDispatch()
     {
         $context = \Ptf\Application::getContext();
 
         $controller = new BaseController('Base', $context);
+        ob_start();
         $controller->dispatch();
-        $this->assertSame('Base/Index', $context->getResponse()->getContent());
+        $returnValue = ob_get_clean();
+        $this->assertSame('Base/Index', $returnValue);
 
-        $controller = new BaseController('Test', $context);
+        $controller = new BaseController('BaseTest', $context);
+        ob_start();
         $controller->dispatch('DummyAction');
-        $this->assertSame('Test/DummyAction', $context->getResponse()->getContent());
+        $returnValue = ob_get_clean();
+        $this->assertSame('BaseTest/DummyAction', $returnValue);
     }
 
     public function testDispatchException()
@@ -66,10 +96,6 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
         $controller = new BaseController('Foobar', $context);
         $this->assertSame('Index', $controller->getDefaultActionName());
-
-        $controller = new \PtfTest\Controller\MyController('MyController', $context);
-        $this->assertSame('MyDefaultAction', $controller->getDefaultActionName());
-
     }
 
     public function testGetAction()
@@ -78,76 +104,53 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
         $controller = new BaseController('Base', $context);
         $this->assertNull($controller->getAction());
+        ob_start();
         $controller->dispatch();
+        ob_get_clean();
         $this->assertInstanceOf('PtfTest\\Controller\\Base\\Action\\Index', $controller->getAction());
 
-        $controller = new BaseController('Test', $context);
+        $controller = new BaseController('BaseTest', $context);
         $this->assertNull($controller->getAction());
+        ob_start();
         $controller->dispatch();
-        $this->assertInstanceOf('PtfTest\\Controller\\Test\\Action\\Index', $controller->getAction());
-
-        $controller = new \PtfTest\Controller\MyController('MyController', $context);
-        $this->assertNull($controller->getAction());
-        $controller->dispatch();
-        $this->assertInstanceOf('PtfTest\\Controller\\MyController\\Action\\MyDefaultAction', $controller->getAction());
-
-        $controller = new \PtfTest\Controller\MyController('MyController', $context);
-        $this->assertNull($controller->getAction());
-        $controller->dispatch('DummyAction');
-        $this->assertInstanceOf('PtfTest\\Controller\\MyController\\Action\\DummyAction', $controller->getAction());
+        ob_get_clean();
+        $this->assertInstanceOf('PtfTest\\Controller\\BaseTest\\Action\\Index', $controller->getAction());
     }
 
     public function testForward()
     {
         $context = \Ptf\Application::getContext();
+        // FIXME: This is dirty!
+        $context->controllerType = 'Base';
 
-        $controller = new BaseController('MyController', $context);
-        $controller->forward('DummyAction');
-        $this->assertInstanceOf('PtfTest\\Controller\\MyController\\Action\\DummyAction', $controller->getAction());
-        $controller->forward('MyController/MyDefaultAction');
-        $this->assertInstanceOf('PtfTest\\Controller\\MyController\\Action\\MyDefaultAction', $controller->getAction());
-
-        $controller->forward('Test/DummyAction');
-        $this->assertSame('Test/DummyAction', $context->getResponse()->getContent());
-    }
-
-    public function testForward404()
-    {
-        $context = \Ptf\Application::getContext();
-
-        $controller = new BaseController('Base', $context);
         ob_start();
-        try {
-            $controller->forward404();
-        } catch (\Ptf\Core\Exception\SystemExit $e) {
-        }
-        $content = ob_get_clean();
-        $this->assertRegExp('/<title>404 Not Found<\/title>.*<h1>Error 404<\/h1>/ms', $content);
-        $headers = $context->getResponse()->getHeaders();
-        $this->assertSame(['HTTP/1.0 404 Not Found' => null], $headers);
-        $context->getResponse()->clearHeaders();
+        $controller = new BaseController('Base', $context);
+        $controller = $controller->forward('AnotherAction');
+        $this->assertInstanceOf('PtfTest\\Controller\\Base\\Action\\AnotherAction', $controller->getAction());
+
+        $controller = $controller->forward('BaseTest/Index');
+        $this->assertInstanceOf('PtfTest\\Controller\\BaseTest\\Action\\Index', $controller->getAction());
+
+        $controller = $controller->forward('BaseTest/DummyAction');
+        $this->assertInstanceOf('PtfTest\\Controller\\BaseTest\\Action\\DummyAction', $controller->getAction());
+
+        $controller = $controller->forward('basetest/index');
+        $this->assertInstanceOf('PtfTest\\Controller\\BaseTest\\Action\\Index', $controller->getAction());
+        ob_get_clean();
     }
 
-    public function testRedirect()
+}
+
+class MyBaseController extends BaseController
+{
+    public function checkAction($action)
     {
-        $context = \Ptf\Application::getContext();
+        return parent::checkAction($action);
+    }
 
-        $controller = new BaseController('Base', $context);
-        try {
-            $controller->redirect('http://www.example.com', 301);
-        } catch (\Ptf\Core\Exception\SystemExit $e) {
-        }
-        $headers = $context->getResponse()->getHeaders();
-        $this->assertSame(['Location: http://www.example.com' => 301], $headers);
-        $context->getResponse()->clearHeaders();
-
-        try {
-            $controller->redirect('http://www.example.com/foo');
-        } catch (\Ptf\Core\Exception\SystemExit $e) {
-        }
-        $headers = $context->getResponse()->getHeaders();
-        $this->assertSame(['Location: http://www.example.com/foo' => 302], $headers);
-        $context->getResponse()->clearHeaders();
+    public function executeAction(\Ptf\Controller\Base\Action\Base $action)
+    {
+        return parent::executeAction($action);
     }
 
 }

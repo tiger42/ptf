@@ -12,7 +12,7 @@ class Context extends \Ptf\App\Context
     protected function init()
     {
         $this->routingTable = [
-                'bar'     => 'test/DummyAction',
+                'bar'     => 'BaseTest/DummyAction',
                 'FOO/Bar' => '/index',
                 'baz'     => 'index'
         ];
@@ -21,7 +21,16 @@ class Context extends \Ptf\App\Context
         $config = new \Ptf\App\Config\View();
         $this->view = new \PtfTest\View\Dummy($config);
 
-        $this->request = new \Ptf\Core\Http\Request();
+        // This is dirty...
+        $_SERVER['argv'] = ['dummy', 'CliActionTest=ActionOutput'];
+        $_SERVER['argc'] = count($_SERVER['argv']);
+        $this->cliParams = new \Ptf\Core\Cli\Params();
+        $this->cliOutput = new \Ptf\Core\Cli\Output();
+    }
+
+    public function isCli()
+    {
+        return false;
     }
 
 }

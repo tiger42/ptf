@@ -1,0 +1,89 @@
+#!/bin/bash
+
+DIR=`cd "$(dirname "$0")" && pwd`
+
+usage () {
+    echo "Usage: `basename $0` path namespace [-t TYPE]"
+    echo
+    echo "Options:"
+    echo "  -t TYPE  Type of the applicaton to generate (web|web-smarty|cli) [default: web]"
+}
+
+copyFile () {
+    mkdir -p `dirname "$2"`
+    sed -e "s/_NAMESPACE_/$3/g" $1 > $2
+}
+
+
+if [[ "$#" -lt 2 ]]; then
+    usage
+    exit
+fi
+
+if [[ "$1" == -* ]] || [[ "$2" == -* ]]; then
+	usage
+	exit
+fi
+
+if [[ "$#" -eq 2 ]]; then
+    TYPE=web
+else
+    if [[ "$3" == "-t" ]]; then
+        case "$4" in
+            "web" )
+                TYPE=web
+                ;;
+            "web-smarty" )
+            	TYPE=web-smarty
+            	;;
+            "cli" )
+                TYPE=cli
+                ;;
+            * )
+                usage
+                exit
+        esac
+    else
+        usage
+        exit
+    fi
+fi
+
+TARGETDIR=$1
+NAMESPACE=$2
+
+if [[ -e ${TARGETDIR} ]]; then
+    echo "Directory ${TARGETDIR} already exists."
+    echo "Aborted."
+    exit
+fi
+
+echo "Generating $TYPE application '${NAMESPACE}' into directory ${TARGETDIR}."
+
+SOURCEDIR=${DIR}/../app_templates/$TYPE/
+
+# create empty directories
+mkdir -p ${TARGETDIR}/var/log
+mkdir -p ${TARGETDIR}/src/App/Config
+if [ $TYPE == "web-smarty" ]; then
+	mkdir -p ${TARGETDIR}/var/smarty/templates_c
+	mkdir -p ${TARGETDIR}/var/smarty/cache
+fi
+
+# copy files, replace all namespace placeholders
+cd ${SOURCEDIR}
+FILES=`find . -type f`
+for f in ${FILES}; do
+    copyFile ${SOURCEDIR}${f} ${TARGETDIR}/${f} ${NAMESPACE}
+done
+
+# set permissions
+chmod 755 ${TARGETDIR}/bin/*
+chmod -R 777 ${TARGETDIR}/var/
+
+# symlink Ptf framework
+ln -s ${DIR}/../ ${TARGETDIR}/ptf
+
+# generate config classes
+cd ${TARGETDIR}
+bin/compile_inis.php

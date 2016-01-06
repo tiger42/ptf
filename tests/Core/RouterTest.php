@@ -9,40 +9,48 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testMatchRoute()
     {
         $context = \Ptf\Application::getContext();
+        // FIXME: This is dirty!
+        $context->controllerType = 'Base';
 
-        $this->assertTrue(Router::matchRoute('test/dummy_action', $context));
-        $this->assertTrue(Router::matchRoute('test/DummyAction', $context));
+        ob_start();
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRoute('base_test/dummy_action', $context));
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRoute('BaseTest/DummyAction', $context));
         $this->assertFalse(Router::matchRoute('DummyAction', $context));
         $this->assertFalse(Router::matchRoute('/dummy_action', $context));
-        $this->assertTrue(Router::matchRoute('test/index', $context));
-        $this->assertTrue(Router::matchRoute('test/INDEX', $context));
-        $this->assertTrue(Router::matchRoute('Test', $context));
-        $this->assertTrue(Router::matchRoute('TEST/', $context));
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRoute('baseTest/index', $context));
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRoute('basetest/INDEX', $context));
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRoute('BaseTest', $context));
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRoute('BASETEST/', $context));
         $this->assertFalse(Router::matchRoute('index', $context));
-        $this->assertTrue(Router::matchRoute('/Index', $context));
-        $this->assertTrue(Router::matchRoute('', $context));
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRoute('/Index', $context));
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRoute('', $context));
 
         $this->assertFalse(Router::matchRoute('foo', $context));
-        $this->assertTrue(Router::matchRoute('bar', $context));   // => test/DummyAction
-        $this->assertTrue(Router::matchRoute('foo/bar', $context));   // => /index
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRoute('bar', $context));   // => BaseTest/DummyAction
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRoute('foo/bar', $context));   // => /index
         $this->assertFalse(Router::matchRoute('baz', $context));    // => index
+        ob_get_clean();
     }
 
     public function testMatchRequestRoute()
     {
         $context = \Ptf\Application::getContext();
+        // FIXME: This is dirty!
+        $context->controllerType = 'Base';
+
+        ob_start();
 
         // /index => Base/Index
         $_REQUEST['action'] = 'index';
-        $this->assertTrue(Router::matchRequestRoute($context));
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRequestRoute($context));
 
         // /Dummy_action => Base/DummyAction
         $_REQUEST['action'] = 'Dummy_action';
         $this->assertFalse(Router::matchRequestRoute($context));
 
-        // Test/Dummy_action => Test/DummyAction
-        $_REQUEST['controller'] = 'Test';
-        $this->assertTrue(Router::matchRequestRoute($context));
+        // basetest/Dummy_action => BaseTest/DummyAction
+        $_REQUEST['controller'] = 'basetest';
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRequestRoute($context));
 
         // BasE/Dummy_action => Base/DummyAction
         $_REQUEST['controller'] = 'BasE';
@@ -54,15 +62,17 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
         // BasE/INDEX => Base/Index
         $_REQUEST['action'] = 'INDEX';
-        $this->assertTrue(Router::matchRequestRoute($context));
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRequestRoute($context));
 
         // BasE/ => Base/Index
         unset($_REQUEST['action']);
-        $this->assertTrue(Router::matchRequestRoute($context));
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRequestRoute($context));
 
         // / => Base/Index
         unset($_REQUEST['controller']);
-        $this->assertTrue(Router::matchRequestRoute($context));
+        $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRequestRoute($context));
+
+        ob_end_clean();
     }
 
 }

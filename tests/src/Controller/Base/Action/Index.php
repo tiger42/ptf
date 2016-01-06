@@ -4,9 +4,9 @@ namespace PtfTest\Controller\Base\Action;
 
 class Index extends \Ptf\Controller\Base\Action\Base
 {
-    public function execute(\Ptf\Core\Http\Request $request, \Ptf\Core\Http\Response $response)
+    public function execute()
     {
-        $response->setContent('Base/Index');
+        echo 'Base/Index';
     }
 
 }

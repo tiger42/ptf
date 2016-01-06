@@ -1,0 +1,11 @@
+DirectoryIndex index.php
+
+RewriteEngine On
+#RewriteBase /
+
+RewriteRule ^css - [L]
+RewriteRule ^img - [L]
+RewriteRule ^ptf - [L]
+
+RewriteCond %{REQUEST_URI} !/index\.php$
+RewriteRule ^([^/]+)/?([^/]*)?.*$ index.php?controller=$1&action=$2 [QSA]

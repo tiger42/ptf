@@ -3,7 +3,7 @@
 namespace Ptf\Controller;
 
 /**
- * Simple base controller
+ * The base controller for all applications
  */
 class Base
 {
@@ -43,7 +43,7 @@ class Base
      * @throws  \Ptf\Core\Exception\InvalidAction If the given action does not exist
      * @throws  \Exception                        If the Action object could not be instantiated
      */
-    public function dispatch($actionName = null)
+    final public function dispatch($actionName = null)
     {
         if (!$actionName) {
             $actionName = $this->getDefaultActionName();
@@ -56,13 +56,34 @@ class Base
         }
 
         $action = new $className($actionName, $this);
-        if (!($action instanceof \Ptf\Controller\Base\Action\Base)) {
+        if (!$this->checkAction($action)) {
             throw new \Exception(get_class($this) . "::" . __FUNCTION__ . ": Action must extend base action: " . $className);
         }
         $this->action = $action;
         $this->context->getLogger()->logSys(get_class($this) . "::" . __FUNCTION__, "Executing action: " . $className);
 
-        $action->execute($this->context->getRequest(), $this->context->getResponse());
+        $this->executeAction($action);
+    }
+
+    /**
+     * Check if the given action has correctly been instantiated
+     *
+     * @param   mixed $action               The action to check
+     * @return  boolean                     Does the action have the correct type?
+     */
+    protected function checkAction($action)
+    {
+        return $action instanceof \Ptf\Controller\Base\Action\Base;
+    }
+
+    /**
+     * Execute the given action
+     *
+     * @param   \Ptf\Controller\Base\Action\Base $action The action to execute
+     */
+    protected function executeAction(\Ptf\Controller\Base\Action\Base $action)
+    {
+        $action->execute();
     }
 
     /**
@@ -99,51 +120,29 @@ class Base
      * Forward to the given route
      *
      * @param   string $route               The route to forward to
+     * @return  \Ptf\Controller\Base        The controller handling the route
      */
-    public function forward($route)
+    final public function forward($route)
     {
         $this->context->getLogger()->logSys(get_class($this) . "::" . __FUNCTION__, "Forwarding to: " . $route);
 
-        // Only an action (w/o controller) was given or controller is current controller
+        // Only an action (w/o controller) was given
         if (strpos($route, '/') === false) {
             $this->dispatch($route);
+
+            return $this;
+
+        // Given controller is current controller
         } elseif (strpos(strtolower($route), strtolower($this->name) . '/') === 0) {
             $parts = explode('/', $route);
             $this->dispatch($parts[1]);
+
+            return $this;
+
+        // Forward to other controller
         } else {
-            \Ptf\Core\Router::matchRoute($route, $this->context);
+            return \Ptf\Core\Router::matchRoute($route, $this->context);
         }
-    }
-
-    /**
-     * Forward to the current view's configured 404 page.<br />
-     * This function will terminate the application!
-     *
-     * @throws  \Ptf\Core\Exception\SystemExit
-     */
-    public function forward404()
-    {
-        $this->context->getResponse()
-            ->set404Header()
-            ->setContent($this->context->getView()->fetch404Page())
-            ->send();
-        throw new \Ptf\Core\Exception\SystemExit();
-    }
-
-    /**
-     * Do a HTTP redirect to the given URL.<br />
-     * This function will terminate the application!
-     *
-     * @param   string $url                 The URL to redirect to
-     * @param   integer $responseCode       The HTTP response code to send
-     * @throws  \Ptf\Core\Exception\SystemExit
-     */
-    public function redirect($url, $responseCode = 302)
-    {
-        $this->context->getResponse()
-            ->setRedirectHeader($url, $responseCode)
-            ->sendHeaders();
-        throw new \Ptf\Core\Exception\SystemExit();
     }
 
 }

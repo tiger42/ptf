@@ -78,7 +78,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
             'foo'  => 'baz'
         ];
         $this->assertSame($nsData, $request->getGetVars('ns'));
-        unset($_GET);
+        $_GET = [];
     }
 
     public function testGetPostVars()
@@ -92,7 +92,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
             'foo'  => 'baz'
         ];
         $this->assertSame($nsData, $request->getPostVars('ns'));
-        unset($_POST);
+        $_POST = [];
     }
 
     public function testGetCookieValues()
@@ -106,7 +106,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
             'foo'  => 'baz'
         ];
         $this->assertSame($nsData, $request->getCookieValues('ns'));
-        unset($_COOKIE);
+        $_COOKIE = [];
     }
 
     public function testGetRequestVars()
@@ -120,7 +120,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
             'foo'  => 'baz'
         ];
         $this->assertSame($nsData, $request->getRequestVars('ns'));
-        unset($_REQUEST);
+        $_REQUEST = [];
     }
 
     public function testGetGetVar()
@@ -129,7 +129,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $_GET = $this->testData;
         $this->assertSame('bar', $request->getGetVar('foo'));
         $this->assertNull($request->getGetVar('bar'));
-        unset($_GET);
+        $_GET = [];
         $this->assertNull($request->getGetVar('foo'));
     }
 
@@ -139,7 +139,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $_POST = $this->testData;
         $this->assertSame('bar', $request->getPostVar('foo'));
         $this->assertNull($request->getPostVar('bar'));
-        unset($_POST);
+        $_POST = [];
         $this->assertNull($request->getPostVar('foo'));
     }
 
@@ -149,7 +149,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $_COOKIE = $this->testData;
         $this->assertSame('bar', $request->getCookieValue('foo'));
         $this->assertNull($request->getCookieValue('bar'));
-        unset($_COOKIE);
+        $_COOKIE = [];
         $this->assertNull($request->getCookieValue('foo'));
     }
 
@@ -159,7 +159,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $_REQUEST= $this->testData;
         $this->assertSame('bar', $request->getRequestVar('foo'));
         $this->assertNull($request->getRequestVar('bar'));
-        unset($_REQUEST);
+        $_REQUEST = [];
         $this->assertNull($request->getRequestVar('foo'));
     }
 
