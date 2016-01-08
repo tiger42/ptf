@@ -26,4 +26,5 @@ class General extends \Ptf\App\Config
     {
         return $this->log_level;
     }
+
 }
