@@ -1,28 +1,31 @@
 <?php
 
-namespace Ptf\View\Helper;
+namespace Ptf\View\Plugin\Plain;
+
+use \Ptf\View\Helper\Pagination;
 
 /**
- * Smarty template function plugins
+ * Plain view template function plugins
  */
-class SmartyFunctions
+class Functions
 {
     /**
-     * Register all Smarty function plugins of this class
+     * Register all Plain view function plugins of this class
      *
-     * @param   \Smarty $smarty             The Smarty object
+     * @param   \Ptf\View\Plain $view       The Plain view object
      */
-    public static function register(\Smarty $smarty)
+    public static function register(\Ptf\View\Plain $view)
     {
         // Pagination plugins
-        $smarty->registerPlugin('function', 'pagination_first', [__CLASS__, 'paginationFirst']);
-        $smarty->registerPlugin('function', 'pagination_prev', [__CLASS__, 'paginationPrev']);
-        $smarty->registerPlugin('function', 'pagination_next', [__CLASS__, 'paginationNext']);
-        $smarty->registerPlugin('function', 'pagination_last', [__CLASS__, 'paginationLast']);
-        $smarty->registerPlugin('function', 'pagination_list', [__CLASS__, 'paginationList']);
-        $smarty->registerPlugin('function', 'pagination_count', [__CLASS__, 'paginationCount']);
+        $view->registerPlugin('pagination_first', [__CLASS__, 'paginationFirst']);
+        $view->registerPlugin('pagination_prev', [__CLASS__, 'paginationPrev']);
+        $view->registerPlugin('pagination_next', [__CLASS__, 'paginationNext']);
+        $view->registerPlugin('pagination_last', [__CLASS__, 'paginationLast']);
+        $view->registerPlugin('pagination_list', [__CLASS__, 'paginationList']);
+        $view->registerPlugin('pagination_count', [__CLASS__, 'paginationCount']);
 
-        $smarty->registerPlugin('function', 'sid', [__CLASS__, 'sid']);
+        $view->registerPlugin('dblbr2p', [__CLASS__, 'dblbr2p']);
+        $view->registerPlugin('sid', [__CLASS__, 'sid']);
     }
 
     /**
@@ -42,13 +45,13 @@ class SmartyFunctions
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @return  string                               The generated pagination link
+     * @param   array $params               Parameters for the plugin
+     * @param   \Ptf\View\Plain $view       The view object
+     * @return  string                      The generated pagination link
      */
-    public static function paginationFirst(array $params, \Smarty_Internal_Template $template)
+    public static function paginationFirst(array $params, \Ptf\View\Plain $view)
     {
-        $pagination = $template->getTemplateVars('pagination');
+        $pagination = $view['pagination'];
         if (!($pagination instanceof Pagination)) {
             trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
         }
@@ -66,7 +69,7 @@ class SmartyFunctions
                 $link = isset($params['link']) ? $params['link'] : $default;
                 $urlParams = $pagination->generateUrlParamsString($params);
 
-                return '<a href="' . $params['url'] . '?page=' . $pagination->getFirstPage() . $urlParams . '">' . $link . '</a>';
+                return '<a href="' . $params['url'] .'?page=' . $pagination->getFirstPage() . $urlParams . '">' . $link . '</a>';
             }
         }
         return $pagination->getFirstPage();
@@ -89,13 +92,13 @@ class SmartyFunctions
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @return  string                               The generated pagination link
+     * @param   array $params               Parameters for the plugin
+     * @param   \Ptf\View\Plain $view       The view object
+     * @return  string                      The generated pagination link
      */
-    public static function paginationPrev(array $params, \Smarty_Internal_Template $template)
+    public static function paginationPrev(array $params, \Ptf\View\Plain $view)
     {
-        $pagination = $template->getTemplateVars('pagination');
+        $pagination = $view['pagination'];
         if (!($pagination instanceof Pagination)) {
             trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
         }
@@ -113,7 +116,7 @@ class SmartyFunctions
                 $link = isset($params['link']) ? $params['link'] : $default;
                 $urlParams = $pagination->generateUrlParamsString($params);
 
-                return '<a href="' . $params['url'] . '?page=' . $pagination->getPrevPage() . $urlParams . '">' . $link . '</a>';
+                return '<a href="' . $params['url'] .'?page=' . $pagination->getPrevPage() . $urlParams . '">' . $link . '</a>';
             }
         }
         return $pagination->getPrevPage();
@@ -136,13 +139,13 @@ class SmartyFunctions
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @return  string                               The generated pagination link
+     * @param   array $params               Parameters for the plugin
+     * @param   \Ptf\View\Plain $view       The view object
+     * @return  string                      The generated pagination link
      */
-    public static function paginationNext(array $params, \Smarty_Internal_Template $template)
+    public static function paginationNext(array $params, \Ptf\View\Plain $view)
     {
-        $pagination = $template->getTemplateVars('pagination');
+        $pagination = $view['pagination'];
         if (!($pagination instanceof Pagination)) {
             trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
         }
@@ -160,7 +163,7 @@ class SmartyFunctions
                 $link = isset($params['link']) ? $params['link'] : $default;
                 $urlParams = $pagination->generateUrlParamsString($params);
 
-                return '<a href="' . $params['url'] . '?page=' . $pagination->getNextPage() . $urlParams . '">' . $link . '</a>';
+                return '<a href="' . $params['url'] .'?page=' . $pagination->getNextPage() . $urlParams . '">' . $link . '</a>';
             }
         }
         return $pagination->getNextPage();
@@ -183,13 +186,13 @@ class SmartyFunctions
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @return  string                               The generated pagination link
+     * @param   array $params               Parameters for the plugin
+     * @param   \Ptf\View\Plain $view       The view object
+     * @return  string                      The generated pagination link
      */
-    public static function paginationLast(array $params, \Smarty_Internal_Template $template)
+    public static function paginationLast(array $params, \Ptf\View\Plain $view)
     {
-        $pagination = $template->getTemplateVars('pagination');
+        $pagination = $view['pagination'];
         if (!($pagination instanceof Pagination)) {
             trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
         }
@@ -207,7 +210,7 @@ class SmartyFunctions
                 $link = isset($params['link']) ? $params['link'] : $default;
                 $urlParams = $pagination->generateUrlParamsString($params);
 
-                return '<a href="' . $params['url'] . '?page=' . $pagination->getLastPage() . $urlParams . '">' . $link . '</a>';
+                return '<a href="' . $params['url'] .'?page=' . $pagination->getLastPage() . $urlParams . '">' . $link . '</a>';
             }
         }
         return $pagination->getLastPage();
@@ -224,13 +227,13 @@ class SmartyFunctions
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @return  string                               The generated page list
+     * @param   array $params               Parameters for the plugin
+     * @param   \Ptf\View\Plain $view       The view object
+     * @return  string                      The generated page list
      */
-    public static function paginationList(array $params, \Smarty_Internal_Template $template)
+    public static function paginationList(array $params, \Ptf\View\Plain $view)
     {
-        $pagination = $template->getTemplateVars('pagination');
+        $pagination = $view['pagination'];
         if (!($pagination instanceof Pagination)) {
             trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
         }
@@ -256,13 +259,12 @@ class SmartyFunctions
     /**
      * Display the overall number of pages for a pagination
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @return  integer                              The page count
+     * @param   \Ptf\View\Plain $view       The view object
+     * @return  integer                     The page count
      */
-    public static function paginationCount(array $params, \Smarty_Internal_Template $template)
+    public static function paginationCount(\Ptf\View\Plain $view)
     {
-        $pagination = $template->getTemplateVars('pagination');
+        $pagination = $view['pagination'];
         if (!($pagination instanceof Pagination)) {
             trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
         }
@@ -271,11 +273,24 @@ class SmartyFunctions
     }
 
     /**
-     * Get the value of the SID constant
+     * Replace two consecutive "<br />" with "</p><p>"
      *
+     * @param   string $string              The string to be modified
+     * @param   \Ptf\View\Plain             The view object
+     * @return  string                      The modified string
+     */
+    public static function dblbr2p($string, \Ptf\View\Plain $view)
+    {
+        return preg_replace('/<br *\/?>\s*<br *\/?>/m', "\n</p>\n<p>", $string);
+    }
+
+    /**
+     * Insert the value of the SID constant
+     *
+     * @param   \Ptf\View\Plain $view       The view object
      * @return  string                      The SID constant
      */
-    public static function sid()
+    public static function sid(\Ptf\View\Plain $view)
     {
         return defined('SID') ? SID : '';
     }

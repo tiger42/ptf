@@ -1,11 +1,11 @@
 <?php
 
-namespace Ptf\View\Helper;
+namespace Ptf\View\Plugin\Smarty;
 
 /**
  * Smarty template block function plugins
  */
-class SmartyBlocks
+class Blocks
 {
     /**
      * Register all Smarty block function plugins of this class

@@ -31,7 +31,7 @@ class Plain extends Base
         $this->pluginFunctions = [];
         $this->templateDir = $config->getTemplateDir();
 
-        \Ptf\View\Helper\PlainFunctions::register($this);
+        Plugin\Plain\Functions::register($this);
     }
 
     /**

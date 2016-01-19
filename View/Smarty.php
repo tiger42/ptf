@@ -46,9 +46,9 @@ class Smarty extends Base
             $this->smarty->loadFilter('output', 'trimwhitespace');
         }
 
-        \Ptf\View\Helper\SmartyFunctions::register($this->smarty);
-        \Ptf\View\Helper\SmartyModifiers::register($this->smarty);
-        \Ptf\View\Helper\SmartyBlocks::register($this->smarty);
+        Plugin\Smarty\Functions::register($this->smarty);
+        Plugin\Smarty\Modifiers::register($this->smarty);
+        Plugin\Smarty\Blocks::register($this->smarty);
     }
 
     /**

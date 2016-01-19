@@ -1,10 +1,10 @@
 <?php
 
-namespace Ptf\View\Helper;
+namespace Ptf\View\Plugin\Smarty;
 
-use \Ptf\View\Helper\SmartyModifiers as Modifiers;
+use \Ptf\View\Plugin\Smarty\Modifiers as Modifiers;
 
-class SmartyModifiersTest extends \PHPUnit_Framework_TestCase
+class ModifiersTest extends \PHPUnit_Framework_TestCase
 {
     public function testDblbr2p()
     {

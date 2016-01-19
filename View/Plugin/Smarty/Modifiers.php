@@ -1,11 +1,11 @@
 <?php
 
-namespace Ptf\View\Helper;
+namespace Ptf\View\Plugin\Smarty;
 
 /**
  * Smarty template modifier plugins
  */
-class SmartyModifiers
+class Modifiers
 {
     /**
      * Register all Smarty modifier plugins of this class
