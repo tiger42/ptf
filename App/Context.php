@@ -16,41 +16,49 @@ abstract class Context
      * @var \Ptf\Core\Http\Request
      */
     protected $request;
+
     /**
      * The response object (for web applications only)
      * @var \Ptf\Core\Http\Response
      */
     protected $response;
+
     /**
      * The command line parameters (for CLI applications only)
      * @var \Ptf\Core\Cli\Params
      */
     protected $cliParams;
+
     /**
      * The console output (for CLI applications only)
      * @var \Ptf\Core\Cli\Output
      */
     protected $cliOutput;
+
     /**
      * The application's view object
      * @var \Ptf\View\Base
      */
     protected $view;
+
     /**
      * Array of configured loggers
      * @var \Ptf\Util\Logger[]
      */
     protected $loggers;
+
     /**
      * The called controller
      * @var \Ptf\Controller\Base
      */
     protected $controller;
+
     /**
      * Array of the application's configuration objects
      * @var \Ptf\App\Config[]
      */
     protected $configs;
+
     /**
      * The route mapping table
      * @var array
@@ -174,6 +182,7 @@ abstract class Context
     /**
      * Get the logger with the given name
      *
+     * @param   string $logger              The name of the logger to fetch
      * @return  \Ptf\Util\Logger            The requested logger or a dummy logger, if a logger with the given name does not exist
      */
     public function getLogger($logger = 'system')
@@ -274,5 +283,4 @@ abstract class Context
     {
         return php_sapi_name() == 'cli' || defined('STDIN');
     }
-
 }

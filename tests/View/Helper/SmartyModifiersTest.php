@@ -15,5 +15,4 @@ class SmartyModifiersTest extends \PHPUnit_Framework_TestCase
         $input = "foo<br   ><br\t>bar<br /><br><br ><br\t/>baz";
         $this->assertSame("foo\n</p>\n<p>bar\n</p>\n<p>\n</p>\n<p>baz", Modifiers::dblbr2p($input));
     }
-
 }

@@ -10,5 +10,4 @@ class SessionMemcacheTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(['localhost:11211'], $config->getHosts());
     }
-
 }

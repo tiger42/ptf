@@ -40,7 +40,6 @@ class RunTimer
     {
         return microtime(true) - self::$startTime;
     }
-
 }
 
 \Ptf\Util\RunTimer::start();

@@ -69,5 +69,4 @@ class DB extends \Ptf\Core\Auth
     {
         // Nothing to do here...
     }
-
 }

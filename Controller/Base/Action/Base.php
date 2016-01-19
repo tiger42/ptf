@@ -12,6 +12,7 @@ abstract class Base
      * @var string
      */
     protected $name;
+
     /**
      * The controller owning the action
      * @var \Ptf\Controller\Base
@@ -21,7 +22,7 @@ abstract class Base
     /**
      * Initialize the member variables
      *
-     * @param   \Ptf\Controller\Base $controller The action's controller
+     * @param   \Ptf\Controller\Base $controller  The action's controller
      */
     public function __construct($actionName, \Ptf\Controller\Base $controller)
     {
@@ -48,5 +49,4 @@ abstract class Base
     {
         $this->controller->forward($route);
     }
-
 }

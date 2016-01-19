@@ -69,5 +69,4 @@ class Router
         }
         return explode('/', $route);
     }
-
 }

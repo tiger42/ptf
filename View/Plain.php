@@ -12,6 +12,7 @@ class Plain extends Base
      * @var string
      */
     protected $templateDir;
+
     /**
      * The registered plugin functions
      * @var array
@@ -21,7 +22,7 @@ class Plain extends Base
     /**
      * Initialize the settings
      *
-     * @param   \Ptf\App\Config\ViewPlain $config The Plain view configuration
+     * @param   \Ptf\App\Config\ViewPlain $config  The Plain view configuration
      */
     public function __construct(\Ptf\App\Config\ViewPlain $config)
     {
@@ -111,5 +112,4 @@ class Plain extends Base
             unset($$key);
         }
     }
-
 }

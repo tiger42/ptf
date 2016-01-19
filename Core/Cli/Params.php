@@ -80,5 +80,4 @@ class Params
             $this->parameters[$paramName] = $value;
         }
     }
-
 }

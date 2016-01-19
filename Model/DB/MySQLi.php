@@ -12,16 +12,19 @@ class MySQLi extends \Ptf\Model\DB
      * @var \MySQLi
      */
     private $db;
+
     /**
      * Query result object
      * @var \MySQLi_Result
      */
     private $queryRes;
+
     /**
      * Number of rows of the last "SELECT" result
      * @var integer
      */
     private $numRows;
+
     /**
      * The number of affected rows after the last "INSERT", "UPDATE" or "DELETE" statement
      * @var integer
@@ -56,11 +59,11 @@ class MySQLi extends \Ptf\Model\DB
     /**
      * Perform a "SELECT" query on the database
      *
-     * @param   string $query               The SQL query string
-     * @param   integer $offset             Offset of the first row
-     * @param   integer $rowCount           Number of rows to fetch
-     * @return  integer                     The number of fetched rows
-     * @throws  \Ptf\Core\Exception\DBQuery If the query has failed
+     * @param   string $query                The SQL query string
+     * @param   integer $offset              Offset of the first row
+     * @param   integer $rowCount            Number of rows to fetch
+     * @return  integer                      The number of fetched rows
+     * @throws  \Ptf\Core\Exception\DBQuery  If the query has failed
      */
     protected function queryImpl($query, $offset = 0, $rowCount = null)
     {
@@ -104,8 +107,8 @@ class MySQLi extends \Ptf\Model\DB
     /**
      * Perform a manipulation query on the database (e.g. "UPDATE", "INSERT")
      *
-     * @param   string $sql                 The SQL statement to execute
-     * @throws  \Ptf\Core\Exception\DBQuery If the query has failed
+     * @param   string $sql                  The SQL statement to execute
+     * @throws  \Ptf\Core\Exception\DBQuery  If the query has failed
      */
     protected function execSqlImpl($sql)
     {
@@ -224,5 +227,4 @@ class MySQLi extends \Ptf\Model\DB
     {
         return stripslashes($string);
     }
-
 }

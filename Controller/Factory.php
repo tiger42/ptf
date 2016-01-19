@@ -43,5 +43,4 @@ class Factory
 
         return $controller;
     }
-
 }

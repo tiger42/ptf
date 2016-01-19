@@ -30,5 +30,4 @@ class SessionMemcache extends \Ptf\App\Config\Session
     {
         return $this->hosts;
     }
-
 }

@@ -83,5 +83,4 @@ class AuthDB extends \Ptf\App\Config\Auth
     {
         return $this->col_is_active;
     }
-
 }

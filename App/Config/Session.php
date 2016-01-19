@@ -12,12 +12,10 @@ class Session extends \Ptf\App\Config
      */
     public function __construct()
     {
-        parent::__construct();
-
-        $this->configData = array_merge($this->configData, [
+        $this->configData = [
             'session_name' => '',
             'max_lifetime' => ''
-        ]);
+        ];
     }
 
     /**
@@ -39,5 +37,4 @@ class Session extends \Ptf\App\Config
     {
         return $this->max_lifetime;
     }
-
 }

@@ -70,5 +70,4 @@ class MySQL extends \Ptf\Model\DB\PDO
     {
         return '`' . $string . '`';
     }
-
 }

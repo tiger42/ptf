@@ -12,6 +12,7 @@ class IniFile
      * @var string
      */
     protected $filename;
+
     /**
      * Array that holds the INI file's data
      * @var array
@@ -158,5 +159,4 @@ class IniFile
         }
         return $ini;
     }
-
 }

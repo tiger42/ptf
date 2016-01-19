@@ -48,5 +48,4 @@ trait Singleton
     final private function __wakeup()
     {
     }
-
 }

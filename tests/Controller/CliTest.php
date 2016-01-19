@@ -39,7 +39,6 @@ class CliTest extends \PHPUnit_Framework_TestCase
         $controller = new CliController('Foobar', $context);
         $this->assertSame('Execute', $controller->getDefaultActionName());
     }
-
 }
 
 class MyCliController extends CliController
@@ -53,5 +52,4 @@ class MyCliController extends CliController
     {
         return parent::executeAction($action);
     }
-
 }

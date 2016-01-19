@@ -16,5 +16,4 @@ class ViewPlain extends \Ptf\App\Config\ViewPlain
     {
         return $this->template_dir;
     }
-
 }

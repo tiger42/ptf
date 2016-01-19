@@ -14,11 +14,13 @@ abstract class Base implements \ArrayAccess
      * @var \Ptf\App\Config\View
      */
     protected $config;
+
     /**
      * Array of assigned template variables
      * @var array
      */
     protected $assignedVars;
+
     /**
      * The template to display
      * @var string
@@ -28,7 +30,7 @@ abstract class Base implements \ArrayAccess
     /**
      * Initialize the member variables
      *
-     * @param   \Ptf\App\Config\View $config The view's configuration
+     * @param   \Ptf\App\Config\View $config  The view's configuration
      */
     public function __construct(\Ptf\App\Config\View $config)
     {
@@ -157,5 +159,4 @@ abstract class Base implements \ArrayAccess
         include 'ErrorPages/404.phtml';
         return ob_get_clean();
     }
-
 }

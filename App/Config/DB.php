@@ -92,5 +92,4 @@ class DB extends \Ptf\App\Config
     {
         return $this->charset;
     }
-
 }

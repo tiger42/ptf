@@ -8,5 +8,4 @@ class Index extends \Ptf\Controller\Http\Action\Base
     {
         $response->setContent($request->getGetVar('HttpActionTest'));
     }
-
 }

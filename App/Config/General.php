@@ -13,7 +13,7 @@ class General extends \Ptf\App\Config
     public function __construct()
     {
         $this->configData = [
-         'log_level' => (string)\Ptf\Util\Logger::INFO
+            'log_level' => (string)\Ptf\Util\Logger::INFO
         ];
     }
 
@@ -26,5 +26,4 @@ class General extends \Ptf\App\Config
     {
         return $this->log_level;
     }
-
 }

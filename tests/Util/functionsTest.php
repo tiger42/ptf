@@ -97,5 +97,4 @@ class FunctionsTest extends \PHPUnit_Framework_Testcase
 EOT;
         $this->assertSame($compare, prettyPrintJson($json));
     }
-
 }

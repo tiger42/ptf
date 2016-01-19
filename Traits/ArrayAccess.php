@@ -49,5 +49,4 @@ trait ArrayAccess
     {
         unset($this->$offset);
     }
-
 }

@@ -191,5 +191,4 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($request->getPreferredLanguage());
         $this->assertNull($request->getPreferredLanguage(true));
     }
-
 }

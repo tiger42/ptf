@@ -12,6 +12,7 @@ class Memcache extends \Ptf\Core\Session
      * @var Memcache
      */
     protected $memcache;
+
     /**
      * List of Memcache hosts
      * @var string[]
@@ -21,9 +22,9 @@ class Memcache extends \Ptf\Core\Session
     /**
      * Initialize the Memcache session, must be called before start()
      *
-     * @param   \Ptf\App\Config\SessionMemcache $config The configuration to initialize with
-     * @param   \Ptf\App\Context $context               The application's context
-     * @throws  \InvalidArgumentException               If the Config object has the wrong type
+     * @param   \Ptf\App\Config\SessionMemcache $config  The configuration to initialize with
+     * @param   \Ptf\App\Context $context                The application's context
+     * @throws  \InvalidArgumentException                If the Config object has the wrong type
      */
     public function init(\Ptf\App\Config\Session $config, \Ptf\App\Context $context)
     {
@@ -105,5 +106,4 @@ class Memcache extends \Ptf\Core\Session
             $this->memcache->addServer($host[0], $host[1]);
         }
     }
-
 }

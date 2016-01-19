@@ -12,31 +12,37 @@ abstract class DB
      * @var \Ptf\Model\DB[]
      */
     private static $instances = [];
+
     /**
      * ID of the current instance
      * @var string
      */
     protected $instanceId;
+
     /**
      * The system logger
      * @var \Ptf\Util\Logger
      */
     protected $logger;
+
     /**
      * The error logger
      * @var \Ptf\Util\Logger
      */
     protected $errLogger;
+
     /**
      * The current configuration data
      * @var \Ptf\App\Config\DB
      */
     protected $config;
+
     /**
      * The application's context
      * @var \Ptf\App\Context
      */
     protected $context;
+
     /**
      * Cache for column names per table
      * @var array
@@ -375,5 +381,4 @@ abstract class DB
      * @return  string                      The unescaped string
      */
     abstract public function unEscapeString($string);
-
 }

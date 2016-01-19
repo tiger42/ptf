@@ -21,7 +21,7 @@ class Cli extends \Ptf\Controller\Base
     /**
      * Execute the given action
      *
-     * @param   \Ptf\Controller\Base\Action\Base $action The action to execute
+     * @param   \Ptf\Controller\Base\Action\Base $action  The action to execute
      */
     protected function executeAction(\Ptf\Controller\Base\Action\Base $action)
     {
@@ -37,5 +37,4 @@ class Cli extends \Ptf\Controller\Base
     {
         return 'Execute';
     }
-
 }

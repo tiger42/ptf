@@ -58,7 +58,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config->foobar;
         $config->notSet;
     }
-
 }
 
 class MyConfig extends Config
@@ -79,5 +78,4 @@ class MyConfig extends Config
     {
         return $this->configData;
     }
-
 }

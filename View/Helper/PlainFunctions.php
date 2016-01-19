@@ -15,15 +15,15 @@ class PlainFunctions
     public static function register(\Ptf\View\Plain $view)
     {
         // Pagination plugins
-        $view->registerPlugin('pagination_first', array(__CLASS__, 'paginationFirst'));
-        $view->registerPlugin('pagination_prev', array(__CLASS__, 'paginationPrev'));
-        $view->registerPlugin('pagination_next', array(__CLASS__, 'paginationNext'));
-        $view->registerPlugin('pagination_last', array(__CLASS__, 'paginationLast'));
-        $view->registerPlugin('pagination_list', array(__CLASS__, 'paginationList'));
-        $view->registerPlugin('pagination_count', array(__CLASS__, 'paginationCount'));
+        $view->registerPlugin('pagination_first', [__CLASS__, 'paginationFirst']);
+        $view->registerPlugin('pagination_prev', [__CLASS__, 'paginationPrev']);
+        $view->registerPlugin('pagination_next', [__CLASS__, 'paginationNext']);
+        $view->registerPlugin('pagination_last', [__CLASS__, 'paginationLast']);
+        $view->registerPlugin('pagination_list', [__CLASS__, 'paginationList']);
+        $view->registerPlugin('pagination_count', [__CLASS__, 'paginationCount']);
 
-        $view->registerPlugin('dblbr2p', array(__CLASS__, 'dblbr2p'));
-        $view->registerPlugin('sid', array(__CLASS__, 'sid'));
+        $view->registerPlugin('dblbr2p', [__CLASS__, 'dblbr2p']);
+        $view->registerPlugin('sid', [__CLASS__, 'sid']);
     }
 
     /**
@@ -32,14 +32,14 @@ class PlainFunctions
      *
      * <pre>
      * Available parameters:
-     * url          The URL of the page (without any parameters!)
-     *              If not set, the plugin will return the page number only
-     * link         The link text or image
-     *              If not set, the default '|<' will be used
-     * inactivelink The link text or image if the current page is the first page
-     *              If not set, the default '|<' will be used
-     * hideinactive If the current page is the first page:
-     *              Hide the link text or image?
+     * url           The URL of the page (without any parameters!)
+     *               If not set, the plugin will return the page number only
+     * link          The link text or image
+     *               If not set, the default '|<' will be used
+     * inactivelink  The link text or image if the current page is the first page
+     *               If not set, the default '|<' will be used
+     * hideinactive  If the current page is the first page:
+     *               Hide the link text or image?
      * Any additional parameters will be appended to the URL
      * </pre>
      *
@@ -79,14 +79,14 @@ class PlainFunctions
      *
      * <pre>
      * Available parameters:
-     * url          The URL of the page (without any parameters!)
-     *              If not set, the plugin will return the page number only
-     * link         The link text or image
-     *              If not set, the default '<' will be used
-     * inactivelink The link text or image if the current page is the first page
-     *              If not set, the default '<' will be used
-     * hideinactive If the current page is the first page:
-     *              Hide the link text or image?
+     * url           The URL of the page (without any parameters!)
+     *               If not set, the plugin will return the page number only
+     * link          The link text or image
+     *               If not set, the default '<' will be used
+     * inactivelink  The link text or image if the current page is the first page
+     *               If not set, the default '<' will be used
+     * hideinactive  If the current page is the first page:
+     *               Hide the link text or image?
      * Any additional parameters will be appended to the URL
      * </pre>
      *
@@ -126,14 +126,14 @@ class PlainFunctions
      *
      * <pre>
      * Available parameters:
-     * url          The URL of the page (without any parameters!)
-     *              If not set, the plugin will return the page number only
-     * link         The link text or image
-     *              If not set, the default '>' will be used
-     * inactivelink The link text or image if the current page is the last page
-     *              If not set, the default '>' will be used
-     * hideinactive If the current page is the last page:
-     *              Hide the link text or image?
+     * url           The URL of the page (without any parameters!)
+     *               If not set, the plugin will return the page number only
+     * link          The link text or image
+     *               If not set, the default '>' will be used
+     * inactivelink  The link text or image if the current page is the last page
+     *               If not set, the default '>' will be used
+     * hideinactive  If the current page is the last page:
+     *               Hide the link text or image?
      * Any additional parameters will be appended to the URL
      * </pre>
      *
@@ -173,14 +173,14 @@ class PlainFunctions
      *
      * <pre>
      * Available parameters:
-     * url          The URL of the page (without any parameters!)
-     *              If not set, the plugin will return the page number only
-     * link         The link text or image
-     *              If not set, the default '>|' will be used
-     * inactivelink The link text or image if the current page is the last page
-     *              If not set, the default '>|' will be used
-     * hideinactive If the current page is the last page:
-     *              Hide the link text or image?
+     * url           The URL of the page (without any parameters!)
+     *               If not set, the plugin will return the page number only
+     * link          The link text or image
+     *               If not set, the default '>|' will be used
+     * inactivelink  The link text or image if the current page is the last page
+     *               If not set, the default '>|' will be used
+     * hideinactive  If the current page is the last page:
+     *               Hide the link text or image?
      * Any additional parameters will be appended to the URL
      * </pre>
      *
@@ -219,9 +219,9 @@ class PlainFunctions
      *
      * <pre>
      * Available parameters:
-     * url          The URL of the page (without any parameters!)
-     * delimiter    The delimiter between two page numbers
-     *              If not set, the default ' ' will be used
+     * url        The URL of the page (without any parameters!)
+     * delimiter  The delimiter between two page numbers
+     *            If not set, the default ' ' will be used
      * Any additional parameters will be appended to the URL
      * </pre>
      *
@@ -292,5 +292,4 @@ class PlainFunctions
     {
         return defined('SID') ? SID : '';
     }
-
 }

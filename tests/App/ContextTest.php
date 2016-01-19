@@ -146,7 +146,6 @@ class ContextTest extends \PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = $oldHttpHost;
         $_SERVER['HTTPS']     = $oldHttps;
     }
-
 }
 
 class MyContext extends Context
@@ -170,7 +169,6 @@ class MyContext extends Context
     {
         return $this->loggers;
     }
-
 }
 
 class MyHttpContext extends Context
@@ -189,5 +187,4 @@ class MyHttpContext extends Context
     {
         return false;
     }
-
 }

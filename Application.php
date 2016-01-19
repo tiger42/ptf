@@ -54,7 +54,7 @@ abstract class Application
      * Initialize the autoloader.<br>
      * Overwrite this method to set an application specific autoload configuration.
      *
-     * @param   \Ptf\Core\Autoloader $autoloader The autoloader to initialize
+     * @param   \Ptf\Core\Autoloader $autoloader  The autoloader to initialize
      */
     protected static function initAutoloader(Core\Autoloader $autoloader)
     {
@@ -72,5 +72,4 @@ abstract class Application
     {
         Util\ConfigCompiler::compile($configName, $configDir, $namespace);
     }
-
 }

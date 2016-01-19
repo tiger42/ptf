@@ -20,5 +20,4 @@ class ViewTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('', $config->getTemplate404());
     }
-
 }

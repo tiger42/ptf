@@ -8,5 +8,4 @@ class MyController extends \Ptf\Controller\Base
     {
         return 'MyDefaultAction';
     }
-
 }

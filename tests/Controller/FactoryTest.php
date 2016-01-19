@@ -33,5 +33,4 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             'Ptf\Controller\Factory::createController: Controller must extend base controller: PtfTest\\Controller\\Invalid');
         Factory::createController('invalid', $context);
     }
-
 }

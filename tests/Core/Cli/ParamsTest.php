@@ -102,5 +102,4 @@ class ParamsTest extends \PHPUnit_Framework_TestCase
         $_SERVER['argv'] = $oldArgv;
         $_SERVER['argc'] = $oldArgc;
     }
-
 }

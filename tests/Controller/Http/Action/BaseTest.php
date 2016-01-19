@@ -46,5 +46,4 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(['Location: http://www.example.com/foo' => 302], $headers);
         $context->getResponse()->clearHeaders();
     }
-
 }

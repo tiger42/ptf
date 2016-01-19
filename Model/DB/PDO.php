@@ -12,16 +12,19 @@ abstract class PDO extends \Ptf\Model\DB
      * @var \PDO
      */
     protected $db;
+
     /**
      * PDO statement object
      * @var \PDOStatement
      */
     protected $statement;
+
     /**
      * Number of rows of the last "SELECT" result
      * @var integer
      */
     protected $numRows;
+
     /**
      * The number of affected rows after the last "INSERT", "UPDATE" or "DELETE" statement
      * @var integer
@@ -39,9 +42,9 @@ abstract class PDO extends \Ptf\Model\DB
     /**
      * Perform a "SELECT" query on the database
      *
-     * @param   string $query               The SQL query string
-     * @return  integer                     The number of fetched rows
-     * @throws  \Ptf\Core\Exception\DBQuery If the query has failed
+     * @param   string $query                The SQL query string
+     * @return  integer                      The number of fetched rows
+     * @throws  \Ptf\Core\Exception\DBQuery  If the query has failed
      */
     protected function runQuery($query)
     {
@@ -78,8 +81,8 @@ abstract class PDO extends \Ptf\Model\DB
     /**
      * Perform a manipulation query on the database (e.g. "UPDATE", "INSERT")
      *
-     * @param   string $sql                 The SQL statement to execute
-     * @throws  \Ptf\Core\Exception\DBQuery If the query has failed
+     * @param   string $sql                  The SQL statement to execute
+     * @throws  \Ptf\Core\Exception\DBQuery  If the query has failed
      */
     protected function execSqlImpl($sql)
     {
@@ -179,5 +182,4 @@ abstract class PDO extends \Ptf\Model\DB
     {
         return stripslashes($string);
     }
-
 }

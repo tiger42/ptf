@@ -14,21 +14,25 @@ class Pagination
      * @var integer
      */
     protected $curPage;
+
     /**
      * The count of list items per page
      * @var integer
      */
     protected $itemsPerPage;
+
     /**
      * The overall count of items
      * @var integer
      */
     protected $itemCount;
+
     /**
      * The count of pages to show in the page list
      * @var integer
      */
     protected $listCount;
+
     /**
      * The overall count of pages
      * @var integer
@@ -208,5 +212,4 @@ class Pagination
         }
         return $paramsStr;
     }
-    
 }

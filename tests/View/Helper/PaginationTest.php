@@ -218,5 +218,4 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
         $pagination = new Pagination(1, 1, 1);
         $this->assertSame($expected, $pagination->generateUrlParamsString($params));
     }
-
 }

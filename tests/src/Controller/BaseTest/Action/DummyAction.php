@@ -8,5 +8,4 @@ class DummyAction extends \Ptf\Controller\Base\Action\Base
     {
         echo 'BaseTest/DummyAction';
     }
-
 }

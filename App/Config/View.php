@@ -12,12 +12,10 @@ class View extends \Ptf\App\Config
      */
     public function __construct()
     {
-        parent::__construct();
-
-        $this->configData = array_merge($this->configData, [
+        $this->configData = [
             'template_dir' => null,
             'template_404' => ''
-        ]);
+        ];
     }
 
     /**
@@ -39,5 +37,4 @@ class View extends \Ptf\App\Config
     {
         return $this->template_404;
     }
-
 }

@@ -57,5 +57,4 @@ class AuthDBTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('', $config->getColIsActive());
     }
-
 }

@@ -37,5 +37,4 @@ class Auth extends \Ptf\App\Config
     {
         return $this->salt;
     }
-
 }

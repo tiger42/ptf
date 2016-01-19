@@ -73,5 +73,4 @@ abstract class Config implements \ArrayAccess
     {
         unset($this->configData[$option]);
     }
-
 }

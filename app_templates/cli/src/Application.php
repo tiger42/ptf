@@ -23,7 +23,7 @@ class Application extends \Ptf\CliApplication
     /**
      * Initialize the autoloader
      *
-     * @param   \Ptf\Core\Autoloader $autoloader The autoloader to initialize
+     * @param   \Ptf\Core\Autoloader $autoloader  The autoloader to initialize
      */
     protected static function initAutoloader(\Ptf\Core\Autoloader $autoloader)
     {
@@ -46,5 +46,4 @@ class Application extends \Ptf\CliApplication
         echo "Options:\n";
         echo "  -n NAME, --name=NAME  The name to display\n";
     }
-
 }

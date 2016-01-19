@@ -25,6 +25,7 @@ class DB extends \Ptf\Util\Logger
      * @var \Ptf\Model\DB\Table
      */
     protected $logTable;
+
     /**
      * DB configuration object
      * @var \Ptf\App\Config\DB
@@ -90,5 +91,4 @@ class DB extends \Ptf\Util\Logger
     {
         $this->dbConfig = $config;
     }
-
 }

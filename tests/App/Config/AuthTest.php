@@ -2,9 +2,6 @@
 
 namespace Ptf\App\Config;
 
-/**
- * Configuration for Auth classes
- */
 class AuthTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetIdletime()
@@ -20,5 +17,4 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('mysecretsalt', $config->getSalt());
     }
-
 }

@@ -16,16 +16,19 @@ class Autoloader
      * @var array
      */
     private $nsMapping;
+
     /**
      * Class name to PHP filename mapping
      * @var array
      */
     private $fileMapping;
+
     /**
      * Name of the class mapping file
      * @var string
      */
     private $cacheFilename;
+
     /**
      * Directories to search in for overridden framework classes
      * @var string[]
@@ -166,7 +169,6 @@ class Autoloader
         fclose($handle);
         rename($this->cacheFilename . '.tmp', $this->cacheFilename);
     }
-
 }
 
 $autoloader = Autoloader::getInstance();

@@ -14,7 +14,7 @@ class SmartyModifiers
      */
     public static function register(\Smarty $smarty)
     {
-        $smarty->registerPlugin('modifier', 'dblbr2p', array(__CLASS__, 'dblbr2p'));
+        $smarty->registerPlugin('modifier', 'dblbr2p', [__CLASS__, 'dblbr2p']);
     }
 
     /**
@@ -27,5 +27,4 @@ class SmartyModifiers
     {
         return preg_replace('/<br[\s]*\/?>\s*<br[\s]*\/?>/m', "\n</p>\n<p>", $string);
     }
-
 }

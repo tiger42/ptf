@@ -8,5 +8,4 @@ class AnotherAction extends \Ptf\Controller\Base\Action\Base
     {
         echo 'Base/AnotherAction';
     }
-
 }

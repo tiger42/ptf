@@ -23,7 +23,7 @@ class Application extends \Ptf\Application
     /**
      * Initialize the autoloader
      *
-     * @param   \Ptf\Core\Autoloader $autoloader The autoloader to initialize
+     * @param   \Ptf\Core\Autoloader $autoloader  The autoloader to initialize
      */
     protected static function initAutoloader(\Ptf\Core\Autoloader $autoloader)
     {
@@ -31,5 +31,4 @@ class Application extends \Ptf\Application
 //        $autoloader->addOverrideDir('src/override');   // Register a directory for Ptf class overrides
         $autoloader->setCacheFilename(dirname($_SERVER['SCRIPT_FILENAME']) . '/var/autoload_cache.php');
     }
-
 }

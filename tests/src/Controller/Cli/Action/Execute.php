@@ -8,5 +8,4 @@ class Execute extends \Ptf\Controller\Cli\Action\Base
     {
         $output->setContent($params->get('CliActionTest'));
     }
-
 }

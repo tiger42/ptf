@@ -33,9 +33,8 @@ abstract class Base extends \Ptf\Controller\Base\Action\Base
     /**
      * Execute the action
      *
-     * @param   \Ptf\Core\Http\Request $request   The current request object
-     * @param   \Ptf\Core\Http\Response $response The response object
+     * @param   \Ptf\Core\Http\Request $request    The current request object
+     * @param   \Ptf\Core\Http\Response $response  The response object
      */
     abstract public function execute(\Ptf\Core\Http\Request $request, \Ptf\Core\Http\Response $response);
-
 }

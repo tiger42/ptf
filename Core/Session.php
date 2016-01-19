@@ -14,16 +14,19 @@ abstract class Session
      * @var \Ptf\App\Config\Session
      */
     protected $config;
+
     /**
      * The application's context
      * @var \Ptf\App\Context
      */
     protected $context;
+
     /**
      * The session path
      * @var string
      */
     protected $path;
+
     /**
      * The name of the session
      * @var string
@@ -33,8 +36,8 @@ abstract class Session
     /**
      * Initialize the session object, must be called before start()
      *
-     * @param   \Ptf\App\Config\Session $config The configuration to initialize with
-     * @param   \Ptf\App\Context $context       The application's context
+     * @param   \Ptf\App\Config\Session $config  The configuration to initialize with
+     * @param   \Ptf\App\Context $context        The application's context
      */
     public function init(\Ptf\App\Config\Session $config, \Ptf\App\Context $context)
     {
@@ -264,5 +267,4 @@ abstract class Session
      * @return  boolean                     Was the operation successful?
      */
     abstract public function gcSession($maxLifetime);
-
 }

@@ -12,6 +12,7 @@ class Response
      * @var array
      */
     protected $headers;
+
     /**
      * The content to send
      * @var string
@@ -185,5 +186,4 @@ class Response
     {
         return $this->sendHeaders()->sendContent();
     }
-
 }

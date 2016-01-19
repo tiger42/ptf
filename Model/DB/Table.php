@@ -45,71 +45,85 @@ class Table implements \ArrayAccess
      * @var \Ptf\App\Context
      */
     protected $context;
+
     /**
      * Database object
      * @var \Ptf\Model\DB
      */
     protected $db;
+
     /**
      * The system logger
      * @var \Ptf\Util\Logger
      */
     protected $logger;
+
     /**
      * The error logger
      * @var \Ptf\Util\Logger
      */
     protected $errLogger;
+
     /**
      * Name of the database table
      * @var string
      */
     protected $tableName;
+
     /**
      * Quoted name of the database table
      * @var string
      */
     protected $quotedName;
+
     /**
      * Name of the database
      * @var string
      */
     protected $dbName;
+
     /**
      * "ORDER BY" columns and directions
      * @var array
      */
     protected $order;
+
     /**
      * Array of member variables (for magic functions)
      * @var array
      */
     protected $fields;
+
     /**
      * Aliases for table columns
      * @var array
      */
     protected $aliases;
+
     /**
      * Names of all table columns
      * @var string[]
      */
     protected $columns;
+
     /**
      * Compare modes of the columns
      * @var array
      */
     protected $compModes;
+
     /**
      * Joined table objects
      * @var array
      */
     protected $joinTables;
+
     /**
      * Has the fetch() function already been executed?
      * @var boolean
      */
     protected $fetched;
+
     /**
      * Do no use the asterisk (*) operator in the next query
      * @var boolean
@@ -773,5 +787,4 @@ class Table implements \ArrayAccess
     {
         return $this->db;
     }
-
 }

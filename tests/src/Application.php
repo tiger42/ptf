@@ -21,5 +21,4 @@ class Application extends \Ptf\Application
     {
         $autoloader->registerNamespace('PtfTest', 'tests/src');
     }
-
 }

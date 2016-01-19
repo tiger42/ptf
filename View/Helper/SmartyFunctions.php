@@ -15,14 +15,14 @@ class SmartyFunctions
     public static function register(\Smarty $smarty)
     {
         // Pagination plugins
-        $smarty->registerPlugin('function', 'pagination_first', array(__CLASS__, 'paginationFirst'));
-        $smarty->registerPlugin('function', 'pagination_prev', array(__CLASS__, 'paginationPrev'));
-        $smarty->registerPlugin('function', 'pagination_next', array(__CLASS__, 'paginationNext'));
-        $smarty->registerPlugin('function', 'pagination_last', array(__CLASS__, 'paginationLast'));
-        $smarty->registerPlugin('function', 'pagination_list', array(__CLASS__, 'paginationList'));
-        $smarty->registerPlugin('function', 'pagination_count', array(__CLASS__, 'paginationCount'));
+        $smarty->registerPlugin('function', 'pagination_first', [__CLASS__, 'paginationFirst']);
+        $smarty->registerPlugin('function', 'pagination_prev', [__CLASS__, 'paginationPrev']);
+        $smarty->registerPlugin('function', 'pagination_next', [__CLASS__, 'paginationNext']);
+        $smarty->registerPlugin('function', 'pagination_last', [__CLASS__, 'paginationLast']);
+        $smarty->registerPlugin('function', 'pagination_list', [__CLASS__, 'paginationList']);
+        $smarty->registerPlugin('function', 'pagination_count', [__CLASS__, 'paginationCount']);
 
-        $smarty->registerPlugin('function', 'sid', array(__CLASS__, 'sid'));
+        $smarty->registerPlugin('function', 'sid', [__CLASS__, 'sid']);
     }
 
     /**
@@ -31,20 +31,20 @@ class SmartyFunctions
      *
      * <pre>
      * Available parameters:
-     * url          The URL of the page (without any parameters!)
-     *              If not set, the plugin will return the page number only
-     * link         The link text or image
-     *              If not set, the default '|<' will be used
-     * inactivelink The link text or image if the current page is the first page
-     *              If not set, the default '|<' will be used
-     * hideinactive If the current page is the first page:
-     *              Hide the link text or image?
+     * url           The URL of the page (without any parameters!)
+     *               If not set, the plugin will return the page number only
+     * link          The link text or image
+     *               If not set, the default '|<' will be used
+     * inactivelink  The link text or image if the current page is the first page
+     *               If not set, the default '|<' will be used
+     * hideinactive  If the current page is the first page:
+     *               Hide the link text or image?
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                       Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template The Smarty template object
-     * @return  string                              The generated pagination link
+     * @param   array $params                        Parameters for the plugin
+     * @param   \Smarty_Internal_Template $template  The Smarty template object
+     * @return  string                               The generated pagination link
      */
     public static function paginationFirst(array $params, \Smarty_Internal_Template $template)
     {
@@ -78,20 +78,20 @@ class SmartyFunctions
      *
      * <pre>
      * Available parameters:
-     * url          The URL of the page (without any parameters!)
-     *              If not set, the plugin will return the page number only
-     * link         The link text or image
-     *              If not set, the default '<' will be used
-     * inactivelink The link text or image if the current page is the first page
-     *              If not set, the default '<' will be used
-     * hideinactive If the current page is the first page:
-     *              Hide the link text or image?
+     * url           The URL of the page (without any parameters!)
+     *               If not set, the plugin will return the page number only
+     * link          The link text or image
+     *               If not set, the default '<' will be used
+     * inactivelink  The link text or image if the current page is the first page
+     *               If not set, the default '<' will be used
+     * hideinactive  If the current page is the first page:
+     *               Hide the link text or image?
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                       Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template The Smarty template object
-     * @return  string                              The generated pagination link
+     * @param   array $params                        Parameters for the plugin
+     * @param   \Smarty_Internal_Template $template  The Smarty template object
+     * @return  string                               The generated pagination link
      */
     public static function paginationPrev(array $params, \Smarty_Internal_Template $template)
     {
@@ -125,20 +125,20 @@ class SmartyFunctions
      *
      * <pre>
      * Available parameters:
-     * url          The URL of the page (without any parameters!)
-     *              If not set, the plugin will return the page number only
-     * link         The link text or image
-     *              If not set, the default '>' will be used
-     * inactivelink The link text or image if the current page is the last page
-     *              If not set, the default '>' will be used
-     * hideinactive If the current page is the last page:
-     *              Hide the link text or image?
+     * url           The URL of the page (without any parameters!)
+     *               If not set, the plugin will return the page number only
+     * link          The link text or image
+     *               If not set, the default '>' will be used
+     * inactivelink  The link text or image if the current page is the last page
+     *               If not set, the default '>' will be used
+     * hideinactive  If the current page is the last page:
+     *               Hide the link text or image?
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                       Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template The Smarty template object
-     * @return  string                              The generated pagination link
+     * @param   array $params                        Parameters for the plugin
+     * @param   \Smarty_Internal_Template $template  The Smarty template object
+     * @return  string                               The generated pagination link
      */
     public static function paginationNext(array $params, \Smarty_Internal_Template $template)
     {
@@ -172,20 +172,20 @@ class SmartyFunctions
      *
      * <pre>
      * Available parameters:
-     * url          The URL of the page (without any parameters!)
-     *              If not set, the plugin will return the page number only
-     * link         The link text or image
-     *              If not set, the default '>|' will be used
-     * inactivelink The link text or image if the current page is the last page
-     *              If not set, the default '>|' will be used
-     * hideinactive If the current page is the last page:
-     *              Hide the link text or image?
+     * url           The URL of the page (without any parameters!)
+     *               If not set, the plugin will return the page number only
+     * link          The link text or image
+     *               If not set, the default '>|' will be used
+     * inactivelink  The link text or image if the current page is the last page
+     *               If not set, the default '>|' will be used
+     * hideinactive  If the current page is the last page:
+     *               Hide the link text or image?
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                       Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template The Smarty template object
-     * @return  string                              The generated pagination link
+     * @param   array $params                        Parameters for the plugin
+     * @param   \Smarty_Internal_Template $template  The Smarty template object
+     * @return  string                               The generated pagination link
      */
     public static function paginationLast(array $params, \Smarty_Internal_Template $template)
     {
@@ -218,15 +218,15 @@ class SmartyFunctions
      *
      * <pre>
      * Available parameters:
-     * url          The URL of the page (without any parameters!)
-     * delimiter    The delimiter between two page numbers
-     *              If not set, the default ' ' will be used
+     * url        The URL of the page (without any parameters!)
+     * delimiter  The delimiter between two page numbers
+     *            If not set, the default ' ' will be used
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                       Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template The Smarty template object
-     * @return  string                              The generated page list
+     * @param   array $params                        Parameters for the plugin
+     * @param   \Smarty_Internal_Template $template  The Smarty template object
+     * @return  string                               The generated page list
      */
     public static function paginationList(array $params, \Smarty_Internal_Template $template)
     {
@@ -256,9 +256,9 @@ class SmartyFunctions
     /**
      * Display the overall number of pages for a pagination
      *
-     * @param   array $params                       Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template The Smarty template object
-     * @return  integer                             The page count
+     * @param   array $params                        Parameters for the plugin
+     * @param   \Smarty_Internal_Template $template  The Smarty template object
+     * @return  integer                              The page count
      */
     public static function paginationCount(array $params, \Smarty_Internal_Template $template)
     {
@@ -279,5 +279,4 @@ class SmartyFunctions
     {
         return defined('SID') ? SID : '';
     }
-
 }

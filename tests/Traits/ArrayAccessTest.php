@@ -16,7 +16,6 @@ class ArrayAccessTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($container['foo']));
         $this->assertNull($container['foo']);
     }
-
 }
 
 class TestContainer implements \ArrayAccess
@@ -44,5 +43,4 @@ class TestContainer implements \ArrayAccess
     {
         unset($this->data[$name]);
     }
-
 }

@@ -16,5 +16,4 @@ class Task extends \Ptf\Controller\Cli
     {
         return 'Run';
     }
-
 }

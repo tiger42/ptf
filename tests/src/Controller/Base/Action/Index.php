@@ -8,5 +8,4 @@ class Index extends \Ptf\Controller\Base\Action\Base
     {
         echo 'Base/Index';
     }
-
 }

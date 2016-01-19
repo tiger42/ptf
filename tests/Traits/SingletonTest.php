@@ -46,5 +46,4 @@ class SingletonTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($reflectionMethod->isPrivate());
         $this->assertTrue($reflectionMethod->isFinal());
     }
-
 }

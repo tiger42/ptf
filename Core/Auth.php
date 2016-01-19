@@ -14,11 +14,13 @@ abstract class Auth
      * @var \Ptf\App\Config\Auth
      */
     protected $config;
+
     /**
      * The session object
      * @var \Ptf\Core\Session
      */
     protected $session;
+
     /**
      * The application's context;
      * @var \Ptf\App\Context
@@ -28,9 +30,9 @@ abstract class Auth
     /**
      * Initialize the Auth object, start the session
      *
-     * @param   \Ptf\App\Config\Auth $config The configuration to initialize with
-     * @param   \Ptf\Core\Session $session   The application's session object
-     * @param   \Ptf\App\Context $context    The application's context
+     * @param   \Ptf\App\Config\Auth $config  The configuration to initialize with
+     * @param   \Ptf\Core\Session $session    The application's session object
+     * @param   \Ptf\App\Context $context     The application's context
      */
     public function init(\Ptf\App\Config\Auth $config, \Ptf\Core\Session $session, \Ptf\App\Context $context)
     {
@@ -137,5 +139,4 @@ abstract class Auth
      * (to be implemented by child classes)
      */
     abstract protected function logoutImpl();
-
 }

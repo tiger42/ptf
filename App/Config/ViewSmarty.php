@@ -105,5 +105,4 @@ class ViewSmarty extends \Ptf\App\Config\View
     {
         return $this->force_compile;
     }
-
 }

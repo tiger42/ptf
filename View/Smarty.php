@@ -21,7 +21,7 @@ class Smarty extends Base
     /**
      * Initialize the Smarty settings
      *
-     * @param   \Ptf\App\Config\ViewSmarty $config The Smarty configuration
+     * @param   \Ptf\App\Config\ViewSmarty $config  The Smarty configuration
      */
     public function __construct(\Ptf\App\Config\ViewSmarty $config)
     {
@@ -148,5 +148,4 @@ class Smarty extends Base
         }
         return $this->smarty->fetch($this->templateName, $cacheId);
     }
-
 }

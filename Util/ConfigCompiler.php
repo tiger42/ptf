@@ -45,5 +45,4 @@ class ConfigCompiler
             file_put_contents($configDir . '/' . $section . '.php', $conf);
         }
     }
-
 }

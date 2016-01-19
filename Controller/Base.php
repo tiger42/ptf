@@ -12,11 +12,13 @@ class Base
      * @var string
      */
     protected $name;
+
     /**
      * The application's context
      * @var \Ptf\App\Context
      */
     protected $context;
+
     /**
      * The called action
      * @var \Ptf\Controller\Base\Action\Base
@@ -39,9 +41,9 @@ class Base
     /**
      * Dispatch the given action of the controller
      *
-     * @param   string $actionName                The name of the action to dispatch
-     * @throws  \Ptf\Core\Exception\InvalidAction If the given action does not exist
-     * @throws  \Exception                        If the Action object could not be instantiated
+     * @param   string $actionName                 The name of the action to dispatch
+     * @throws  \Ptf\Core\Exception\InvalidAction  If the given action does not exist
+     * @throws  \Exception                         If the Action object could not be instantiated
      */
     final public function dispatch($actionName = null)
     {
@@ -79,7 +81,7 @@ class Base
     /**
      * Execute the given action
      *
-     * @param   \Ptf\Controller\Base\Action\Base $action The action to execute
+     * @param   \Ptf\Controller\Base\Action\Base $action  The action to execute
      */
     protected function executeAction(\Ptf\Controller\Base\Action\Base $action)
     {
@@ -109,7 +111,7 @@ class Base
     /**
      * Get the called action
      *
-     * @return  \Ptf\Controller\Base\Action\Base The called action
+     * @return  \Ptf\Controller\Base\Action\Base  The called action
      */
     public function getAction()
     {
@@ -144,5 +146,4 @@ class Base
             return \Ptf\Core\Router::matchRoute($route, $this->context);
         }
     }
-
 }

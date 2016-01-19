@@ -14,10 +14,10 @@ class SmartyBlocks
      */
     public static function register(\Smarty $smarty)
     {
-        $smarty->registerPlugin('block', 'fetch_db', array(__CLASS__, 'fetchDB'));
-        $smarty->registerPlugin('block', 'fetch_dbtable', array(__CLASS__, 'fetchDBTable'));
+        $smarty->registerPlugin('block', 'fetch_db', [__CLASS__, 'fetchDB']);
+        $smarty->registerPlugin('block', 'fetch_dbtable', [__CLASS__, 'fetchDBTable']);
 
-        $smarty->registerPlugin('block', 'language', array(__CLASS__, 'language'));
+        $smarty->registerPlugin('block', 'language', [__CLASS__, 'language']);
     }
 
     /**
@@ -25,19 +25,19 @@ class SmartyBlocks
      *
      * <pre>
      * Available parameters:
-     * db           The DB object
+     * db  The DB object
      *
      * Assigned template variables:
-     * fetchcount   The current number of fetches
-     * row          The currently fetched row
+     * fetchcount  The current number of fetches
+     * row         The currently fetched row
      * </pre>
      *
-     * @param   array $params                       Parameters for the plugin
-     * @param   string $content                     Content of the block tags
-     * @param   \Smarty_Internal_Template $template The Smarty template object
-     * @param   boolean $repeat                     Repeat the plugin?
-     * @param   integer $fetchCount                 The number of performed fetches
-     * @return  string                              The modified string
+     * @param   array $params                        Parameters for the plugin
+     * @param   string $content                      Content of the block tags
+     * @param   \Smarty_Internal_Template $template  The Smarty template object
+     * @param   boolean $repeat                      Repeat the plugin?
+     * @param   integer $fetchCount                  The number of performed fetches
+     * @return  string                               The modified string
      */
     public static function fetchDB(array $params, $content, \Smarty_Internal_Template $template, &$repeat, &$fetchCount = 0)
     {
@@ -71,20 +71,20 @@ class SmartyBlocks
      *
      * <pre>
      * Available parameters:
-     * dbtable      The DB\Table object
-     * offset       Offset of the first row to fetch (default: 0)
-     * count        Number of rows to fetch (default: all)
+     * dbtable  The DB\Table object
+     * offset   Offset of the first row to fetch (default: 0)
+     * count    Number of rows to fetch (default: all)
      *
      * Assigned template variables:
-     * fetchcount   The current number of fetches
+     * fetchcount  The current number of fetches
      * </pre>
      *
-     * @param   array $params                       Parameters for the plugin
-     * @param   string $content                     Content of the block tags
-     * @param   \Smarty_Internal_Template $template The Smarty template object
-     * @param   boolean &$repeat                    Repeat the plugin?
-     * @param   integer $fetchCount                 The number of performed fetches
-     * @return  string                              The modified string
+     * @param   array $params                        Parameters for the plugin
+     * @param   string $content                      Content of the block tags
+     * @param   \Smarty_Internal_Template $template  The Smarty template object
+     * @param   boolean &$repeat                     Repeat the plugin?
+     * @param   integer $fetchCount                  The number of performed fetches
+     * @return  string                               The modified string
      */
     public static function fetchDBTable(array $params, $content, \Smarty_Internal_Template $template, &$repeat, &$fetchCount = 0)
     {
@@ -115,14 +115,14 @@ class SmartyBlocks
      *
      * <pre>
      * Available parameters:
-     * code     The language code (e.g. 'en', 'de', ...)
+     * code  The language code (e.g. 'en', 'de', ...)
      * </pre>
      *
-     * @param   array $params                       Parameters for the plugin
-     * @param   string $content                     Content of the block tags
-     * @param   \Smarty_Internal_Template $template The Smarty template object
-     * @param   boolean $repeat                     Repeat the plugin?
-     * @return  string                              The language dependent string
+     * @param   array $params                        Parameters for the plugin
+     * @param   string $content                      Content of the block tags
+     * @param   \Smarty_Internal_Template $template  The Smarty template object
+     * @param   boolean $repeat                      Repeat the plugin?
+     * @return  string                               The language dependent string
      */
     public static function language(array $params, $content, \Smarty_Internal_Template $template, &$repeat)
     {
@@ -149,5 +149,4 @@ class SmartyBlocks
 
         return $content;
     }
-
 }

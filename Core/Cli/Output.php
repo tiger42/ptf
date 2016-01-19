@@ -65,5 +65,4 @@ class Output
 
         return $this;
     }
-
 }

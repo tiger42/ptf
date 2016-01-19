@@ -61,5 +61,4 @@ class DBTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('utf8', $config->getCharset());
     }
-
 }

@@ -120,5 +120,4 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
             $this->assertSame(['some header'], headers_list());
         }
     }
-
 }

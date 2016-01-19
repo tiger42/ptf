@@ -62,5 +62,4 @@ class ViewSmartyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('0', $config->getForceCompile());
     }
-
 }

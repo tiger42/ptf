@@ -47,5 +47,4 @@ abstract class CliApplication extends Application
 
         echo "Usage: php {$context->getBasePath(true)} controller:action [options]\n";
     }
-
 }

@@ -25,21 +25,25 @@ abstract class Logger
      * @var array
      */
     protected static $instances = [];
+
     /**
      * The name of the current log
      * @var string
      */
     protected $logName;
+
     /**
      * The logger's configured log level limit
      * @var integer
      */
     protected $logLevelLimit;
+
     /**
      * Cache for available log levels
      * @var array
      */
     private $logLevels;
+
     /**
      * The application's context
      * @var \Ptf\App\Context
@@ -247,5 +251,4 @@ abstract class Logger
         }
         return $this->logLevels[$logLevel];
     }
-
 }

@@ -57,5 +57,4 @@ class File extends \Ptf\Util\Logger
         }
         fflush($this->logFile);
     }
-
 }

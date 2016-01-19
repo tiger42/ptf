@@ -32,5 +32,4 @@ class DevNull extends \Ptf\Util\Logger
     protected function logImpl($message, $logLevel, $timestamp, $remoteAddress)
     {
     }
-
 }

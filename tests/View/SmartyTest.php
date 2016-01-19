@@ -192,5 +192,4 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
         return $output;
     }
-
 }

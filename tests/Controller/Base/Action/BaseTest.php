@@ -28,5 +28,4 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('PtfTest\\Controller\\BaseTest\\Action\\DummyAction', $controller->getAction());
         ob_end_clean();
     }
-
 }
