@@ -84,8 +84,14 @@ abstract class Context
         $this->initLoggers();
         $this->init();
 
-        $view = $this->getView();
-        $view['request'] = $this->getRequest();
+        try {
+            $view = $this->getView();
+            $view['request'] = $this->getRequest();
+        } catch (\Ptf\Core\Exception\Config $e) {
+            if (!$this->isCli()) {
+                throw $e;
+            }
+        }
     }
 
     /**
