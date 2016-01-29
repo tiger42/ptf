@@ -307,12 +307,17 @@ class Table implements \ArrayAccess
      * Copy all fields from the given source array into the internal fields array
      *
      * @param   array $source               The source array to copy from
+     * @param   callable $filter            A filter function to be applied to every array value
      * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
      */
-    public function fromArray(array $source)
+    public function fromArray(array $source, callable $filter = null)
     {
         foreach ($source as $key => $value) {
-            $this->$key = $value;
+            if ($filter !== null) {
+                $this->$key = call_user_func($filter, $value);
+            } else {
+                $this->$key = $value;
+            }
         }
         return $this;
     }
