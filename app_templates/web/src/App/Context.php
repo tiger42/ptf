@@ -12,8 +12,6 @@ class Context extends \Ptf\App\Context
      */
     protected function init()
     {
-        // Initialize the view to use
-        $this->view = new \Ptf\View\Plain($this->getConfig('ViewPlain'));   // You may omit this line, the Plain view is used as a fallback anyway
     }
 
     /**

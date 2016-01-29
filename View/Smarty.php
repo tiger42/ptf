@@ -22,12 +22,12 @@ class Smarty extends Base
      * Initialize the Smarty settings
      *
      * @param   \Ptf\App\Config\ViewSmarty $config  The Smarty configuration
+     * @param   \Ptf\App\Context $context           The application's context
      */
-    public function __construct(\Ptf\App\Config\ViewSmarty $config)
+    public function __construct(\Ptf\App\Config\ViewSmarty $config, \Ptf\App\Context $context)
     {
-        parent::__construct($config);
+        parent::__construct($config, $context);
 
-        $this->assignedVars = [];
         $this->smarty = new \Smarty();
 
         $this->smarty->setTemplateDir($config->getTemplateDir());
@@ -49,6 +49,8 @@ class Smarty extends Base
         Plugin\Smarty\Functions::register($this->smarty);
         Plugin\Smarty\Modifiers::register($this->smarty);
         Plugin\Smarty\Blocks::register($this->smarty);
+
+        $this->smarty->assign('context', $context);
     }
 
     /**
@@ -131,6 +133,9 @@ class Smarty extends Base
         if (!$this->templateName) {
             throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": Smarty template has not been set");
         }
+
+        $this->context->getLogger()->logSys(__METHOD__, "Rendering template: " . $this->config->getTemplateDir() . '/' . $this->templateName);
+
         $this->smarty->display($this->templateName, $cacheId);
     }
 
@@ -146,6 +151,9 @@ class Smarty extends Base
         if (!$this->templateName) {
             throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": Smarty template has not been set");
         }
+
+        $this->context->getLogger()->logSys(__METHOD__, "Fetching template: " . $this->config->getTemplateDir() . '/' . $this->templateName);
+
         return $this->smarty->fetch($this->templateName, $cacheId);
     }
 }

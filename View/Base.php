@@ -16,6 +16,12 @@ abstract class Base implements \ArrayAccess
     protected $config;
 
     /**
+     * The application's context
+     * @var \Ptf\App\Context
+     */
+    protected $context;
+
+    /**
      * Array of assigned template variables
      * @var array
      */
@@ -31,11 +37,16 @@ abstract class Base implements \ArrayAccess
      * Initialize the member variables
      *
      * @param   \Ptf\App\Config\View $config  The view's configuration
+     * @param   \Ptf\App\Context $context     The application's context
      */
-    public function __construct(\Ptf\App\Config\View $config)
+    public function __construct(\Ptf\App\Config\View $config, \Ptf\App\Context $context)
     {
-        $this->config = $config;
-        $this->assignedVars = [];
+        $this->config  = $config;
+        $this->context = $context;
+
+        $this->assignedVars = [
+            'context' => $context
+        ];
     }
 
     /**

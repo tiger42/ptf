@@ -19,7 +19,7 @@ class Context extends \Ptf\App\Context
         $this->loggers = [];
 
         $config = new \Ptf\App\Config\View();
-        $this->view = new \PtfTest\View\Dummy($config);
+        $this->view = new \PtfTest\View\Dummy($config, $this);
 
         // This is dirty...
         $_SERVER['argv'] = ['dummy', 'CliActionTest=ActionOutput'];

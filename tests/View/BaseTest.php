@@ -46,7 +46,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
     private function createView()
     {
         $config = new \Ptf\App\Config\View();
+        $context = \Ptf\Application::getContext();
 
-        return $this->getMockForAbstractClass('\Ptf\View\Base', [$config]);
+        return $this->getMockForAbstractClass('\Ptf\View\Base', [$config, $context]);
     }
 }

@@ -29,7 +29,7 @@ class PlainTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderException()
     {
-        $view = new \Ptf\View\Plain($this->createConfig());
+        $view = new \Ptf\View\Plain($this->createConfig(), \Ptf\Application::getContext());
         $this->setExpectedException(
             '\\RuntimeException',
             'Ptf\View\Plain::render: PHP template has not been set');
@@ -58,7 +58,7 @@ class PlainTest extends \PHPUnit_Framework_TestCase
 
     public function testFetchException()
     {
-        $view = new \Ptf\View\Plain($this->createConfig());
+        $view = new \Ptf\View\Plain($this->createConfig(), \Ptf\Application::getContext());
         $this->setExpectedException(
             '\\RuntimeException',
             'Ptf\View\Plain::fetch: PHP template has not been set');
@@ -69,7 +69,7 @@ class PlainTest extends \PHPUnit_Framework_TestCase
     {
         $config = $this->createConfig();
         $config->template_404 = 'test_404.tpl';
-        $view = new \Ptf\View\Plain($config);
+        $view = new \Ptf\View\Plain($config, \Ptf\Application::getContext());
         $this->assertSame('This is our own 404 template.', $view->fetch404Page());
     }
 
@@ -94,7 +94,7 @@ class PlainTest extends \PHPUnit_Framework_TestCase
     private function createView($templateName = 'test.tpl')
     {
         $config = $this->createConfig();
-        $view = new \Ptf\View\Plain($config);
+        $view = new \Ptf\View\Plain($config, \Ptf\Application::getContext());
         $view->setTemplateName($templateName);
 
         return $view;

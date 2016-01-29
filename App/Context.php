@@ -85,7 +85,6 @@ abstract class Context
         $this->init();
 
         $view = $this->getView();
-        $view['context'] = $this;
         $view['request'] = $this->getRequest();
     }
 
@@ -174,7 +173,7 @@ abstract class Context
     {
         if ($this->view === null) {
             // Set fallback view if none is set in the init() function
-            $this->view = new \Ptf\View\Plain($this->getConfig('ViewPlain'));
+            $this->view = new \Ptf\View\Plain($this->getConfig('ViewPlain'), $this);
         }
         return $this->view;
     }

@@ -29,7 +29,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderException()
     {
-        $view = new \Ptf\View\Smarty($this->createConfig());
+        $view = new \Ptf\View\Smarty($this->createConfig(), \Ptf\Application::getContext());
         $this->setExpectedException(
             '\\RuntimeException',
             'Ptf\View\Smarty::render: Smarty template has not been set');
@@ -58,7 +58,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     public function testFetchException()
     {
-        $view = new \Ptf\View\Smarty($this->createConfig());
+        $view = new \Ptf\View\Smarty($this->createConfig(), \Ptf\Application::getContext());
         $this->setExpectedException(
             '\\RuntimeException',
             'Ptf\View\Smarty::fetch: Smarty template has not been set');
@@ -69,7 +69,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     {
         $config = $this->createConfig();
         $config->template_404 = 'test_404.tpl';
-        $view = new \Ptf\View\Smarty($config);
+        $view = new \Ptf\View\Smarty($config, \Ptf\Application::getContext());
         $this->assertSame('This is our own 404 template.', $view->fetch404Page());
     }
 
@@ -103,7 +103,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     {
         $config = $this->createConfig();
         $config->caching = 1;
-        $view = new \Ptf\View\Smarty($config);
+        $view = new \Ptf\View\Smarty($config, \Ptf\Application::getContext());
         $view->setTemplateName('test.tpl');
         $directory = sys_get_temp_dir() . '/ptf_test';
         $files = array_diff(scandir($directory), ['..', '.']);
@@ -119,7 +119,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     public function testIsCached()
     {
         $config = $this->createConfig();
-        $view = new \Ptf\View\Smarty($config);
+        $view = new \Ptf\View\Smarty($config, \Ptf\Application::getContext());
         $view->setTemplateName('test.tpl');
         $view->fetch();
         $this->assertFalse($view->isCached());
@@ -130,7 +130,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     {
         $config = $this->createConfig();
         $config->caching = 1;
-        $view = new \Ptf\View\Smarty($config);
+        $view = new \Ptf\View\Smarty($config, \Ptf\Application::getContext());
         $view->setTemplateName('test.tpl');
         $view->fetch();
         $this->assertTrue($view->isCached());
@@ -144,7 +144,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     {
         $config = $this->createConfig();
         $config->caching = 1;
-        $view = new \Ptf\View\Smarty($config);
+        $view = new \Ptf\View\Smarty($config, \Ptf\Application::getContext());
         $view->setTemplateName('test.tpl');
         $view->fetch('testCacheId');
         $this->assertFalse($view->isCached());
@@ -169,7 +169,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     private function createView($templateName = 'test.tpl')
     {
         $config = $this->createConfig();
-        $view = new \Ptf\View\Smarty($config);
+        $view = new \Ptf\View\Smarty($config, \Ptf\Application::getContext());
         $view->setTemplateName($templateName);
 
         return $view;

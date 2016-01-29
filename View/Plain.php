@@ -23,10 +23,11 @@ class Plain extends Base
      * Initialize the settings
      *
      * @param   \Ptf\App\Config\ViewPlain $config  The Plain view configuration
+     * @param   \Ptf\App\Context $context          The application's context
      */
-    public function __construct(\Ptf\App\Config\ViewPlain $config)
+    public function __construct(\Ptf\App\Config\ViewPlain $config, \Ptf\App\Context $context)
     {
-        parent::__construct($config);
+        parent::__construct($config, $context);
 
         $this->pluginFunctions = [];
         $this->templateDir = $config->getTemplateDir();
@@ -45,7 +46,10 @@ class Plain extends Base
         if (!$this->templateName) {
             throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": PHP template has not been set");
         }
-        include $this->templateDir . '/' . $this->templateName;
+
+        $tpl = $this->templateDir . '/' . $this->templateName;
+        $this->context->getLogger()->logSys(__METHOD__, "Rendering template: " . $tpl);
+        include $tpl;
     }
 
     /**
@@ -60,8 +64,12 @@ class Plain extends Base
         if (!$this->templateName) {
             throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": PHP template has not been set");
         }
+
+        $tpl = $this->templateDir . '/' . $this->templateName;
+        $this->context->getLogger()->logSys(__METHOD__, "Fetching template: " . $tpl);
         ob_start();
-        include $this->templateDir . '/' . $this->templateName;
+        include $tpl;
+
         return ob_get_clean();
     }
 

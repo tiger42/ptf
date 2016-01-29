@@ -13,7 +13,7 @@ class Context extends \Ptf\App\Context
     protected function init()
     {
         // Initialize the view to use
-        $this->view = new \Ptf\View\Smarty($this->getConfig('ViewSmarty'));
+        $this->view = new \Ptf\View\Smarty($this->getConfig('ViewSmarty'), $this);
     }
 
     /**
