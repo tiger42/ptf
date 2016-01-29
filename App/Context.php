@@ -106,10 +106,15 @@ abstract class Context
      */
     protected function initLoggers()
     {
-        $logLevelLimit = (int)$this->getConfig('General')->getLogLevel();
+        $config = $this->getConfig('General');
+
+        $logLevelLimit = (int)$config->getLogLevel();
+        $sysLog = $config->getSystemLog();
+        $errLog = $config->getErrorLog();
+
         $this->loggers = [
-            'system' => \Ptf\Util\Logger\File::getInstance('var/log/system.log', $this, $logLevelLimit),
-            'error'  => \Ptf\Util\Logger\File::getInstance('var/log/error.log', $this, $logLevelLimit)
+            'system' => \Ptf\Util\Logger\File::getInstance($sysLog, $this, $logLevelLimit),
+            'error'  => \Ptf\Util\Logger\File::getInstance($errLog, $this, $logLevelLimit)
         ];
     }
 
