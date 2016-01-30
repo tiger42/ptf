@@ -170,4 +170,12 @@ abstract class Base implements \ArrayAccess
         include 'ErrorPages/404.phtml';
         return ob_get_clean();
     }
+
+    /**
+     * Register a template function plugin
+     *
+     * @param    string $name               The name of the function plugin to register
+     * @param    callable $function         The callback function for the plugin
+     */
+    abstract public function registerFunctionPlugin($name, callable $function);
 }

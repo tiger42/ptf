@@ -82,10 +82,10 @@ class PlainTest extends \PHPUnit_Framework_TestCase
     public function testPlugin()
     {
         $view = $this->createView('test_plugin.tpl');
-        $view->registerPlugin('sum', function (array $params, \Ptf\View\Plain $view) {
+        $view->registerFunctionPlugin('sum', function (array $params, \Ptf\View\Plain $view) {
             return $params[0] + $params[1];
         });
-        $view->registerPlugin('helloWorld', function (\Ptf\View\Plain $view) {
+        $view->registerFunctionPlugin('helloWorld', function (\Ptf\View\Plain $view) {
             return 'hello world!';
         });
         $this->assertSame('plugin output: hello world! 42', $view->fetch());

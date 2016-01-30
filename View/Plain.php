@@ -14,10 +14,10 @@ class Plain extends Base
     protected $templateDir;
 
     /**
-     * The registered plugin functions
+     * The registered function plugins
      * @var array
      */
-    protected $pluginFunctions;
+    protected $functionPlugins;
 
     /**
      * Initialize the settings
@@ -29,7 +29,7 @@ class Plain extends Base
     {
         parent::__construct($config, $context);
 
-        $this->pluginFunctions = [];
+        $this->functionPlugins = [];
         $this->templateDir = $config->getTemplateDir();
 
         Plugin\Plain\Functions::register($this);
@@ -74,6 +74,17 @@ class Plain extends Base
     }
 
     /**
+     * Register a template function plugin
+     *
+     * @param    string $name               The name of the function plugin to register
+     * @param    callable $function         The callback function for the plugin
+     */
+    public function registerFunctionPlugin($name, callable $function)
+    {
+        $this->functionPlugins[$name] = $function;
+    }
+
+    /**
      * Call a registered template function
      *
      * @param   string $name                Name of the template function to call
@@ -83,20 +94,9 @@ class Plain extends Base
     public function __call($name, array $arguments = [])
     {
         if (!count($arguments)) {
-            return $this->pluginFunctions[$name]($this);
+            return $this->functionPlugins[$name]($this);
         }
-        return $this->pluginFunctions[$name]($arguments[0], $this);
-    }
-
-    /**
-     * Register a template function
-     *
-     * @param    string $name               The name of the plugin function to register
-     * @param    callable $function         The callback function for the plugin
-     */
-    public function registerPlugin($name, callable $function)
-    {
-        $this->pluginFunctions[$name] = $function;
+        return $this->functionPlugins[$name]($arguments[0], $this);
     }
 
 

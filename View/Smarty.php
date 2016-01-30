@@ -46,9 +46,9 @@ class Smarty extends Base
             $this->smarty->loadFilter('output', 'trimwhitespace');
         }
 
-        Plugin\Smarty\Functions::register($this->smarty);
-        Plugin\Smarty\Modifiers::register($this->smarty);
-        Plugin\Smarty\Blocks::register($this->smarty);
+        Plugin\Smarty\Functions::register($this);
+        Plugin\Smarty\Modifiers::register($this);
+        Plugin\Smarty\Blocks::register($this);
 
         $this->smarty->assign('context', $context);
     }
@@ -155,5 +155,38 @@ class Smarty extends Base
         $this->context->getLogger()->logSys(__METHOD__, "Fetching template: " . $this->config->getTemplateDir() . '/' . $this->templateName);
 
         return $this->smarty->fetch($this->templateName, $cacheId);
+    }
+
+    /**
+     * Register a template function plugin
+     *
+     * @param    string $name               The name of the function plugin to register
+     * @param    callable $function         The callback function for the plugin
+     */
+    public function registerFunctionPlugin($name, callable $function)
+    {
+        $this->smarty->registerPlugin('function', $name, $function);
+    }
+
+    /**
+     * Register a template block plugin
+     *
+     * @param   string $name                The name of the block plugin to register
+     * @param   callable $function          The callback function for the plugin
+     */
+    public function registerBlockPlugin($name, callable $function)
+    {
+        $this->smarty->registerPlugin('block', $name, $function);
+    }
+
+    /**
+     * Register a template modifier plugin
+     *
+     * @param   string $name                The name of the modifier plugin to register
+     * @param   callable $function          The callback function for the plugin
+     */
+    public function registerModifierPlugin($name, callable $function)
+    {
+        $this->smarty->registerPlugin('modifier', $name, $function);
     }
 }

@@ -10,11 +10,11 @@ class Modifiers
     /**
      * Register all Smarty modifier plugins of this class
      *
-     * @param   \Smarty $smarty             The Smarty object
+     * @param   \Ptf\View\Smarty $view      The Smarty view object
      */
-    public static function register(\Smarty $smarty)
+    public static function register(\Ptf\View\Smarty $view)
     {
-        $smarty->registerPlugin('modifier', 'dblbr2p', [__CLASS__, 'dblbr2p']);
+        $view->registerModifierPlugin('dblbr2p', [__CLASS__, 'dblbr2p']);
     }
 
     /**

@@ -11,4 +11,8 @@ class Dummy extends \Ptf\View\Base
     public function fetch($cacheId = null)
     {
     }
+
+    public function registerFunctionPlugin($name, callable $function)
+    {
+    }
 }
