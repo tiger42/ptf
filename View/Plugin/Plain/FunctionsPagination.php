@@ -7,7 +7,7 @@ use \Ptf\View\Helper\Pagination;
 /**
  * Plain view template function plugins for pagination
  */
-class Functions_Pagination
+class FunctionsPagination
 {
     /**
      * Register all Plain view function plugins of this class

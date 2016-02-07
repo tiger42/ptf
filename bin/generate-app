@@ -21,8 +21,8 @@ if [[ "$#" -lt 2 ]]; then
 fi
 
 if [[ "$1" == -* ]] || [[ "$2" == -* ]]; then
-	usage
-	exit
+    usage
+    exit
 fi
 
 if [[ "$#" -eq 2 ]]; then
@@ -34,8 +34,8 @@ else
                 TYPE=web
                 ;;
             "web-smarty" )
-            	TYPE=web-smarty
-            	;;
+                TYPE=web-smarty
+                ;;
             "cli" )
                 TYPE=cli
                 ;;
@@ -66,8 +66,8 @@ SOURCEDIR=${DIR}/../app_templates/$TYPE/
 mkdir -p ${TARGETDIR}/var/log
 mkdir -p ${TARGETDIR}/src/App/Config
 if [ $TYPE == "web-smarty" ]; then
-	mkdir -p ${TARGETDIR}/var/smarty/templates_c
-	mkdir -p ${TARGETDIR}/var/smarty/cache
+    mkdir -p ${TARGETDIR}/var/smarty/templates_c
+    mkdir -p ${TARGETDIR}/var/smarty/cache
 fi
 
 # copy files, replace all namespace placeholders

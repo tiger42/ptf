@@ -4,11 +4,6 @@ namespace PtfTest\App;
 
 class Context extends \Ptf\App\Context
 {
-    public function getAppNamespace()
-    {
-        return 'PtfTest';
-    }
-
     protected function init()
     {
         $this->routingTable = [
@@ -28,8 +23,18 @@ class Context extends \Ptf\App\Context
         $this->cliOutput = new \Ptf\Core\Cli\Output();
     }
 
+    public function getAppNamespace()
+    {
+        return 'PtfTest';
+    }
+
     public function isCli()
     {
         return false;
+    }
+
+    public function setView($view)
+    {
+        $this->view = $view;
     }
 }

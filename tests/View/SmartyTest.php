@@ -4,6 +4,25 @@ namespace Ptf\View;
 
 class SmartyTest extends \PHPUnit_Framework_TestCase
 {
+    public function testMagicGettersAndSetters()
+    {
+        $view = $this->createView();
+        $smarty = $view->getSmartyObject();
+        $this->assertFalse(isset($view->foo));
+        $this->assertNull($view->foo);
+        $view->foo = 'bar';
+        $view['bar'] = 'foo';
+        $this->assertTrue(isset($view->foo));
+        $this->assertSame('bar', $view->foo);
+        $this->assertSame('bar', $smarty->getTemplateVars('foo'));
+        $this->assertSame('foo', $smarty->getTemplateVars('bar'));
+        unset($view['foo']);
+        $this->assertFalse(isset($view->foo));
+        $this->assertNull($view->foo);
+        $this->assertNull($smarty->getTemplateVars('foo'));
+        $this->assertSame('foo', $smarty->getTemplateVars('bar'));
+    }
+
     public function testRender()
     {
         $view = $this->createView();
@@ -46,7 +65,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     {
         $view = $this->createView();
         $view->test = 'hello';
-        $this->assertSame("foobarhellobaz", $view->fetch());
+        $this->assertSame('foobarhellobaz', $view->fetch());
     }
 
     public function testFetch3()
@@ -79,24 +98,19 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('included:foobarbaasdfz:end', $view->fetch());
     }
 
-    public function testGettersAndSetters()
-    {
-        $view = $this->createView();
-        $smarty = $view->getSmartyObject();
-        $view->foo = 'bar';
-        $view['bar'] = 'foo';
-        $this->assertSame('bar', $smarty->getTemplateVars('foo'));
-        $this->assertSame('foo', $smarty->getTemplateVars('bar'));
-        unset($view['foo']);
-        $this->assertNull($smarty->getTemplateVars('foo'));
-        $this->assertSame('foo', $smarty->getTemplateVars('bar'));
-    }
-
     public function testGetSmartyObject()
     {
         $view = $this->createView();
         $smarty = $view->getSmartyObject();
         $this->assertInstanceOf('\\Smarty', $smarty);
+    }
+
+    public function testSetSmartyObject()
+    {
+        $view = $this->createView();
+        $smarty = new \Smarty();
+        $view->_setSmartyObject($smarty);
+        $this->assertSame($smarty, $view->getSmartyObject());
     }
 
     public function testClearAll()
@@ -179,6 +193,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     {
         $config = new \Ptf\App\Config\ViewSmarty();
         $config->template_dir = __DIR__ . '/templates/Smarty';
+        $config->compile_check = 1;
         $config->compile_dir = $config->cache_dir = sys_get_temp_dir() . '/ptf_test';
 
         return $config;

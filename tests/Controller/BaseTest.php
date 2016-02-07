@@ -55,7 +55,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
         $controller = new BaseController('Invalid', $context);
         $this->setExpectedException(
-            '\\Ptf\\Core\\Exception\InvalidAction',
+            '\\Ptf\\Core\\Exception\\InvalidAction',
             'Ptf\Controller\Base::dispatch: Action class not found: PtfTest\Controller\Invalid\Action\Index');
         $controller->dispatch();
     }
@@ -120,6 +120,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
     public function testForward()
     {
         $context = \Ptf\Application::getContext();
+
         // FIXME: This is dirty!
         $context->controllerType = 'Base';
 
@@ -137,6 +138,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         $controller = $controller->forward('basetest/index');
         $this->assertInstanceOf('PtfTest\\Controller\\BaseTest\\Action\\Index', $controller->getAction());
         ob_get_clean();
+
+        unset($context->controllerType);
     }
 }
 

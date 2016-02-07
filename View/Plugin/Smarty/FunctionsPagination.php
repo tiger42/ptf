@@ -7,7 +7,7 @@ use \Ptf\View\Helper\Pagination;
 /**
  * Smarty template function plugins for pagination
  */
-class Functions_Pagination
+class FunctionsPagination
 {
     /**
      * Register all Smarty function plugins of this class

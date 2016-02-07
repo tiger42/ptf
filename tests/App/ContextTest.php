@@ -52,6 +52,14 @@ class ContextTest extends \PHPUnit_Framework_TestCase
         $constructor->invoke($mock);
     }
 
+    public function testConstructorException()
+    {
+        $this->setExpectedException(
+            '\\Ptf\\Core\\Exception\\Config',
+            'Ptf\App\Config\ViewPlain::__get: Option \'template_dir\' not configured');
+        new MyExceptionContext();
+    }
+
     public function testInitLoggers()
     {
         $context = new MyContext();
@@ -90,7 +98,7 @@ class ContextTest extends \PHPUnit_Framework_TestCase
         $context = new MyContext();
 
         $controller = new \Ptf\Controller\Base('foo', $context);
-        $context->setController($controller);
+        $context->_setController($controller);
         $this->assertSame($controller, $context->getController());
     }
 
@@ -107,7 +115,7 @@ class ContextTest extends \PHPUnit_Framework_TestCase
         $context = new MyContext();
 
         $this->setExpectedException(
-            'RuntimeException',
+            '\\RuntimeException',
             'Ptf\App\MyContext::getConfig: Configuration not found: foobar');
         $context->getConfig('foobar');
     }
@@ -171,20 +179,21 @@ class MyContext extends Context
     }
 }
 
-class MyHttpContext extends Context
+class MyHttpContext extends MyContext
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    public function getAppNamespace()
-    {
-        return 'PtfTest';
-    }
-
     public function isCli()
     {
         return false;
+    }
+}
+
+class MyExceptionContext extends MyHttpContext
+{
+    public function getConfig($configName = 'General')
+    {
+        if ($configName == 'ViewPlain') {
+            return new \Ptf\App\Config\ViewPlain();
+        }
+        return parent::getConfig($configName);
     }
 }

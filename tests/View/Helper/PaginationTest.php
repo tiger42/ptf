@@ -125,7 +125,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorException($curPage, $itemsPerPage, $itemCount, $listCount = 5)
     {
-        $pagination = new Pagination($curPage, $itemsPerPage, $itemCount, $listCount);
+        new Pagination($curPage, $itemsPerPage, $itemCount, $listCount);
     }
 
     /**

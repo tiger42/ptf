@@ -39,7 +39,7 @@ class Factory
         }
         $context->getLogger()->logSys(__METHOD__, "Controller created: " . $className);
 
-        $context->setController($controller);
+        $context->_setController($controller);
 
         return $controller;
     }

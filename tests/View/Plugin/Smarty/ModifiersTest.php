@@ -2,7 +2,7 @@
 
 namespace Ptf\View\Plugin\Smarty;
 
-use \Ptf\View\Plugin\Smarty\Modifiers as Modifiers;
+use \Ptf\View\Plugin\Smarty\Modifiers;
 
 class ModifiersTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class ModifiersTest extends \PHPUnit_Framework_TestCase
         $this->assertSame("foo<br>bar\n</p>\n<p>baz", Modifiers::dblbr2p($input));
         $input = "<br />foo<br/><br  >bar<br><br\t\t /><br />baz";
         $this->assertSame("<br />foo\n</p>\n<p>bar\n</p>\n<p><br />baz", Modifiers::dblbr2p($input));
-        $input = "foo<br   ><br\t>bar<br /><br><br ><br\t/>baz";
+        $input = "foo<br   ><br\t>bar<br />  <br><br >\n<br\t/>baz";
         $this->assertSame("foo\n</p>\n<p>bar\n</p>\n<p>\n</p>\n<p>baz", Modifiers::dblbr2p($input));
     }
 }

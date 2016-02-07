@@ -9,6 +9,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testMatchRoute()
     {
         $context = \Ptf\Application::getContext();
+
         // FIXME: This is dirty!
         $context->controllerType = 'Base';
 
@@ -30,6 +31,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRoute('foo/bar', $context));   // => /index
         $this->assertFalse(Router::matchRoute('baz', $context));    // => index
         ob_get_clean();
+
+        unset($context->controllerType);
     }
 
     public function testMatchRequestRoute()
@@ -73,5 +76,6 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Ptf\\Controller\\Base', Router::matchRequestRoute($context));
 
         ob_end_clean();
+        unset($context->controllerType);
     }
 }

@@ -16,7 +16,7 @@ class Blocks
     {
         $view->registerBlockPlugin('language', [__CLASS__, 'language']);
 
-        Blocks_DB::register($view);
+        BlocksDB::register($view);
     }
 
     /**

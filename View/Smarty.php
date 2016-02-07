@@ -14,7 +14,7 @@ class Smarty extends Base
 
     /**
      * The internal Smarty object
-     * @var \Smarty
+     * @var \Smarty_Internal_TemplateBase
      */
     protected $smarty;
 
@@ -54,6 +54,18 @@ class Smarty extends Base
     }
 
     /**
+     * Get the given template variable.<br />
+     * (magic getter function)
+     *
+     * @param   string $name                Name of the template variable to get
+     * @return  mixed                       The value of the template variable
+     */
+    public function __get($name)
+    {
+        return $this->smarty->getTemplateVars($name);
+    }
+
+    /**
      * Set the given template variable.<br />
      * (magic setter function)
      *
@@ -62,8 +74,19 @@ class Smarty extends Base
      */
     public function __set($name, $value)
     {
-        parent::__set($name, $value);
         $this->smarty->assign($name, $value);
+    }
+
+    /**
+     * Determine whether the given template variabe is set.<br />
+     * (magic isset function)
+     *
+     * @param   string $name                Name of the template variable to check
+     * @return  boolean                     Is the variable set?
+     */
+    public function __isset($name)
+    {
+        return $this->smarty->getTemplateVars($name) !== null;
     }
 
     /**
@@ -74,18 +97,30 @@ class Smarty extends Base
      */
     public function __unset($name)
     {
-        parent::__unset($name);
         $this->smarty->clearAssign($name);
     }
 
     /**
      * Get the internal Smarty object
      *
-     * @return    \Smarty                   The internal Smarty object
+     * @return  \Smarty_Internal_TemplateBase  The internal Smarty object
      */
     public function getSmartyObject()
     {
         return $this->smarty;
+    }
+
+    /**
+     * Set the internal Smarty object.<br />
+     * This function is only for internal framework purposes!
+     * @see     \Ptf\View\Plugin\Smarty\Functions::exec()
+     * @ignore
+     *
+     * @param   \Smarty_Internal_TemplateBase $smarty  The Smarty object to set
+     */
+    public function _setSmartyObject(\Smarty_Internal_TemplateBase $smarty)
+    {
+        $this->smarty = $smarty;
     }
 
     /**

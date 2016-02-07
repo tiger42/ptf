@@ -107,6 +107,16 @@ abstract class Base implements \ArrayAccess
     }
 
     /**
+     * Get the name of the set template
+     *
+     * @param   string                       The template name
+     */
+    public function getTemplateName()
+    {
+        return $this->templateName;
+    }
+
+    /**
      * Set the template's language
      *
      * @param   string $templateLang        The language of the template to set

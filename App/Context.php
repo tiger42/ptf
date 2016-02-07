@@ -67,6 +67,8 @@ abstract class Context
 
     /**
      * Initialize the member variables
+     *
+     * @throws  \Ptf\Core\Exception\Config  If application is web app and the view config is incomplete
      */
     protected function __construct()
     {
@@ -78,7 +80,7 @@ abstract class Context
             $this->response = new \Ptf\Core\Http\Response();
         }
 
-        $this->configs  = [];
+        $this->configs = [];
         $this->routingTable = [];
 
         $this->initLoggers();
@@ -201,16 +203,6 @@ abstract class Context
     }
 
     /**
-     * Set the called controller
-     *
-     * @param   \Ptf\Controller\Base $controller The controller to set
-     */
-    public function setController(\Ptf\Controller\Base $controller)
-    {
-        $this->controller = $controller;
-    }
-
-    /**
      * Get the called controller
      *
      * @return  \Ptf\Controller\Base        The called controller
@@ -218,6 +210,18 @@ abstract class Context
     public function getController()
     {
         return $this->controller;
+    }
+
+    /**
+     * Set the called controller.<br />
+     * This function is only for internal framework purposes!
+     * @ignore
+     *
+     * @param   \Ptf\Controller\Base $controller  The controller to set
+     */
+    public function _setController(\Ptf\Controller\Base $controller)
+    {
+        $this->controller = $controller;
     }
 
     /**

@@ -5,7 +5,7 @@ namespace Ptf\View\Plugin\Smarty;
 /**
  * Smarty template block function plugins
  */
-class Blocks_DB
+class BlocksDB
 {
     /**
      * Register all Smarty block function plugins of this class
