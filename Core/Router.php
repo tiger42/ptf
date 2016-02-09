@@ -20,7 +20,7 @@ class Router
 
         $parts = self::lookup($route, $context);
         $controllerName = $parts[0];
-        $actionName     = $parts[1];
+        $actionName     = isset($parts[1]) ? $parts[1] : null;
 
         $controller = \Ptf\Controller\Factory::createController($controllerName, $context);
         try {

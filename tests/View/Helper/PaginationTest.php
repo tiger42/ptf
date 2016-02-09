@@ -214,7 +214,9 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
      */
     public function testGenerateUrlParamsStringWithSID($params, $expected)
     {
-        define('SID', 'SESS_ID=foobar');
+        if (!defined('SID')) {
+            define('SID', 'SESS_ID=foobar');
+        }
         $pagination = new Pagination(1, 1, 1);
         $this->assertSame($expected, $pagination->generateUrlParamsString($params));
     }

@@ -21,7 +21,7 @@ class Request
         if (isset($_SERVER['HTTP_CLIENT_IP'])) {
             return $_SERVER['HTTP_CLIENT_IP'];
         }
-        return $_SERVER['REMOTE_ADDR'];
+        return isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
     }
 
     /**
@@ -42,7 +42,7 @@ class Request
      */
     public function getHost()
     {
-        return $_SERVER['HTTP_HOST'];
+        return isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
     }
 
     /**
@@ -52,7 +52,7 @@ class Request
      */
     public function getRequestUri()
     {
-        return $_SERVER['REQUEST_URI'];
+        return isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
     }
 
     /**
@@ -62,7 +62,7 @@ class Request
     */
     public function getRequestMethod()
     {
-        return $_SERVER['REQUEST_METHOD'];
+        return isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
     }
 
     /**

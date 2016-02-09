@@ -49,7 +49,11 @@ class Plain extends Base
 
         $tpl = $this->templateDir . '/' . $this->templateName;
         $this->context->getLogger()->logSys(__METHOD__, "Rendering template: " . $tpl);
+
+        $oldErrorReporting = error_reporting();
+        error_reporting(E_ALL & ~E_NOTICE);
         include $tpl;
+        error_reporting($oldErrorReporting);
     }
 
     /**
@@ -67,8 +71,13 @@ class Plain extends Base
 
         $tpl = $this->templateDir . '/' . $this->templateName;
         $this->context->getLogger()->logSys(__METHOD__, "Fetching template: " . $tpl);
+
         ob_start();
+
+        $oldErrorReporting = error_reporting();
+        error_reporting(E_ALL & ~E_NOTICE);
         include $tpl;
+        error_reporting($oldErrorReporting);
 
         return ob_get_clean();
     }

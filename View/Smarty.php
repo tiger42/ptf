@@ -29,6 +29,7 @@ class Smarty extends Base
         parent::__construct($config, $context);
 
         $this->smarty = new \Smarty();
+        $this->smarty->setErrorReporting(E_ALL & ~E_NOTICE);
 
         $this->smarty->setTemplateDir($config->getTemplateDir());
         $this->smarty->setCompileDir($config->getCompileDir());

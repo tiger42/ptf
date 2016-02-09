@@ -8,8 +8,10 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
 {
     public function testSid()
     {
-        $sid = defined('SID') ? SID : '';
-        $this->assertEquals($sid, Functions::sid());
+        if (!defined('SID')) {
+            define('SID', 'foobar');
+        }
+        $this->assertEquals(SID, Functions::sid());
     }
 
     public function testExec()

@@ -143,8 +143,8 @@ class ContextTest extends \PHPUnit_Framework_TestCase
     {
         $context = new MyHttpContext();
 
-        $oldHttpHost = $_SERVER['HTTP_HOST'];
-        $oldHttps    = $_SERVER['HTTPS'];
+        $oldHttpHost = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : null;
+        $oldHttps    = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : null;
 
         $_SERVER['HTTP_HOST'] = 'example.com';
         $this->assertSame('http://example.com' . $_SERVER['SCRIPT_FILENAME'], $context->getBaseUrl(true));
