@@ -23,7 +23,7 @@ abstract class CliApplication extends Application
         $context = static::getContext();
 
         $args = $_SERVER['argv'];
-        $route = strpos($args[1], ':') !== false ? str_replace(':', '/', $args[1]) : null;
+        $route = isset($args[1]) && strpos($args[1], ':') !== false ? str_replace(':', '/', $args[1]) : null;
         if (!Core\Router::matchRoute($route, $context)) {
             echo "Unknown command \"{$args[1]}\"\n\n";
             static::showUsage($args);
