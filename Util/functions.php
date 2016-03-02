@@ -16,12 +16,12 @@ function now()
 }
 
 /**
- * Determine whether the given value is a whole number
+ * Determine whether the given value is an integer number (in the mathematical sense)
  *
  * @param   mixed $val                  The value to check
  * @return  boolean                     Is the value a whole number?
  */
-function is_whole_number($val)
+function isIntegerNumber($val)
 {
     return is_numeric($val) && (int)$val == (float)$val;
 }
@@ -34,7 +34,7 @@ function is_whole_number($val)
  */
 function even($number)
 {
-    return is_whole_number($number) && !($number & 1);
+    return isIntegerNumber($number) && !($number & 1);
 }
 
 /**
@@ -45,7 +45,7 @@ function even($number)
  */
 function odd($number)
 {
-    return is_whole_number($number) && ($number & 1);
+    return isIntegerNumber($number) && ($number & 1);
 }
 
 /**
@@ -54,7 +54,7 @@ function odd($number)
  * @param   array $array                The array to check
  * @return  boolean                     Is the array a numeric array?
  */
-function is_numeric_array(array $array)
+function isNumericArray(array $array)
 {
     $keys = array_keys($array);
     foreach ($keys as $key) {
@@ -85,21 +85,34 @@ function truncate($string, $length, $etc = '')
 }
 
 /**
- * Convert the given string with underscores to camel case
+ * Convert the given string with underscores (or any individual separator) to camel case
  *
  * @param   string $string              The string to convert
  * @param   boolean $lcFirst            Convert the first character to lower case?
+ * @param   string $separator           The word separator
  * @return  string                      The camelized string
  */
-function camelize($string, $lcFirst = false)
+function camelize($string, $lcFirst = false, $separator = '_')
 {
-    $string = str_replace(' ', '', ucwords(str_replace('_', ' ', $string)));
+    $string = str_replace(' ', '', ucwords(str_replace($separator, ' ', $string)));
 
     if ($lcFirst) {
         $string = lcfirst($string);
     }
 
     return $string;
+}
+
+/**
+ * Convert the given camel cased string to an underscore (or individual separator) separated string
+ *
+ * @param   string $string              The string to convert
+ * @param   string $separator           The word separator
+ * @return  string                      The uncamelized string
+ */
+function uncamelize($string, $separator = '_')
+{
+   return strtolower(preg_replace('/([A-Z])/', $separator . '$1', $string));
 }
 
 /**
