@@ -4,5 +4,9 @@ DIR=`cd "$(dirname "$0")" && pwd`
 
 cd ${DIR}/../3rdparty/smarty
 
-git clone https://github.com/smarty-php/smarty.git . 2>/dev/null || git fetch origin master
+git init
+git remote add origin https://github.com/smarty-php/smarty.git
+git fetch origin master
+git reset --hard HEAD
+git checkout -t origin/master
 

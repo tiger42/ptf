@@ -1,0 +1,9 @@
+3rdparty/
+
+.gitignore
+
+# Eclipse IDE
+.buildpath
+.project
+.settings/
+
