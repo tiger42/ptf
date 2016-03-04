@@ -9,4 +9,5 @@ git remote add origin https://github.com/smarty-php/smarty.git
 git fetch origin master
 git reset --hard HEAD
 git checkout -t origin/master
+git pull --rebase
 
