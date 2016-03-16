@@ -23,6 +23,18 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foo', $smarty->getTemplateVars('bar'));
     }
 
+    public function testAssign()
+    {
+        $view = $this->createView();
+        $view->assign('test', 42);
+        $view->assign(['test2' => 43, 'test3' => 44]);
+        $this->assertSame(42, $view['test']);
+        $this->assertSame(43, $view->test2);
+        $this->assertSame(\Ptf\Application::getContext(), $view->context);
+        $smarty = $view->getSmartyObject();
+        $this->assertSame($view->getAssignedVars(), $smarty->getTemplateVars());
+    }
+
     public function testRender()
     {
         $view = $this->createView();

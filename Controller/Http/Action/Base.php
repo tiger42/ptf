@@ -26,9 +26,7 @@ abstract class Base extends \Ptf\Controller\Base\Action\Base
     public function redirect($url, $responseCode = 302)
     {
         $this->controller->redirect($url, $responseCode);
-    // @codeCoverageIgnoreStart
     }
-    // @codeCoverageIgnoreEnd
 
     /**
      * Execute the action

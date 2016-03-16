@@ -15,6 +15,20 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         unset($view->foo);
         $this->assertFalse(isset($view->foo));
         $this->assertNull($view->foo);
+        $this->assertSame(\Ptf\Application::getContext(), $view->context);
+    }
+
+    public function testAssign()
+    {
+        $view = $this->createView();
+        $view->assign('test', 42);
+        $view->assign(['test2' => 43, 'test3' => 44]);
+        $this->assertSame(42, $view['test']);
+        $this->assertSame(43, $view->test2);
+        $this->assertSame([
+            'context' => \Ptf\Application::getContext(),
+            'test'  => 42, 'test2' => 43, 'test3' => 44
+        ], $view->getAssignedVars());
     }
 
     public function testSetTemplateLanguage()

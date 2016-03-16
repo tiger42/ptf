@@ -102,6 +102,27 @@ class Smarty extends Base
     }
 
     /**
+     * Set the given template variable
+     *
+     * @param   array|string $assign        Name of the template variable to set, or assoc array with multiple variables/values
+     * @param   mixed $value                The value to set (if the first parameter is a string)
+     */
+    public function assign($assign, $value = null)
+    {
+        $this->smarty->assign($assign, $value);
+    }
+
+    /**
+     * Return a list of all assigned template variables
+     *
+     * @return  array                       The assigned template variables
+     */
+    public function getAssignedVars()
+    {
+        return $this->smarty->getTemplateVars();
+    }
+
+    /**
      * Get the internal Smarty object
      *
      * @return  \Smarty_Internal_TemplateBase  The internal Smarty object

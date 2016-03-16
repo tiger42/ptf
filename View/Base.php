@@ -97,6 +97,31 @@ abstract class Base implements \ArrayAccess
     }
 
     /**
+     * Set the given template variable
+     *
+     * @param   array|string $assign        Name of the template variable to set, or assoc array with multiple variables/values
+     * @param   mixed $value                The value to set (if the first parameter is a string)
+     */
+    public function assign($assign, $value = null)
+    {
+        if (is_array($assign)) {
+            $this->assignedVars = array_merge($this->assignedVars, $assign);
+        } else {
+            $this[$assign] = $value;
+        }
+    }
+
+    /**
+     * Return a list of all assigned template variables
+     *
+     * @return  array                       The assigned template variables
+     */
+    public function getAssignedVars()
+    {
+        return $this->assignedVars;
+    }
+
+    /**
      * Set the name of the template to be rendered
      *
      * @param   string $templateName        The name of the template to be rendered
