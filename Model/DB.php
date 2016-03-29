@@ -250,7 +250,7 @@ abstract class DB
      */
     final public function getColumnNames($tableName)
     {
-        if (!array_key_exists($tableName, $this->columnNames)) {
+        if (!isset($this->columnNames[$tableName])) {
             $this->columnNames[$tableName] = $this->getColumnNamesImpl($tableName);
         }
         return $this->columnNames[$tableName];

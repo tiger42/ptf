@@ -94,7 +94,7 @@ class Smarty extends Base
      * Unset the given template variable.<br />
      * (magic unset function)
      *
-     * @param   string $name                The template variable to unset
+     * @param   string $name                Name of the template variable to unset
      */
     public function __unset($name)
     {
@@ -102,7 +102,7 @@ class Smarty extends Base
     }
 
     /**
-     * Set the given template variable
+     * Set the given template variable(s)
      *
      * @param   array|string $assign        Name of the template variable to set, or assoc array with multiple variables/values
      * @param   mixed $value                The value to set (if the first parameter is a string)

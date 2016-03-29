@@ -35,9 +35,9 @@ class IniFile
                 throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": Could not read INI file");
             }
             $this->data = parse_ini_file($filename, true);
-        } else {
-            $this->data = [];
+            return;
         }
+        $this->data = [];
     }
 
     /**
@@ -59,9 +59,7 @@ class IniFile
      */
     public function getValue($section, $key)
     {
-        if (isset($this->data[$section])
-            && array_key_exists($key, $this->data[$section])
-        ) {
+        if (isset($this->data[$section]) && isset($this->data[$section][$key])) {
             return $this->data[$section][$key];
         }
         return null;

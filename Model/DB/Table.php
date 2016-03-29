@@ -170,7 +170,7 @@ class Table implements \ArrayAccess
     public function __get($name)
     {
         $name = strtolower($name);
-        return array_key_exists($name, $this->fields) ? $this->fields[$name] : null;
+        return isset($this->fields[$name]) ? $this->fields[$name] : null;
     }
 
     /**
@@ -287,7 +287,7 @@ class Table implements \ArrayAccess
     public function getCompareMode($col)
     {
         $col = strtolower($col);
-        if (array_key_exists($col, $this->compModes)) {
+        if (isset($this->compModes[$col])) {
             return $this->compModes[$col];
         }
         return self::COMP_EQ;
