@@ -2,12 +2,13 @@
 
 DIR=`cd "$(dirname "$0")" && pwd`
 
+mkdir -p ${DIR}/../3rdparty/smarty
 cd ${DIR}/../3rdparty/smarty
 
 git init
-git remote add origin https://github.com/smarty-php/smarty.git
-git fetch origin master
-git reset --hard HEAD
-git checkout -t origin/master
+git remote add origin https://github.com/smarty-php/smarty.git 2>/dev/null
+git fetch origin master 2>/dev/null
+git reset --hard HEAD 2>/dev/null
+git checkout -t origin/master 2>/dev/null
 git pull --rebase
 
