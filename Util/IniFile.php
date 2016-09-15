@@ -91,7 +91,7 @@ class IniFile
         }
         if ($value === true) {
             $this->data[$section][$key] = 'on';
-        } else if ($value === false) {
+        } elseif ($value === false) {
             $this->data[$section][$key] = 'off';
         } else {
             $this->data[$section][$key] = (string)$value;

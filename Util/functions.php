@@ -112,7 +112,7 @@ function camelize($string, $lcFirst = false, $separator = '_')
  */
 function uncamelize($string, $separator = '_')
 {
-   return strtolower(preg_replace('/([A-Z])/', $separator . '$1', $string));
+    return strtolower(preg_replace('/([A-Z])/', $separator . '$1', $string));
 }
 
 /**

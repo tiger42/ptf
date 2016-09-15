@@ -41,7 +41,8 @@ class DB extends \Ptf\Util\Logger
     {
         if (!$this->logTable) {
             if (!$this->dbConfig) {
-                throw new \Ptf\Core\Exception\Logger(get_class($this) . "::" . __FUNCTION__ . ": DB configuration has not been set");
+                throw new \Ptf\Core\Exception\Logger(get_class($this) . "::" . __FUNCTION__
+                    . ": DB configuration has not been set");
             }
             try {
                 $this->logTable = new \Ptf\Model\DB\Table($this->logName, $this->dbConfig, $this->context);

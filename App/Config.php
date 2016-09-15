@@ -34,7 +34,8 @@ abstract class Config implements \ArrayAccess
     final public function __get($option)
     {
         if (array_key_exists($option, $this->configData) && $this->configData[$option] === null) {
-            throw new \Ptf\Core\Exception\Config(get_class($this) . "::" . __FUNCTION__ . ": Option '" . $option . "' not configured");
+            throw new \Ptf\Core\Exception\Config(get_class($this) . "::" . __FUNCTION__
+                . ": Option '" . $option . "' not configured");
         }
         return isset($this->configData[$option]) ? $this->configData[$option] : null;
     }

@@ -244,7 +244,9 @@ class FunctionsPagination
         $pageList  = $pagination->getPageList();
         $current   = $pagination->getCurrentPage();
         foreach ($pageList as $page) {
-            $str .= ($page == $current) ? $page : '<a href="' . $params['url'] . '?page=' . $page . $urlParams . '">' . $page . '</a>';
+            $str .= ($page == $current)
+                ? $page
+                : '<a href="' . $params['url'] . '?page=' . $page . $urlParams . '">' . $page . '</a>';
             $str .= $delimiter;
         }
         $str = substr($str, 0, -strlen($delimiter));

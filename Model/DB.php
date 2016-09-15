@@ -277,8 +277,11 @@ abstract class DB
         if ($res) {
             $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, "Transaction successfully started");
         } else {
-            $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__,
-                "Transaction could not be started", \Ptf\Util\Logger::WARN);
+            $this->errLogger->logSys(
+                get_class($this) . "::" . __FUNCTION__,
+                "Transaction could not be started",
+                \Ptf\Util\Logger::WARN
+            );
         }
         return $res;
     }
@@ -303,8 +306,11 @@ abstract class DB
         if ($res) {
             $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, "Transaction successfully commited");
         } else {
-            $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__,
-                "Transaction could not be commited", \Ptf\Util\Logger::WARN);
+            $this->errLogger->logSys(
+                get_class($this) . "::" . __FUNCTION__,
+                "Transaction could not be commited",
+                \Ptf\Util\Logger::WARN
+            );
         }
         return $res;
     }
@@ -329,8 +335,11 @@ abstract class DB
         if ($res) {
             $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, "Transaction successfully rollbacked");
         } else {
-            $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__,
-                "Transaction could not be rollbacked", \Ptf\Util\Logger::WARN);
+            $this->errLogger->logSys(
+                get_class($this) . "::" . __FUNCTION__,
+                "Transaction could not be rollbacked",
+                \Ptf\Util\Logger::WARN
+            );
         }
         return $res;
     }

@@ -38,7 +38,7 @@ class MySQL extends \Ptf\Model\DB\PDO
         $limit = '';
         if ($rowCount !== null) {
             $limit = ' LIMIT ' . (int)$offset . ', ' . (int)$rowCount;
-        } else if ($offset > 0) {
+        } elseif ($offset > 0) {
             $limit = ' LIMIT ' . (int)$offset . ', 18446744073709551615';
         }
         return $this->runQuery($query . $limit);

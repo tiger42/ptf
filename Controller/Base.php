@@ -54,12 +54,14 @@ class Base
 
         $className = $this->context->getAppNamespace() . '\\Controller\\' . $this->name . '\\Action\\' . $actionName;
         if (!class_exists($className)) {
-            throw new \Ptf\Core\Exception\InvalidAction(get_class($this) . "::" . __FUNCTION__ . ": Action class not found: " . $className);
+            throw new \Ptf\Core\Exception\InvalidAction(get_class($this) . "::" . __FUNCTION__
+                . ": Action class not found: " . $className);
         }
 
         $action = new $className($actionName, $this);
         if (!$this->checkAction($action)) {
-            throw new \Exception(get_class($this) . "::" . __FUNCTION__ . ": Action must extend base action: " . $className);
+            throw new \Exception(get_class($this) . "::" . __FUNCTION__
+                . ": Action must extend base action: " . $className);
         }
         $this->action = $action;
         $this->context->getLogger()->logSys(get_class($this) . "::" . __FUNCTION__, "Executing action: " . $className);

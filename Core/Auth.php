@@ -96,12 +96,20 @@ abstract class Auth
     final public function login($username, $password)
     {
         if (!$this->loginImpl($username, $password)) {
-            $this->context->getLogger()->logSys(get_class($this) . "::" . __FUNCTION__, "Login failed for user '" . $username . "'", \Ptf\Util\Logger::INFO);
+            $this->context->getLogger()->logSys(
+                get_class($this) . "::" . __FUNCTION__,
+                "Login failed for user '" . $username . "'",
+                \Ptf\Util\Logger::INFO
+            );
             $this->logout();
 
             return false;
         }
-        $this->context->getLogger()->logSys(get_class($this) . "::" . __FUNCTION__, "User '" . $username . "' has logged in", \Ptf\Util\Logger::INFO);
+        $this->context->getLogger()->logSys(
+            get_class($this) . "::" . __FUNCTION__,
+            "User '" . $username . "' has logged in",
+            \Ptf\Util\Logger::INFO
+        );
 
         $data = $this->session->authData;
         $data['username']  = $username;
@@ -129,7 +137,11 @@ abstract class Auth
     {
         $this->logoutImpl();
         if (isset($this->session->authData['username'])) {
-            $this->context->getLogger()->logSys(get_class($this) . "::" . __FUNCTION__, "User '" . $this->session->authData['username'] . "' has logged out", \Ptf\Util\Logger::INFO);
+            $this->context->getLogger()->logSys(
+                get_class($this) . "::" . __FUNCTION__,
+                "User '" . $this->session->authData['username'] . "' has logged out",
+                \Ptf\Util\Logger::INFO
+            );
         }
         $this->session->authData = [];
     }

@@ -650,7 +650,7 @@ class Table implements \ArrayAccess
      * @param   string $where               "WHERE" part of statement (overrides set fields!)
      * @return  mixed                       The minimum value of the column; FALSE, if no result
      */
-    public function fetchMinValue($col , $where = '')
+    public function fetchMinValue($col, $where = '')
     {
         $min = $this->fetchSpecial('MIN', $col, $where);
         $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, "MIN of '" . $col . "': " . $min);

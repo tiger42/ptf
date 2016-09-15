@@ -46,8 +46,13 @@ class MySQLi extends \Ptf\Model\DB
      */
     protected function connect()
     {
-        $this->db = @new \MySQLi($this->config->getHost(), $this->config->getUsername(), $this->config->getPassword(),
-            $this->config->getDatabase(), $this->config->getPort());
+        $this->db = @new \MySQLi(
+            $this->config->getHost(),
+            $this->config->getUsername(),
+            $this->config->getPassword(),
+            $this->config->getDatabase(),
+            $this->config->getPort()
+        );
 
         if ($this->db->connect_error) {
             $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__, $this->db->connect_error, \Ptf\Util\Logger::ERROR);
@@ -70,7 +75,7 @@ class MySQLi extends \Ptf\Model\DB
         $limit = '';
         if ($rowCount !== null) {
             $limit = ' LIMIT ' . (int)$offset . ', ' . (int)$rowCount;
-        } else if ($offset > 0) {
+        } elseif ($offset > 0) {
             $limit = ' LIMIT ' . (int)$offset . ', 18446744073709551615';
         }
 

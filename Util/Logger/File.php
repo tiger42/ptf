@@ -23,7 +23,8 @@ class File extends \Ptf\Util\Logger
         if (!is_resource($this->logFile)) {
             $this->logFile = @fopen($this->logName, 'ab');
             if (!is_resource($this->logFile)) {
-                throw new \Ptf\Core\Exception\Logger(get_class($this) . "::" . __FUNCTION__ . ": Error opening file '" . $this->logName . "'");
+                throw new \Ptf\Core\Exception\Logger(get_class($this) . "::" . __FUNCTION__
+                    . ": Error opening file '" . $this->logName . "'");
             }
             flock($this->logFile, LOCK_EX | LOCK_NB);
         }

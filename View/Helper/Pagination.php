@@ -158,7 +158,7 @@ class Pagination
             $start++;
         }
         if ($start < 1) {
-        	$start = 1;
+            $start = 1;
         }
         $end = $start + $this->listCount - 1;
         $pageCount = $this->getPageCount();

@@ -16,7 +16,7 @@ class ConfigCompiler
      */
     public static function compile($configName, $configDir, $namespace)
     {
-        $inifile = new IniFile($configName);
+        $inifile  = new IniFile($configName);
         $sections = $inifile->toArray();
 
         foreach ($sections as $section => $settings) {
