@@ -1,3 +1,7 @@
+before_script:
+    bin/fetch_smarty
+
 phpunit:
   script:
     - phpunit --coverage-text --colors=never --configuration phpunit.xml
+
