@@ -5,3 +5,7 @@ phpunit:
   script:
     - phpunit --coverage-text --colors=never --configuration phpunit.xml
 
+phpcs:
+  script:
+    - phpcs -s --standard=phpcs.xml .
+
