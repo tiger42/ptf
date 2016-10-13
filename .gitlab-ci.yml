@@ -1,0 +1,3 @@
+phpunit:
+  script:
+    - phpunit --coverage-text --colors=never --configuration phpunit.xml
