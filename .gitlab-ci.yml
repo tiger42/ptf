@@ -1,5 +1,5 @@
 before_script:
-  - bin/fetch_smarty
+  - bin/fetch-smarty
 
 phpunit:
   script:
