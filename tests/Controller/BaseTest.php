@@ -4,7 +4,7 @@ namespace Ptf\Controller;
 
 use \Ptf\Controller\Base as BaseController;
 
-class BaseTest extends \PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit\Framework\TestCase
 {
     public function testCheckAction()
     {
@@ -54,8 +54,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         $context = \Ptf\Application::getContext();
 
         $controller = new BaseController('Invalid', $context);
-        $this->setExpectedException(
-            '\\Ptf\\Core\\Exception\\InvalidAction',
+        $this->expectException('\\Ptf\\Core\\Exception\\InvalidAction');
+        $this->expectExceptionMessage(
             'Ptf\Controller\Base::dispatch: Action class not found: PtfTest\Controller\Invalid\Action\Index');
         $controller->dispatch();
     }
@@ -65,8 +65,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         $context = \Ptf\Application::getContext();
 
         $controller = new BaseController('Base', $context);
-        $this->setExpectedException(
-            '\\Ptf\\Core\\Exception\\InvalidAction',
+        $this->expectException('\\Ptf\\Core\\Exception\\InvalidAction');
+        $this->expectExceptionMessage(
             'Ptf\Controller\Base::dispatch: Action class not found: PtfTest\Controller\Base\Action\Invalid');
         $controller->dispatch('invalid');
     }
@@ -76,8 +76,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         $context = \Ptf\Application::getContext();
 
         $controller = new BaseController('Base', $context);
-        $this->setExpectedException(
-            '\\Exception',
+        $this->expectException('\\Exception');
+        $this->expectExceptionMessage(
             'Ptf\Controller\Base::dispatch: Action must extend base action: PtfTest\Controller\Base\Action\WrongClass');
         $controller->dispatch('WrongClass');
     }

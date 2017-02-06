@@ -4,7 +4,7 @@ namespace Ptf\Controller;
 
 use \Ptf\Controller;
 
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit\Framework\TestCase
 {
     public function testCreateController()
     {
@@ -28,8 +28,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $context = \Ptf\Application::getContext();
 
-        $this->setExpectedException(
-            '\\Exception',
+        $this->expectException('\\Exception');
+        $this->expectExceptionMessage(
             'Ptf\Controller\Factory::createController: Controller must extend base controller: PtfTest\\Controller\\Invalid');
         Factory::createController('invalid', $context);
     }

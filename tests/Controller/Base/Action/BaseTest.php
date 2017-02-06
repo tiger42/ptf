@@ -4,7 +4,7 @@ namespace Ptf\Controller\Base\Action;
 
 use \Ptf\Controller\Base as BaseController;
 
-class BaseTest extends \PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetName()
     {

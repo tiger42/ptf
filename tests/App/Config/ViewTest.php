@@ -2,14 +2,14 @@
 
 namespace Ptf\App\Config;
 
-class ViewTest extends \PHPUnit_Framework_TestCase
+class ViewTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetTemplateDir()
     {
         $config = new View();
 
-        $this->setExpectedException(
-            '\\Ptf\\Core\\Exception\\Config',
+        $this->expectException('\\Ptf\\Core\\Exception\\Config');
+        $this->expectExceptionMessage(
             'Ptf\App\Config\View::__get: Option \'template_dir\' not configured');
         $config->getTemplateDir();
     }

@@ -2,7 +2,7 @@
 
 namespace Ptf\View;
 
-class PlainTest extends \PHPUnit_Framework_TestCase
+class PlainTest extends \PHPUnit\Framework\TestCase
 {
     public function testRender()
     {
@@ -30,8 +30,8 @@ class PlainTest extends \PHPUnit_Framework_TestCase
     public function testRenderException()
     {
         $view = new \Ptf\View\Plain($this->createConfig(), \Ptf\Application::getContext());
-        $this->setExpectedException(
-            '\\RuntimeException',
+        $this->expectException('\\RuntimeException');
+        $this->expectExceptionMessage(
             'Ptf\View\Plain::render: PHP template has not been set');
         $view->render();
     }
@@ -59,8 +59,8 @@ class PlainTest extends \PHPUnit_Framework_TestCase
     public function testFetchException()
     {
         $view = new \Ptf\View\Plain($this->createConfig(), \Ptf\Application::getContext());
-        $this->setExpectedException(
-            '\\RuntimeException',
+        $this->expectException('\\RuntimeException');
+        $this->expectExceptionMessage(
             'Ptf\View\Plain::fetch: PHP template has not been set');
         $view->fetch();
     }

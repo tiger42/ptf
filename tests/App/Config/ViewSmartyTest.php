@@ -2,14 +2,14 @@
 
 namespace Ptf\App\Config;
 
-class ViewSmartyTest extends \PHPUnit_Framework_TestCase
+class ViewSmartyTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetCompileDir()
     {
         $config = new ViewSmarty();
 
-        $this->setExpectedException(
-            '\\Ptf\\Core\\Exception\\Config',
+        $this->expectException('\\Ptf\\Core\\Exception\\Config');
+        $this->expectExceptionMessage(
             'Ptf\App\Config\ViewSmarty::__get: Option \'compile_dir\' not configured');
         $config->getCompileDir();
     }

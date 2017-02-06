@@ -2,7 +2,7 @@
 
 namespace Ptf\App\Config;
 
-class SessionMemcacheTest extends \PHPUnit_Framework_TestCase
+class SessionMemcacheTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetHosts()
     {

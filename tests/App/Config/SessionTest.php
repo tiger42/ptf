@@ -2,7 +2,7 @@
 
 namespace Ptf\App\Config;
 
-class SessionTest extends \PHPUnit_Framework_TestCase
+class SessionTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetSessionName()
     {

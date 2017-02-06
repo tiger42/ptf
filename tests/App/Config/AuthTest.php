@@ -2,7 +2,7 @@
 
 namespace Ptf\App\Config;
 
-class AuthTest extends \PHPUnit_Framework_TestCase
+class AuthTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetIdletime()
     {

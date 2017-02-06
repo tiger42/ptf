@@ -4,7 +4,7 @@ namespace  Ptf\Core\Cli;
 
 use \Ptf\Core\Cli\Output;
 
-class OutputTest extends \PHPUnit_Framework_TestCase
+class OutputTest extends \PHPUnit\Framework\TestCase
 {
     public function testSetContent()
     {

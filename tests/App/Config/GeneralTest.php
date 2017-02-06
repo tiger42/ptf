@@ -2,7 +2,7 @@
 
 namespace Ptf\App\Config;
 
-class GeneralTest extends \PHPUnit_Framework_TestCase
+class GeneralTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetLogLevel()
     {

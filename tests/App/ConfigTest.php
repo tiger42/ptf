@@ -2,7 +2,7 @@
 
 namespace Ptf\App;
 
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class ConfigTest extends \PHPUnit\Framework\TestCase
 {
     public function testGet()
     {
@@ -19,8 +19,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $config = new MyConfig();
 
-        $this->setExpectedException(
-            '\\Ptf\\Core\\Exception\Config',
+        $this->expectException('\\Ptf\\Core\\Exception\Config');
+        $this->expectExceptionMessage(
             'Ptf\App\MyConfig::__get: Option \'notSet\' not configured');
         $config->notSet;
     }

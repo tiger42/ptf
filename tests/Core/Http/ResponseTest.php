@@ -4,7 +4,7 @@ namespace Ptf\Core\Http;
 
 use \Ptf\Core\Http\Response;
 
-class ResponseTest extends \PHPUnit_Framework_TestCase
+class ResponseTest extends \PHPUnit\Framework\TestCase
 {
     public function testSetHeader()
     {

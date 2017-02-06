@@ -4,7 +4,7 @@ namespace Ptf\View\Plugin\Smarty;
 
 use \Ptf\View\Plugin\Smarty\Modifiers;
 
-class ModifiersTest extends \PHPUnit_Framework_TestCase
+class ModifiersTest extends \PHPUnit\Framework\TestCase
 {
     public function testDblbr2p()
     {

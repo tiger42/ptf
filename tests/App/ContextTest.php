@@ -2,7 +2,7 @@
 
 namespace Ptf\App;
 
-class ContextTest extends \PHPUnit_Framework_TestCase
+class ContextTest extends \PHPUnit\Framework\TestCase
 {
     public function testConstructor()
     {
@@ -54,8 +54,8 @@ class ContextTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorException()
     {
-        $this->setExpectedException(
-            '\\Ptf\\Core\\Exception\\Config',
+        $this->expectException('\\Ptf\\Core\\Exception\\Config');
+        $this->expectExceptionMessage(
             'Ptf\App\Config\ViewPlain::__get: Option \'template_dir\' not configured');
         new MyExceptionContext();
     }
@@ -114,8 +114,8 @@ class ContextTest extends \PHPUnit_Framework_TestCase
     {
         $context = new MyContext();
 
-        $this->setExpectedException(
-            '\\RuntimeException',
+        $this->expectException('\\RuntimeException');
+        $this->expectExceptionMessage(
             'Ptf\App\MyContext::getConfig: Configuration not found: foobar');
         $context->getConfig('foobar');
     }

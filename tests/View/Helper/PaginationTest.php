@@ -4,7 +4,7 @@ namespace Ptf\View\Helper;
 
 use \Ptf\View\Helper\Pagination;
 
-class PaginationTest extends \PHPUnit_Framework_TestCase
+class PaginationTest extends \PHPUnit\Framework\TestCase
 {
     public function invalidParamsProvider()
     {

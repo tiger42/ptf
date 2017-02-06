@@ -4,7 +4,7 @@ namespace Ptf\Controller;
 
 use \Ptf\Controller\Cli as CliController;
 
-class CliTest extends \PHPUnit_Framework_TestCase
+class CliTest extends \PHPUnit\Framework\TestCase
 {
     public function testCheckAction()
     {

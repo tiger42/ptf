@@ -2,7 +2,7 @@
 
 namespace Ptf\Traits;
 
-class ArrayAccessTest extends \PHPUnit_Framework_TestCase
+class ArrayAccessTest extends \PHPUnit\Framework\TestCase
 {
     public function testMagicGettersAndSetters()
     {

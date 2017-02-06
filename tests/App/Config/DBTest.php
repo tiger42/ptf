@@ -2,7 +2,7 @@
 
 namespace Ptf\App\Config;
 
-class DBTest extends \PHPUnit_Framework_TestCase
+class DBTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetDriver()
     {
@@ -29,8 +29,8 @@ class DBTest extends \PHPUnit_Framework_TestCase
     {
         $config = new DB();
 
-        $this->setExpectedException(
-            '\\Ptf\\Core\\Exception\\Config',
+        $this->expectException('\\Ptf\\Core\\Exception\\Config');
+        $this->expectExceptionMessage(
             'Ptf\App\Config\DB::__get: Option \'username\' not configured');
         $config->getUsername();
     }
@@ -39,8 +39,8 @@ class DBTest extends \PHPUnit_Framework_TestCase
     {
         $config = new DB();
 
-        $this->setExpectedException(
-            '\\Ptf\\Core\\Exception\\Config',
+        $this->expectException('\\Ptf\\Core\\Exception\\Config');
+        $this->expectExceptionMessage(
             'Ptf\App\Config\DB::__get: Option \'password\' not configured');
         $config->getPassword();
     }
@@ -49,8 +49,8 @@ class DBTest extends \PHPUnit_Framework_TestCase
     {
         $config = new DB();
 
-        $this->setExpectedException(
-            '\\Ptf\\Core\\Exception\\Config',
+        $this->expectException('\\Ptf\\Core\\Exception\\Config');
+        $this->expectExceptionMessage(
             'Ptf\App\Config\DB::__get: Option \'database\' not configured');
         $config->getDatabase();
     }

@@ -4,7 +4,7 @@ namespace Ptf\View\Plugin\Smarty;
 
 use \Ptf\View\Plugin\Smarty\Functions;
 
-class FunctionsTest extends \PHPUnit_Framework_TestCase
+class FunctionsTest extends \PHPUnit\Framework\TestCase
 {
     public function testSid()
     {

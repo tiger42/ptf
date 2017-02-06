@@ -4,7 +4,7 @@ namespace Ptf\Controller\Http\Action;
 
 use \Ptf\Controller\Http as HttpController;
 
-class BaseTest extends \PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit\Framework\TestCase
 {
     public function testForward404()
     {

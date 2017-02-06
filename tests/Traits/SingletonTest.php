@@ -2,7 +2,7 @@
 
 namespace Ptf\Traits;
 
-class SingletonTest extends \PHPUnit_Framework_TestCase
+class SingletonTest extends \PHPUnit\Framework\TestCase
 {
     private $traitName = '\Ptf\Traits\Singleton';
 
