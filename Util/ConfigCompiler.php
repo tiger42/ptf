@@ -19,6 +19,10 @@ class ConfigCompiler
         $inifile  = new IniFile($configName);
         $sections = $inifile->toArray();
 
+        if (!is_dir($configDir)) {
+            mkdir($configDir, 0775, true);
+        }
+
         foreach ($sections as $section => $settings) {
             $now      = now();
             $confData = var_export($settings, true);
