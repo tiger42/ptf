@@ -46,14 +46,14 @@ class Functions
      */
     public static function exec(array $params, \Smarty_Internal_Template $template)
     {
-        /** @var $context \Ptf\App\Context */
+        /* @var $context \Ptf\App\Context */
         $context = $template->getTemplateVars('context');
-        /** @var $view \Ptf\View\Smarty */
+        /* @var $view \Ptf\View\Smarty */
         $view = $context->getView();
         $response = $context->getResponse();
 
-        $controllerName = isset($params['controller']) ? $params['controller'] : '';
-        $actionName     = isset($params['action']) ? $params['action'] : '';
+        $controllerName = $params['controller'] ?? '';
+        $actionName     = $params['action'] ?? '';
         $route = $controllerName . '/' . $actionName;
 
         // Overwrite internal Smarty object with current template object

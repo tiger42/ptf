@@ -9,17 +9,18 @@ if (php_sapi_name() != 'cli' && !defined('STDIN')) {
 require_once 'Application.php';
 
 /**
- * Base class for all Ptf CLI applications
+ * Base class for all Ptf CLI applications.
  */
 abstract class CliApplication extends Application
 {
     /**
-     * Run the application
+     * Run the application.
      */
-    public static function run()
+    public static function run(): void
     {
         static::initAutoloader(Core\Autoloader::getInstance());
 
+        /* @var $context App\Context */
         $context = static::getContext();
 
         $args = $_SERVER['argv'];
@@ -41,7 +42,7 @@ abstract class CliApplication extends Application
      * Display a usage message for the application.<br />
      * Overwrite this function to display an individual message.
      */
-    public static function showUsage()
+    public static function showUsage(): void
     {
         $context = static::getContext();
 

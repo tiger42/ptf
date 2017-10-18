@@ -14,9 +14,8 @@ class ContextTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($context->getResponse());
 
         $configs = $context->getConfigs();
-        $this->assertCount(2, $configs);
+        $this->assertCount(1, $configs);
         $this->assertInstanceOf('\\Ptf\\App\\Config\\General', $configs['General']);
-        $this->assertInstanceOf('\\Ptf\\App\\Config\\ViewPlain', $configs['ViewPlain']);
 
         $this->assertSame([], $context->getRoutingTable());
 
@@ -32,6 +31,11 @@ class ContextTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('\\Ptf\\Core\\Http\\Response', $context->getResponse());
         $this->assertNull($context->getCliParams());
         $this->assertNull($context->getCliOutput());
+
+        $configs = $context->getConfigs();
+        $this->assertCount(2, $configs);
+        $this->assertInstanceOf('\\Ptf\\App\\Config\\General', $configs['General']);
+        $this->assertInstanceOf('\\Ptf\\App\\Config\\ViewPlain', $configs['ViewPlain']);
     }
 
     public function testConstructorCallsMethods()
@@ -143,8 +147,8 @@ class ContextTest extends \PHPUnit\Framework\TestCase
     {
         $context = new MyHttpContext();
 
-        $oldHttpHost = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : null;
-        $oldHttps    = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : null;
+        $oldHttpHost = $_SERVER['HTTP_HOST'] ?? null;
+        $oldHttps    = $_SERVER['HTTPS'] ?? null;
 
         $_SERVER['HTTP_HOST'] = 'example.com';
         $this->assertSame('http://example.com' . $_SERVER['SCRIPT_FILENAME'], $context->getBaseUrl(true));
@@ -163,17 +167,17 @@ class MyContext extends Context
         parent::__construct();
     }
 
-    public function getAppNamespace()
+    public function getAppNamespace(): string
     {
         return 'PtfTest';
     }
 
-    public function getConfigs()
+    public function getConfigs(): array
     {
         return $this->configs;
     }
 
-    public function getLoggers()
+    public function getLoggers(): array
     {
         return $this->loggers;
     }
@@ -181,7 +185,7 @@ class MyContext extends Context
 
 class MyHttpContext extends MyContext
 {
-    public function isCli()
+    public function isCli(): bool
     {
         return false;
     }
@@ -189,7 +193,7 @@ class MyHttpContext extends MyContext
 
 class MyExceptionContext extends MyHttpContext
 {
-    public function getConfig($configName = 'General')
+    public function getConfig(string $configName = 'General'): \Ptf\App\Config
     {
         if ($configName == 'ViewPlain') {
             return new \Ptf\App\Config\ViewPlain();

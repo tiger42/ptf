@@ -2,8 +2,11 @@
 
 namespace Ptf\Model\DB;
 
+use Ptf\Core\Exception\DBConnect as DBConnectException;
+use Ptf\Core\Exception\DBQuery as DBQueryException;
+
 /**
- * Database wrapper for MySQL access with MySQLi
+ * Database wrapper for MySQL access via MySQLi.
  */
 class MySQLi extends \Ptf\Model\DB
 {
@@ -21,18 +24,18 @@ class MySQLi extends \Ptf\Model\DB
 
     /**
      * Number of rows of the last "SELECT" result
-     * @var integer
+     * @var int
      */
     private $numRows;
 
     /**
      * The number of affected rows after the last "INSERT", "UPDATE" or "DELETE" statement
-     * @var integer
+     * @var int
      */
     private $affRows;
 
     /**
-     * Disconnect from the database
+     * Disconnect from the database.
      */
     public function __destruct()
     {
@@ -40,11 +43,11 @@ class MySQLi extends \Ptf\Model\DB
     }
 
     /**
-     * Connect to the database
+     * Connect to the database.
      *
-     * @throws  \Ptf\Core\Exception\DBConnect If the DB connection could not be established
+     * @throws DBConnectException  If the DB connection could not be established
      */
-    protected function connect()
+    protected function connect(): void
     {
         $this->db = @new \MySQLi(
             $this->config->getHost(),
@@ -56,21 +59,23 @@ class MySQLi extends \Ptf\Model\DB
 
         if ($this->db->connect_error) {
             $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__, $this->db->connect_error, \Ptf\Util\Logger::ERROR);
-            throw new \Ptf\Core\Exception\DBConnect(get_class($this) . "::" . __FUNCTION__ . ": " . $this->db->connect_error);
+            throw new DBConnectException(get_class($this) . "::" . __FUNCTION__ . ": " . $this->db->connect_error);
         }
         $this->db->set_charset($this->config->getCharset());
     }
 
     /**
-     * Perform a "SELECT" query on the database
+     * Perform a "SELECT" query on the database.
      *
-     * @param   string $query                The SQL query string
-     * @param   integer $offset              Offset of the first row
-     * @param   integer $rowCount            Number of rows to fetch
-     * @return  integer                      The number of fetched rows
-     * @throws  \Ptf\Core\Exception\DBQuery  If the query has failed
+     * @param string $query     The SQL query string
+     * @param int    $offset    Offset of the first row
+     * @param int    $rowCount  Number of rows to fetch
+     *
+     * @throws DBQueryException  If the query has failed
+     *
+     * @return int  The number of fetched rows
      */
-    protected function queryImpl($query, $offset = 0, $rowCount = null)
+    protected function queryImpl(string $query, int $offset = 0, int $rowCount = null): int
     {
         $limit = '';
         if ($rowCount !== null) {
@@ -83,7 +88,7 @@ class MySQLi extends \Ptf\Model\DB
 
         if (!is_object($res)) {
             $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__, $this->db->error, \Ptf\Util\Logger::ERROR);
-            throw new \Ptf\Core\Exception\DBQuery(get_class($this) . "::" . __FUNCTION__ . ": " . $this->db->error);
+            throw new DBQueryException(get_class($this) . "::" . __FUNCTION__ . ": " . $this->db->error);
         }
         $this->queryRes = $res;
         $this->numRows  = $res->num_rows;
@@ -92,9 +97,9 @@ class MySQLi extends \Ptf\Model\DB
     }
 
     /**
-     * Fetch a row from the query result, advance the row pointer
+     * Fetch a row from the query result, advance the row pointer.
      *
-     * @return  mixed                       Result row as assoc array; FALSE, if result has no more rows
+     * @return array|false  Result row as assoc array; FALSE, if result has no more rows
      */
     public function fetch()
     {
@@ -110,57 +115,59 @@ class MySQLi extends \Ptf\Model\DB
     }
 
     /**
-     * Perform a manipulation query on the database (e.g. "UPDATE", "INSERT")
+     * Perform a manipulation query on the database (e.g. "UPDATE", "INSERT").
      *
-     * @param   string $sql                  The SQL statement to execute
-     * @throws  \Ptf\Core\Exception\DBQuery  If the query has failed
+     * @param string $sql  The SQL statement to execute
+     *
+     * @throws DBQueryException  If the query has failed
      */
-    protected function execSqlImpl($sql)
+    protected function execSqlImpl(string $sql): void
     {
         if (!$this->db->query($sql)) {
             $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__, $this->db->error, \Ptf\Util\Logger::ERROR);
-            throw new \Ptf\Core\Exception\DBQuery(get_class($this) . "::" . __FUNCTION__ . ": " . $this->db->error);
+            throw new DBQueryException(get_class($this) . "::" . __FUNCTION__ . ": " . $this->db->error);
         }
         $this->affRows = $this->db->affected_rows;
     }
 
     /**
-     * Return the number of fetched rows of the last "SELECT" statement
+     * Return the number of fetched rows of the last "SELECT" statement.
      *
-     * @return  integer                     The number of fetched rows
+     * @return int The number of fetched rows
      */
-    protected function getFetchedRowsCountImpl()
+    protected function getFetchedRowsCountImpl(): int
     {
         return $this->numRows;
     }
 
     /**
-     * Return the number of affected rows after the last "INSERT", "UPDATE" or "DELETE" statement
+     * Return the number of affected rows after the last "INSERT", "UPDATE" or "DELETE" statement.
      *
-     * @return  integer                     The number of affected rows
+     * @return int  The number of affected rows
      */
-    protected function getAffectedRowsCountImpl()
+    protected function getAffectedRowsCountImpl(): int
     {
         return $this->affRows;
     }
 
     /**
-     * Return the last insert ID after an "INSERT" statement (works only for tables with autoincrement key!)
+     * Return the last insert ID after an "INSERT" statement (works only for tables with autoincrement key).
      *
-     * @return  integer                     The last insert ID
+     * @return int  The last insert ID
      */
-    protected function getLastInsertIdImpl()
+    protected function getLastInsertIdImpl(): int
     {
         return $this->db->insert_id;
     }
 
     /**
-     * Return all column names of the given table
+     * Return all column names of the given table.
      *
-     * @param   string $tableName           Name of the table to determine the column names of
-     * @return  string[]                    The names of the table's columns
+     * @param string $tableName  Name of the table to determine the column names of
+     *
+     * @return string[]  The names of the table's columns
      */
-    protected function getColumnNamesImpl($tableName)
+    protected function getColumnNamesImpl(string $tableName): array
     {
         $this->query('DESCRIBE ' . $this->quoteIdentifier($tableName));
         $columns = [];
@@ -171,64 +178,67 @@ class MySQLi extends \Ptf\Model\DB
     }
 
     /**
-     * Start a transaction
+     * Start a transaction.
      *
-     * @return  boolean                     Was the operation successful?
+     * @return bool  Was the operation successful?
      */
-    protected function startTransactionImpl()
+    protected function startTransactionImpl(): bool
     {
         return $this->db->begin_transaction();
     }
 
     /**
-     * Commit the current transaction
+     * Commit the current transaction.
      *
-     * @return  boolean                     Was the operation successful?
+     * @return bool  Was the operation successful?
      */
-    protected function commitTransactionImpl()
+    protected function commitTransactionImpl(): bool
     {
         return $this->db->commit();
     }
 
     /**
-     * Roll back the current transaction
+     * Roll back the current transaction.
      *
-     * @return  boolean                     Was the operation successful?
+     * @return bool  Was the operation successful?
      */
-    protected function rollbackTransactionImpl()
+    protected function rollbackTransactionImpl(): bool
     {
         return $this->db->rollback();
     }
 
     /**
-     * Quote the given identifier (e.g. table or column name)
+     * Quote the given identifier (e.g. table or column name).
      *
-     * @param   string $string              The string to be quoted
-     * @return  string                      The quoted string
+     * @param string $string  The string to be quoted
+     *
+     * @return string  The quoted string
      */
-    public function quoteIdentifier($string)
+    public function quoteIdentifier(string $string): string
     {
         return '`' . $string . '`';
     }
 
     /**
-     * Escape a string to be safely used in database queries
+     * Escape a string to be safely used in database queries.
      *
-     * @param   string $string              The string to be escaped
-     * @return  string                      The escaped string
+     * @param string $string  The string to be escaped
+     *
+     * @return string  The escaped string
      */
-    public function escapeString($string)
+    public function escapeString(string $string): string
     {
         return $this->db->real_escape_string($string);
     }
 
     /**
-     * Unescape a string
+     * Unescape a string.
      *
-     * @param   string $string              The string to be unescaped
-     * @return  string                      The unescaped string
+     * @param string $string  The string to be unescaped
+     *
+     * @return string  The unescaped string
      */
-    public function unEscapeString($string)
+    public function unEscapeString(string $string): string
     {
         return stripslashes($string);
     }

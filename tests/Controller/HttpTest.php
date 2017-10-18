@@ -75,13 +75,13 @@ class HttpTest extends \PHPUnit\Framework\TestCase
 
 class MyHttpController extends HttpController
 {
-    public function checkAction($action)
+    public function checkAction($action): bool
     {
         return parent::checkAction($action);
     }
 
-    public function executeAction(\Ptf\Controller\Base\Action\Base $action)
+    public function executeAction(\Ptf\Controller\Base\Action\Base $action): void
     {
-        return parent::executeAction($action);
+        parent::executeAction($action);
     }
 }

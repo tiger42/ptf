@@ -2,18 +2,21 @@
 
 namespace _NAMESPACE_\Controller\Show\Action;
 
+use Ptf\Controller\Http\Action\Base as BaseAction;
+use Ptf\Core\Http\{Request, Response};
+
 /**
- * The action for the "show/index" route
+ * The action for the "show/index" route.
  */
-class Index extends \Ptf\Controller\Http\Action\Base
+class Index extends BaseAction
 {
     /**
-     * Execute the action
+     * Execute the action.
      *
-     * @param   \Ptf\Core\Http\Request $request    The current request object
-     * @param   \Ptf\Core\Http\Response $response  The response object
+     * @param Request  $request   The current request object
+     * @param Response $response  The response object
      */
-    public function execute(\Ptf\Core\Http\Request $request, \Ptf\Core\Http\Response $response)
+    public function execute(Request $request, Response $response): void
     {
         $context = \Ptf\Application::getContext();
         $view = $context->getView();

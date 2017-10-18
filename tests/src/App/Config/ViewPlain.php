@@ -8,7 +8,7 @@ class ViewPlain extends \Ptf\App\Config\ViewPlain
     {
         parent::__construct();
         $this->configData = array_merge($this->configData, [
-            'template_dir' => 'src/View/Plain/templates/'
+            'template_dir' => 'src/View/Plain/templates/',
         ]);
     }
 

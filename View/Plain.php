@@ -2,8 +2,11 @@
 
 namespace Ptf\View;
 
+use Ptf\App\Config\ViewPlain as ViewConfig;
+use Ptf\App\Context;
+
 /**
- * Simple PHP only view
+ * Simple PHP-only view.
  */
 class Plain extends Base
 {
@@ -20,12 +23,12 @@ class Plain extends Base
     protected $functionPlugins;
 
     /**
-     * Initialize the settings
+     * Initialize the settings.
      *
-     * @param   \Ptf\App\Config\ViewPlain $config  The Plain view configuration
-     * @param   \Ptf\App\Context $context          The application's context
+     * @param ViewConfig $config   The Plain view configuration
+     * @param Context    $context  The application's context
      */
-    public function __construct(\Ptf\App\Config\ViewPlain $config, \Ptf\App\Context $context)
+    public function __construct(ViewConfig $config, Context $context)
     {
         parent::__construct($config, $context);
 
@@ -36,12 +39,13 @@ class Plain extends Base
     }
 
     /**
-     * Render the set template
+     * Render the set template.
      *
-     * @param   string $cacheId             An additional cache ID, if multiple caches for the template are used
-     * @throws  \RuntimeException           If no template has been set
+     * @param string $cacheId  An additional cache ID, if multiple caches for the template are used
+     *
+     * @throws \RuntimeException  If no template has been set
      */
-    public function render($cacheId = null)
+    public function render(string $cacheId = null): void
     {
         if (!$this->templateName) {
             throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": PHP template has not been set");
@@ -57,13 +61,15 @@ class Plain extends Base
     }
 
     /**
-     * Fetch the content of the set template as a string
+     * Fetch the content of the set template as a string.
      *
-     * @param   string $cacheId             An additional cache ID, if multiple caches for the template are used
-     * @return  string                      The fetched template
-     * @throws  \RuntimeException           If no template has been set
+     * @param string $cacheId  An additional cache ID, if multiple caches for the template are used
+     *
+     * @throws \RuntimeException  If no template has been set
+     *
+     * @return string  The fetched template
      */
-    public function fetch($cacheId = null)
+    public function fetch(string $cacheId = null): string
     {
         if (!$this->templateName) {
             throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": PHP template has not been set");
@@ -83,24 +89,25 @@ class Plain extends Base
     }
 
     /**
-     * Register a template function plugin
+     * Register a template function plugin.
      *
-     * @param    string $name               The name of the function plugin to register
-     * @param    callable $function         The callback function for the plugin
+     * @param string   $name      The name of the function plugin to register
+     * @param callable $function  The callback function for the plugin
      */
-    public function registerFunctionPlugin($name, callable $function)
+    public function registerFunctionPlugin(string $name, callable $function): void
     {
         $this->functionPlugins[$name] = $function;
     }
 
     /**
-     * Call a registered template function
+     * Call a registered template function.
      *
-     * @param   string $name                Name of the template function to call
-     * @param   array $arguments            Arguments for the template function
-     * @return  mixed                       The return value of the called function
+     * @param string $name       Name of the template function to call
+     * @param array  $arguments  Arguments for the template function
+     *
+     * @return mixed  The return value of the called function
      */
-    public function __call($name, array $arguments = [])
+    public function __call(string $name, array $arguments = [])
     {
         if (!count($arguments)) {
             return $this->functionPlugins[$name]($this);
@@ -112,12 +119,12 @@ class Plain extends Base
     // Special template plugin functions
 
     /**
-     * Include the given subtemplate
+     * Include the given subtemplate.
      *
-     * @param   string $templateName        The filename of the template to include
-     * @param   array $params               Parameters to be passed to the template
+     * @param string $templateName  The filename of the template to include
+     * @param array  $params        Parameters to be passed to the template
      */
-    public function include_tpl($templateName, array $params = [])
+    public function include_tpl(string $templateName, array $params = []): void
     {
         foreach ($params as $key => $value) {
             $$key = $value;

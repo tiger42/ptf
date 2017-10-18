@@ -2,10 +2,11 @@
 
 namespace Ptf\App;
 
-use Ptf\Application;
+use Ptf\Core\Cli;
+use Ptf\Core\Http;
 
 /**
- * Abstract application context
+ * Abstract application context.
  */
 abstract class Context
 {
@@ -13,25 +14,25 @@ abstract class Context
 
     /**
      * The request object (for web applications only)
-     * @var \Ptf\Core\Http\Request
+     * @var Http\Request
      */
     protected $request;
 
     /**
      * The response object (for web applications only)
-     * @var \Ptf\Core\Http\Response
+     * @var Http\Response
      */
     protected $response;
 
     /**
      * The command line parameters (for CLI applications only)
-     * @var \Ptf\Core\Cli\Params
+     * @var Cli\Params
      */
     protected $cliParams;
 
     /**
      * The console output (for CLI applications only)
-     * @var \Ptf\Core\Cli\Output
+     * @var Cli\Output
      */
     protected $cliOutput;
 
@@ -55,7 +56,7 @@ abstract class Context
 
     /**
      * Array of the application's configuration objects
-     * @var \Ptf\App\Config[]
+     * @var Config[]
      */
     protected $configs;
 
@@ -66,18 +67,16 @@ abstract class Context
     protected $routingTable;
 
     /**
-     * Initialize the member variables
-     *
-     * @throws  \Ptf\Core\Exception\Config  If application is web app and the view config is incomplete
+     * Initialize the member variables.
      */
     protected function __construct()
     {
         if ($this->isCli()) {
-            $this->cliParams = new \Ptf\Core\Cli\Params();
-            $this->cliOutput = new \Ptf\Core\Cli\Output();
+            $this->cliParams = new Cli\Params();
+            $this->cliOutput = new Cli\Output();
         } else {
-            $this->request  = new \Ptf\Core\Http\Request();
-            $this->response = new \Ptf\Core\Http\Response();
+            $this->request  = new Http\Request();
+            $this->response = new Http\Response();
         }
 
         $this->configs = [];
@@ -86,27 +85,23 @@ abstract class Context
         $this->initLoggers();
         $this->init();
 
-        try {
+        if (!$this->isCli()) {
             $view = $this->getView();
             $view['request'] = $this->getRequest();
-        } catch (\Ptf\Core\Exception\Config $e) {
-            if (!$this->isCli()) {
-                throw $e;
-            }
         }
     }
 
     /**
-     * Overwrite this method to initialize application specific objects (loggers, view, ...)
+     * Overwrite this method to initialize application specific objects (loggers, view, ...).
      */
-    protected function init()
+    protected function init(): void
     {
     }
 
     /**
      * Initialize the Logger objects
      */
-    protected function initLoggers()
+    protected function initLoggers(): void
     {
         $config = $this->getConfig('General');
 
@@ -121,68 +116,68 @@ abstract class Context
     }
 
     /**
-     * Get the application's namespace
+     * Get the application's namespace.
      *
-     * @return  string                      The namespace of the application
+     * @return string  The namespace of the application
      */
-    abstract public function getAppNamespace();
+    abstract public function getAppNamespace(): string;
 
     /**
-     * Get the name of the default controller
+     * Get the name of the default controller.
      *
-     * @return  string                      The name of the default controller
+     * @return string  The name of the default controller
      */
-    public function getDefaultControllerName()
+    public function getDefaultControllerName(): string
     {
         return 'Base';
     }
 
     /**
-     * Get the request object
+     * Get the request object.
      *
-     * @return  \Ptf\Core\Http\Request      The request object
+     * @return Http\Request  The request object
      */
-    public function getRequest()
+    public function getRequest(): ?Http\Request
     {
         return $this->request;
     }
 
     /**
-     * Get the response object
+     * Get the response object.
      *
-     * @return  \Ptf\Core\Http\Response     The response object
+     * @return Http\Response The response object
      */
-    public function getResponse()
+    public function getResponse(): ?Http\Response
     {
         return $this->response;
     }
 
     /**
-     * Get the CLI parameters object
+     * Get the CLI parameters object.
      *
-     * @return \Ptf\Core\Cli\Params         The CLI parameters object
+     * @return Cli\Params  The CLI parameters object
      */
-    public function getCliParams()
+    public function getCliParams(): ?Cli\Params
     {
         return $this->cliParams;
     }
 
     /**
-     * Get the console output object
+     * Get the console output object.
      *
-     * @return \Ptf\Core\Cli\Output         The CLI output object
+     * @return Cli\Output  The CLI output object
      */
-    public function getCliOutput()
+    public function getCliOutput(): ?Cli\Output
     {
         return $this->cliOutput;
     }
 
     /**
-     * Get the application's view object
+     * Get the application's view object.
      *
-     * @return  \Ptf\View\Base              The view used by the application
+     * @return \Ptf\View\Base  The view used by the application
      */
-    public function getView()
+    public function getView(): \Ptf\View\Base
     {
         if ($this->view === null) {
             // Set fallback view if none is set in the init() function
@@ -192,22 +187,23 @@ abstract class Context
     }
 
     /**
-     * Get the logger with the given name
+     * Get the logger with the given name.
      *
-     * @param   string $logger              The name of the logger to fetch
-     * @return  \Ptf\Util\Logger            The requested logger or a dummy logger, if a logger with the given name does not exist
+     * @param string $logger  The name of the logger to fetch
+     *
+     * @return \Ptf\Util\Logger  The requested logger or a dummy logger, if a logger with the given name does not exist
      */
-    public function getLogger($logger = 'system')
+    public function getLogger(string $logger = 'system'): \Ptf\Util\Logger
     {
-        return isset($this->loggers[$logger]) ? $this->loggers[$logger] : \Ptf\Util\Logger\DevNull::getInstance('dummy', $this);
+        return $this->loggers[$logger] ?? \Ptf\Util\Logger\DevNull::getInstance('dummy', $this);
     }
 
     /**
-     * Get the called controller
+     * Get the called controller.
      *
-     * @return  \Ptf\Controller\Base        The called controller
+     * @return \Ptf\Controller\Base  The called controller
      */
-    public function getController()
+    public function getController(): \Ptf\Controller\Base
     {
         return $this->controller;
     }
@@ -217,21 +213,23 @@ abstract class Context
      * This function is only for internal framework purposes!
      * @ignore
      *
-     * @param   \Ptf\Controller\Base $controller  The controller to set
+     * @param \Ptf\Controller\Base $controller  The controller to set
      */
-    public function _setController(\Ptf\Controller\Base $controller)
+    public function _setController(\Ptf\Controller\Base $controller): void
     {
         $this->controller = $controller;
     }
 
     /**
-     * Get the configuration object with the given name
+     * Get the configuration object with the given name.
      *
-     * @param   string $configName          The name of the configuration to fetch
-     * @return  \Ptf\App\Config             The requested configuration object
-     * @throws  \RuntimeException           If the requested config object does not exist
+     * @param string $configName  The name of the configuration to fetch
+     *
+     * @throws \RuntimeException  If the requested config object does not exist
+     *
+     * @return Config  The requested configuration object
      */
-    public function getConfig($configName = 'General')
+    public function getConfig(string $configName = 'General'): Config
     {
         if (!isset($this->configs[$configName])) {
             $className = $this->getAppNamespace() . '\\App\\Config\\' . $configName;
@@ -250,33 +248,35 @@ abstract class Context
     }
 
     /**
-     * Get the route mapping table
+     * Get the route mapping table.
      *
-     * @return  array                       The route mapping table
+     * @return array  The route mapping table
      */
-    public function getRoutingTable()
+    public function getRoutingTable(): array
     {
         return $this->routingTable;
     }
 
     /**
-     * Get the application's base path
+     * Get the application's base path.
      *
-     * @param   string $withScriptName      Append the filename of the bootstrap script?
-     * @return  string                      The base path
+     * @param bool $withScriptName  Append the filename of the bootstrap script?
+     *
+     * @return string  The base path
      */
-    public function getBasePath($withScriptName = false)
+    public function getBasePath(bool $withScriptName = false): string
     {
         return $withScriptName ? $_SERVER['PHP_SELF'] : dirname($_SERVER['PHP_SELF']);
     }
 
     /**
-     * Get the application's base URL
+     * Get the application's base URL.
      *
-     * @param   string $withScriptName      Append the filename of the bootstrap script?
-     * @return  string                      The base URL
+     * @param bool $withScriptName  Append the filename of the bootstrap script?
+     *
+     * @return string  The base URL
      */
-    public function getBaseUrl($withScriptName = false)
+    public function getBaseUrl(bool $withScriptName = false): string
     {
         $url = '';
         if (!$this->isCli()) {
@@ -289,11 +289,11 @@ abstract class Context
     }
 
     /**
-     * Determine, whether the application was called from the command line interface
+     * Determine, whether the application was called from the command line interface.
      *
-     * @return  boolean                     Was the application called from CLI?
+     * @return bool  Was the application called from CLI?
      */
-    public function isCli()
+    public function isCli(): bool
     {
         return php_sapi_name() == 'cli' || defined('STDIN');
     }

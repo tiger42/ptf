@@ -2,8 +2,12 @@
 
 namespace Ptf\Controller;
 
+use Ptf\App\Context;
+use Ptf\Controller\Base as BaseController;
+use Ptf\Controller\Base\Action\Base as BaseAction;
+
 /**
- * The base controller for all applications
+ * The base controller for all applications.
  */
 class Base
 {
@@ -15,23 +19,23 @@ class Base
 
     /**
      * The application's context
-     * @var \Ptf\App\Context
+     * @var Context
      */
     protected $context;
 
     /**
      * The called action
-     * @var \Ptf\Controller\Base\Action\Base
+     * @var BaseAction
      */
     protected $action;
 
     /**
-     * Initialize the member variables
+     * Initialize the member variables.
      *
-     * @param   string $controllerName      The name of the controller to set
-     * @param   \Ptf\App\Context $context   The application's context
+     * @param string  $controllerName  The name of the controller to set
+     * @param Context $context         The application's context
      */
-    public function __construct($controllerName, \Ptf\App\Context $context)
+    public function __construct(string $controllerName, Context $context)
     {
         $this->name    = $controllerName;
         $this->context = $context;
@@ -39,13 +43,14 @@ class Base
     }
 
     /**
-     * Dispatch the given action of the controller
+     * Dispatch the given action of the controller.
      *
-     * @param   string $actionName                 The name of the action to dispatch
-     * @throws  \Ptf\Core\Exception\InvalidAction  If the given action does not exist
-     * @throws  \Exception                         If the Action object could not be instantiated
+     * @param string $actionName  The name of the action to dispatch
+     *
+     * @throws \Ptf\Core\Exception\InvalidAction  If the given action does not exist
+     * @throws \Exception                         If the Action object could not be instantiated
      */
-    final public function dispatch($actionName = null)
+    final public function dispatch(string $actionName = null): void
     {
         if (!$actionName) {
             $actionName = $this->getDefaultActionName();
@@ -70,63 +75,65 @@ class Base
     }
 
     /**
-     * Check if the given action has correctly been instantiated
+     * Check if the given action has correctly been instantiated.
      *
-     * @param   mixed $action               The action to check
-     * @return  boolean                     Does the action have the correct type?
+     * @param mixed $action  The action to check
+     *
+     * @return bool  Does the action have the correct type?
      */
-    protected function checkAction($action)
+    protected function checkAction($action): bool
     {
-        return $action instanceof \Ptf\Controller\Base\Action\Base;
+        return $action instanceof BaseAction;
     }
 
     /**
-     * Execute the given action
+     * Execute the given action.
      *
-     * @param   \Ptf\Controller\Base\Action\Base $action  The action to execute
+     * @param BaseAction $action  The action to execute
      */
-    protected function executeAction(\Ptf\Controller\Base\Action\Base $action)
+    protected function executeAction(BaseAction $action): void
     {
         $action->execute();
     }
 
     /**
-     * Get the controller's name
+     * Get the controller's name.
      *
-     * @return  string                      The name of the controller
+     * @return string  The name of the controller
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * Get the name of the controller's default action
+     * Get the name of the controller's default action.
      *
-     * @return  string                      The name of the default action
+     * @return string  The name of the default action
      */
-    public function getDefaultActionName()
+    public function getDefaultActionName(): string
     {
         return 'Index';
     }
 
     /**
-     * Get the called action
+     * Get the called action.
      *
-     * @return  \Ptf\Controller\Base\Action\Base  The called action
+     * @return BaseAction  The called action
      */
-    public function getAction()
+    public function getAction(): ?BaseAction
     {
         return $this->action;
     }
 
     /**
-     * Forward to the given route
+     * Forward to the given route.
      *
-     * @param   string $route               The route to forward to
-     * @return  \Ptf\Controller\Base        The controller handling the route
+     * @param string $route  The route to forward to
+     *
+     * @return BaseController  The controller handling the route
      */
-    final public function forward($route)
+    final public function forward(string $route): BaseController
     {
         $this->context->getLogger()->logSys(get_class($this) . "::" . __FUNCTION__, "Forwarding to: " . $route);
 

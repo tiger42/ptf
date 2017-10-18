@@ -3,7 +3,7 @@
 namespace Ptf\Core\Exception;
 
 /**
- * General database exception
+ * General database exception.
  */
 class DB extends \RuntimeException
 {

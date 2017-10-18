@@ -3,7 +3,7 @@
 namespace Ptf\Core\Cli;
 
 /**
- * Command line output abstraction class
+ * Command line output abstraction class.
  */
 class Output
 {
@@ -14,7 +14,7 @@ class Output
     protected $content;
 
     /**
-     * Initialize the member variables
+     * Initialize the member variables.
      */
     public function __construct()
     {
@@ -22,12 +22,13 @@ class Output
     }
 
     /**
-     * Set the content to display
+     * Set the content to display.
      *
-     * @param   string $content             The content to set
-     * @return  \Ptf\Core\Cli\Output        The output object (for fluent interface)
+     * @param string $content  The content to set
+     *
+     * @return Output  The output object (for fluent interface)
      */
-    public function setContent($content)
+    public function setContent(string $content): Output
     {
         $this->content = $content;
 
@@ -35,31 +36,31 @@ class Output
     }
 
     /**
-     * Get the content which will be displayed
+     * Get the content which will be displayed.
      *
-     * @return  string                      The content to be displayed
+     * @return string  The content to be displayed
      */
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
     /**
-     * Return whether any content has been set
+     * Return whether any content has been set.
      *
-     * @return  boolean                     Has the content been set?
+     * @return bool  Has the content been set?
      */
-    public function hasContent()
+    public function hasContent(): bool
     {
         return $this->content !== null;
     }
 
     /**
-     * Display the content
+     * Display the content.
      *
-     * @return  \Ptf\Core\Cli\Output        The output object (for fluent interface)
+     * @return Output  The output object (for fluent interface)
      */
-    public function display()
+    public function display(): Output
     {
         echo $this->content;
 

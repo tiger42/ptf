@@ -1,60 +1,64 @@
 <?php
 /**
- * Collection of miscellaneous helper functions
+ * Collection of miscellaneous helper functions.
  */
 
 namespace Ptf\Util;
 
 /**
- * Get the current date and time in database format
+ * Get the current date and time in database format.
  *
- * @return  string                      The current timestamp
+ * @return string  The current timestamp
  */
-function now()
+function now(): string
 {
     return date('Y-m-d H:i:s');
 }
 
 /**
- * Determine whether the given value is an integer number (in the mathematical sense)
+ * Determine whether the given value is an integer number (in the mathematical sense).
  *
- * @param   mixed $val                  The value to check
- * @return  boolean                     Is the value a whole number?
+ * @param mixed $val  The value to check
+ *
+ * @return bool  Is the value a whole number?
  */
-function isIntegerNumber($val)
+function isIntegerNumber($val): bool
 {
     return is_numeric($val) && (int)$val == (float)$val;
 }
 
 /**
- * Determine whether the given number is even
+ * Determine whether the given number is even.
  *
- * @param   integer $number             The number to check
- * @return  boolean                     Is the number even?
+ * @param float $number  The number to check
+ *
+ * @return bool  Is the number even?
  */
-function even($number)
+function even(float $number): bool
 {
     return isIntegerNumber($number) && !($number & 1);
 }
 
 /**
- * Determine whether the given number is odd
+ * Determine whether the given number is odd.
  *
- * @param   integer $number             The number to check
- * @return  boolean                     Is the number odd?
+ * @param float $number  The number to check
+ *
+ * @return bool  Is the number odd?
  */
-function odd($number)
+function odd(float $number): bool
 {
     return isIntegerNumber($number) && ($number & 1);
 }
 
 /**
- * Check whether the given array is a numeric (non associative) array
+ * Check whether the given array is a numeric (non associative) array.
  *
- * @param   array $array                The array to check
- * @return  boolean                     Is the array a numeric array?
+ * @param array $array  The array to check
+ *
+ * @return bool  Is the array a numeric array?
  */
-function isNumericArray(array $array)
+function isNumericArray(array $array): bool
 {
     $keys = array_keys($array);
     foreach ($keys as $key) {
@@ -66,14 +70,15 @@ function isNumericArray(array $array)
 }
 
 /**
- * Truncate the given string
+ * Truncate the given string.
  *
- * @param   string $string              The string to truncate
- * @param   integer $length             The desired number of characters
- * @param   string $etc                 String to append to the end of the truncated string
- * @return  string                      The truncated string
+ * @param string $string  The string to truncate
+ * @param int    $length  The desired number of characters
+ * @param string $etc     String to append to the end of the truncated string
+ *
+ * @return string  The truncated string
  */
-function truncate($string, $length, $etc = '')
+function truncate(string $string, int $length, string $etc = ''): string
 {
     if ($length >= strlen($string)) {
         return $string;
@@ -85,14 +90,15 @@ function truncate($string, $length, $etc = '')
 }
 
 /**
- * Convert the given string with underscores (or any individual separator) to camel case
+ * Convert the given string with underscores (or any individual separator) to camel case.
  *
- * @param   string $string              The string to convert
- * @param   boolean $lcFirst            Convert the first character to lower case?
- * @param   string $separator           The word separator
- * @return  string                      The camelized string
+ * @param string $string     The string to convert
+ * @param bool   $lcFirst    Convert the first character to lower case?
+ * @param string $separator  The word separator
+ *
+ * @return string  The camelized string
  */
-function camelize($string, $lcFirst = false, $separator = '_')
+function camelize(string $string, bool $lcFirst = false, string $separator = '_'): string
 {
     $string = str_replace(' ', '', ucwords(str_replace($separator, ' ', $string)));
 
@@ -104,24 +110,26 @@ function camelize($string, $lcFirst = false, $separator = '_')
 }
 
 /**
- * Convert the given camel cased string to an underscore (or individual separator) separated string
+ * Convert the given camel cased string to an underscore (or individual separator) separated string.
  *
- * @param   string $string              The string to convert
- * @param   string $separator           The word separator
- * @return  string                      The uncamelized string
+ * @param string $string     The string to convert
+ * @param string $separator  The word separator
+ *
+ * @return string  The uncamelized string
  */
-function uncamelize($string, $separator = '_')
+function uncamelize(string $string, string $separator = '_'): string
 {
     return strtolower(preg_replace('/([A-Z])/', $separator . '$1', $string));
 }
 
 /**
- * Pretty print the given JSON string
+ * Pretty print the given JSON string.
  *
- * @param   string $json                The JSON to pretty print
- * @return  string                      The pretty printed JSON
+ * @param string $json  The JSON to pretty print
+ *
+ * @return string  The pretty printed JSON
  */
-function prettyPrintJson($json)
+function prettyPrintJson(string $json): string
 {
     return json_encode(json_decode($json), JSON_PRETTY_PRINT);
 }

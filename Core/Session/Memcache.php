@@ -3,7 +3,7 @@
 namespace Ptf\Core\Session;
 
 /**
- * Memcache based session class
+ * Memcache based session class.
  */
 class Memcache extends \Ptf\Core\Session
 {
@@ -20,13 +20,14 @@ class Memcache extends \Ptf\Core\Session
     protected $hosts;
 
     /**
-     * Initialize the Memcache session, must be called before start()
+     * Initialize the Memcache session, must be called before start().
      *
-     * @param   \Ptf\App\Config\SessionMemcache $config  The configuration to initialize with
-     * @param   \Ptf\App\Context $context                The application's context
-     * @throws  \InvalidArgumentException                If the Config object has the wrong type
+     * @param \Ptf\App\Config\SessionMemcache $config   The configuration to initialize with
+     * @param \Ptf\App\Context                $context  The application's context
+     *
+     * @throws \InvalidArgumentException  If the Config object has the wrong type
      */
-    public function init(\Ptf\App\Config\Session $config, \Ptf\App\Context $context)
+    public function init(\Ptf\App\Config\Session $config, \Ptf\App\Context $context): void
     {
         if (!($config instanceof \Ptf\App\Config\SessionMemcache)) {
             throw new \InvalidArgumentException(get_class($this) . "::" . __FUNCTION__
@@ -42,7 +43,7 @@ class Memcache extends \Ptf\Core\Session
     }
 
     /**
-     * Disconnect from Memcache service
+     * Disconnect from Memcache service.
      */
     public function __destruct()
     {
@@ -50,24 +51,26 @@ class Memcache extends \Ptf\Core\Session
     }
 
     /**
-     * Read the session data (handler function)
+     * Read the session data (handler function).
      *
-     * @param   string $id                  The current session ID
-     * @return  string                      The read session data
+     * @param string $id  The current session ID
+     *
+     * @return string  The read session data
      */
-    public function readSession($id)
+    public function readSession(string $id): string
     {
         return (string)$this->memcache->get($this->path . '/sess_' . $id);
     }
 
     /**
-     * Write the session data (handler function)
+     * Write the session data (handler function).
      *
-     * @param   string $id                  The current session ID
-     * @param   string $data                The session data to write
-     * @return  boolean                     Was the operation successful?
+     * @param string $id    The current session ID
+     * @param string $data  The session data to write
+     *
+     * @return bool  Was the operation successful?
      */
-    public function writeSession($id, $data)
+    public function writeSession(string $id, string $data): bool
     {
         $lifetime = time() + $this->getMaxLifetime();
         $this->connect();
@@ -76,29 +79,31 @@ class Memcache extends \Ptf\Core\Session
     }
 
     /**
-     * Kill the session (handler function)
+     * Kill the session (handler function).
      *
-     * @param   string $id                  The current session ID
-     * @return  boolean                     Was the operation successful?
+     * @param string $id  The current session ID
+     *
+     * @return bool  Was the operation successful?
      */
-    public function destroySession($id)
+    public function destroySession(string $id): bool
     {
         return $this->memcache->delete($this->path . '/sess_' . $id);
     }
 
     /**
-     * Perform a garbage collection (handler function)
+     * Perform a garbage collection (handler function).
      *
-     * @param   integer $maxLifetime        The maximum session lifetime [sec]
-     * @return  boolean                     Was the operation successful?
+     * @param int $maxLifetime  The maximum session lifetime [sec]
+     *
+     * @return bool  Was the operation successful?
      */
-    public function gcSession($maxLifetime)
+    public function gcSession(int $maxLifetime): bool
     {
         return true;   // Memcache automatically deletes old data after their lifetime has expired
     }
 
     /**
-     * Connect to the Memcache service
+     * Connect to the Memcache service.
      */
     protected function connect()
     {

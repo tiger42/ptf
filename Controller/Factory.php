@@ -2,20 +2,25 @@
 
 namespace Ptf\Controller;
 
+use Ptf\App\Context;
+use Ptf\Controller\Base as BaseController;
+
 /**
- * Factory for producing Controller objects
+ * Factory for producing Controller objects.
  */
 class Factory
 {
     /**
-     * Create a Controller object defined by the given name
+     * Create a Controller object defined by the given name.
      *
-     * @param   string $controllerName      The name of the controller to create
-     * @param   \Ptf\App\Context $context   The application's context
-     * @return  \Ptf\Controller\Base        The created Controller object
-     * @throws  \Exception                  If the Controller object could not be instantiated
+     * @param string  $controllerName  The name of the controller to create
+     * @param Context $context         The application's context
+     *
+     * @throws \Exception  If the Controller object could not be instantiated
+     *
+     * @return BaseController  The created Controller object
      */
-    public static function createController($controllerName, \Ptf\App\Context $context)
+    public static function createController(string $controllerName, Context $context): BaseController
     {
         if (!$controllerName) {
             $controllerName = $context->getDefaultControllerName();
@@ -34,7 +39,7 @@ class Factory
         }
 
         $controller = new $className($controllerName, $context);
-        if (!($controller instanceof \Ptf\Controller\Base)) {
+        if (!($controller instanceof BaseController)) {
             throw new \Exception(__METHOD__ . ": Controller must extend base controller: " . $className);
         }
         $context->getLogger()->logSys(__METHOD__, "Controller created: " . $className);

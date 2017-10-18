@@ -3,7 +3,7 @@
 namespace Ptf\Core;
 
 /**
- * Abstract session wrapper class
+ * Abstract session wrapper class.
  */
 abstract class Session
 {
@@ -34,12 +34,12 @@ abstract class Session
     protected $sessionName;
 
     /**
-     * Initialize the session object, must be called before start()
+     * Initialize the session object, must be called before start().
      *
-     * @param   \Ptf\App\Config\Session $config  The configuration to initialize with
-     * @param   \Ptf\App\Context $context        The application's context
+     * @param \Ptf\App\Config\Session $config   The configuration to initialize with
+     * @param \Ptf\App\Context        $context  The application's context
      */
-    public function init(\Ptf\App\Config\Session $config, \Ptf\App\Context $context)
+    public function init(\Ptf\App\Config\Session $config, \Ptf\App\Context $context): void
     {
         $this->config  = $config;
         $this->context = $context;
@@ -56,57 +56,59 @@ abstract class Session
 
     /**
      * Get the value of the session variable with the given name.<br />
-     * (magic getter function)
+     * (magic getter function).
      *
-     * @param   string $name                Name of the session variable to get the value of
-     * @return  mixed                       The value of the session variable
+     * @param string $name  Name of the session variable to get the value of
+     *
+     * @return mixed  The value of the session variable
      */
-    public function __get($name)
+    public function __get(string $name)
     {
-        return isset($_SESSION[$name]) ? $_SESSION[$name] : null;
+        return $_SESSION[$name] ?? null;
     }
 
     /**
      * Set the value of the session variable with the given name.<br />
-     * (magic setter function)
+     * (magic setter function).
      *
-     * @param   string $name                Name of the session variable to set the value of
-     * @param   mixed $value                The value to set
+     * @param string $name   Name of the session variable to set the value of
+     * @param mixed  $value  The value to set
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value): void
     {
         $_SESSION[$name] = $value;
     }
 
     /**
      * Check if the session variable with the given name is set.<br />
-     * (magic isset function)
+     * (magic isset function).
      *
-     * @param   string $name                Name of the session variable to check
-     * @return  boolean                     Is the session variable set?
+     * @param string $name  Name of the session variable to check
+     *
+     * @return bool  Is the session variable set?
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         return isset($_SESSION[$name]);
     }
 
     /**
      * Unset the given session variable.<br />
-     * (magic unset function)
+     * (magic unset function).
      *
-     * @param   string $name                Name of the session variable to unset
+     * @param string $name  Name of the session variable to unset
      */
-    public function __unset($name)
+    public function __unset(string $name): void
     {
         unset($_SESSION[$name]);
     }
 
     /**
-     * Register the session handler functions and start the session
+     * Register the session handler functions and start the session.
      *
-     * @return  boolean                     Was the session started successfully?
+     * @return bool  Was the session started successfully?
      */
-    final public function start()
+    final public function start(): bool
     {
         if ($this->isStarted()) {
             return true;
@@ -136,21 +138,21 @@ abstract class Session
     }
 
     /**
-     * Return whether the session has been started
+     * Return whether the session has been started.
      *
-     * @return  boolean                     Is the session running?
+     * @return bool  Is the session running?
      */
-    final public function isStarted()
+    final public function isStarted(): bool
     {
         return strlen(session_id()) > 0;
     }
 
     /**
-     * Return the current maximum session lifetime
+     * Return the current maximum session lifetime.
      *
-     * @return  integer                     The maximum session lifetime in seconds
+     * @return int  The maximum session lifetime in seconds
      */
-    final public function getMaxLifetime()
+    final public function getMaxLifetime(): int
     {
         return (int)ini_get('session.gc_maxlifetime');
     }
@@ -159,19 +161,19 @@ abstract class Session
      * Set the maximum session lifetime.<br />
      * Must be called before start()!
      *
-     * @param   integer $seconds            The max lifetime to set [sec]
+     * @param int $seconds  The max lifetime to set [sec]
      */
-    final public function setMaxLifetime($maxLifetime)
+    final public function setMaxLifetime(int $maxLifetime): void
     {
         init_set('session.gc_maxlifetime', $maxLifetime);
     }
 
     /**
-     * Return the current session ID
+     * Return the current session ID.
      *
-     * @return  string                      The current session ID
+     * @return string  The current session ID
      */
-    final public function getSessionId()
+    final public function getSessionId(): string
     {
         return session_id();
     }
@@ -180,19 +182,19 @@ abstract class Session
      * Set the session ID.<br />
      * Must be called before start()!
      *
-     * @param   string $id                  The session ID to set
+     * @param string $id  The session ID to set
      */
-    final public function setSessionId($id)
+    final public function setSessionId(string $id): void
     {
         session_id($id);
     }
 
     /**
-     * Return the current session name
+     * Return the current session name.
      *
-     * @return  string                      The current session name
+     * @return string  The current session name
      */
-    final public function getSessionName()
+    final public function getSessionName(): string
     {
         return session_name();
     }
@@ -201,30 +203,31 @@ abstract class Session
      * Set the session name.<br />
      * Must be called before start()!
      *
-     * @param   string $name                The session name to set
+     * @param string $name  The session name to set
      */
-    final public function setSessionName($name)
+    final public function setSessionName(string $name): void
     {
         session_name($name);
     }
 
     /**
-     * Destroy the session
+     * Destroy the session.
      */
-    final public function destroy()
+    final public function destroy(): void
     {
         $_SESSION = [];
         session_destroy();
     }
 
     /**
-     * Open the session (handler function)
+     * Open the session (handler function).
      *
-     * @param   string $path                The session save path
-     * @param   string $sessionName         The name of the session
-     * @return  boolean                     Was the operation successful?
+     * @param string $path         The session save path
+     * @param string $sessionName  The name of the session
+     *
+     * @return bool  Was the operation successful?
      */
-    public function openSession($path, $sessionName)
+    public function openSession(string $path, string $sessionName): bool
     {
         $this->path = $path;
         $this->sessionName = $sessionName;
@@ -233,45 +236,49 @@ abstract class Session
     }
 
     /**
-     * Close the session (handler function)
+     * Close the session (handler function).
      *
-     * @return  boolean                     Was the operation successful?
+     * @return bool  Was the operation successful?
      */
-    public function closeSession()
+    public function closeSession(): bool
     {
         return true;
     }
 
     /**
-     * Read the session data (handler function)
+     * Read the session data (handler function).
      *
-     * @param   string $id                  The current session ID
-     * @return  string                      The read session data
+     * @param string $id  The current session ID
+     *
+     * @return string  The read session data
      */
-    abstract public function readSession($id);
+    abstract public function readSession(string $id): string;
 
     /**
-     * Write the session data (handler function)
+     * Write the session data (handler function).
      *
-     * @param   string $id                  The current session ID
-     * @param   string $data                The session data to write
-     * @return  boolean                     Was the operation successful?
+     * @param string $id    The current session ID
+     * @param string $data  The session data to write
+     *
+     * @return bool  Was the operation successful?
      */
-    abstract public function writeSession($id, $data);
+    abstract public function writeSession(string $id, string $data): bool;
 
     /**
-     * Kill the session (handler function)
+     * Kill the session (handler function).
      *
-     * @param   string $id                  The current session ID
-     * @return  boolean                     Was the operation successful?
+     * @param string $id  The current session ID
+     *
+     * @return bool  Was the operation successful?
      */
-    abstract public function destroySession($id);
+    abstract public function destroySession(string $id): bool;
 
     /**
-     * Perform a garbage collection (handler function)
+     * Perform a garbage collection (handler function).
      *
-     * @param   integer $maxLifetime        The maximum session lifetime [sec]
-     * @return  boolean                     Was the operation successful?
+     * @param int $maxLifetime  The maximum session lifetime [sec]
+     *
+     * @return bool  Was the operation successful?
      */
-    abstract public function gcSession($maxLifetime);
+    abstract public function gcSession(int $maxLifetime): bool;
 }

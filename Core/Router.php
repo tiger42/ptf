@@ -3,24 +3,25 @@
 namespace Ptf\Core;
 
 /**
- * Class for handling the URL path to controller/action routing
+ * Class for handling the URL path to controller/action routing.
  */
 class Router
 {
     /**
-     * Match the given route string to the corresponding controller and action
+     * Match the given route string to the corresponding controller and action.
      *
-     * @param   string $route               The route string to match (case insensitive)
-     * @param   \Ptf\App\Context $context   The application's context
-     * @return  \Ptf\Controller\Base|false  The matching controller or FALSE if route could not be resolved
+     * @param string           $route    The route string to match (case insensitive)
+     * @param \Ptf\App\Context $context  The application's context
+     *
+     * @return \Ptf\Controller\Base|false  The matching controller or FALSE if route could not be resolved
      */
-    public static function matchRoute($route, \Ptf\App\Context $context)
+    public static function matchRoute(?string $route, \Ptf\App\Context $context)
     {
         $context->getLogger()->logSys(__METHOD__, "Trying to match route: " . $route);
 
         $parts = self::lookup($route, $context);
         $controllerName = $parts[0];
-        $actionName     = isset($parts[1]) ? $parts[1] : null;
+        $actionName     = $parts[1] ?? null;
 
         $controller = \Ptf\Controller\Factory::createController($controllerName, $context);
         try {
@@ -33,14 +34,16 @@ class Router
     }
 
     /**
-     * Match the route given in the request to the corresponding controller and action
+     * Match the route given in the request to the corresponding controller and action.
      *
-     * @param   \Ptf\App\Context $context   The application's context
-     * @return  boolean                     Was a matching controller and action found?
+     * @param \Ptf\App\Context $context  The application's context
+     *
+     * @return \Ptf\Controller\Base|false  The matching controller or FALSE if route could not be resolved
      */
     public static function matchRequestRoute(\Ptf\App\Context $context)
     {
         $request = $context->getRequest();
+
         $controllerName = $request->getRequestVar('controller');
         $actionName     = $request->getRequestVar('action');
 
@@ -48,13 +51,14 @@ class Router
     }
 
     /**
-     * Look up the given route in the route mapping table
+     * Look up the given route in the route mapping table.
      *
-     * @param   string $route               The route string to look up (case insensitive)
-     * @param   \Ptf\App\Context $context   The application's context
-     * @return  string[]                    The mapped route if the string was found in the table
+     * @param string           $route    The route string to look up (case insensitive)
+     * @param \Ptf\App\Context $context  The application's context
+     *
+     * @return string[]  The mapped route if the string was found in the table
      */
-    private static function lookup($route, \Ptf\App\Context $context)
+    private static function lookup(string $route, \Ptf\App\Context $context): array
     {
         $routingTable = $context->getRoutingTable();
         $newRoute = strtolower($route);

@@ -11,50 +11,44 @@ class Pagination
 {
     /**
      * The number of the current page
-     * @var integer
+     * @var int
      */
     protected $curPage;
 
     /**
      * The count of list items per page
-     * @var integer
+     * @var int
      */
     protected $itemsPerPage;
 
     /**
      * The overall count of items
-     * @var integer
+     * @var int
      */
     protected $itemCount;
 
     /**
      * The count of pages to show in the page list
-     * @var integer
+     * @var int
      */
     protected $listCount;
 
     /**
      * The overall count of pages
-     * @var integer
+     * @var int
      */
     protected $pageCount;
 
     /**
      * Initialize the member variables
      *
-     * @param   integer $curPage            Number of the current page
-     * @param   integer $itemsPerPage       Count of items per page
-     * @param   integer $itemCount          Overall count of items
-     * @param   integer $listCount          Count of pages to show in the page list
-     * @throws  \InvalidArgumentException   If any of the parameters is not integer
+     * @param   int $curPage            Number of the current page
+     * @param   int $itemsPerPage       Count of items per page
+     * @param   int $itemCount          Overall count of items
+     * @param   int $listCount          Count of pages to show in the page list
      */
-    public function __construct($curPage, $itemsPerPage, $itemCount, $listCount = 5)
+    public function __construct(int $curPage, int $itemsPerPage, int $itemCount, int $listCount = 5)
     {
-        if (!Util\isIntegerNumber($curPage) || !Util\isIntegerNumber($itemsPerPage)
-            || !Util\isIntegerNumber($itemCount) || !Util\isIntegerNumber($listCount)
-        ) {
-            throw new \InvalidArgumentException(get_class($this) . "::" . __FUNCTION__ . ": Non-integer parameter given");
-        }
         $this->itemsPerPage = $itemsPerPage;
         $this->itemCount    = $itemCount;
 
@@ -74,7 +68,7 @@ class Pagination
     /**
      * Return the overall count of pages
      *
-     * @return  integer                     The count of pages
+     * @return  int                     The count of pages
      */
     public function getPageCount()
     {
@@ -90,7 +84,7 @@ class Pagination
     /**
      * Return the number of the current page
      *
-     * @return  integer                     The number of the current page
+     * @return  int                     The number of the current page
      */
     public function getCurrentPage()
     {
@@ -100,7 +94,7 @@ class Pagination
     /**
      * Return the number of the first page
      *
-     * @return  integer                     The number of the first page
+     * @return  int                     The number of the first page
      */
     public function getFirstPage()
     {
@@ -110,7 +104,7 @@ class Pagination
     /**
      * Return the number of the last page
      *
-     * @return  integer                     The number of the last page
+     * @return  int                     The number of the last page
      */
     public function getLastPage()
     {
@@ -120,7 +114,7 @@ class Pagination
     /**
      * Return the number of the previous page
      *
-     * @return  integer                     The number of the previous page
+     * @return  int                     The number of the previous page
      */
     public function getPrevPage()
     {
@@ -134,7 +128,7 @@ class Pagination
     /**
      * Return the number of the next page
      *
-     * @return  integer                     The number of the next page
+     * @return  int                     The number of the next page
      */
     public function getNextPage()
     {
@@ -149,7 +143,7 @@ class Pagination
      * Return a list of n page numbers (depending on $listCount)
      * surrounding the current page number
      *
-     * @return  integer[]                   The list of page numbers
+     * @return  int[]                   The list of page numbers
      */
     public function getPageList()
     {
@@ -177,7 +171,7 @@ class Pagination
     /**
      * Get the offset for the first item of the current page
      *
-     * @return  integer                     The current item offset
+     * @return  int                     The current item offset
      */
     public function getOffset()
     {

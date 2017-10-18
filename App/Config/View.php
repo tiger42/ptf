@@ -3,25 +3,25 @@
 namespace Ptf\App\Config;
 
 /**
- * Configuration for View classes
+ * Configuration for View classes.
  */
 class View extends \Ptf\App\Config
 {
     /**
-     * Initialize the configuration data
+     * Initialize the configuration data.
      */
     public function __construct()
     {
         $this->configData = [
             'template_dir' => null,
-            'template_404' => ''
+            'template_404' => '',
         ];
     }
 
     /**
-     * Get the template directory setting
+     * Get the template directory setting.
      *
-     * @return  string                      The configured template directory
+     * @return string  The configured template directory
      */
     public function getTemplateDir()
     {
@@ -29,9 +29,9 @@ class View extends \Ptf\App\Config
     }
 
     /**
-     * Get the name of the "404 Not Found" template
+     * Get the name of the "404 Not Found" template.
      *
-     * @return  string                      The configured 404 template name
+     * @return string  The configured 404 template name
      */
     public function getTemplate404()
     {

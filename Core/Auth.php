@@ -3,7 +3,7 @@
 namespace Ptf\Core;
 
 /**
- * Abstract user authentication class
+ * Abstract user authentication class.
  */
 abstract class Auth
 {
@@ -22,19 +22,19 @@ abstract class Auth
     protected $session;
 
     /**
-     * The application's context;
+     * The application's context
      * @var \Ptf\App\Context
      */
     protected $context;
 
     /**
-     * Initialize the Auth object, start the session
+     * Initialize the Auth object, start the session.
      *
-     * @param   \Ptf\App\Config\Auth $config  The configuration to initialize with
-     * @param   \Ptf\Core\Session $session    The application's session object
-     * @param   \Ptf\App\Context $context     The application's context
+     * @param \Ptf\App\Config\Auth $config   The configuration to initialize with
+     * @param \Ptf\Core\Session    $session  The application's session object
+     * @param \Ptf\App\Context     $context  The application's context
      */
-    public function init(\Ptf\App\Config\Auth $config, \Ptf\Core\Session $session, \Ptf\App\Context $context)
+    public function init(\Ptf\App\Config\Auth $config, \Ptf\Core\Session $session, \Ptf\App\Context $context): void
     {
         $this->config  = $config;
         $this->session = $session;
@@ -47,12 +47,13 @@ abstract class Auth
     }
 
     /**
-     * Check the user authentication and optionally refresh the expiry time
+     * Check the user authentication and optionally refresh the expiry time.
      *
-     * @param   boolean $refresh            Refresh the expiry time?
-     * @return  boolean                     Is the user authenticated?
+     * @param bool $refresh  Refresh the expiry time?
+     *
+     * @return bool  Is the user authenticated?
      */
-    final public function checkAuth($refresh = true)
+    final public function checkAuth(bool $refresh = true): bool
     {
         $data = $this->session->authData;
 
@@ -77,23 +78,24 @@ abstract class Auth
     }
 
     /**
-     * Return the login name of the user
+     * Return the login name of the user.
      *
-     * @return  string                      The username
+     * @return string  The username
      */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->session->authData['username'];
     }
 
     /**
-     * Log the user in
+     * Log the user in.
      *
-     * @param   string $username            The username to check
-     * @param   string $password            The password to check
-     * @return  boolean                     Was the login successful?
+     * @param string $username  The username to check
+     * @param string $password  The password to check
+     *
+     * @return bool  Was the login successful?
      */
-    final public function login($username, $password)
+    final public function login(string $username, string $password): bool
     {
         if (!$this->loginImpl($username, $password)) {
             $this->context->getLogger()->logSys(
@@ -122,18 +124,19 @@ abstract class Auth
 
     /**
      * Log the user in.<br />
-     * (to be implemented by child classes)
+     * (to be implemented by child classes).
      *
-     * @param   string $username            The username to check
-     * @param   string $password            The password to check
-     * @return  boolean                     Was the login successful?
+     * @param string $username  The username to check
+     * @param string $password  The password to check
+     *
+     * @return bool  Was the login successful?
      */
-    abstract protected function loginImpl($username, $password);
+    abstract protected function loginImpl(string $username, string $password): bool;
 
     /**
      * Log the user out and clear the auth session data
      */
-    final public function logout()
+    final public function logout(): void
     {
         $this->logoutImpl();
         if (isset($this->session->authData['username'])) {
@@ -148,7 +151,7 @@ abstract class Auth
 
     /**
      * Log the user out.<br />
-     * (to be implemented by child classes)
+     * (to be implemented by child classes).
      */
-    abstract protected function logoutImpl();
+    abstract protected function logoutImpl(): void;
 }

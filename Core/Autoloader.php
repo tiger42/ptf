@@ -5,7 +5,7 @@ namespace Ptf\Core;
 require_once \Ptf\BASEDIR . '/Traits/Singleton.php';
 
 /**
- * Loader for automagically loading PHP files on demand
+ * Loader for automagically loading PHP files on demand.
  */
 class Autoloader
 {
@@ -36,7 +36,7 @@ class Autoloader
     private $overrideDirs;
 
     /**
-     * Initialize the member variables
+     * Initialize the member variables.
      */
     private function __construct()
     {
@@ -46,11 +46,11 @@ class Autoloader
     }
 
     /**
-     * Load the PHP file containing the given class, trait or interface
+     * Load the PHP file containing the given class, trait or interface.
      *
-     * @param   string $className           The name of the class to load
+     * @param string $className  The name of the class to load
      */
-    public function load($className)
+    public function load(string $className): void
     {
         if (isset($this->fileMapping[$className])
             && (@include $this->fileMapping[$className]) !== false
@@ -79,13 +79,14 @@ class Autoloader
     }
 
     /**
-     * Include the file with the given filename if it contains the given class; cache the filename
+     * Include the file with the given filename if it contains the given class; cache the filename.
      *
-     * @param    string $filename           The name of the file to include
-     * @param    string $className          The class name to check
-     * @return   boolean                    Could the file be included?
+     * @param string $filename   The name of the file to include
+     * @param string $className  The class name to check
+     *
+     * @return bool  Could the file be included?
      */
-    private function includeFile($filename, $className)
+    private function includeFile(string $filename, string $className): bool
     {
         if ((@include $filename) !== false
                 && (class_exists($className, false)
@@ -102,22 +103,22 @@ class Autoloader
 
     /**
      * Register a namespace along with its base directory.<br />
-     * The specific subdirectory of each class will be determined automatically
+     * The specific subdirectory of each class will be determined automatically.
      *
-     * @param   string $namespace           The namespace to register
-     * @param   string $dir                 The base directory of the namespace
+     * @param string $namespace  The namespace to register
+     * @param string $dir        The base directory of the namespace
      */
-    public function registerNamespace($namespace, $dir)
+    public function registerNamespace(string $namespace, string $dir): void
     {
         $this->nsMapping[$namespace] = $dir;
     }
 
     /**
-     * Register multiple namespaces along with their base directories
+     * Register multiple namespaces along with their base directories.
      *
-     * @param   array $namespaces           The namespaces with their base directories to register
+     * @param array $namespaces  The namespaces with their base directories to register
      */
-    public function registerNamespaces(array $namespaces)
+    public function registerNamespaces(array $namespaces): void
     {
         foreach ($namespaces as $namespace => $dir) {
             $this->registerNamespace($namespace, $dir);
@@ -125,21 +126,21 @@ class Autoloader
     }
 
     /**
-     * Add a directory for overridden framework classes
+     * Add a directory for overridden framework classes.
      *
-     * @param    string $overrideDir        The directory to add
+     * @param string $overrideDir  The directory to add
      */
-    public function addOverrideDir($overrideDir)
+    public function addOverrideDir(string $overrideDir): void
     {
         $this->overrideDirs[] = $overrideDir;
     }
 
     /**
-     * Set the name of the class mapping file
+     * Set the name of the class mapping file.
      *
-     * @param   string $filename            The filename to set
+     * @param string $filename  The filename to set
      */
-    public function setCacheFilename($filename)
+    public function setCacheFilename(string $filename): void
     {
         $this->cacheFilename = $filename;
         @include $filename;
@@ -149,9 +150,9 @@ class Autoloader
     }
 
     /**
-     * Write the internal path mapping to the cache file
+     * Write the internal path mapping to the cache file.
      */
-    private function writeCacheFile()
+    private function writeCacheFile(): void
     {
         if ($this->cacheFilename === null) {
             return;

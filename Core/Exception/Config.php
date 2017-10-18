@@ -3,7 +3,7 @@
 namespace Ptf\Core\Exception;
 
 /**
- * Exception for configuration errors
+ * Exception for configuration errors.
  */
 class Config extends \RuntimeException
 {

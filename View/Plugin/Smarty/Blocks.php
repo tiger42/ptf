@@ -30,7 +30,7 @@ class Blocks
      * @param   array $params                        Parameters for the plugin
      * @param   string $content                      Content of the block tags
      * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @param   boolean $repeat                      Repeat the plugin?
+     * @param   bool $repeat                      Repeat the plugin?
      * @return  string                               The language dependent string
      */
     public static function language(array $params, $content, \Smarty_Internal_Template $template, &$repeat)

@@ -13,14 +13,14 @@ require_once 'Util/functions.php';
 require_once 'Core/Autoloader.php';
 
 /**
- * Base class for all Ptf applications
+ * Base class for all Ptf applications.
  */
 abstract class Application
 {
     /**
-     * Run the application
+     * Run the application.
      */
-    public static function run()
+    public static function run(): void
     {
         static::initAutoloader(Core\Autoloader::getInstance());
 
@@ -43,9 +43,9 @@ abstract class Application
      * Return the application's context object.<br>
      * Overwrite this method to return a custom context.
      *
-     * @return  \Ptf\App\Context            The context of the application
+     * @return App\Context  The context of the application
      */
-    public static function getContext()
+    public static function getContext(): App\Context
     {
         return App\Context::getInstance();
     }
@@ -54,21 +54,21 @@ abstract class Application
      * Initialize the autoloader.<br>
      * Overwrite this method to set an application specific autoload configuration.
      *
-     * @param   \Ptf\Core\Autoloader $autoloader  The autoloader to initialize
+     * @param Core\Autoloader $autoloader  The autoloader to initialize
      */
-    protected static function initAutoloader(Core\Autoloader $autoloader)
+    protected static function initAutoloader(Core\Autoloader $autoloader): void
     {
         $autoloader->setCacheFilename(dirname($_SERVER['SCRIPT_FILENAME']) . '/var/autoload_cache.php');
     }
 
     /**
-     * Compile the given config INI file into \Ptf\App\Config class files
+     * Compile the given config INI file into \Ptf\App\Config class files.
      *
-     * @param   string $configName          The filename of the config file
-     * @param   string $configDir           The target directory for the generated class files
-     * @param   string $namespace           The namespace of the application
+     * @param string $configName  The filename of the config file
+     * @param string $configDir   The target directory for the generated class files
+     * @param string $namespace   The namespace of the application
      */
-    public static function compileConfig($configName, $configDir, $namespace)
+    public static function compileConfig(string $configName, string $configDir, string $namespace): void
     {
         Util\ConfigCompiler::compile($configName, $configDir, $namespace);
     }

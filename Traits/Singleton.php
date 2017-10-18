@@ -3,27 +3,28 @@
 namespace Ptf\Traits;
 
 /**
- * Trait for classes that implement the Singleton pattern
+ * Trait for classes that implement the Singleton pattern.
  */
 trait Singleton
 {
     /**
-     * The Singleton instance of the class
-     * @var \Ptf\Singleton
+     * The Singleton instance of the class.
+     *
+     * @var Singleton
      */
     protected static $instance;
 
     /**
-     * Prevent the class from being instantiated directly
+     * Prevent the class from being instantiated directly.
      */
     protected function __construct()
     {
     }
 
     /**
-     * Get the Singleton instance of the class
+     * Get the Singleton instance of the class.
      *
-     * @return  \Ptf\Singleton              The Singleton instance of the class
+     * @return Singleton  The Singleton instance of the class
      */
     final public static function getInstance()
     {
@@ -34,7 +35,8 @@ trait Singleton
     }
 
     /**
-     * Prevent Singleton instance of the class from being cloned
+     * Prevent Singleton instance of the class from being cloned.
+     *
      * @codeCoverageIgnore
      */
     final private function __clone()
@@ -42,7 +44,8 @@ trait Singleton
     }
 
     /**
-     * Prevent Singleton instance of the class from being unserialized
+     * Prevent Singleton instance of the class from being unserialized.
+     *
      * @codeCoverageIgnore
      */
     final private function __wakeup()

@@ -2,65 +2,70 @@
 
 namespace Ptf\Model\DB;
 
+use Ptf\App\Config\DB as DBConfig;
+use Ptf\App\Context;
+use Ptf\Model\DB;
+use Ptf\Util\Logger;
+
 /**
- * Class representing a single database table
+ * Class representing a single database table.
  */
 class Table implements \ArrayAccess
 {
     use \Ptf\Traits\ArrayAccess;
 
     /** Join type for inner join */
-    const INNER_JOIN       = 'INNER JOIN';
+    public const INNER_JOIN       = 'INNER JOIN';
     /** Join type for left join */
-    const LEFT_OUTER_JOIN  = 'LEFT OUTER JOIN';
+    public const LEFT_OUTER_JOIN  = 'LEFT OUTER JOIN';
     /** Join type for left join */
-    const LEFT_JOIN        = 'LEFT OUTER JOIN';
+    public const LEFT_JOIN        = 'LEFT OUTER JOIN';
     /** Join type for right join */
-    const RIGHT_OUTER_JOIN = 'RIGHT OUTER JOIN';
+    public const RIGHT_OUTER_JOIN = 'RIGHT OUTER JOIN';
     /** Join type for right join */
-    const RIGHT_JOIN       = 'RIGHT OUTER JOIN';
+    public const RIGHT_JOIN       = 'RIGHT OUTER JOIN';
 
     /*
      * Compare modes for all fetch...() and delete() methods, may be combined with each other
      */
     /** Compare with "=" (default) */
-    const COMP_EQ   =   1;
+    public const COMP_EQ   =   1;
     /** Compare with ">" */
-    const COMP_GT   =   2;
+    public const COMP_GT   =   2;
     /** Compare with ">=" */
-    const COMP_GTE  =   3;
+    public const COMP_GTE  =   3;
     /** Compare with "<" */
-    const COMP_LT   =   4;
+    public const COMP_LT   =   4;
     /** Compare with "<=" */
-    const COMP_LTE  =   5;
+    public const COMP_LTE  =   5;
     /** Compare with "<>" */
-    const COMP_NE   =   6;
+    public const COMP_NE   =   6;
     /** Compare with "LIKE" instead of "=", cannot be combined with any lower compare mode! */
-    const COMP_LIKE =  64;
+    public const COMP_LIKE =  64;
     /** Compare case-insensitive */
-    const COMP_CI   = 128;
+    public const COMP_CI   = 128;
 
     /**
      * The application's context
-     * @var \Ptf\App\Context
+     * @var Context
      */
     protected $context;
 
     /**
      * Database object
-     * @var \Ptf\Model\DB
+     * @var DB
      */
     protected $db;
 
     /**
      * The system logger
-     * @var \Ptf\Util\Logger
+     * @var Logger
      */
     protected $logger;
 
     /**
      * The error logger
-     * @var \Ptf\Util\Logger
+     * @var Logger
      */
     protected $errLogger;
 
@@ -120,28 +125,28 @@ class Table implements \ArrayAccess
 
     /**
      * Has the fetch() function already been executed?
-     * @var boolean
+     * @var bool
      */
     protected $fetched;
 
     /**
      * Do no use the asterisk (*) operator in the next query
-     * @var boolean
+     * @var bool
      */
     protected $suppressAsterisk;
 
     /**
-     * Initialize the member variables
+     * Initialize the member variables.
      *
-     * @param   string $tableName           Name of the database table
-     * @param   \Ptf\App\Config\DB $config  The DB configuration
-     * @param   \Ptf\App\Context $context   The application's context
-     * @param   string $id                  Optional ID to get different DB instances for same config
+     * @param string   $tableName  Name of the database table
+     * @param DBConfig $config     The DB configuration
+     * @param Context  $context    The application's context
+     * @param string   $id         Optional ID to get different DB instances for same config
      */
-    public function __construct($tableName, \Ptf\App\Config\DB $config, \Ptf\App\Context $context, $id = '')
+    public function __construct(string $tableName, DBConfig $config, Context $context, string $id = '')
     {
         $this->context    = $context;
-        $this->db         = \Ptf\Model\DB::getInstance($config, $context, $id);
+        $this->db         = DB::getInstance($config, $context, $id);
         $this->dbName     = $config->getDatabase();
         $this->tableName  = $tableName;
         $this->quotedName = $this->db->quoteIdentifier($tableName);
@@ -153,7 +158,7 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Free the database object
+     * Free the database object.
      */
     public function __destruct()
     {
@@ -162,77 +167,80 @@ class Table implements \ArrayAccess
 
     /**
      * Get the given field's value.<br />
-     * (magic getter function)
+     * (magic getter function).
      *
-     * @param   string $name                Name of the field to get the value of
-     * @return  mixed                       The value of the field
+     * @param string $name  Name of the field to get the value of
+     *
+     * @return mixed  The value of the field
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         $name = strtolower($name);
-        return isset($this->fields[$name]) ? $this->fields[$name] : null;
+
+        return $this->fields[$name] ?? null;
     }
 
     /**
      * Set the given field's value.<br />
-     * (magic setter function)
+     * (magic setter function).
      *
-     * @param   string $name                Name of the field to get the value of
-     * @param   mixed $value                The value to set, use an array to generate an "IN" statement
+     * @param string $name   Name of the field to get the value of
+     * @param mixed  $value  The value to set, use an array to generate an "IN" statement
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value): void
     {
         $this->fields[strtolower($name)] = $value;
     }
 
     /**
      * Determine whether the given field is set.<br />
-     * (magic isset function)
+     * (magic isset function).
      *
-     * @param   string $name                Name of the field to check
-     * @return  boolean                     Is the field set?
+     * @param string $name  Name of the field to check
+     *
+     * @return bool  Is the field set?
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         return isset($this->fields[strtolower($name)]);
     }
 
     /**
-     * Unset the given field
+     * Unset the given field.
      *
-     * @param   string $name                The name of the field to unset
+     * @param string $name  The name of the field to unset
      */
-    public function __unset($name)
+    public function __unset(string $name): void
     {
         unset($this->fields[strtolower($name)]);
     }
 
     /**
-     * Return the table's name
+     * Return the table's name.
      *
-     * @return  string                      The name of the table
+     * @return string  The name of the table
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->tableName;
     }
 
     /**
-     * Return the name of the database
+     * Return the name of the database.
      *
-     * @return  string                      The name of the database
+     * @return string  The name of the database
      */
-    public function getDBName()
+    public function getDBName(): string
     {
         return $this->dbName;
     }
 
     /**
-     * Return the names of all table columns
+     * Return the names of all table columns.
      *
-     * @return  string[]                    The names of the table's columns
+     * @return string[]  The names of the table's columns
      */
-    public function getColumnNames()
+    public function getColumnNames(): array
     {
         if ($this->columns === null) {
             $this->columns = $this->db->getColumnNames($this->tableName);
@@ -241,23 +249,24 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Return all set column aliases
+     * Return all set column aliases.
      *
-     * @return  array                       The set aliases
+     * @return array  The set aliases
      */
-    public function getAliases()
+    public function getAliases(): array
     {
         return $this->aliases;
     }
 
     /**
-     * Set/add a column alias
+     * Set/add a column alias.
      *
-     * @param   string $col                 The column to set the alias for
-     * @param   string $alias               The name of the alias to set
-     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
+     * @param string $col    The column to set the alias for
+     * @param string $alias  The name of the alias to set
+     *
+     * @return Table  The table object (for fluent interface)
      */
-    public function setAlias($col, $alias)
+    public function setAlias(string $col, string $alias): Table
     {
         $this->aliases[strtolower($col)] = $alias;
 
@@ -265,13 +274,14 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Set the compare mode of the given column (for all fetch...() and delete() functions)
+     * Set the compare mode of the given column (for all fetch...() and delete() functions).
      *
-     * @param   string $col                 The column to set the compare mode of
-     * @param   integer $mode               The mode to set
-     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
+     * @param  string $col   The column to set the compare mode of
+     * @param  int    $mode  The mode to set
+     *
+     * @return Table  The table object (for fluent interface)
      */
-    public function setCompareMode($col, $mode)
+    public function setCompareMode(string $col, int $mode): Table
     {
         $this->compModes[strtolower($col)] = $mode;
 
@@ -279,38 +289,38 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Get the currently set compare mode for the given column
+     * Get the currently set compare mode for the given column.
      *
-     * @param   string $col                 The column to get the compare mode of
-     * @return  integer                     The compare mode
+     * @param string $col  The column to get the compare mode of
+     *
+     * @return int  The compare mode
      */
-    public function getCompareMode($col)
+    public function getCompareMode(string $col): int
     {
         $col = strtolower($col);
-        if (isset($this->compModes[$col])) {
-            return $this->compModes[$col];
-        }
-        return self::COMP_EQ;
+
+        return $this->compModes[$col] ?? self::COMP_EQ;
     }
 
     /**
-     * Return all set fields as an associative array
+     * Return all set fields as an associative array.
      *
-     * @return  array                       All set fields with their current values
+     * @return array  All set fields with their current values
      */
-    public function getFields()
+    public function getFields(): array
     {
         return $this->fields;
     }
 
     /**
-     * Copy all fields from the given source array into the internal fields array
+     * Copy all fields from the given source array into the internal fields array.
      *
-     * @param   array $source               The source array to copy from
-     * @param   callable $filter            A filter function to be applied to every array value
-     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
+     * @param array    $source  The source array to copy from
+     * @param callable $filter  A filter function to be applied to every array value
+     *
+     * @return Table  The table object (for fluent interface)
      */
-    public function fromArray(array $source, callable $filter = null)
+    public function fromArray(array $source, callable $filter = null): Table
     {
         foreach ($source as $key => $value) {
             if ($filter !== null) {
@@ -323,11 +333,11 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Initialize the member variables for fetch() function
+     * Initialize the member variables for fetch() function.
      *
-     * @param   boolean $unjoinTables       Also remove all table joins?
+     * @param bool $unjoinTables  Also remove all table joins?
      */
-    protected function initFetchVars($unjoinTables = true)
+    protected function initFetchVars(bool $unjoinTables = true): void
     {
         $this->fields     = [];
         $this->aliases    = [];
@@ -342,12 +352,13 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Clear all values, reset the search
+     * Clear all values, reset the search.
      *
-     * @param   boolean $unjoinTables       Also remove all table joins?
-     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
+     * @param bool $unjoinTables  Also remove all table joins?
+     *
+     * @return Table  The table object (for fluent interface)
      */
-    public function clear($unjoinTables = true)
+    public function clear(bool $unjoinTables = true): Table
     {
         $this->initFetchVars($unjoinTables);
 
@@ -355,13 +366,14 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Set/add an "ORDER BY" column
+     * Set/add an "ORDER BY" column.
      *
-     * @param   string $orderBy             Name of column to order by
-     * @param   string $orderDir            The order direction ("ASC" or "DESC")
-     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
+     * @param string $orderBy   Name of column to order by
+     * @param string $orderDir  The order direction ("ASC" or "DESC")
+     *
+     * @return Table  The table object (for fluent interface)
      */
-    public function setOrder($orderBy, $orderDir = 'ASC')
+    public function setOrder(string $orderBy, string $orderDir = 'ASC'): Table
     {
         if (!is_numeric($orderBy)) {
             if (strpos($orderBy, '.') !== false) {
@@ -384,15 +396,17 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Join the current table with the given Table object
+     * Join the current table with the given Table object.
      *
-     * @param   \Ptf\Model\DB\Table $table  The table to join with
-     * @param   string $onCond              The "ON" part of the join
-     * @param   string $type                The join type
-     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
-     * @throws  \InvalidArgumentException   If an invalid join type was given
+     * @param Table  $table   The table to join with
+     * @param string $onCond  The "ON" part of the join
+     * @param string $type    The join type
+     *
+     * @throws \InvalidArgumentException  If an invalid join type was given
+     *
+     * @return Table  The table object (for fluent interface)
      */
-    public function join(\Ptf\Model\DB\Table $table, $onCond, $type = self::INNER_JOIN)
+    public function join(Table $table, string $onCond, string $type = self::INNER_JOIN): Table
     {
         $reflection = new \ReflectionClass(__CLASS__);
         if (!in_array($type, $reflection->getConstants())) {
@@ -411,11 +425,11 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Generate the "WHERE" part for the fetch() and delete() functions
+     * Generate the "WHERE" part for the fetch() and delete() functions.
      *
-     * @return  string                      The generated "WHERE" string
+     * @return string  The generated "WHERE" string
      */
-    protected function generateWhereCondition()
+    protected function generateWhereCondition(): string
     {
         $str = '';
         if (count($this->fields)) {
@@ -452,7 +466,7 @@ class Table implements \ArrayAccess
                             $comp = ' LIKE';
                         }
                     } else {
-                        $comp .= '=';   // Default, if nothing set
+                        $comp .= '=';   // Default, if nothing was set
                     }
                     $comp .= ' ';
 
@@ -477,25 +491,26 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Return the generated "WHERE" part for queries
+     * Return the generated "WHERE" part for queries.
      *
-     * @return  string                      The generated "WHERE" string
+     * @return string  The generated "WHERE" string
      */
-    public function getWhereCondition()
+    public function getWhereCondition(): string
     {
         return $this->generateWhereCondition();
     }
 
     /**
-     * Fetch a row from the table
+     * Fetch a row from the table.
      *
-     * @param   integer $offset             Offset of first row to fetch
-     * @param   integer $rowCount           Number of rows to fetch, NULL for all
-     * @param   string $where               "WHERE" part of statement (overrides set fields!)
-     * @param   array $additional           Additional special fields to fetch (e.g. "COUNT(id) AS count_id")
-     * @return  boolean                     Did the fetch return a result?
+     * @param int    $offset      Offset of first row to fetch
+     * @param int    $rowCount    Number of rows to fetch, NULL for all
+     * @param string $where       "WHERE" part of statement (overrides set fields!)
+     * @param array  $additional  Additional special fields to fetch (e.g. "COUNT(id) AS count_id")
+     *
+     * @return bool  Did the fetch return a result?
      */
-    public function fetch($offset = 0, $rowCount = null, $where = '', array $additional = [])
+    public function fetch(int $offset = 0, int $rowCount = null, string $where = '', array $additional = []): bool
     {
         if (!$this->fetched) {
             $query = 'SELECT ';
@@ -581,14 +596,15 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Perform a fetch and return the result as an array
+     * Perform a fetch and return the result as an array.
      *
-     * @param   integer $offset             Offset of first row to fetch
-     * @param   integer $rowCount           Number of rows to fetch
-     * @param   string $where               "WHERE" part of statement (overrides set fields!)
-     * @return  mixed                       The result row as an array; FALSE, if no result
+     * @param int    $offset    Offset of first row to fetch
+     * @param int    $rowCount  Number of rows to fetch
+     * @param string $where     "WHERE" part of statement (overrides set fields!)
+     *
+     * @return array|false  The result row as an array; FALSE, if no result
      */
-    public function fetchArray($offset = 0, $rowCount = null, $where = '')
+    public function fetchArray(int $offset = 0, int $rowCount = null, string $where = '')
     {
         if (!$this->fetch($offset, $rowCount, $where)) {
             return false;
@@ -598,14 +614,15 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Fetch a "special" value ("COUNT", "MAX", "MIN" etc.) of the given table column
+     * Fetch a "special" value ("COUNT", "MAX", "MIN" etc.) of the given table column.
      *
-     * @param   string $function            The SQL function to execute on the given column
-     * @param   string $col                 The column to apply the function to
-     * @param   string $where               "WHERE" part of statement (overrides set fields!)
-     * @return  mixed                       The query result, FALSE if none
+     * @param string $function  The SQL function to execute on the given column
+     * @param string $col       The column to apply the function to
+     * @param string $where     "WHERE" part of statement (overrides set fields!)
+     *
+     * @return array|false  The query result; FALSE if no result
      */
-    protected function fetchSpecial($function, $col, $where = '')
+    protected function fetchSpecial(string $function, string $col, string $where = '')
     {
         $special = $function . '(' . $col . ')';
         $this->suppressAsterisk = true;
@@ -614,13 +631,14 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Perform a "COUNT" query on the given column
+     * Perform a "COUNT" query on the given column.
      *
-     * @param   string $col                 The column to count the value of
-     * @param   string $where               "WHERE" part of statement (overrides set fields!)
-     * @return  mixed                       The number of rows; FALSE, if no result
+     * @param string $col    The column to count the value of
+     * @param string $where  "WHERE" part of statement (overrides set fields!)
+     *
+     * @return int|false  The number of rows; FALSE, if no result
      */
-    public function count($col = '*', $where = '')
+    public function count(string $col = '*', string $where = '')
     {
         $count = $this->fetchSpecial('COUNT', $col, $where);
         $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, "COUNT of '" . $col . "': " . $count);
@@ -629,13 +647,14 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Fetch maximum value of a given table column
+     * Fetch maximum value of a given table column.
      *
-     * @param   string $col                 Column to find maximum value of
-     * @param   string $where               "WHERE" part of statement (overrides set fields!)
-     * @return  mixed                       The maximum value of the column; FALSE, if no result
+     * @param string $col    Column to find maximum value of
+     * @param string $where  "WHERE" part of statement (overrides set fields!)
+     *
+     * @return int|false  The maximum value of the column; FALSE, if no result
      */
-    public function fetchMaxValue($col, $where = '')
+    public function fetchMaxValue(string $col, string $where = '')
     {
         $max = $this->fetchSpecial('MAX', $col, $where);
         $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, "MAX of '" . $col . "': " . $max);
@@ -644,11 +663,12 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Fetch minimum value of a given table column
+     * Fetch minimum value of a given table column.
      *
-     * @param   string $col                 Column to find minimum value of
-     * @param   string $where               "WHERE" part of statement (overrides set fields!)
-     * @return  mixed                       The minimum value of the column; FALSE, if no result
+     * @param string $col    Column to find minimum value of
+     * @param string $where  "WHERE" part of statement (overrides set fields!)
+     *
+     * @return int|false  The minimum value of the column; FALSE, if no result
      */
     public function fetchMinValue($col, $where = '')
     {
@@ -659,12 +679,13 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Insert a row into the database table
+     * Insert a row into the database table.
      *
-     * @param   boolean $replace            Use "REPLACE" instead of "INSERT"? (MySQL specific)
-     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
+     * @param bool $replace  Use "REPLACE" instead of "INSERT"? (MySQL specific)
+     *
+     * @return Table  The table object (for fluent interface)
      */
-    public function insert($replace = false)
+    public function insert(bool $replace = false): Table
     {
         $arr = [];
         foreach ($this->fields as $col => $value) {
@@ -687,12 +708,13 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Update rows of the database table
+     * Update rows of the database table.
      *
-     * @param   string $where               "WHERE" part of the update statement
-     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
+     * @param string $where  "WHERE" part of the update statement
+     *
+     * @return Table  The table object (for fluent interface)
      */
-    public function update($where)
+    public function update(string $where): Table
     {
         $arr = [];
         foreach ($this->fields as $col => $value) {
@@ -717,13 +739,16 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Delete rows from the database table
+     * Delete rows from the database table.
      *
-     * @param   string $where               "WHERE" part of the delete statement (overrides set fields!)
-     * @return  \Ptf\Model\DB\Table         The table object (for fluent interface)
-     * @throws  \InvalidArgumentException   If no valid "WHERE" condition was given
+     * @param string $where  "WHERE" part of the delete statement (overrides set fields!)
+     *
+     * @throws \InvalidArgumentException  If no valid "WHERE" condition was given
+     *
+     * @return Table  The table object (for fluent interface)
+     *
      */
-    public function delete($where = '')
+    public function delete(string $where = ''): Table
     {
         if (strlen($where) && (!is_string($where) || is_numeric($where))) {
             $message = "WHERE parameter must be string or empty";
@@ -753,42 +778,42 @@ class Table implements \ArrayAccess
     }
 
     /**
-     * Return the number of fetched rows of the last fetch()
+     * Return the number of fetched rows of the last fetch().
      *
-     * @return  integer                     The number of fetched rows
+     * @return int  The number of fetched rows
      */
-    public function getFetchedRowsCount()
+    public function getFetchedRowsCount(): int
     {
         return $this->db->getFetchedRowsCount();
     }
 
     /**
-     * Return the number of affected rows after the last insert(), update() or delete()
+     * Return the number of affected rows after the last insert(), update() or delete().
      *
-     * @return  integer                     The number of affected rows
+     * @return int  The number of affected rows
      */
-    public function getAffectedRowsCount()
+    public function getAffectedRowsCount(): int
     {
         return $this->db->getAffectedRowsCount();
     }
 
     /**
      * Return the last insert ID after insert().<br />
-     * (only if table has an autoincrement key!)
+     * (only if table has an autoincrement key).
      *
-     * @return  integer                     The last insert ID
+     * @return int  The last insert ID
      */
-    public function getLastInsertId()
+    public function getLastInsertId(): int
     {
         return $this->db->getLastInsertId();
     }
 
     /**
-     * Return the internal DB object
+     * Return the internal DB object.
      *
-     * @return  \Ptf\Model\DB               The DB object
+     * @return DB  The DB object
      */
-    public function getDB()
+    public function getDB(): DB
     {
         return $this->db;
     }

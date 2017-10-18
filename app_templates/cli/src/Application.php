@@ -6,26 +6,26 @@ namespace _NAMESPACE_;
 require_once __DIR__. '/../ptf/CliApplication.php';
 
 /**
- * The application's main class
+ * The application's main class.
  */
 class Application extends \Ptf\CliApplication
 {
     /**
-     * Return the application's context object
+     * Return the application's context object.
      *
-     * @return  \_NAMESPACE_\App\Context  The context of the application
+     * @return \_NAMESPACE_\App\Context  The context of the application
      */
-    public static function getContext()
+    public static function getContext(): \Ptf\App\Context
     {
         return \_NAMESPACE_\App\Context::getInstance();
     }
 
     /**
-     * Initialize the autoloader
+     * Initialize the autoloader.
      *
-     * @param   \Ptf\Core\Autoloader $autoloader  The autoloader to initialize
+     * @param \Ptf\Core\Autoloader $autoloader  The autoloader to initialize
      */
-    protected static function initAutoloader(\Ptf\Core\Autoloader $autoloader)
+    protected static function initAutoloader(\Ptf\Core\Autoloader $autoloader): void
     {
         $autoloader->registerNamespace('_NAMESPACE_', __DIR__);   // Register our own namespace
 //        $autoloader->addOverrideDir('src/override');   // Register a directory for Ptf class overrides
@@ -33,9 +33,9 @@ class Application extends \Ptf\CliApplication
     }
 
     /**
-     * Display a usage message for the application
+     * Display a usage message for the application.
      */
-    public static function showUsage()
+    public static function showUsage(): void
     {
         $context = static::getContext();
 

@@ -3,7 +3,7 @@
 namespace Ptf\App;
 
 /**
- * Abstract configuration settings
+ * Abstract configuration settings.
  */
 abstract class Config implements \ArrayAccess
 {
@@ -16,7 +16,7 @@ abstract class Config implements \ArrayAccess
     protected $configData;
 
     /**
-     * Initialize the configuration data
+     * Initialize the configuration data.
      */
     protected function __construct()
     {
@@ -27,27 +27,29 @@ abstract class Config implements \ArrayAccess
      * Get the given option's value.<br />
      * (magic getter function)
      *
-     * @param   string $option              The configuration option to get the value of
-     * @return  mixed                       The option's value
-     * @throws \Ptf\Core\Exception\Config   If the requested configuration parameter is mandatory but not set
+     * @param string $option  The configuration option to get the value of
+     *
+     * @throws \Ptf\Core\Exception\Config  If the requested configuration parameter is mandatory but not set
+     *
+     * @return mixed  The option's value
      */
-    final public function __get($option)
+    final public function __get(string $option)
     {
         if (array_key_exists($option, $this->configData) && $this->configData[$option] === null) {
             throw new \Ptf\Core\Exception\Config(get_class($this) . "::" . __FUNCTION__
                 . ": Option '" . $option . "' not configured");
         }
-        return isset($this->configData[$option]) ? $this->configData[$option] : null;
+        return $this->configData[$option] ?? null;
     }
 
     /**
      * Set the given option's value.<br />
      * (magic setter function)
      *
-     * @param   string $option              The configuration option to set
-     * @param   mixed $value                The new value
+     * @param string $option  The configuration option to set
+     * @param mixed  $value   The new value
      */
-    final public function __set($option, $value)
+    final public function __set(string $option, $value): void
     {
         $this->configData[$option] = $value;
     }
@@ -56,10 +58,11 @@ abstract class Config implements \ArrayAccess
      * Determine whether the given configuration option is set.<br />
      * (magic isset function)
      *
-     * @param   string $option              The configuration option to test
-     * @return  boolean                     Is the configuration option set?
+     * @param string $option  The configuration option to test
+     *
+     * @return bool  Is the configuration option set?
      */
-    final public function __isset($option)
+    final public function __isset(string $option): bool
     {
         return isset($this->configData[$option]);
     }
@@ -68,9 +71,9 @@ abstract class Config implements \ArrayAccess
      * Unset the given configuration option.<br />
      * (magic unset function)
      *
-     * @param  string $option               The configuration option to unset
+     * @param string $option  The configuration option to unset
      */
-    final public function __unset($option)
+    final public function __unset(string $option): void
     {
         unset($this->configData[$option]);
     }

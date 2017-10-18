@@ -4,15 +4,15 @@ namespace PtfTest\View;
 
 class Dummy extends \Ptf\View\Base
 {
-    public function render($cacheId = null)
+    public function render(string $cacheId = null): void
     {
     }
 
-    public function fetch($cacheId = null)
+    public function fetch(string $cacheId = null): string
     {
     }
 
-    public function registerFunctionPlugin($name, callable $function)
+    public function registerFunctionPlugin(string $name, callable $function): void
     {
     }
 }

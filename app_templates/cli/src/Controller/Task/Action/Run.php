@@ -2,18 +2,21 @@
 
 namespace _NAMESPACE_\Controller\Task\Action;
 
+use Ptf\Controller\Cli\Action\Base as BaseAction;
+use Ptf\Core\Cli\{Params, Output};
+
 /**
- * The action for the "task/run" route
+ * The action for the "task/run" route.
  */
-class Run extends \Ptf\Controller\Cli\Action\Base
+class Run extends BaseAction
 {
     /**
-     * Execute the action
+     * Execute the action.
      *
-     * @param   \Ptf\Core\Cli\Params $params  The current parameters object
-     * @param   \Ptf\Core\Cli\Output $output  The output object
+     * @param Params $params  The current parameters object
+     * @param Output $output  The output object
      */
-    public function execute(\Ptf\Core\Cli\Params $params, \Ptf\Core\Cli\Output $output)
+    public function execute(Params $params, Output $output): void
     {
         $name = $params->has('--name') ? $params->get('--name')
             : ($params->has('-n') ? $params->get('-n') : 'World');

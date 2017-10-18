@@ -2,15 +2,18 @@
 
 namespace Ptf\View;
 
+use Ptf\App\Config\ViewSmarty as ViewConfig;
+use Ptf\App\Context;
+
 require_once \Ptf\BASEDIR . '/3rdparty/smarty/libs/Smarty.class.php';
 
 /**
- * View based on Smarty 3
+ * View based on Smarty 3.
  */
 class Smarty extends Base
 {
     /** The Smarty main directory */
-    const SMARTY_DIR = '3rdparty/smarty/libs/';
+    protected const SMARTY_DIR = '3rdparty/smarty/libs/';
 
     /**
      * The internal Smarty object
@@ -19,12 +22,12 @@ class Smarty extends Base
     protected $smarty;
 
     /**
-     * Initialize the Smarty settings
+     * Initialize the Smarty settings.
      *
-     * @param   \Ptf\App\Config\ViewSmarty $config  The Smarty configuration
-     * @param   \Ptf\App\Context $context           The application's context
+     * @param ViewConfig $config   The Smarty configuration
+     * @param Context    $context  The application's context
      */
-    public function __construct(\Ptf\App\Config\ViewSmarty $config, \Ptf\App\Context $context)
+    public function __construct(ViewConfig $config, Context $context)
     {
         parent::__construct($config, $context);
 
@@ -56,78 +59,80 @@ class Smarty extends Base
 
     /**
      * Get the given template variable.<br />
-     * (magic getter function)
+     * (magic getter function).
      *
-     * @param   string $name                Name of the template variable to get
-     * @return  mixed                       The value of the template variable
+     * @param string $name  Name of the template variable to get
+     *
+     * @return mixed  The value of the template variable
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         return $this->smarty->getTemplateVars($name);
     }
 
     /**
      * Set the given template variable.<br />
-     * (magic setter function)
+     * (magic setter function).
      *
-     * @param   string $name                Name of the template variable to set
-     * @param   mixed $value                The value to set
+     * @param string $name   Name of the template variable to set
+     * @param mixed  $value  The value to set
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value): void
     {
         $this->smarty->assign($name, $value);
     }
 
     /**
      * Determine whether the given template variabe is set.<br />
-     * (magic isset function)
+     * (magic isset function).
      *
-     * @param   string $name                Name of the template variable to check
-     * @return  boolean                     Is the variable set?
+     * @param string $name  Name of the template variable to check
+     *
+     * @return bool  Is the variable set?
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         return $this->smarty->getTemplateVars($name) !== null;
     }
 
     /**
      * Unset the given template variable.<br />
-     * (magic unset function)
+     * (magic unset function).
      *
-     * @param   string $name                Name of the template variable to unset
+     * @param string $name  Name of the template variable to unset
      */
-    public function __unset($name)
+    public function __unset(string $name): void
     {
         $this->smarty->clearAssign($name);
     }
 
     /**
-     * Set the given template variable(s)
+     * Set the given template variable(s).
      *
-     * @param   array|string $assign        Name of the template variable to set, or assoc array with multiple variables/values
-     * @param   mixed $value                The value to set (if the first parameter is a string)
+     * @param array|string $assign  Name of the template variable to set, or assoc array with multiple variables/values
+     * @param mixed        $value   The value to set (if the first parameter is a string)
      */
-    public function assign($assign, $value = null)
+    public function assign($assign, $value = null): void
     {
         $this->smarty->assign($assign, $value);
     }
 
     /**
-     * Return a list of all assigned template variables
+     * Return a list of all assigned template variables.
      *
-     * @return  array                       The assigned template variables
+     * @return array  The assigned template variables
      */
-    public function getAssignedVars()
+    public function getAssignedVars(): array
     {
         return $this->smarty->getTemplateVars();
     }
 
     /**
-     * Get the internal Smarty object
+     * Get the internal Smarty object.
      *
-     * @return  \Smarty_Internal_TemplateBase  The internal Smarty object
+     * @return \Smarty_Internal_TemplateBase  The internal Smarty object
      */
-    public function getSmartyObject()
+    public function getSmartyObject(): \Smarty_Internal_TemplateBase
     {
         return $this->smarty;
     }
@@ -135,43 +140,45 @@ class Smarty extends Base
     /**
      * Set the internal Smarty object.<br />
      * This function is only for internal framework purposes!
-     * @see     \Ptf\View\Plugin\Smarty\Functions::exec()
+     *
+     * @see \Ptf\View\Plugin\Smarty\Functions::exec()
      * @ignore
      *
-     * @param   \Smarty_Internal_TemplateBase $smarty  The Smarty object to set
+     * @param \Smarty_Internal_TemplateBase $smarty  The Smarty object to set
      */
-    public function _setSmartyObject(\Smarty_Internal_TemplateBase $smarty)
+    public function _setSmartyObject(\Smarty_Internal_TemplateBase $smarty): void
     {
         $this->smarty = $smarty;
     }
 
     /**
-     * Clear the complete cache and the compiled templates dir
+     * Clear the complete cache and the compiled templates dir.
      */
-    public function clearAll()
+    public function clearAll(): void
     {
         $this->smarty->clearAllCache();
         $this->smarty->clearCompiledTemplate();
     }
 
     /**
-     * Clear the complete template cache
+     * Clear the complete template cache.
      *
-     * @param   integer $expireTime         The minimum age in seconds the cache files must be before they will get cleared
+     * @param int $expireTime  The minimum age in seconds the cache files must be before they will get cleared
      */
-    public function clearCache($expireTime = null)
+    public function clearCache(int $expireTime = null): void
     {
         $this->smarty->clearAllCache($expireTime);
     }
 
     /**
-     * Determine whether the given or set template is cached
+     * Determine whether the given or set template is cached.
      *
-     * @param   string $templateName       The name of the template to check, NULL to check the template set by setTemplateName()
-     * @param   string $cacheId            An additional cache ID, if multiple caches for the template are used
-     * @return  boolean                    Is the template cached?
+     * @param string $templateName  The name of the template to check, NULL to check the template set by setTemplateName()
+     * @param string $cacheId       An additional cache ID, if multiple caches for the template are used
+     *
+     * @return bool  Is the template cached?
      */
-    public function isCached($templateName = null, $cacheId = null)
+    public function isCached(string $templateName = null, string $cacheId = null): bool
     {
         if ($templateName === null) {
             $templateName = $this->templateName;
@@ -180,12 +187,13 @@ class Smarty extends Base
     }
 
     /**
-     * Render the set template
+     * Render the set template.
      *
-     * @param   string $cacheId             An additional cache ID, if multiple caches for the template are used
-     * @throws  \RuntimeException           If no template has been set
+     * @param string $cacheId  An additional cache ID, if multiple caches for the template are used
+     *
+     * @throws \RuntimeException  If no template has been set
      */
-    public function render($cacheId = null)
+    public function render(string $cacheId = null): void
     {
         if (!$this->templateName) {
             throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": Smarty template has not been set");
@@ -198,13 +206,15 @@ class Smarty extends Base
     }
 
     /**
-     * Fetch the content of the set template as a string
+     * Fetch the content of the set template as a string.
      *
-     * @param   string $cacheId             An additional cache ID, if multiple caches for the template are used
-     * @return  string                      The fetched template
-     * @throws  \RuntimeException           If no template has been set
+     * @param string $cacheId  An additional cache ID, if multiple caches for the template are used
+     *
+     * @throws \RuntimeException  If no template has been set
+     *
+     * @return string  The fetched template
      */
-    public function fetch($cacheId = null)
+    public function fetch(string $cacheId = null): string
     {
         if (!$this->templateName) {
             throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": Smarty template has not been set");
@@ -217,34 +227,34 @@ class Smarty extends Base
     }
 
     /**
-     * Register a template function plugin
+     * Register a template function plugin.
      *
-     * @param    string $name               The name of the function plugin to register
-     * @param    callable $function         The callback function for the plugin
+     * @param string   $name      The name of the function plugin to register
+     * @param callable $function  The callback function for the plugin
      */
-    public function registerFunctionPlugin($name, callable $function)
+    public function registerFunctionPlugin(string $name, callable $function): void
     {
         $this->smarty->registerPlugin('function', $name, $function);
     }
 
     /**
-     * Register a template block plugin
+     * Register a template block plugin.
      *
-     * @param   string $name                The name of the block plugin to register
-     * @param   callable $function          The callback function for the plugin
+     * @param string   $name      The name of the block plugin to register
+     * @param callable $function  The callback function for the plugin
      */
-    public function registerBlockPlugin($name, callable $function)
+    public function registerBlockPlugin(string $name, callable $function): void
     {
         $this->smarty->registerPlugin('block', $name, $function);
     }
 
     /**
-     * Register a template modifier plugin
+     * Register a template modifier plugin.
      *
-     * @param   string $name                The name of the modifier plugin to register
-     * @param   callable $function          The callback function for the plugin
+     * @param string   $name      The name of the modifier plugin to register
+     * @param callable $function  The callback function for the plugin
      */
-    public function registerModifierPlugin($name, callable $function)
+    public function registerModifierPlugin(string $name, callable $function): void
     {
         $this->smarty->registerPlugin('modifier', $name, $function);
     }

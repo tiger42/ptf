@@ -4,7 +4,7 @@ namespace PtfTest\Controller;
 
 class MyController extends \Ptf\Controller\Base
 {
-    public function getDefaultActionName()
+    public function getDefaultActionName(): string
     {
         return 'MyDefaultAction';
     }

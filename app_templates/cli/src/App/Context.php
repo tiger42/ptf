@@ -2,39 +2,41 @@
 
 namespace _NAMESPACE_\App;
 
+use Ptf\Util\Logger\File as FileLogger;
+
 /**
- * The application's context
+ * The application's context.
  */
 class Context extends \Ptf\App\Context
 {
     /**
-     * Initialize the Logger objects
+     * Initialize the Logger objects.
      */
-    protected function initLoggers()
+    protected function initLoggers(): void
     {
         $logLevelLimit = (int)$this->getConfig('General')->getLogLevel();
         $this->loggers = [
-            'system' => \Ptf\Util\Logger\File::getInstance(\_NAMESPACE_\APPDIR . '/var/log/system.log', $this, $logLevelLimit),
-            'error'  => \Ptf\Util\Logger\File::getInstance(\_NAMESPACE_\APPDIR . '/var/log/error.log', $this, $logLevelLimit)
+            'system' => FileLogger::getInstance(\_NAMESPACE_\APPDIR . '/var/log/system.log', $this, $logLevelLimit),
+            'error'  => FileLogger::getInstance(\_NAMESPACE_\APPDIR . '/var/log/error.log', $this, $logLevelLimit)
         ];
     }
 
     /**
-     * Get the application's namespace
+     * Get the application's namespace.
      *
-     * @return  string                      The namespace of the application
+     * @return string  The namespace of the application
      */
-    public function getAppNamespace()
+    public function getAppNamespace(): string
     {
         return '_NAMESPACE_';
     }
 
     /**
-     * Get the name of the default controller
+     * Get the name of the default controller.
      *
-     * @return  string                      The name of the default controller
+     * @return string  The name of the default controller
      */
-    public function getDefaultControllerName()
+    public function getDefaultControllerName(): string
     {
         return 'Task';
     }

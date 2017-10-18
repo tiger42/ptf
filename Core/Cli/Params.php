@@ -3,7 +3,7 @@
 namespace Ptf\Core\Cli;
 
 /**
- * Abstraction class for the command line parameters
+ * Abstraction class for the command line parameters.
  */
 class Params
 {
@@ -14,7 +14,7 @@ class Params
     protected $parameters;
 
     /**
-     * Initialize the member variables
+     * Initialize the member variables.
      */
     public function __construct()
     {
@@ -22,41 +22,43 @@ class Params
     }
 
     /**
-     * Get all CLI parameters as an array
+     * Get all CLI parameters as an array.
      *
-     * @return  array                       All set CLI parameters
+     * @return array  All set CLI parameters
      */
-    public function getAll()
+    public function getAll(): array
     {
         return $this->parameters;
     }
 
     /**
-     * Get the value of the given parameter
+     * Get the value of the given parameter.
      *
-     * @param   string $name                The name of the parameter to get the value of
-     * @return  string                      The value of the parameter
+     * @param string $name  The name of the parameter to get the value of
+     *
+     * @return string  The value of the parameter
      */
-    public function get($name)
+    public function get(string $name): ?string
     {
-        return isset($this->parameters[$name]) ? $this->parameters[$name] : null;
+        return $this->parameters[$name] ?? null;
     }
 
     /**
-     * Check whether the parameter with the given name has been set
+     * Check whether the parameter with the given name has been set.
      *
-     * @param   string $name                The name of the parameter to check
-     * @return  boolean                     Has the parameter been set?
+     * @param string $name  The name of the parameter to check
+     *
+     * @return bool  Has the parameter been set?
      */
-    public function has($name)
+    public function has(string $name): bool
     {
         return array_key_exists($name, $this->parameters);
     }
 
     /**
-     * Initialize the internal parameters array
+     * Initialize the internal parameters array.
      */
-    protected function init()
+    protected function init(): void
     {
         $this->parameters = [];
 

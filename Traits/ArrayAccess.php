@@ -3,15 +3,16 @@
 namespace Ptf\Traits;
 
 /**
- * Trait for classes that implement the ArrayAccess interface
+ * Trait for classes that implement the ArrayAccess interface.
  */
 trait ArrayAccess
 {
     /**
-     * Return whether the given offset exists
+     * Return whether the given offset exists.
      *
-     * @param   string $offset              The offset to check
-     * @return  boolean                     Does the offset exist?
+     * @param string $offset  The offset to check
+     *
+     * @return bool  Does the offset exist?
      */
     public function offsetExists($offset)
     {
@@ -19,10 +20,11 @@ trait ArrayAccess
     }
 
     /**
-     * Retrieve the value at the given offset
+     * Retrieve the value at the given offset.
      *
-     * @param   string $offset              The offset to get the value for
-     * @return  mixed                       The value at the given offset
+     * @param string $offset  The offset to get the value for
+     *
+     * @return mixed  The value at the given offset
      */
     public function offsetGet($offset)
     {
@@ -30,10 +32,10 @@ trait ArrayAccess
     }
 
     /**
-     * Set the value of the given offset
+     * Set the value of the given offset.
      *
-     * @param   string $offset              The offset to set the value of
-     * @param   string $value               The value to set
+     * @param string $offset  The offset to set the value of
+     * @param string $value   The value to set
      */
     public function offsetSet($offset, $value)
     {
@@ -41,9 +43,9 @@ trait ArrayAccess
     }
 
     /**
-     * Delete the the given offset
+     * Delete the the given offset.
      *
-     * @param   string $offset              The offset to delete
+     * @param string $offset  The offset to delete
      */
     public function offsetUnset($offset)
     {

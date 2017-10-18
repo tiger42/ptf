@@ -3,8 +3,8 @@
 namespace Ptf\App\Config;
 
 /**
- * Configuration for the Plain view
+ * Configuration for the Plain view.
  */
-class ViewPlain extends \Ptf\App\Config\View
+class ViewPlain extends View
 {
 }

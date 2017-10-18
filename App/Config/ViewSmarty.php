@@ -3,12 +3,12 @@
 namespace Ptf\App\Config;
 
 /**
- * Configuration for the Smarty view
+ * Configuration for the Smarty view.
  */
-class ViewSmarty extends \Ptf\App\Config\View
+class ViewSmarty extends View
 {
     /**
-     * Initialize the configuration data
+     * Initialize the configuration data.
      */
     public function __construct()
     {
@@ -22,14 +22,14 @@ class ViewSmarty extends \Ptf\App\Config\View
             'plugins_dir'    => '',
             'compress_html'  => '1',
             'compile_check'  => '0',
-            'force_compile'  => '0'
+            'force_compile'  => '0',
         ]);
     }
 
     /**
-     * Get the compile directory setting
+     * Get the compile directory setting.
      *
-     * @return  string                      The configured compile directory
+     * @return string  The configured compile directory
      */
     public function getCompileDir()
     {
@@ -37,9 +37,9 @@ class ViewSmarty extends \Ptf\App\Config\View
     }
 
     /**
-     * Get the cache directory setting
+     * Get the cache directory setting.
      *
-     * @return  string                      The configured cache directory
+     * @return string  The configured cache directory
      */
     public function getCacheDir()
     {
@@ -47,9 +47,9 @@ class ViewSmarty extends \Ptf\App\Config\View
     }
 
     /**
-     * Get the caching setting
+     * Get the caching setting.
      *
-     * @return  string                      The configured caching setting
+     * @return string  The configured caching setting
      */
     public function getCaching()
     {
@@ -57,9 +57,9 @@ class ViewSmarty extends \Ptf\App\Config\View
     }
 
     /**
-     * Get the cache lifetime setting
+     * Get the cache lifetime setting.
      *
-     * @return  string                      The configured cache lifetime [sec]
+     * @return string  The configured cache lifetime [sec]
      */
     public function getCacheLifetime()
     {
@@ -67,9 +67,9 @@ class ViewSmarty extends \Ptf\App\Config\View
     }
 
     /**
-     * Get the plugins directory setting
+     * Get the plugins directory setting.
      *
-     * @return  string|string[]             The configured plugins path(s)
+     * @return string|string[]  The configured plugins path(s)
      */
     public function getPluginsDir()
     {
@@ -77,9 +77,9 @@ class ViewSmarty extends \Ptf\App\Config\View
     }
 
     /**
-     * Get the "compress_html" setting
+     * Get the "compress_html" setting.
      *
-     * @return  string                      The configured "compress_html" setting
+     * @return string  The configured "compress_html" setting
      */
     public function getCompressHtml()
     {
@@ -87,9 +87,9 @@ class ViewSmarty extends \Ptf\App\Config\View
     }
 
     /**
-     * Get the "compile_check" setting
+     * Get the "compile_check" setting.
      *
-     * @return  string                      The configured "compile_check" setting
+     * @return string  The configured "compile_check" setting
      */
     public function getCompileCheck()
     {
@@ -97,9 +97,9 @@ class ViewSmarty extends \Ptf\App\Config\View
     }
 
     /**
-     * Get the "force_compile" setting
+     * Get the "force_compile" setting.
      *
-     * @return  string                      The configured "force_compile" setting
+     * @return string  The configured "force_compile" setting
      */
     public function getForceCompile()
     {

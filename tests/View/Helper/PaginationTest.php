@@ -6,17 +6,6 @@ use \Ptf\View\Helper\Pagination;
 
 class PaginationTest extends \PHPUnit\Framework\TestCase
 {
-    public function invalidParamsProvider()
-    {
-        return [
-            ['a', 1, '1'],
-            [1, 'a', 1],
-            ['1', '1', 'a'],
-            [null, 1, 1],
-            [1, 1, 1, 'a']
-        ];
-    }
-
     public function paramsProvider()
     {
         return [
@@ -119,17 +108,7 @@ class PaginationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider        invalidParamsProvider
-     * @expectedException   InvalidArgumentException
-     * @expectedExceptionMessage Ptf\View\Helper\Pagination::__construct: Non-integer parameter given
-     */
-    public function testConstructorException($curPage, $itemsPerPage, $itemCount, $listCount = 5)
-    {
-        new Pagination($curPage, $itemsPerPage, $itemCount, $listCount);
-    }
-
-    /**
-     * @dataProvider    paramsProvider
+     * @dataProvider paramsProvider
      */
     public function testGetPageCount($curPage, $itemsPerPage, $itemCount, $listCount, $expected)
     {
@@ -138,7 +117,7 @@ class PaginationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider    paramsProvider
+     * @dataProvider paramsProvider
      */
     public function testGetCurrentPage($curPage, $itemsPerPage, $itemCount, $listCount, $expected)
     {
@@ -147,7 +126,7 @@ class PaginationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider    paramsProvider
+     * @dataProvider paramsProvider
      */
     public function testGetFirstPage($curPage, $itemsPerPage, $itemCount, $listCount)
     {
@@ -156,7 +135,7 @@ class PaginationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider    paramsProvider
+     * @dataProvider paramsProvider
      */
     public function testGetLastPage($curPage, $itemsPerPage, $itemCount, $listCount)
     {
@@ -165,7 +144,7 @@ class PaginationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider    paramsProvider
+     * @dataProvider paramsProvider
      */
     public function testGetPrevPage($curPage, $itemsPerPage, $itemCount, $listCount, $expected)
     {
@@ -174,7 +153,7 @@ class PaginationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider    paramsProvider
+     * @dataProvider paramsProvider
      */
     public function testGetNextPage($curPage, $itemsPerPage, $itemsCount, $listCount, $expected)
     {
@@ -183,7 +162,7 @@ class PaginationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider    paramsProvider
+     * @dataProvider paramsProvider
      */
     public function testGetPageList($curPage, $itemsPerPage, $itemsCount, $listCount, $expected)
     {
@@ -192,7 +171,7 @@ class PaginationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider    paramsProvider
+     * @dataProvider paramsProvider
      */
     public function testGetOffset($curPage, $itemsPerPage, $itemsCount, $listCount, $expected)
     {
@@ -201,7 +180,7 @@ class PaginationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider    urlParamsProvider
+     * @dataProvider urlParamsProvider
      */
     public function testGenerateUrlParamsString($params, $expected)
     {
@@ -210,7 +189,7 @@ class PaginationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider    urlParamsWithSIDProvider
+     * @dataProvider urlParamsWithSIDProvider
      */
     public function testGenerateUrlParamsStringWithSID($params, $expected)
     {

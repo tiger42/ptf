@@ -8,8 +8,8 @@ See [here](https://github.com/tiger42/ptf_demo) for an example application imple
 
 Requirements
 ------------
-* PHP 5.5 or higher
-* MySQL/MariaDB 5.1 or higher
+* PHP 7.1 or higher
+* MySQL/MariaDB 5.5 or higher
 * PDO_MYSQL or MySQLi extension for PHP
 
 Optional dependencies

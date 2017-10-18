@@ -3,18 +3,18 @@
 namespace Ptf\Util;
 
 /**
- * Compiles INI files into PHP files
+ * Compiles INI files into PHP files.
  */
 class ConfigCompiler
 {
     /**
-     * Compile the given config INI file into \Ptf\App\Config class files
+     * Compile the given config INI file into \Ptf\App\Config class files.
      *
-     * @param   string $configName          The filename of the config file
-     * @param   string $configDir           The target directory for the generated class files
-     * @param   string $namespace           The namespace of the application
+     * @param string $configName  The filename of the config file
+     * @param string $configDir   The target directory for the generated class files
+     * @param string $namespace   The namespace of the application
      */
-    public static function compile($configName, $configDir, $namespace)
+    public static function compile(string $configName, string $configDir, string $namespace): void
     {
         $inifile  = new IniFile($configName);
         $sections = $inifile->toArray();
@@ -30,8 +30,8 @@ class ConfigCompiler
 
             $conf = "<?php\n"
                 . "// Generated on: $now\n\n"
-                . "namespace $namespace\App\Config;\n\n"
-                . "class $section extends \Ptf\App\Config\\$parent\n"
+                . "namespace $namespace\\App\\Config;\n\n"
+                . "class $section extends \\Ptf\\App\\Config\\$parent\n"
                 . "{\n"
                 . "    public function __construct()\n"
                 . "    {\n"

@@ -4,7 +4,7 @@ namespace PtfTest\App;
 
 class Context extends \Ptf\App\Context
 {
-    protected function init()
+    protected function init(): void
     {
         $this->routingTable = [
                 'bar'     => 'BaseTest/DummyAction',
@@ -23,17 +23,17 @@ class Context extends \Ptf\App\Context
         $this->cliOutput = new \Ptf\Core\Cli\Output();
     }
 
-    public function getAppNamespace()
+    public function getAppNamespace(): string
     {
         return 'PtfTest';
     }
 
-    public function isCli()
+    public function isCli(): bool
     {
         return false;
     }
 
-    public function setView($view)
+    public function setView(\Ptf\View\Base $view): void
     {
         $this->view = $view;
     }

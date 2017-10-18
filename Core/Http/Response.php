@@ -3,7 +3,7 @@
 namespace Ptf\Core\Http;
 
 /**
- * Encapsulates the server response
+ * Encapsulates the server response.
  */
 class Response
 {
@@ -20,7 +20,7 @@ class Response
     protected $content;
 
     /**
-     * Initialize the member variables
+     * Initialize the member variables.
      */
     public function __construct()
     {
@@ -29,10 +29,10 @@ class Response
     }
 
     /**
-     * Set the given header
+     * Set the given header.
      *
      * @param   string $header              The header to set
-     * @param   integer $responseCode       The response code to send with the header
+     * @param   int $responseCode       The response code to send with the header
      * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function setHeader($header, $responseCode = null)
@@ -43,7 +43,7 @@ class Response
     }
 
     /**
-     * Set a "404 Not Found" header
+     * Set a "404 Not Found" header.
      *
      * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
@@ -53,10 +53,10 @@ class Response
     }
 
     /**
-     * Set a "Location" header
+     * Set a "Location" header.
      *
      * @param   string $url                 The URL to redirect to
-     * @param   integer $responseCode       The redirect response code
+     * @param   int $responseCode       The redirect response code
      * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
     public function setRedirectHeader($url, $responseCode = 302)
@@ -65,7 +65,7 @@ class Response
     }
 
     /**
-     * Set a "Content-type" header
+     * Set a "Content-type" header.
      *
      * @param   string $contentType         The content type to set
      * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
@@ -76,7 +76,7 @@ class Response
     }
 
     /**
-     * Set a JSON content type header
+     * Set a JSON content type header.
      *
      * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
@@ -86,7 +86,7 @@ class Response
     }
 
     /**
-     * Set a header to bypass the browser cache
+     * Set a header to bypass the browser cache.
      *
      * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
@@ -97,7 +97,7 @@ class Response
     }
 
     /**
-     * Get all headers that will be sent
+     * Get all headers that will be sent.
      *
      * @return    array                     The headers to be sent
      */
@@ -107,7 +107,7 @@ class Response
     }
 
     /**
-     * Clear all set headers
+     * Clear all set headers.
      *
      * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
@@ -120,7 +120,7 @@ class Response
     }
 
     /**
-     * Set the content to send
+     * Set the content to send.
      *
      * @param   string $content             The content to set
      * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
@@ -133,7 +133,7 @@ class Response
     }
 
     /**
-     * Get the content which will be sent
+     * Get the content which will be sent.
      *
      * @return  string                      The content to be sent
      */
@@ -143,9 +143,9 @@ class Response
     }
 
     /**
-     * Return whether any content has been set
+     * Return whether any content has been set.
      *
-     * @return  boolean                     Has the content been set?
+     * @return  bool                     Has the content been set?
      */
     public function hasContent()
     {
@@ -153,7 +153,7 @@ class Response
     }
 
     /**
-     * Send the set headers to the client
+     * Send the set headers to the client.
      *
      * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
@@ -166,7 +166,7 @@ class Response
     }
 
     /**
-     * Send the set content to the client
+     * Send the set content to the client.
      *
      * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */
@@ -178,7 +178,7 @@ class Response
     }
 
     /**
-     * Send the set headers and the content
+     * Send the set headers and the content.
      *
      * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
      */

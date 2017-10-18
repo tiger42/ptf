@@ -3,12 +3,12 @@
 namespace Ptf\App\Config;
 
 /**
- * Configuration for Auth\DB class
+ * Configuration for Auth\DB class.
  */
-class AuthDB extends \Ptf\App\Config\Auth
+class AuthDB extends Auth
 {
     /**
-     * Initialize the configuration data
+     * Initialize the configuration data.
      */
     public function __construct()
     {
@@ -20,14 +20,14 @@ class AuthDB extends \Ptf\App\Config\Auth
             'col_username'  => null,
             'col_password'  => null,
             'col_user_id'   => '',
-            'col_is_active' => ''
+            'col_is_active' => '',
         ]);
     }
 
     /**
-     * Get the DB connection name setting
+     * Get the DB connection name setting.
      *
-     * @return  string                      The configured name of the DB connection
+     * @return string  The configured name of the DB connection
      */
     public function getConnection()
     {
@@ -35,9 +35,9 @@ class AuthDB extends \Ptf\App\Config\Auth
     }
 
     /**
-     * Get the DB table name setting
+     * Get the DB table name setting.
      *
-     * @return  string                      The configured name of the DB table
+     * @return string  The configured name of the DB table
      */
     public function getTable()
     {
@@ -45,9 +45,9 @@ class AuthDB extends \Ptf\App\Config\Auth
     }
 
     /**
-     * Get the "username" column setting
+     * Get the "username" column setting.
      *
-     * @return  string                      The configured name of the "username" column
+     * @return string  The configured name of the "username" column
      */
     public function getColUsername()
     {
@@ -55,9 +55,9 @@ class AuthDB extends \Ptf\App\Config\Auth
     }
 
     /**
-     * Get the "password" column setting
+     * Get the "password" column setting.
      *
-     * @return  string                      The configured name of the "password" column
+     * @return string  The configured name of the "password" column
      */
     public function getColPassword()
     {
@@ -65,9 +65,9 @@ class AuthDB extends \Ptf\App\Config\Auth
     }
 
     /**
-     * Get the "user_id" column setting
+     * Get the "user_id" column setting.
      *
-     * @return  string                      The configured name of the "user_id" column
+     * @return string  The configured name of the "user_id" column
      */
     public function getColUserId()
     {
@@ -75,9 +75,9 @@ class AuthDB extends \Ptf\App\Config\Auth
     }
 
     /**
-     * Get the "is_active" column setting
+     * Get the "is_active" column setting.
      *
-     * @return  string                      The configured name of the "is_active" column
+     * @return string  The configured name of the "is_active" column
      */
     public function getColIsActive()
     {

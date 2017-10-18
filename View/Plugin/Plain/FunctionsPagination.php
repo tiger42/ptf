@@ -58,11 +58,11 @@ class FunctionsPagination
                 if (isset($params['hideinactive']) && $params['hideinactive']) {
                     return '';
                 }
-                $link = isset($params['inactivelink']) ? $params['inactivelink'] : $default;
+                $link = $params['inactivelink'] ?? $default;
 
                 return $link;
             } else {
-                $link = isset($params['link']) ? $params['link'] : $default;
+                $link = $params['link'] ?? $default;
                 $urlParams = $pagination->generateUrlParamsString($params);
 
                 return '<a href="' . $params['url'] .'?page=' . $pagination->getFirstPage() . $urlParams . '">' . $link . '</a>';
@@ -105,11 +105,11 @@ class FunctionsPagination
                 if (isset($params['hideinactive']) && $params['hideinactive']) {
                     return '';
                 }
-                $link = isset($params['inactivelink']) ? $params['inactivelink'] : $default;
+                $link = $params['inactivelink'] ?? $default;
 
                 return $link;
             } else {
-                $link = isset($params['link']) ? $params['link'] : $default;
+                $link = $params['link'] ?? $default;
                 $urlParams = $pagination->generateUrlParamsString($params);
 
                 return '<a href="' . $params['url'] .'?page=' . $pagination->getPrevPage() . $urlParams . '">' . $link . '</a>';
@@ -152,11 +152,11 @@ class FunctionsPagination
                 if (isset($params['hideinactive']) && $params['hideinactive']) {
                     return '';
                 }
-                $link = isset($params['inactivelink']) ? $params['inactivelink'] : $default;
+                $link = $params['inactivelink'] ?? $default;
 
                 return $link;
             } else {
-                $link = isset($params['link']) ? $params['link'] : $default;
+                $link = $params['link'] ?? $default;
                 $urlParams = $pagination->generateUrlParamsString($params);
 
                 return '<a href="' . $params['url'] .'?page=' . $pagination->getNextPage() . $urlParams . '">' . $link . '</a>';
@@ -199,11 +199,11 @@ class FunctionsPagination
                 if (isset($params['hideinactive']) && $params['hideinactive']) {
                     return '';
                 }
-                $link = isset($params['inactivelink']) ? $params['inactivelink'] : $default;
+                $link = $params['inactivelink'] ?? $default;
 
                 return $link;
             } else {
-                $link = isset($params['link']) ? $params['link'] : $default;
+                $link = $params['link'] ?? $default;
                 $urlParams = $pagination->generateUrlParamsString($params);
 
                 return '<a href="' . $params['url'] .'?page=' . $pagination->getLastPage() . $urlParams . '">' . $link . '</a>';
@@ -239,7 +239,7 @@ class FunctionsPagination
         }
 
         $str = '';
-        $delimiter = isset($params['delimiter']) ? $params['delimiter'] : ' ';
+        $delimiter = $params['delimiter'] ?? ' ';
         $urlParams = $pagination->generateUrlParamsString($params);
         $pageList  = $pagination->getPageList();
         $current   = $pagination->getCurrentPage();
@@ -258,7 +258,7 @@ class FunctionsPagination
      * Display the overall number of pages for a pagination
      *
      * @param   \Ptf\View\Plain $view       The view object
-     * @return  integer                     The page count
+     * @return  int                     The page count
      */
     public static function paginationCount(\Ptf\View\Plain $view)
     {

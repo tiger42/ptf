@@ -4,7 +4,7 @@ namespace PtfTest\Controller\ExecTest\Action;
 
 class Inner extends \Ptf\Controller\Http\Action\Base
 {
-    public function execute(\Ptf\Core\Http\Request $request, \Ptf\Core\Http\Response $response)
+    public function execute(\Ptf\Core\Http\Request $request, \Ptf\Core\Http\Response $response): void
     {
         $context = \Ptf\Application::getContext();
         $view = $context->getView();

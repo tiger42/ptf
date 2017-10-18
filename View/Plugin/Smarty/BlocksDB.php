@@ -33,8 +33,8 @@ class BlocksDB
      * @param   array $params                        Parameters for the plugin
      * @param   string $content                      Content of the block tags
      * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @param   boolean $repeat                      Repeat the plugin?
-     * @param   integer $fetchCount                  The number of performed fetches
+     * @param   bool $repeat                      Repeat the plugin?
+     * @param   int $fetchCount                  The number of performed fetches
      * @return  string                               The modified string
      */
     public static function fetchDB(array $params, $content, \Smarty_Internal_Template $template, &$repeat, &$fetchCount = 0)
@@ -80,8 +80,8 @@ class BlocksDB
      * @param   array $params                        Parameters for the plugin
      * @param   string $content                      Content of the block tags
      * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @param   boolean &$repeat                     Repeat the plugin?
-     * @param   integer $fetchCount                  The number of performed fetches
+     * @param   bool &$repeat                     Repeat the plugin?
+     * @param   int $fetchCount                  The number of performed fetches
      * @return  string                               The modified string
      */
     public static function fetchDBTable(array $params, $content, \Smarty_Internal_Template $template, &$repeat, &$fetchCount = 0)
@@ -91,8 +91,8 @@ class BlocksDB
         }
 
         $dbtable = $params['dbtable'];
-        $offset  = isset($params['offset']) ? $params['offset'] : 0;
-        $count   = isset($params['count']) ? $params['count'] : null;
+        $offset  = $params['offset'] ?? 0;
+        $count   = $params['count'] ?? null;
 
         // Skip the opening block tag
         if ($content === null) {

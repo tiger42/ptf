@@ -3,12 +3,12 @@
 namespace Ptf\App\Config;
 
 /**
- * Configuration for DB class
+ * Configuration for DB class.
  */
 class DB extends \Ptf\App\Config
 {
     /**
-     * Initialize the configuration data
+     * Initialize the configuration data.
      */
     public function __construct()
     {
@@ -19,14 +19,14 @@ class DB extends \Ptf\App\Config
             'username' => null,
             'password' => null,
             'database' => null,
-            'charset'  => 'utf8'
+            'charset'  => 'utf8',
         ];
     }
 
     /**
-     * Get the DB driver name setting
+     * Get the DB driver name setting.
      *
-     * @return  string                      The configured name of the DB driver
+     * @return string  The configured name of the DB driver
      */
     public function getDriver()
     {
@@ -34,9 +34,9 @@ class DB extends \Ptf\App\Config
     }
 
     /**
-     * Get the DB port setting
+     * Get the DB port setting.
      *
-     * @return  string                      The configured DB port
+     * @return string  The configured DB port
      */
     public function getPort()
     {
@@ -44,9 +44,9 @@ class DB extends \Ptf\App\Config
     }
 
     /**
-     * Get the DB host name setting
+     * Get the DB host name setting.
      *
-     * @return  string                      The configured DB host name
+     * @return string  The configured DB host name
      */
     public function getHost()
     {
@@ -54,9 +54,9 @@ class DB extends \Ptf\App\Config
     }
 
     /**
-     * Get the username setting
+     * Get the username setting.
      *
-     * @return  string                      The configured username
+     * @return string  The configured username
      */
     public function getUsername()
     {
@@ -64,9 +64,9 @@ class DB extends \Ptf\App\Config
     }
 
     /**
-     * Get the password setting
+     * Get the password setting.
      *
-     * @return  string                      The configured password
+     * @return string  The configured password
      */
     public function getPassword()
     {
@@ -74,9 +74,9 @@ class DB extends \Ptf\App\Config
     }
 
     /**
-     * Get the the database name setting
+     * Get the the database name setting.
      *
-     * @return  string                      The configured database name
+     * @return string  The configured database name
      */
     public function getDatabase()
     {
@@ -84,9 +84,9 @@ class DB extends \Ptf\App\Config
     }
 
     /**
-     * Get the database character set setting
+     * Get the database character set setting.
      *
-     * @return  string                      The configured character set
+     * @return string  The configured character set
      */
     public function getCharset()
     {

@@ -3,7 +3,7 @@
 namespace Ptf\Util;
 
 /**
- * Provides functions for INI file access
+ * Provides functions for INI file access.
  */
 class IniFile
 {
@@ -14,19 +14,20 @@ class IniFile
     protected $filename;
 
     /**
-     * Array that holds the INI file's data
+     * Array that holds the INI file's data.
      * @var array
      */
     protected $data;
 
     /**
      * Load the INI file, initialize the internal data array.<br />
-     * If no file with the given name exists, saveToDisk() will create a new file
+     * If no file with the given name exists, saveToDisk() will create a new file.
      *
-     * @param   string $filename            The filename of the INI file
-     * @throws  \RuntimeException           If the file is not readable
+     * @param string $filename  The filename of the INI file
+     *
+     * @throws \RuntimeException  If the file is not readable
      */
-    public function __construct($filename)
+    public function __construct(string $filename)
     {
         $this->filename = $filename;
 
@@ -41,9 +42,9 @@ class IniFile
     }
 
     /**
-     * Write the INI file to disk
+     * Write the INI file to disk.
      *
-     * @return  integer|false               Amount of bytes that were written to the file, FALSE on failure
+     * @return int|false  Amount of bytes that were written to the file, FALSE on failure
      */
     public function saveToDisk()
     {
@@ -51,13 +52,14 @@ class IniFile
     }
 
     /**
-     * Get the value of the given key
+     * Get the value of the given key.
      *
-     * @param   string $section             The section the key is located in
-     * @param   string $key                 The key to read the value of
-     * @return  string|null                 The requested value or NULL if the key does not exist
+     * @param string $section  The section the key is located in
+     * @param string $key      The key to read the value of
+     *
+     * @return string|null  The requested value or NULL if the key does not exist
      */
-    public function getValue($section, $key)
+    public function getValue(string $section, string $key): ?string
     {
         if (isset($this->data[$section]) && isset($this->data[$section][$key])) {
             return $this->data[$section][$key];
@@ -66,14 +68,15 @@ class IniFile
     }
 
     /**
-     * Set a value to the given key
+     * Set a value to the given key.
      *
-     * @param   string $section             The section the key is located in
-     * @param   string $key                 The key to write to
-     * @param   mixed $value                The value to write
-     * @throws  \InvalidArgumentException   If the value has an invalid type
+     * @param string $section  The section the key is located in
+     * @param string $key      The key to write to
+     * @param mixed  $value    The value to write
+     *
+     * @throws \InvalidArgumentException  If the value has an invalid type
      */
-    public function setValue($section, $key, $value)
+    public function setValue(string $section, string $key, $value): void
     {
         if (!strlen($section)) {
             $error = "Invalid section name given";
@@ -99,52 +102,53 @@ class IniFile
     }
 
     /**
-     * Get a complete section as array
+     * Get a complete section as array.
      *
-     * @param   string $section             The name of the section to retrieve
-     * @return  array|null                  The section as array or NULL if the section does not exist
+     * @param string $section  The name of the section to retrieve
+     *
+     * @return array|null  The section as array or NULL if the section does not exist
      */
-    public function getSection($section)
+    public function getSection(string $section): ?array
     {
-        return isset($this->data[$section]) ? $this->data[$section] : null;
+        return $this->data[$section] ?? null;
     }
 
     /**
-     * Delete a section
+     * Delete a section.
      *
-     * @param   string $section             The section to delete
+     * @param string $section  The section to delete
      */
-    public function deleteSection($section)
+    public function deleteSection(string $section): void
     {
         unset($this->data[$section]);
     }
 
     /**
-     * Return all available section names as array
+     * Return all available section names as array.
      *
-     * @return  array                       The list of all section names
+     * @return string[]  The list of all section names
      */
-    public function getSectionNames()
+    public function getSectionNames(): array
     {
         return array_keys($this->data);
     }
 
     /**
-     * Return the INI file's content as array
+     * Return the INI file's content as array.
      *
-     * @return  array                       The INI file's data content
+     * @return array  The INI file's data content
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->data;
     }
 
     /**
-     * Convert the internal data array to string
+     * Convert the internal data array to string.
      *
-     * @return  string                      String representation of the object
+     * @return string  String representation of the object
      */
-    public function __toString()
+    public function __toString(): string
     {
         $ini = "; Generated on: " . \Ptf\Util\now() . "\n\n";
 

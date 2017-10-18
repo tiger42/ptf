@@ -58,12 +58,12 @@ class Functions
      */
     public static function exec(array $params, \Ptf\View\Plain $view)
     {
-        /** @var $context \Ptf\App\Context */
+        /* @var $context \Ptf\App\Context */
         $context  = $view['context'];
         $response = $context->getResponse();
 
-        $controllerName = isset($params['controller']) ? $params['controller'] : '';
-        $actionName     = isset($params['action']) ? $params['action'] : '';
+        $controllerName = $params['controller'] ?? '';
+        $actionName     = $params['action'] ?? '';
         $route = $controllerName . '/' . $actionName;
 
         // Preserve current context state
