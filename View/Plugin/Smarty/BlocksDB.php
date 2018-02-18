@@ -41,8 +41,13 @@ class BlocksDB
      *
      * @return string  The modified string
      */
-    public static function fetchDB(array $params, string $content = null, Smarty $template, bool &$repeat, int &$fetchCount = 0): string
-    {
+    public static function fetchDB(
+        array $params,
+        string $content = null,
+        Smarty $template,
+        bool &$repeat,
+        int &$fetchCount = 0
+    ): string {
         if (!isset($params['db']) || !($params['db'] instanceof \Ptf\Model\DB)) {
             trigger_error(__FUNCTION__ . '(): No DB object set', E_USER_ERROR);
         }
@@ -56,6 +61,7 @@ class BlocksDB
 
             $template->assign('row', $row);
             $template->assign('fetchcount', $fetchCount);
+
             return '';
         }
         $row = $db->fetch();
@@ -89,8 +95,13 @@ class BlocksDB
      *
      * @return string  The modified string
      */
-    public static function fetchDBTable(array $params, string $content = null, Smarty $template, bool &$repeat, int &$fetchCount = 0): string
-    {
+    public static function fetchDBTable(
+        array $params,
+        string $content = null,
+        Smarty $template,
+        bool &$repeat,
+        int &$fetchCount = 0
+    ): string {
         if (!isset($params['dbtable']) || !($params['dbtable'] instanceof \Ptf\Model\DB\Table)) {
             trigger_error(__FUNCTION__ . '(): No DB table object set', E_USER_ERROR);
         }
@@ -104,6 +115,7 @@ class BlocksDB
             $dbtable->fetch($offset, $count);
             $fetchCount = 1;
             $template->assign('fetchcount', $fetchCount);
+
             return '';
         }
         $repeat = $dbtable->fetch();
