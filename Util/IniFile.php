@@ -14,7 +14,7 @@ class IniFile
     protected $filename;
 
     /**
-     * Array that holds the INI file's data.
+     * Array that holds the INI file's data
      * @var array
      */
     protected $data;
@@ -33,7 +33,7 @@ class IniFile
 
         if (file_exists($filename)) {
             if (!is_readable($filename)) {
-                throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": Could not read INI file");
+                throw new \RuntimeException(get_class($this) . '::' . __FUNCTION__ . ': Could not read INI file');
             }
             $this->data = parse_ini_file($filename, true);
             return;
@@ -79,14 +79,14 @@ class IniFile
     public function setValue(string $section, string $key, $value): void
     {
         if (!strlen($section)) {
-            $error = "Invalid section name given";
+            $error = 'Invalid section name given';
         } elseif (!strlen($key)) {
-            $error = "Invalid key given";
+            $error = 'Invalid key given';
         } elseif (is_array($value) || is_object($value) || is_resource($value)) {
-            $error = "\$value parameter has invalid type";
+            $error = 'Value parameter has invalid type';
         }
         if ($error) {
-            throw new \InvalidArgumentException(get_class($this) . "::" . __FUNCTION__ . ": " . $error);
+            throw new \InvalidArgumentException(get_class($this) . '::' . __FUNCTION__ . ': ' . $error);
         }
 
         if (!isset($this->data[$section])) {
@@ -150,12 +150,12 @@ class IniFile
      */
     public function __toString(): string
     {
-        $ini = "; Generated on: " . \Ptf\Util\now() . "\n\n";
+        $ini = '; Generated on: ' . \Ptf\Util\now() . "\n\n";
 
         foreach ($this->data as $section => $sectionData) {
-            $ini .= "[" . $section . "]\n";
+            $ini .= '[' . $section . "]\n";
             foreach ($sectionData as $key => $value) {
-                $ini .= $key . " = " . var_export($value, true) . "\n";
+                $ini .= $key . ' = ' . var_export($value, true) . "\n";
             }
             $ini .= "\n";
         }

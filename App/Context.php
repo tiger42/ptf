@@ -238,8 +238,8 @@ abstract class Context
             } else {
                 $className = '\\Ptf\\App\\Config\\' . $configName;
                 if (!class_exists($className)) {
-                    throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__
-                        . ": Configuration not found: " . $configName);
+                    throw new \RuntimeException(get_class($this) . '::' . __FUNCTION__
+                        . ': Configuration not found: ' . $configName);
                 }
                 $this->configs[$configName] = new $className();
             }

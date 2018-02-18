@@ -2,8 +2,6 @@
 
 namespace  Ptf\Core\Cli;
 
-use \Ptf\Core\Cli\Params;
-
 class ParamsTest extends \PHPUnit\Framework\TestCase
 {
     private $testParams1 = [

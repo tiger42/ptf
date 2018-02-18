@@ -410,7 +410,7 @@ class Table implements \ArrayAccess
     {
         $reflection = new \ReflectionClass(__CLASS__);
         if (!in_array($type, $reflection->getConstants())) {
-            throw new \InvalidArgumentException(get_class($this) . "::" . __FUNCTION__ . ": Invalid join type: " . $type);
+            throw new \InvalidArgumentException(get_class($this) . '::' . __FUNCTION__ . ': Invalid join type: ' . $type);
         }
 
         $joinTbl = [
@@ -579,8 +579,8 @@ class Table implements \ArrayAccess
                 $query .= implode(', ', $order);
             }
 
-            $msg = $query . ($offset > 0 || $rowCount !== null ? "; Offset: " . $offset . ", Count: " . $rowCount : "");
-            $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, $msg);
+            $msg = $query . ($offset > 0 || $rowCount !== null ? '; Offset: ' . $offset . ', Count: ' . $rowCount : '');
+            $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, $msg);
 
             $this->db->query($query, $offset, $rowCount);
 
@@ -641,7 +641,7 @@ class Table implements \ArrayAccess
     public function count(string $col = '*', string $where = '')
     {
         $count = $this->fetchSpecial('COUNT', $col, $where);
-        $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, "COUNT of '" . $col . "': " . $count);
+        $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, 'COUNT of "' . $col . '": ' . $count);
 
         return $count === false ? false : (int)$count;
     }
@@ -657,7 +657,7 @@ class Table implements \ArrayAccess
     public function fetchMaxValue(string $col, string $where = '')
     {
         $max = $this->fetchSpecial('MAX', $col, $where);
-        $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, "MAX of '" . $col . "': " . $max);
+        $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, 'MAX of "' . $col . '": ' . $max);
 
         return $max;
     }
@@ -673,7 +673,7 @@ class Table implements \ArrayAccess
     public function fetchMinValue($col, $where = '')
     {
         $min = $this->fetchSpecial('MIN', $col, $where);
-        $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, "MIN of '" . $col . "': " . $min);
+        $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, 'MIN of "' . $col . '": ' . $min);
 
         return $min;
     }
@@ -700,7 +700,7 @@ class Table implements \ArrayAccess
             $cmd . ' INTO ' . $this->quotedName
                 . ' (' . $cols . ') VALUES (' . $vals . ')';
 
-        $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, $sql);
+        $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, $sql);
 
         $this->db->execSql($sql);
 
@@ -731,7 +731,7 @@ class Table implements \ArrayAccess
             . ' SET ' . $sets
             . ' WHERE ' . $where;
 
-        $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, $sql);
+        $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, $sql);
 
         $this->db->execSql($sql);
 
@@ -751,9 +751,9 @@ class Table implements \ArrayAccess
     public function delete(string $where = ''): Table
     {
         if (strlen($where) && (!is_string($where) || is_numeric($where))) {
-            $message = "WHERE parameter must be string or empty";
-            $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__, $message, \Ptf\Util\Logger::FATAL);
-            throw new \InvalidArgumentException(get_class($this) . "::" . __FUNCTION__ . ": " . $message);
+            $message = 'WHERE parameter must be string or empty';
+            $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $message, \Ptf\Util\Logger::FATAL);
+            throw new \InvalidArgumentException(get_class($this) . '::' . __FUNCTION__ . ': ' . $message);
         }
 
         $sql =
@@ -765,12 +765,12 @@ class Table implements \ArrayAccess
         } elseif (count($this->fields)) {
             $sql .= $this->generateWhereCondition();
         } else {
-            $message = "No WHERE condition set";
-            $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__, $message, \Ptf\Util\Logger::FATAL);
-            throw new \InvalidArgumentException(get_class($this) . "::" . __FUNCTION__ . ": " . $message);
+            $message = 'No WHERE condition set';
+            $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $message, \Ptf\Util\Logger::FATAL);
+            throw new \InvalidArgumentException(get_class($this) . '::' . __FUNCTION__ . ': ' . $message);
         }
 
-        $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, $sql);
+        $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, $sql);
 
         $this->db->execSql($sql);
 

@@ -10,7 +10,7 @@ class ViewTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException('\\Ptf\\Core\\Exception\\Config');
         $this->expectExceptionMessage(
-            'Ptf\App\Config\View::__get: Option \'template_dir\' not configured');
+            'Ptf\App\Config\View::__get: Option "template_dir" not configured');
         $config->getTemplateDir();
     }
 

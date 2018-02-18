@@ -58,8 +58,8 @@ class MySQLi extends \Ptf\Model\DB
         );
 
         if ($this->db->connect_error) {
-            $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__, $this->db->connect_error, \Ptf\Util\Logger::ERROR);
-            throw new DBConnectException(get_class($this) . "::" . __FUNCTION__ . ": " . $this->db->connect_error);
+            $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $this->db->connect_error, \Ptf\Util\Logger::ERROR);
+            throw new DBConnectException(get_class($this) . '::' . __FUNCTION__ . ': ' . $this->db->connect_error);
         }
         $this->db->set_charset($this->config->getCharset());
     }
@@ -87,8 +87,8 @@ class MySQLi extends \Ptf\Model\DB
         $res = $this->db->query($query . $limit);
 
         if (!is_object($res)) {
-            $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__, $this->db->error, \Ptf\Util\Logger::ERROR);
-            throw new DBQueryException(get_class($this) . "::" . __FUNCTION__ . ": " . $this->db->error);
+            $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $this->db->error, \Ptf\Util\Logger::ERROR);
+            throw new DBQueryException(get_class($this) . '::' . __FUNCTION__ . ': ' . $this->db->error);
         }
         $this->queryRes = $res;
         $this->numRows  = $res->num_rows;
@@ -124,8 +124,8 @@ class MySQLi extends \Ptf\Model\DB
     protected function execSqlImpl(string $sql): void
     {
         if (!$this->db->query($sql)) {
-            $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__, $this->db->error, \Ptf\Util\Logger::ERROR);
-            throw new DBQueryException(get_class($this) . "::" . __FUNCTION__ . ": " . $this->db->error);
+            $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $this->db->error, \Ptf\Util\Logger::ERROR);
+            throw new DBQueryException(get_class($this) . '::' . __FUNCTION__ . ': ' . $this->db->error);
         }
         $this->affRows = $this->db->affected_rows;
     }

@@ -30,8 +30,8 @@ class Memcache extends \Ptf\Core\Session
     public function init(\Ptf\App\Config\Session $config, \Ptf\App\Context $context): void
     {
         if (!($config instanceof \Ptf\App\Config\SessionMemcache)) {
-            throw new \InvalidArgumentException(get_class($this) . "::" . __FUNCTION__
-                . ": \$config must be instance of class \\Ptf\\App\\Config\\SessionMemcache");
+            throw new \InvalidArgumentException(get_class($this) . '::' . __FUNCTION__
+                . ': $config must be instance of class \\Ptf\\App\\Config\\SessionMemcache');
         }
 
         parent::init($config, $context);

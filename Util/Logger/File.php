@@ -25,8 +25,8 @@ class File extends \Ptf\Util\Logger
         if (!is_resource($this->logFile)) {
             $this->logFile = @fopen($this->logName, 'ab');
             if (!is_resource($this->logFile)) {
-                throw new LoggerException(get_class($this) . "::" . __FUNCTION__
-                    . ": Error opening file '" . $this->logName . "'");
+                throw new LoggerException(get_class($this) . '::' . __FUNCTION__
+                    . ': Error opening file "' . $this->logName . '"');
             }
             flock($this->logFile, LOCK_EX | LOCK_NB);
         }
@@ -57,7 +57,7 @@ class File extends \Ptf\Util\Logger
     {
         $line = sprintf("[%s][%-15s][%-5s] %s\n", $timestamp, $remoteAddress, $this->translateLogLevel($logLevel), $message);
         if (!fwrite($this->logFile, $line)) {
-            throw new LoggerException(get_class($this) . "::" . __FUNCTION__ . ": Unable to write to log file");
+            throw new LoggerException(get_class($this) . '::' . __FUNCTION__ . ': Unable to write to log file');
         }
         fflush($this->logFile);
     }

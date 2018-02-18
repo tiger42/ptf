@@ -2,17 +2,19 @@
 
 namespace Ptf\View\Plugin\Plain;
 
+use Ptf\View\Plain as View;
+
 /**
- * Plain view template function plugins
+ * Plain view template function plugins.
  */
 class Functions
 {
     /**
-     * Register all Plain view function plugins of this class
+     * Register all Plain view function plugins of this class.
      *
-     * @param   \Ptf\View\Plain $view       The Plain view object
+     * @param View $view  The Plain view object
      */
-    public static function register(\Ptf\View\Plain $view)
+    public static function register(View $view): void
     {
         $view->registerFunctionPlugin('dblbr2p', [__CLASS__, 'dblbr2p']);
         $view->registerFunctionPlugin('sid', [__CLASS__, 'sid']);
@@ -22,41 +24,43 @@ class Functions
     }
 
     /**
-     * Replace two consecutive "<br />" with "</p><p>"
+     * Replace two consecutive "<br />" with "</p><p>".
      *
-     * @param   string $string              The string to be modified
-     * @return  string                      The modified string
+     * @param string $string  The string to be modified
+     *
+     * @return string  The modified string
      */
-    public static function dblbr2p($string)
+    public static function dblbr2p($string): string
     {
         return preg_replace('/<br[\s]*\/?>\s*<br[\s]*\/?>/m', "\n</p>\n<p>", $string);
     }
 
     /**
-     * Insert the value of the SID constant
+     * Insert the value of the SID constant.
      *
-     * @return  string                      The SID constant
+     * @return string  The SID constant
      */
-    public static function sid()
+    public static function sid(): string
     {
         return defined('SID') ? SID : '';
     }
 
     /**
-     * Execute the given controller action
+     * Execute the given controller action.
      *
      * <pre>
      * Available parameters:
-     * controller  The controller containing the action to execute
-     * action      The action to execute
+     *   controller  The controller containing the action to execute
+     *   action      The action to execute
      * Any additional parameters will be set as "virtual" GET/REQUEST parameters
      * </pre>
      *
-     * @param   array $params               Parameters for the plugin
-     * @param   \Ptf\View\Plain $view       The view object
-     * @return  string                      The content of the Response object, if set
+     * @param array $params  Parameters for the plugin
+     * @param View  $view    The view object
+     *
+     * @return string  The content of the Response object, if set
      */
-    public static function exec(array $params, \Ptf\View\Plain $view)
+    public static function exec(array $params, View $view): string
     {
         /* @var $context \Ptf\App\Context */
         $context  = $view['context'];

@@ -2,8 +2,6 @@
 
 namespace Ptf\Util;
 
-use Ptf\Util;
-
 class FunctionsTest extends \PHPUnit\Framework\Testcase
 {
     public function testNow()

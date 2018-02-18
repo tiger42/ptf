@@ -55,8 +55,8 @@ abstract class PDO extends \Ptf\Model\DB
         $statement = $this->db->query($query);
         if ($statement === false) {
             $error = $this->db->errorInfo();
-            $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__, $error[2], \Ptf\Util\Logger::ERROR);
-            throw new DBQueryException(get_class($this) . "::" . __FUNCTION__ . ": " . $error[2]);
+            $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $error[2], \Ptf\Util\Logger::ERROR);
+            throw new DBQueryException(get_class($this) . '::' . __FUNCTION__ . ': ' . $error[2]);
         }
         $this->statement = $statement;
         $this->numRows   = $statement->rowCount();
@@ -95,8 +95,8 @@ abstract class PDO extends \Ptf\Model\DB
 
         if ($res === false) {
             $error = $this->db->errorInfo();
-            $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__, $error[2], \Ptf\Util\Logger::ERROR);
-            throw new \Ptf\Core\Exception\DBQuery(get_class($this) . "::" . __FUNCTION__ . ": " . $error[2]);
+            $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $error[2], \Ptf\Util\Logger::ERROR);
+            throw new \Ptf\Core\Exception\DBQuery(get_class($this) . '::' . __FUNCTION__ . ': ' . $error[2]);
         }
         $this->affRows = $res;
     }

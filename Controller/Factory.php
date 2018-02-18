@@ -40,9 +40,9 @@ class Factory
 
         $controller = new $className($controllerName, $context);
         if (!($controller instanceof BaseController)) {
-            throw new \Exception(__METHOD__ . ": Controller must extend base controller: " . $className);
+            throw new \Exception(__METHOD__ . ': Controller must extend base controller: ' . $className);
         }
-        $context->getLogger()->logSys(__METHOD__, "Controller created: " . $className);
+        $context->getLogger()->logSys(__METHOD__, 'Controller created: ' . $className);
 
         $context->_setController($controller);
 

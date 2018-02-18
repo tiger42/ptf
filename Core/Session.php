@@ -124,15 +124,15 @@ abstract class Session
         @session_start();
         if (!$this->isStarted()) {
             $this->context->getLogger('error')->logSys(
-                get_class($this) . "::" . __FUNCTION__,
-                "Unable to start session",
+                get_class($this) . '::' . __FUNCTION__,
+                'Unable to start session',
                 \Ptf\Util\Logger::WARN
             );
             return false;
         }
         $this->context->getLogger()->logSys(
-            get_class($this) . "::" . __FUNCTION__,
-            "Session '" . $this->getSessionId() . "' started"
+            get_class($this) . '::' . __FUNCTION__,
+            'Session "' . $this->getSessionId() . '" started'
         );
         return true;
     }

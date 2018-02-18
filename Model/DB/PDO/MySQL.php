@@ -22,8 +22,8 @@ class MySQL extends \Ptf\Model\DB\PDO
         try {
             $this->db = new \PDO($dsn, $this->config->getUsername(), $this->config->getPassword());
         } catch (\PDOException $e) {
-            $this->errLogger->logSys(get_class($this) . "::" . __FUNCTION__, $e->getMessage(), \Ptf\Util\Logger::ERROR);
-            throw new DBConnectException(get_class($this) . "::" . __FUNCTION__ . ":" . $e->getMessage());
+            $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $e->getMessage(), \Ptf\Util\Logger::ERROR);
+            throw new DBConnectException(get_class($this) . '::' . __FUNCTION__ . ':' . $e->getMessage());
         }
     }
 

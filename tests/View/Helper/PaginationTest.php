@@ -2,8 +2,6 @@
 
 namespace Ptf\View\Helper;
 
-use \Ptf\View\Helper\Pagination;
-
 class PaginationTest extends \PHPUnit\Framework\TestCase
 {
     public function paramsProvider()

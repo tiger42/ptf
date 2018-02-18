@@ -2,19 +2,21 @@
 
 namespace Ptf\View\Plugin\Smarty;
 
-use \Ptf\View\Helper\Pagination;
+use Ptf\View\Smarty as View;
+use Ptf\View\Helper\Pagination;
+use Smarty_Internal_Template as Smarty;
 
 /**
- * Smarty template function plugins for pagination
+ * Smarty template function plugins for pagination.
  */
 class FunctionsPagination
 {
     /**
-     * Register all Smarty function plugins of this class
+     * Register all Smarty function plugins of this class.
      *
-     * @param   \Ptf\View\Smarty $view      The Smarty view object
+     * @param View $view  The Smarty view object
      */
-    public static function register(\Ptf\View\Smarty $view)
+    public static function register(View $view): void
     {
         $view->registerFunctionPlugin('pagination_first', [__CLASS__, 'paginationFirst']);
         $view->registerFunctionPlugin('pagination_prev', [__CLASS__, 'paginationPrev']);
@@ -26,30 +28,31 @@ class FunctionsPagination
 
     /**
      * Generate a link to the first page of a listing with pagination
-     * or return its page number
+     * or return its page number.
      *
      * <pre>
      * Available parameters:
-     * url           The URL of the page (without any parameters!)
-     *               If not set, the plugin will return the page number only
-     * link          The link text or image
-     *               If not set, the default '|<' will be used
-     * inactivelink  The link text or image if the current page is the first page
-     *               If not set, the default '|<' will be used
-     * hideinactive  If the current page is the first page:
-     *               Hide the link text or image?
+     *   url           The URL of the page (without any parameters!)
+     *                 If not set, the plugin will return the page number only
+     *   link          The link text or image
+     *                 If not set, the default '|<' will be used
+     *   inactivelink  The link text or image if the current page is the first page
+     *                 If not set, the default '|<' will be used
+     *   hideinactive  If the current page is the first page:
+     *                 Hide the link text or image?
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @return  string                               The generated pagination link
+     * @param array  $params    Parameters for the plugin
+     * @param Smarty $template  The Smarty template object
+     *
+     * @return string  The generated pagination link
      */
-    public static function paginationFirst(array $params, \Smarty_Internal_Template $template)
+    public static function paginationFirst(array $params, Smarty $template): string
     {
         $pagination = $template->getTemplateVars('pagination');
         if (!($pagination instanceof Pagination)) {
-            trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
+            trigger_error(__FUNCTION__ . '(): No Pagination object set', E_USER_ERROR);
         }
 
         $default = '|&lt;';
@@ -73,30 +76,31 @@ class FunctionsPagination
 
     /**
      * Generate a link to the previous page of a listing with pagination
-     * or return its page number
+     * or return its page number.
      *
      * <pre>
      * Available parameters:
-     * url           The URL of the page (without any parameters!)
-     *               If not set, the plugin will return the page number only
-     * link          The link text or image
-     *               If not set, the default '<' will be used
-     * inactivelink  The link text or image if the current page is the first page
-     *               If not set, the default '<' will be used
-     * hideinactive  If the current page is the first page:
-     *               Hide the link text or image?
+     *   url           The URL of the page (without any parameters!)
+     *                 If not set, the plugin will return the page number only
+     *   link          The link text or image
+     *                 If not set, the default '<' will be used
+     *   inactivelink  The link text or image if the current page is the first page
+     *                 If not set, the default '<' will be used
+     *   hideinactive  If the current page is the first page:
+     *                 Hide the link text or image?
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @return  string                               The generated pagination link
+     * @param array  $params    Parameters for the plugin
+     * @param Smarty $template  The Smarty template object
+     *
+     * @return string  The generated pagination link
      */
-    public static function paginationPrev(array $params, \Smarty_Internal_Template $template)
+    public static function paginationPrev(array $params, Smarty $template): string
     {
         $pagination = $template->getTemplateVars('pagination');
         if (!($pagination instanceof Pagination)) {
-            trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
+            trigger_error(__FUNCTION__ . '(): No Pagination object set', E_USER_ERROR);
         }
 
         $default = '&lt;';
@@ -120,30 +124,31 @@ class FunctionsPagination
 
     /**
      * Generate a link to the next page of a listing with pagination
-     * or return its page number
+     * or return its page number.
      *
      * <pre>
      * Available parameters:
-     * url           The URL of the page (without any parameters!)
-     *               If not set, the plugin will return the page number only
-     * link          The link text or image
-     *               If not set, the default '>' will be used
-     * inactivelink  The link text or image if the current page is the last page
-     *               If not set, the default '>' will be used
-     * hideinactive  If the current page is the last page:
-     *               Hide the link text or image?
+     *   url           The URL of the page (without any parameters!)
+     *                 If not set, the plugin will return the page number only
+     *   link          The link text or image
+     *                 If not set, the default '>' will be used
+     *   inactivelink  The link text or image if the current page is the last page
+     *                 If not set, the default '>' will be used
+     *   hideinactive  If the current page is the last page:
+     *                 Hide the link text or image?
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @return  string                               The generated pagination link
+     * @param array  $params    Parameters for the plugin
+     * @param Smarty $template  The Smarty template object
+     *
+     * @return string  The generated pagination link
      */
-    public static function paginationNext(array $params, \Smarty_Internal_Template $template)
+    public static function paginationNext(array $params, Smarty $template): string
     {
         $pagination = $template->getTemplateVars('pagination');
         if (!($pagination instanceof Pagination)) {
-            trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
+            trigger_error(__FUNCTION__ . '(): No Pagination object set', E_USER_ERROR);
         }
 
         $default = '&gt;';
@@ -167,30 +172,31 @@ class FunctionsPagination
 
     /**
      * Generate a link to the last page of a listing with pagination
-     * or return its page number
+     * or return its page number.
      *
      * <pre>
      * Available parameters:
-     * url           The URL of the page (without any parameters!)
-     *               If not set, the plugin will return the page number only
-     * link          The link text or image
-     *               If not set, the default '>|' will be used
-     * inactivelink  The link text or image if the current page is the last page
-     *               If not set, the default '>|' will be used
-     * hideinactive  If the current page is the last page:
-     *               Hide the link text or image?
+     *   url           The URL of the page (without any parameters!)
+     *                 If not set, the plugin will return the page number only
+     *   link          The link text or image
+     *                 If not set, the default '>|' will be used
+     *   inactivelink  The link text or image if the current page is the last page
+     *                 If not set, the default '>|' will be used
+     *   hideinactive  If the current page is the last page:
+     *                 Hide the link text or image?
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @return  string                               The generated pagination link
+     * @param array  $params    Parameters for the plugin
+     * @param Smarty $template  The Smarty template object
+     *
+     * @return string  The generated pagination link
      */
-    public static function paginationLast(array $params, \Smarty_Internal_Template $template)
+    public static function paginationLast(array $params, Smarty $template): string
     {
         $pagination = $template->getTemplateVars('pagination');
         if (!($pagination instanceof Pagination)) {
-            trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
+            trigger_error(__FUNCTION__ . '(): No Pagination object set', E_USER_ERROR);
         }
 
         $default = '&gt;|';
@@ -213,25 +219,26 @@ class FunctionsPagination
     }
 
     /**
-     * Generate a list of page numbers (with links) for a listing with pagination
+     * Generate a list of page numbers (with links) for a listing with pagination.
      *
      * <pre>
      * Available parameters:
-     * url        The URL of the page (without any parameters!)
-     * delimiter  The delimiter between two page numbers
-     *            If not set, the default ' ' will be used
+     *   url        The URL of the page (without any parameters!)
+     *   delimiter  The delimiter between two page numbers
+     *              If not set, the default ' ' will be used
      * Any additional parameters will be appended to the URL
      * </pre>
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @return  string                               The generated page list
+     * @param array $params     Parameters for the plugin
+     * @param Smarty $template  The Smarty template object
+     *
+     * @return string  The generated page list
      */
-    public static function paginationList(array $params, \Smarty_Internal_Template $template)
+    public static function paginationList(array $params, Smarty $template): string
     {
         $pagination = $template->getTemplateVars('pagination');
         if (!($pagination instanceof Pagination)) {
-            trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
+            trigger_error(__FUNCTION__ . '(): No Pagination object set', E_USER_ERROR);
         }
 
         if (!isset($params['url'])) {
@@ -255,17 +262,18 @@ class FunctionsPagination
     }
 
     /**
-     * Display the overall number of pages for a pagination
+     * Display the overall number of pages for a pagination.
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @return  int                              The page count
+     * @param array  $params    Parameters for the plugin
+     * @param Smarty $template  The Smarty template object
+     *
+     * @return int  The page count
      */
-    public static function paginationCount(array $params, \Smarty_Internal_Template $template)
+    public static function paginationCount(array $params, Smarty $template): int
     {
         $pagination = $template->getTemplateVars('pagination');
         if (!($pagination instanceof Pagination)) {
-            trigger_error(__FUNCTION__ . "(): No Pagination object set", E_USER_ERROR);
+            trigger_error(__FUNCTION__ . '(): No Pagination object set', E_USER_ERROR);
         }
 
         return $pagination->getPageCount();

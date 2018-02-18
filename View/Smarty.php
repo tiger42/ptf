@@ -196,10 +196,10 @@ class Smarty extends Base
     public function render(string $cacheId = null): void
     {
         if (!$this->templateName) {
-            throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": Smarty template has not been set");
+            throw new \RuntimeException(get_class($this) . '::' . __FUNCTION__ . ': Smarty template has not been set');
         }
 
-        $this->context->getLogger()->logSys(__METHOD__, "Rendering template: "
+        $this->context->getLogger()->logSys(__METHOD__, 'Rendering template: '
             . $this->config->getTemplateDir() . '/' . $this->templateName);
 
         $this->smarty->display($this->templateName, $cacheId);
@@ -217,10 +217,10 @@ class Smarty extends Base
     public function fetch(string $cacheId = null): string
     {
         if (!$this->templateName) {
-            throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": Smarty template has not been set");
+            throw new \RuntimeException(get_class($this) . '::' . __FUNCTION__ . ': Smarty template has not been set');
         }
 
-        $this->context->getLogger()->logSys(__METHOD__, "Fetching template: "
+        $this->context->getLogger()->logSys(__METHOD__, 'Fetching template: '
             . $this->config->getTemplateDir() . '/' . $this->templateName);
 
         return $this->smarty->fetch($this->templateName, $cacheId);

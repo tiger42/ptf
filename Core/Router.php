@@ -17,7 +17,7 @@ class Router
      */
     public static function matchRoute(?string $route, \Ptf\App\Context $context)
     {
-        $context->getLogger()->logSys(__METHOD__, "Trying to match route: " . $route);
+        $context->getLogger()->logSys(__METHOD__, 'Trying to match route: ' . $route);
 
         $parts = self::lookup($route, $context);
         $controllerName = $parts[0];
@@ -67,7 +67,7 @@ class Router
         foreach ($routingTable as $source => $target) {
             if (strtolower($source) == $newRoute) {
                 $route = $target;
-                $context->getLogger()->logSys(__METHOD__, "Mapping route to: " . $newRoute);
+                $context->getLogger()->logSys(__METHOD__, 'Mapping route to: ' . $newRoute);
                 break;
             }
         }

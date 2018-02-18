@@ -2,8 +2,6 @@
 
 namespace Ptf\Core;
 
-use \Ptf\Core\Router;
-
 class RouterTest extends \PHPUnit\Framework\TestCase
 {
     public function testMatchRoute()

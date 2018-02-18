@@ -45,13 +45,13 @@ class DB extends \Ptf\Util\Logger
     {
         if (!$this->logTable) {
             if (!$this->dbConfig) {
-                throw new LoggerException(get_class($this) . "::" . __FUNCTION__
-                    . ": DB configuration has not been set");
+                throw new LoggerException(get_class($this) . '::' . __FUNCTION__
+                    . ': DB configuration has not been set');
             }
             try {
                 $this->logTable = new DBTable($this->logName, $this->dbConfig, $this->context);
             } catch (\Ptf\Exception\DBConnect $e) {
-                throw new LoggerException(get_class($this) . "::" . __FUNCTION__ . ": " . $e->getMessage());
+                throw new LoggerException(get_class($this) . '::' . __FUNCTION__ . ': ' . $e->getMessage());
             }
         }
     }
@@ -83,8 +83,8 @@ class DB extends \Ptf\Util\Logger
 
         try {
             $this->logTable->insert();
-        } catch (\Ptf\Exception\DBQuery $e) {
-            throw new \Ptf\Core\Exception\Logger(get_class($this) . "::" . __FUNCTION__ . ": " . $e->getMessage());
+        } catch (\Ptf\Core\Exception\DBQuery $e) {
+            throw new \Ptf\Core\Exception\Logger(get_class($this) . '::' . __FUNCTION__ . ': ' . $e->getMessage());
         }
     }
 

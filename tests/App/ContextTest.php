@@ -60,7 +60,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException('\\Ptf\\Core\\Exception\\Config');
         $this->expectExceptionMessage(
-            'Ptf\App\Config\ViewPlain::__get: Option \'template_dir\' not configured');
+            'Ptf\App\Config\ViewPlain::__get: Option "template_dir" not configured');
         new MyExceptionContext();
     }
 

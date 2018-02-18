@@ -10,7 +10,7 @@ class ViewSmartyTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException('\\Ptf\\Core\\Exception\\Config');
         $this->expectExceptionMessage(
-            'Ptf\App\Config\ViewSmarty::__get: Option \'compile_dir\' not configured');
+            'Ptf\App\Config\ViewSmarty::__get: Option "compile_dir" not configured');
         $config->getCompileDir();
     }
 

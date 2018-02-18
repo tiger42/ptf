@@ -10,7 +10,7 @@ class AuthDBTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException('\\Ptf\\Core\\Exception\\Config');
         $this->expectExceptionMessage(
-            'Ptf\App\Config\AuthDB::__get: Option \'connection\' not configured');
+            'Ptf\App\Config\AuthDB::__get: Option "connection" not configured');
         $config->getConnection();
     }
 
@@ -20,7 +20,7 @@ class AuthDBTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException('\\Ptf\\Core\\Exception\\Config');
         $this->expectExceptionMessage(
-            'Ptf\App\Config\AuthDB::__get: Option \'table\' not configured');
+            'Ptf\App\Config\AuthDB::__get: Option "table" not configured');
         $config->getTable();
     }
 
@@ -30,7 +30,7 @@ class AuthDBTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException('\\Ptf\\Core\\Exception\\Config');
         $this->expectExceptionMessage(
-            'Ptf\App\Config\AuthDB::__get: Option \'col_username\' not configured');
+            'Ptf\App\Config\AuthDB::__get: Option "col_username" not configured');
         $config->getColUsername();
     }
 
@@ -40,7 +40,7 @@ class AuthDBTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException('\\Ptf\\Core\\Exception\\Config');
         $this->expectExceptionMessage(
-            'Ptf\App\Config\AuthDB::__get: Option \'col_password\' not configured');
+            'Ptf\App\Config\AuthDB::__get: Option "col_password" not configured');
         $config->getColPassword();
     }
 

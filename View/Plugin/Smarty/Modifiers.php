@@ -2,28 +2,31 @@
 
 namespace Ptf\View\Plugin\Smarty;
 
+use Ptf\View\Smarty as View;
+
 /**
- * Smarty template modifier plugins
+ * Smarty template modifier plugins.
  */
 class Modifiers
 {
     /**
-     * Register all Smarty modifier plugins of this class
+     * Register all Smarty modifier plugins of this class.
      *
-     * @param   \Ptf\View\Smarty $view      The Smarty view object
+     * @param View $view  The Smarty view object
      */
-    public static function register(\Ptf\View\Smarty $view)
+    public static function register(View $view): void
     {
         $view->registerModifierPlugin('dblbr2p', [__CLASS__, 'dblbr2p']);
     }
 
     /**
-     * Replace two consecutive "<br />" with "</p><p>"
+     * Replace two consecutive "<br />" with "</p><p>".
      *
-     * @param   string $string              The string to be modified
-     * @return  string                      The modified string
+     * @param  string $string  The string to be modified
+     *
+     * @return string  The modified string
      */
-    public static function dblbr2p($string)
+    public static function dblbr2p(string $string): string
     {
         return preg_replace('/<br[\s]*\/?>\s*<br[\s]*\/?>/m', "\n</p>\n<p>", $string);
     }

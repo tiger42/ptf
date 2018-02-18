@@ -21,7 +21,7 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException('\\Ptf\\Core\\Exception\Config');
         $this->expectExceptionMessage(
-            'Ptf\App\MyConfig::__get: Option \'notSet\' not configured');
+            'Ptf\App\MyConfig::__get: Option "notSet" not configured');
         $config->notSet;
     }
 

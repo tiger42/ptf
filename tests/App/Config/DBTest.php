@@ -31,7 +31,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException('\\Ptf\\Core\\Exception\\Config');
         $this->expectExceptionMessage(
-            'Ptf\App\Config\DB::__get: Option \'username\' not configured');
+            'Ptf\App\Config\DB::__get: Option "username" not configured');
         $config->getUsername();
     }
 
@@ -41,7 +41,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException('\\Ptf\\Core\\Exception\\Config');
         $this->expectExceptionMessage(
-            'Ptf\App\Config\DB::__get: Option \'password\' not configured');
+            'Ptf\App\Config\DB::__get: Option "password" not configured');
         $config->getPassword();
     }
 
@@ -51,7 +51,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException('\\Ptf\\Core\\Exception\\Config');
         $this->expectExceptionMessage(
-            'Ptf\App\Config\DB::__get: Option \'database\' not configured');
+            'Ptf\App\Config\DB::__get: Option "database" not configured');
         $config->getDatabase();
     }
 

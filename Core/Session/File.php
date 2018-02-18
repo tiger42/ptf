@@ -19,15 +19,15 @@ class File extends \Ptf\Core\Session
     public function init(\Ptf\App\Config\Session $config, \Ptf\App\Context $context): void
     {
         if (!($config instanceof \Ptf\App\Config\SessionFile)) {
-            throw new \InvalidArgumentException(get_class($this) . "::" . __FUNCTION__
-                . ": \$config must be instance of class \\Ptf\\App\\Config\\SessionFile");
+            throw new \InvalidArgumentException(get_class($this) . '::' . __FUNCTION__
+                . ': $config must be instance of class \\Ptf\\App\\Config\\SessionFile');
         }
 
         parent::init($config, $context);
 
         if (!is_writable(session_save_path())) {
-            throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__
-                . ": Session save path is not writable: " . session_save_path());
+            throw new \RuntimeException(get_class($this) . '::' . __FUNCTION__
+                . ': Session save path is not writable: ' . session_save_path());
         }
     }
 

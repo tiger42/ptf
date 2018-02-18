@@ -2,8 +2,6 @@
 
 namespace Ptf\Core\Http;
 
-use \Ptf\Core\Http\Request;
-
 class RequestTest extends \PHPUnit\Framework\TestCase
 {
     private $testData = [

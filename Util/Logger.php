@@ -172,8 +172,8 @@ abstract class Logger
     public function logSys(string $function, string $message, int $logLevel = self::DEBUG): void
     {
         try {
-            $this->log("(" . $function . ") " . $message, $logLevel);
-        } catch (\Ptf\Exception\Logger $e) {
+            $this->log('(' . $function . ') ' . $message, $logLevel);
+        } catch (\Ptf\Core\Exception\Logger $e) {
         }
     }
 

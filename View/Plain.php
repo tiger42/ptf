@@ -48,11 +48,11 @@ class Plain extends Base
     public function render(string $cacheId = null): void
     {
         if (!$this->templateName) {
-            throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": PHP template has not been set");
+            throw new \RuntimeException(get_class($this) . '::' . __FUNCTION__ . ': PHP template has not been set');
         }
 
         $tpl = $this->templateDir . '/' . $this->templateName;
-        $this->context->getLogger()->logSys(__METHOD__, "Rendering template: " . $tpl);
+        $this->context->getLogger()->logSys(__METHOD__, 'Rendering template: ' . $tpl);
 
         $oldErrorReporting = error_reporting();
         error_reporting(E_ALL & ~E_NOTICE);
@@ -72,11 +72,11 @@ class Plain extends Base
     public function fetch(string $cacheId = null): string
     {
         if (!$this->templateName) {
-            throw new \RuntimeException(get_class($this) . "::" . __FUNCTION__ . ": PHP template has not been set");
+            throw new \RuntimeException(get_class($this) . '::' . __FUNCTION__ . ': PHP template has not been set');
         }
 
         $tpl = $this->templateDir . '/' . $this->templateName;
-        $this->context->getLogger()->logSys(__METHOD__, "Fetching template: " . $tpl);
+        $this->context->getLogger()->logSys(__METHOD__, 'Fetching template: ' . $tpl);
 
         ob_start();
 

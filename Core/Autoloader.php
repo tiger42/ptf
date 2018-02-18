@@ -164,7 +164,7 @@ class Autoloader
             return;
         }
 
-        $str = "\$mapping = " . var_export($this->fileMapping, true) . ";\n";
+        $str = '$mapping = ' . var_export($this->fileMapping, true) . ";\n";
         fwrite($handle, "<?php\n// Generated on: " . \Ptf\Util\now() . "\n\n" . $str);
         flock($handle, LOCK_UN);
         fclose($handle);

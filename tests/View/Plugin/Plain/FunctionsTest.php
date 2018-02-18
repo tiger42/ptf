@@ -2,8 +2,6 @@
 
 namespace Ptf\View\Plugin\Plain;
 
-use \Ptf\View\Plugin\Plain\Functions;
-
 class FunctionsTest extends \PHPUnit\Framework\TestCase
 {
     public function testSid()

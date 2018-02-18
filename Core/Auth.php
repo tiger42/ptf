@@ -99,8 +99,8 @@ abstract class Auth
     {
         if (!$this->loginImpl($username, $password)) {
             $this->context->getLogger()->logSys(
-                get_class($this) . "::" . __FUNCTION__,
-                "Login failed for user '" . $username . "'",
+                get_class($this) . '::' . __FUNCTION__,
+                'Login failed for user "' . $username . '"',
                 \Ptf\Util\Logger::INFO
             );
             $this->logout();
@@ -108,8 +108,8 @@ abstract class Auth
             return false;
         }
         $this->context->getLogger()->logSys(
-            get_class($this) . "::" . __FUNCTION__,
-            "User '" . $username . "' has logged in",
+            get_class($this) . '::' . __FUNCTION__,
+            'User "' . $username . '" has logged in',
             \Ptf\Util\Logger::INFO
         );
 
@@ -141,8 +141,8 @@ abstract class Auth
         $this->logoutImpl();
         if (isset($this->session->authData['username'])) {
             $this->context->getLogger()->logSys(
-                get_class($this) . "::" . __FUNCTION__,
-                "User '" . $this->session->authData['username'] . "' has logged out",
+                get_class($this) . '::' . __FUNCTION__,
+                'User "' . $this->session->authData['username'] . '" has logged out',
                 \Ptf\Util\Logger::INFO
             );
         }

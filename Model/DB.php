@@ -139,8 +139,8 @@ abstract class DB
      */
     final public function query(string $query, int $offset = 0, int $rowCount = null): int
     {
-        $msg = $query . ($offset > 0 || $rowCount !== null ? "; Offset: " . $offset . ", Count: " . $rowCount : "");
-        $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, $msg);
+        $msg = $query . ($offset > 0 || $rowCount !== null ? '; Offset: ' . $offset . ', Count: ' . $rowCount : '');
+        $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, $msg);
 
         return $this->queryImpl($query, $offset, $rowCount);
     }
@@ -171,7 +171,7 @@ abstract class DB
      */
     final public function execSql(string $sql): void
     {
-        $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, $sql);
+        $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, $sql);
 
         $this->execSqlImpl($sql);
     }
@@ -193,7 +193,7 @@ abstract class DB
     {
         $count = $this->getFetchedRowsCountImpl();
 
-        $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, $count);
+        $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, $count);
 
         return $count;
     }
@@ -215,7 +215,7 @@ abstract class DB
     {
         $count = $this->getAffectedRowsCountImpl();
 
-        $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, $count);
+        $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, $count);
 
         return $count;
     }
@@ -237,7 +237,7 @@ abstract class DB
     {
         $id = $this->getLastInsertIdImpl();
 
-        $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, $id);
+        $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, $id);
 
         return $id;
     }
@@ -285,11 +285,11 @@ abstract class DB
         $res = $this->startTransactionImpl();
 
         if ($res) {
-            $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, "Transaction successfully started");
+            $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, 'Transaction successfully started');
         } else {
             $this->errLogger->logSys(
-                get_class($this) . "::" . __FUNCTION__,
-                "Transaction could not be started",
+                get_class($this) . '::' . __FUNCTION__,
+                'Transaction could not be started',
                 Logger::WARN
             );
         }
@@ -314,11 +314,11 @@ abstract class DB
         $res = $this->commitTransactionImpl();
 
         if ($res) {
-            $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, "Transaction successfully commited");
+            $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, 'Transaction successfully commited');
         } else {
             $this->errLogger->logSys(
-                get_class($this) . "::" . __FUNCTION__,
-                "Transaction could not be commited",
+                get_class($this) . '::' . __FUNCTION__,
+                'Transaction could not be commited',
                 Logger::WARN
             );
         }
@@ -343,11 +343,11 @@ abstract class DB
         $res = $this->rollbackTransactionImpl();
 
         if ($res) {
-            $this->logger->logSys(get_class($this) . "::" . __FUNCTION__, "Transaction successfully rollbacked");
+            $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, 'Transaction successfully rollbacked');
         } else {
             $this->errLogger->logSys(
-                get_class($this) . "::" . __FUNCTION__,
-                "Transaction could not be rollbacked",
+                get_class($this) . '::' . __FUNCTION__,
+                'Transaction could not be rollbacked',
                 Logger::WARN
             );
         }

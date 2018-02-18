@@ -2,17 +2,20 @@
 
 namespace Ptf\View\Plugin\Smarty;
 
+use Ptf\View\Smarty as View;
+use Smarty_Internal_Template as Smarty;
+
 /**
- * Smarty template block function plugins
+ * Smarty template block function plugins.
  */
 class Blocks
 {
     /**
-     * Register all Smarty block function plugins of this class
+     * Register all Smarty block function plugins of this class.
      *
-     * @param   \Ptf\View\Smarty $view      The Smarty view object
+     * @param View $view  The Smarty view object
      */
-    public static function register(\Ptf\View\Smarty $view)
+    public static function register(View $view): void
     {
         $view->registerBlockPlugin('language', [__CLASS__, 'language']);
 
@@ -20,28 +23,29 @@ class Blocks
     }
 
     /**
-     * Display content depending on the given language code
+     * Display content depending on the given language code.
      *
      * <pre>
      * Available parameters:
-     * code  The language code (e.g. 'en', 'de', ...)
+     *   code  The language code (e.g. 'en', 'de', ...)
      * </pre>
      *
-     * @param   array $params                        Parameters for the plugin
-     * @param   string $content                      Content of the block tags
-     * @param   \Smarty_Internal_Template $template  The Smarty template object
-     * @param   bool $repeat                      Repeat the plugin?
-     * @return  string                               The language dependent string
+     * @param array  $params    Parameters for the plugin
+     * @param string $content   Content of the block tags
+     * @param Smarty $template  The Smarty template object
+     * @param bool   $repeat    Repeat the plugin?
+     *
+     * @return string  The language dependent string
      */
-    public static function language(array $params, $content, \Smarty_Internal_Template $template, &$repeat)
+    public static function language(array $params, string $content = null, Smarty $template, bool &$repeat): string
     {
         if (!isset($params['code']) || !strlen($params['code'])) {
-            trigger_error(__FUNCTION__ . "(): No language code given", E_USER_ERROR);
+            trigger_error(__FUNCTION__ . '(): No language code given', E_USER_ERROR);
         }
 
         // Skip the opening block tag
         if ($content === null) {
-            return;
+            return '';
         }
 
         $language = $params['code'];
