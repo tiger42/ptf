@@ -245,6 +245,7 @@ class Table implements \ArrayAccess
         if ($this->columns === null) {
             $this->columns = $this->db->getColumnNames($this->tableName);
         }
+
         return $this->columns;
     }
 
@@ -329,6 +330,7 @@ class Table implements \ArrayAccess
                 $this->$key = $value;
             }
         }
+
         return $this;
     }
 
@@ -418,6 +420,7 @@ class Table implements \ArrayAccess
             'condition' => $onCond,
             'type'      => $type
         ];
+
         $key = $table->getDBName() . '.' . $table->getName();
         $this->joinTables[$key] = $joinTbl;
 
@@ -698,7 +701,7 @@ class Table implements \ArrayAccess
         $cmd = $replace ? 'REPLACE' : 'INSERT';
         $sql =
             $cmd . ' INTO ' . $this->quotedName
-                . ' (' . $cols . ') VALUES (' . $vals . ')';
+            . ' (' . $cols . ') VALUES (' . $vals . ')';
 
         $this->logger->logSys(get_class($this) . '::' . __FUNCTION__, $sql);
 
@@ -746,13 +749,13 @@ class Table implements \ArrayAccess
      * @throws \InvalidArgumentException  If no valid "WHERE" condition was given
      *
      * @return Table  The table object (for fluent interface)
-     *
      */
     public function delete(string $where = ''): Table
     {
         if (strlen($where) && (!is_string($where) || is_numeric($where))) {
             $message = 'WHERE parameter must be string or empty';
             $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $message, \Ptf\Util\Logger::FATAL);
+
             throw new \InvalidArgumentException(get_class($this) . '::' . __FUNCTION__ . ': ' . $message);
         }
 
@@ -767,6 +770,7 @@ class Table implements \ArrayAccess
         } else {
             $message = 'No WHERE condition set';
             $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $message, \Ptf\Util\Logger::FATAL);
+
             throw new \InvalidArgumentException(get_class($this) . '::' . __FUNCTION__ . ': ' . $message);
         }
 

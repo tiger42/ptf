@@ -22,7 +22,7 @@ abstract class Base
     /**
      * Initialize the member variables.
      *
-     * @param string $actionName                The name of the action
+     * @param string               $actionName  The name of the action
      * @param \Ptf\Controller\Base $controller  The action's controller
      */
     public function __construct(string $actionName, \Ptf\Controller\Base $controller)

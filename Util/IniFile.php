@@ -36,8 +36,10 @@ class IniFile
                 throw new \RuntimeException(get_class($this) . '::' . __FUNCTION__ . ': Could not read INI file');
             }
             $this->data = parse_ini_file($filename, true);
+
             return;
         }
+
         $this->data = [];
     }
 
@@ -64,6 +66,7 @@ class IniFile
         if (isset($this->data[$section]) && isset($this->data[$section][$key])) {
             return $this->data[$section][$key];
         }
+
         return null;
     }
 
@@ -85,6 +88,7 @@ class IniFile
         } elseif (is_array($value) || is_object($value) || is_resource($value)) {
             $error = 'Value parameter has invalid type';
         }
+
         if ($error) {
             throw new \InvalidArgumentException(get_class($this) . '::' . __FUNCTION__ . ': ' . $error);
         }
@@ -92,6 +96,7 @@ class IniFile
         if (!isset($this->data[$section])) {
             $this->data[$section] = [];
         }
+
         if ($value === true) {
             $this->data[$section][$key] = 'on';
         } elseif ($value === false) {
@@ -159,6 +164,7 @@ class IniFile
             }
             $ini .= "\n";
         }
+
         return $ini;
     }
 }

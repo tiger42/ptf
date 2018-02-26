@@ -183,6 +183,7 @@ class Smarty extends Base
         if ($templateName === null) {
             $templateName = $this->templateName;
         }
+
         return $this->smarty->isCached($templateName, $cacheId);
     }
 

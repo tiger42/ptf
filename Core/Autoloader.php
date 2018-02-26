@@ -96,8 +96,10 @@ class Autoloader
         ) {
             $this->fileMapping[$className] = $filename;
             $this->writeCacheFile();
+
             return true;
         }
+
         return false;
     }
 
@@ -161,6 +163,7 @@ class Autoloader
         $handle = @fopen($this->cacheFilename . '.tmp', 'w+b');
         if ($handle === false || !flock($handle, LOCK_EX | LOCK_NB)) {
             @fclose($handle);
+
             return;
         }
 

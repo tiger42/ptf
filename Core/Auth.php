@@ -70,6 +70,7 @@ abstract class Auth
                 $data['checkhash'] = md5($data['username'] . $data['expiry'] . $this->config->getSalt());
                 $this->session->authData = $data;
             }
+
             return true;
         }
         $this->logout();
@@ -134,7 +135,7 @@ abstract class Auth
     abstract protected function loginImpl(string $username, string $password): bool;
 
     /**
-     * Log the user out and clear the auth session data
+     * Log the user out and clear the auth session data.
      */
     final public function logout(): void
     {

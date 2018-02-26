@@ -198,6 +198,7 @@ class MyExceptionContext extends MyHttpContext
         if ($configName == 'ViewPlain') {
             return new \Ptf\App\Config\ViewPlain();
         }
+
         return parent::getConfig($configName);
     }
 }

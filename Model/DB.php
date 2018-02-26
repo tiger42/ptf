@@ -100,7 +100,7 @@ abstract class DB
      * @param Context  $context  The application's context
      * @param string   $id       Optional ID to get different instances for same config
      *
-     * @return \Ptf\Model\DB  Singleton instance of concrete DB class
+     * @return DB  Singleton instance of concrete DB class
      */
     final public static function getInstance(DBConfig $config, Context $context, string $id = ''): DB
     {
@@ -110,6 +110,7 @@ abstract class DB
             $className = '\\Ptf\\Model\\DB\\' . str_replace('_', '\\', $config->getDriver());
             self::$instances[$key] = new $className($config, $context, $id);
         }
+
         return self::$instances[$key];
     }
 
@@ -155,7 +156,7 @@ abstract class DB
      *
      * @return  int  The number of fetched rows
      */
-    abstract protected function queryImpl(string $query, int $offset = 0, int $rowCount = null);
+    abstract protected function queryImpl(string $query, int $offset = 0, int $rowCount = null): int;
 
     /**
      * Fetch a row from the query result, advance the row pointer.
@@ -262,6 +263,7 @@ abstract class DB
         if (!isset($this->columnNames[$tableName])) {
             $this->columnNames[$tableName] = $this->getColumnNamesImpl($tableName);
         }
+
         return $this->columnNames[$tableName];
     }
 
@@ -293,6 +295,7 @@ abstract class DB
                 Logger::WARN
             );
         }
+
         return $res;
     }
 
@@ -322,11 +325,12 @@ abstract class DB
                 Logger::WARN
             );
         }
+
         return $res;
     }
 
     /**
-     * Commit the current transaction. <br />
+     * Commit the current transaction.<br />
      * (to be implemented by child classes).
      *
      * @return bool  Was the operation successful?
@@ -351,11 +355,12 @@ abstract class DB
                 Logger::WARN
             );
         }
+
         return $res;
     }
 
     /**
-     * Roll back the current transaction. <br />
+     * Roll back the current transaction.<br />
      * (to be implemented by child classes).
      *
      * @return bool  Was the operation successful?

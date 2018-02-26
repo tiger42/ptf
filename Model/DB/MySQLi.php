@@ -59,8 +59,10 @@ class MySQLi extends \Ptf\Model\DB
 
         if ($this->db->connect_error) {
             $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $this->db->connect_error, \Ptf\Util\Logger::ERROR);
+
             throw new DBConnectException(get_class($this) . '::' . __FUNCTION__ . ': ' . $this->db->connect_error);
         }
+
         $this->db->set_charset($this->config->getCharset());
     }
 
@@ -88,6 +90,7 @@ class MySQLi extends \Ptf\Model\DB
 
         if (!is_object($res)) {
             $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $this->db->error, \Ptf\Util\Logger::ERROR);
+
             throw new DBQueryException(get_class($this) . '::' . __FUNCTION__ . ': ' . $this->db->error);
         }
         $this->queryRes = $res;
@@ -109,8 +112,10 @@ class MySQLi extends \Ptf\Model\DB
             $row = array_change_key_case($row, CASE_LOWER);
         } else {
             $this->queryRes->free();
+
             return false;
         }
+
         return $row;
     }
 
@@ -125,8 +130,10 @@ class MySQLi extends \Ptf\Model\DB
     {
         if (!$this->db->query($sql)) {
             $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $this->db->error, \Ptf\Util\Logger::ERROR);
+
             throw new DBQueryException(get_class($this) . '::' . __FUNCTION__ . ': ' . $this->db->error);
         }
+
         $this->affRows = $this->db->affected_rows;
     }
 
@@ -170,10 +177,12 @@ class MySQLi extends \Ptf\Model\DB
     protected function getColumnNamesImpl(string $tableName): array
     {
         $this->query('DESCRIBE ' . $this->quoteIdentifier($tableName));
+
         $columns = [];
         while (($row = $this->fetch())) {
             $columns[] = $row['field'];
         }
+
         return $columns;
     }
 

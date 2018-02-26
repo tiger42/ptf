@@ -112,6 +112,7 @@ class Plain extends Base
         if (!count($arguments)) {
             return $this->functionPlugins[$name]($this);
         }
+
         return $this->functionPlugins[$name]($arguments[0], $this);
     }
 

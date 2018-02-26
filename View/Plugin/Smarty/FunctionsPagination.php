@@ -71,6 +71,7 @@ class FunctionsPagination
                 return '<a href="' . $params['url'] . '?page=' . $pagination->getFirstPage() . $urlParams . '">' . $link . '</a>';
             }
         }
+
         return $pagination->getFirstPage();
     }
 
@@ -119,6 +120,7 @@ class FunctionsPagination
                 return '<a href="' . $params['url'] . '?page=' . $pagination->getPrevPage() . $urlParams . '">' . $link . '</a>';
             }
         }
+
         return $pagination->getPrevPage();
     }
 
@@ -167,6 +169,7 @@ class FunctionsPagination
                 return '<a href="' . $params['url'] . '?page=' . $pagination->getNextPage() . $urlParams . '">' . $link . '</a>';
             }
         }
+
         return $pagination->getNextPage();
     }
 
@@ -215,6 +218,7 @@ class FunctionsPagination
                 return '<a href="' . $params['url'] . '?page=' . $pagination->getLastPage() . $urlParams . '">' . $link . '</a>';
             }
         }
+
         return $pagination->getLastPage();
     }
 

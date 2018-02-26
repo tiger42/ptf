@@ -16,6 +16,7 @@ class Request
     {
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $addresses = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+
             return trim($addresses[0]);
         }
         return $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'] ?? '';
@@ -237,6 +238,7 @@ class Request
                 $vars[substr($key, strlen($namespace . ':'))] = $value;
             }
         }
+
         return $vars;
     }
 }

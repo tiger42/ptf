@@ -5,7 +5,7 @@ namespace Ptf\Model\DB;
 use Ptf\Core\Exception\DBQuery as DBQueryException;
 
 /**
- * Generic database wrapper for PDO
+ * Generic database wrapper for PDO.
  */
 abstract class PDO extends \Ptf\Model\DB
 {
@@ -56,6 +56,7 @@ abstract class PDO extends \Ptf\Model\DB
         if ($statement === false) {
             $error = $this->db->errorInfo();
             $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $error[2], \Ptf\Util\Logger::ERROR);
+
             throw new DBQueryException(get_class($this) . '::' . __FUNCTION__ . ': ' . $error[2]);
         }
         $this->statement = $statement;
@@ -77,8 +78,10 @@ abstract class PDO extends \Ptf\Model\DB
             $row = array_change_key_case($row, CASE_LOWER);
         } else {
             $this->statement->closeCursor();
+
             return false;
         }
+
         return $row;
     }
 
@@ -96,8 +99,10 @@ abstract class PDO extends \Ptf\Model\DB
         if ($res === false) {
             $error = $this->db->errorInfo();
             $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $error[2], \Ptf\Util\Logger::ERROR);
+
             throw new \Ptf\Core\Exception\DBQuery(get_class($this) . '::' . __FUNCTION__ . ': ' . $error[2]);
         }
+
         $this->affRows = $res;
     }
 
@@ -174,6 +179,7 @@ abstract class PDO extends \Ptf\Model\DB
         if ($quoted === false) {
             return $string;
         }
+
         // PDO::quote() also adds quotes around the string, so we have to remove them here
         return substr($quoted, 1, -1);
     }

@@ -46,7 +46,7 @@ class Output
     }
 
     /**
-     * Return whether any content has been set.
+     * Determine whether any content has been set.
      *
      * @return bool  Has the content been set?
      */

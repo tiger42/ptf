@@ -28,8 +28,10 @@ class Router
             $controller->dispatch($actionName);
         } catch (Exception\InvalidAction $e) {
             $context->getLogger('error')->logSys(__METHOD__, $e->getMessage(), \Ptf\Util\Logger::ERROR);
+
             return false;
         }
+
         return $controller;
     }
 
@@ -68,9 +70,11 @@ class Router
             if (strtolower($source) == $newRoute) {
                 $route = $target;
                 $context->getLogger()->logSys(__METHOD__, 'Mapping route to: ' . $newRoute);
+
                 break;
             }
         }
+
         return explode('/', $route);
     }
 }

@@ -108,6 +108,7 @@ abstract class Logger
         if ($logLevelLimit !== null) {
             static::$instances[$class][$logName]->setLogLevelLimit($logLevelLimit);
         }
+
         return static::$instances[$class][$logName];
     }
 
@@ -251,6 +252,7 @@ abstract class Logger
             $constants = array_flip($reflection->getConstants());
             $this->logLevels = $constants;
         }
+
         return $this->logLevels[$logLevel];
     }
 }

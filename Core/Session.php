@@ -48,6 +48,7 @@ abstract class Session
         if (strlen($sessionName)) {
             $this->setSessionName($sessionName);
         }
+
         $maxLifetime = $config->getMaxLifetime();
         if (is_numeric($maxLifetime)) {
             $this->setMaxLifetime($maxLifetime);
@@ -113,6 +114,7 @@ abstract class Session
         if ($this->isStarted()) {
             return true;
         }
+
         session_set_save_handler(
             [$this, 'openSession'],
             [$this, 'closeSession'],
@@ -121,6 +123,7 @@ abstract class Session
             [$this, 'destroySession'],
             [$this, 'gcSession']
         );
+
         @session_start();
         if (!$this->isStarted()) {
             $this->context->getLogger('error')->logSys(
@@ -128,17 +131,20 @@ abstract class Session
                 'Unable to start session',
                 \Ptf\Util\Logger::WARN
             );
+
             return false;
         }
+
         $this->context->getLogger()->logSys(
             get_class($this) . '::' . __FUNCTION__,
             'Session "' . $this->getSessionId() . '" started'
         );
+
         return true;
     }
 
     /**
-     * Return whether the session has been started.
+     * Determine whether the session has been started.
      *
      * @return bool  Is the session running?
      */

@@ -28,6 +28,7 @@ abstract class CliApplication extends Application
         if (!Core\Router::matchRoute($route, $context)) {
             echo "Unknown command \"{$args[1]}\"\n\n";
             static::showUsage($args);
+
             return;
         }
         $output = $context->getCliOutput();

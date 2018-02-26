@@ -66,6 +66,7 @@ function isNumericArray(array $array): bool
             return false;
         }
     }
+
     return true;
 }
 
@@ -83,9 +84,11 @@ function truncate(string $string, int $length, string $etc = ''): string
     if ($length >= strlen($string)) {
         return $string;
     }
+
     if (strlen($etc) > $length) {
         $etc = substr($etc, 0, $length);
     }
+
     return substr($string, 0, $length - strlen($etc)) . $etc;
 }
 

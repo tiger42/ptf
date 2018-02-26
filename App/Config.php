@@ -25,7 +25,7 @@ abstract class Config implements \ArrayAccess
 
     /**
      * Get the given option's value.<br />
-     * (magic getter function)
+     * (magic getter function).
      *
      * @param string $option  The configuration option to get the value of
      *
@@ -44,7 +44,7 @@ abstract class Config implements \ArrayAccess
 
     /**
      * Set the given option's value.<br />
-     * (magic setter function)
+     * (magic setter function).
      *
      * @param string $option  The configuration option to set
      * @param mixed  $value   The new value
@@ -56,7 +56,7 @@ abstract class Config implements \ArrayAccess
 
     /**
      * Determine whether the given configuration option is set.<br />
-     * (magic isset function)
+     * (magic isset function).
      *
      * @param string $option  The configuration option to test
      *
@@ -69,7 +69,7 @@ abstract class Config implements \ArrayAccess
 
     /**
      * Unset the given configuration option.<br />
-     * (magic unset function)
+     * (magic unset function).
      *
      * @param string $option  The configuration option to unset
      */

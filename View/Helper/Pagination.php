@@ -78,6 +78,7 @@ class Pagination
                 $this->pageCount++;
             }
         }
+
         return $this->pageCount;
     }
 
@@ -122,6 +123,7 @@ class Pagination
         if ($prevPage < 1) {
             $prevPage = 1;
         }
+
         return $prevPage;
     }
 
@@ -136,6 +138,7 @@ class Pagination
         if ($nextPage > ($pageCount = $this->getPageCount())) {
             $nextPage = $pageCount;
         }
+
         return $nextPage;
     }
 
@@ -154,6 +157,7 @@ class Pagination
         if ($start < 1) {
             $start = 1;
         }
+
         $end = $start + $this->listCount - 1;
         $pageCount = $this->getPageCount();
         while ($end > $pageCount) {
@@ -165,6 +169,7 @@ class Pagination
         for ($i = $start; $i <= $end; $i++) {
             $pages[] = $i;
         }
+
         return $pages;
     }
 
@@ -205,6 +210,7 @@ class Pagination
         if (defined('SID') && strlen(SID)) {
             $paramsStr .= '&amp;' . SID;
         }
+
         return $paramsStr;
     }
 }

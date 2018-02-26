@@ -82,6 +82,7 @@ class File extends \Ptf\Core\Session
                 @unlink($filename);
             }
         }
+
         return true;
     }
 }

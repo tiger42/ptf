@@ -204,11 +204,13 @@ abstract class Base implements \ArrayAccess
         $tpl404 = $this->config->getTemplate404();
         if (strlen($tpl404)) {
             $this->setTemplateName($tpl404);
+
             return $this->fetch();
         }
 
         ob_start();
         include 'ErrorPages/404.phtml';
+
         return ob_get_clean();
     }
 

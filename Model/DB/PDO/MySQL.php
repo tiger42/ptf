@@ -23,6 +23,7 @@ class MySQL extends \Ptf\Model\DB\PDO
             $this->db = new \PDO($dsn, $this->config->getUsername(), $this->config->getPassword());
         } catch (\PDOException $e) {
             $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $e->getMessage(), \Ptf\Util\Logger::ERROR);
+
             throw new DBConnectException(get_class($this) . '::' . __FUNCTION__ . ':' . $e->getMessage());
         }
     }
@@ -44,6 +45,7 @@ class MySQL extends \Ptf\Model\DB\PDO
         } elseif ($offset > 0) {
             $limit = ' LIMIT ' . (int)$offset . ', 18446744073709551615';
         }
+
         return $this->runQuery($query . $limit);
     }
 
@@ -57,10 +59,12 @@ class MySQL extends \Ptf\Model\DB\PDO
     protected function getColumnNamesImpl(string $tableName): array
     {
         $this->query('DESCRIBE ' . $this->quoteIdentifier($tableName));
+
         $columns = [];
         while (($row = $this->fetch())) {
             $columns[] = $row['field'];
         }
+
         return $columns;
     }
 

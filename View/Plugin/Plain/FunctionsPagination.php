@@ -43,7 +43,7 @@ class FunctionsPagination
      * </pre>
      *
      * @param array $params  Parameters for the plugin
-     * @param View $view     The view object
+     * @param View  $view    The view object
      *
      * @return string  The generated pagination link
      */
@@ -70,6 +70,7 @@ class FunctionsPagination
                 return '<a href="' . $params['url'] .'?page=' . $pagination->getFirstPage() . $urlParams . '">' . $link . '</a>';
             }
         }
+
         return $pagination->getFirstPage();
     }
 
@@ -91,7 +92,7 @@ class FunctionsPagination
      * </pre>
      *
      * @param array $params  Parameters for the plugin
-     * @param View $view     The view object
+     * @param View  $view    The view object
      *
      * @return string  The generated pagination link
      */
@@ -118,6 +119,7 @@ class FunctionsPagination
                 return '<a href="' . $params['url'] .'?page=' . $pagination->getPrevPage() . $urlParams . '">' . $link . '</a>';
             }
         }
+
         return $pagination->getPrevPage();
     }
 
@@ -139,7 +141,7 @@ class FunctionsPagination
      * </pre>
      *
      * @param array $params  Parameters for the plugin
-     * @param View $view     The view object
+     * @param View  $view    The view object
      *
      * @return string  The generated pagination link
      */
@@ -166,6 +168,7 @@ class FunctionsPagination
                 return '<a href="' . $params['url'] .'?page=' . $pagination->getNextPage() . $urlParams . '">' . $link . '</a>';
             }
         }
+
         return $pagination->getNextPage();
     }
 
@@ -214,6 +217,7 @@ class FunctionsPagination
                 return '<a href="' . $params['url'] .'?page=' . $pagination->getLastPage() . $urlParams . '">' . $link . '</a>';
             }
         }
+
         return $pagination->getLastPage();
     }
 
@@ -229,7 +233,7 @@ class FunctionsPagination
      * </pre>
      *
      * @param array $params  Parameters for the plugin
-     * @param View $view     The view object
+     * @param View  $view    The view object
      *
      * @return string  The generated page list
      */

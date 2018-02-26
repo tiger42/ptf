@@ -20,18 +20,20 @@ abstract class Base extends \Ptf\Controller\Base\Action\Base
     /**
      * Do a HTTP redirect to the given URL.
      *
-     * @param string $url        The URL to redirect to
-     * @param int $responseCode  The HTTP response code to send
+     * @param string $url           The URL to redirect to
+     * @param int    $responseCode  The HTTP response code to send
      */
     public function redirect(string $url, int $responseCode = 302): void
     {
         $this->controller->redirect($url, $responseCode);
+    // @codeCoverageIgnoreStart
     }
+    // @codeCoverageIgnoreEnd
 
     /**
      * Execute the action.
      *
-     * @param \Ptf\Core\Http\Request $request    The current request object
+     * @param \Ptf\Core\Http\Request  $request   The current request object
      * @param \Ptf\Core\Http\Response $response  The response object
      */
     abstract public function execute(\Ptf\Core\Http\Request $request, \Ptf\Core\Http\Response $response): void;
