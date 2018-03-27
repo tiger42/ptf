@@ -17,7 +17,7 @@ class Context extends \Ptf\App\Context
     /**
      * Get the application's namespace.
      *
-     * @return  string  The namespace of the application
+     * @return string  The namespace of the application
      */
     public function getAppNamespace(): string
     {
