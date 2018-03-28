@@ -31,11 +31,12 @@ class Response
     /**
      * Set the given header.
      *
-     * @param   string $header              The header to set
-     * @param   int $responseCode       The response code to send with the header
-     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
+     * @param string $header        The header to set
+     * @param int    $responseCode  The response code to send with the header
+     *
+     * @return Response  The response object (for fluent interface)
      */
-    public function setHeader($header, $responseCode = null)
+    public function setHeader(string $header, int $responseCode = null): Response
     {
         $this->headers[$header] = $responseCode;
 
@@ -45,9 +46,9 @@ class Response
     /**
      * Set a "404 Not Found" header.
      *
-     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
+     * @return Response  The response object (for fluent interface)
      */
-    public function set404Header()
+    public function set404Header(): Response
     {
         return $this->setHeader('HTTP/1.0 404 Not Found');
     }
@@ -55,11 +56,12 @@ class Response
     /**
      * Set a "Location" header.
      *
-     * @param   string $url                 The URL to redirect to
-     * @param   int $responseCode       The redirect response code
-     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
+     * @param string $url           The URL to redirect to
+     * @param int    $responseCode  The redirect response code
+     *
+     * @return Response  The response object (for fluent interface)
      */
-    public function setRedirectHeader($url, $responseCode = 302)
+    public function setRedirectHeader($url, $responseCode = 302): Response
     {
         return $this->setHeader('Location: ' . $url, $responseCode);
     }
@@ -67,10 +69,11 @@ class Response
     /**
      * Set a "Content-type" header.
      *
-     * @param   string $contentType         The content type to set
-     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
+     * @param string $contentType  The content type to set
+     *
+     * @return Response  The response object (for fluent interface)
      */
-    public function setContentTypeHeader($contentType)
+    public function setContentTypeHeader($contentType): Response
     {
         return $this->setHeader('Content-type: ' . $contentType);
     }
@@ -78,9 +81,9 @@ class Response
     /**
      * Set a JSON content type header.
      *
-     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
+     * @return Response  The response object (for fluent interface)
      */
-    public function setJsonHeader()
+    public function setJsonHeader(): Response
     {
         return $this->setContentTypeHeader('application/json');
     }
@@ -88,9 +91,9 @@ class Response
     /**
      * Set a header to bypass the browser cache.
      *
-     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
+     * @return Response  The response object (for fluent interface)
      */
-    public function setNoCacheHeader()
+    public function setNoCacheHeader(): Response
     {
         return $this->setHeader('Cache-Control: no-cache, must-revalidate')
             ->setHeader('Expires: Thu, 01 Jan 1970 00:00:00 GMT');
@@ -99,9 +102,9 @@ class Response
     /**
      * Get all headers that will be sent.
      *
-     * @return    array                     The headers to be sent
+     * @return array  The headers to be sent
      */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
@@ -109,9 +112,9 @@ class Response
     /**
      * Clear all set headers.
      *
-     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
+     * @return Response  The response object (for fluent interface)
      */
-    public function clearHeaders()
+    public function clearHeaders(): Response
     {
         $this->headers = [];
         header_remove();
@@ -122,10 +125,11 @@ class Response
     /**
      * Set the content to send.
      *
-     * @param   string $content             The content to set
-     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
+     * @param string $content  The content to set
+     *
+     * @return Response The response object (for fluent interface)
      */
-    public function setContent($content)
+    public function setContent(string $content = null): Response
     {
         $this->content = $content;
 
@@ -135,9 +139,9 @@ class Response
     /**
      * Get the content which will be sent.
      *
-     * @return  string                      The content to be sent
+     * @return string  The content to be sent
      */
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -145,9 +149,9 @@ class Response
     /**
      * Return whether any content has been set.
      *
-     * @return  bool                     Has the content been set?
+     * @return bool Has the content been set?
      */
-    public function hasContent()
+    public function hasContent(): bool
     {
         return $this->content !== null;
     }
@@ -155,22 +159,23 @@ class Response
     /**
      * Send the set headers to the client.
      *
-     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
+     * @return Response  The response object (for fluent interface)
      */
-    public function sendHeaders()
+    public function sendHeaders(): Response
     {
         foreach ($this->headers as $header => $responseCode) {
             header($header, true, $responseCode);
         }
+
         return $this;
     }
 
     /**
      * Send the set content to the client.
      *
-     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
+     * @return Response  The response object (for fluent interface)
      */
-    public function sendContent()
+    public function sendContent(): Response
     {
         echo $this->content;
 
@@ -180,9 +185,9 @@ class Response
     /**
      * Send the set headers and the content.
      *
-     * @return  \Ptf\Core\Http\Response     The response object (for fluent interface)
+     * @return Response  The response object (for fluent interface)
      */
-    public function send()
+    public function send(): Response
     {
         return $this->sendHeaders()->sendContent();
     }

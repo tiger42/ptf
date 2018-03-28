@@ -11,9 +11,9 @@ class ResponseTest extends \PHPUnit\Framework\TestCase
         $response = new Response();
         $this->assertSame([], $response->getHeaders());
         $response
-            ->setHeader('foo', 'bar')
+            ->setHeader('foo', 42)
             ->setHeader('baz');
-        $this->assertSame(['foo' => 'bar', 'baz' => null], $response->getHeaders());
+        $this->assertSame(['foo' => 42, 'baz' => null], $response->getHeaders());
         $response->clearHeaders();
         $this->assertSame([], $response->getHeaders());
     }
