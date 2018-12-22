@@ -138,7 +138,7 @@ abstract class Logger
      * @param string $message   The message to log
      * @param int    $logLevel  The log level of the message
      */
-    final public function log(string $message, int $logLevel = self::INFO): void
+    final public function log(string $message, $logLevel = self::INFO): void
     {
         if ($logLevel < $this->logLevelLimit) {
             return;
@@ -170,7 +170,7 @@ abstract class Logger
      * @param string $message   The message to log
      * @param int    $logLevel  The log level of the message
      */
-    public function logSys(string $function, string $message, int $logLevel = self::DEBUG): void
+    public function logSys(string $function, string $message, $logLevel = self::DEBUG): void
     {
         try {
             $this->log('(' . $function . ') ' . $message, $logLevel);
