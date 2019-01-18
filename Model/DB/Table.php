@@ -267,7 +267,7 @@ class Table implements \ArrayAccess
      *
      * @return Table  The table object (for fluent interface)
      */
-    public function setAlias(string $col, string $alias): Table
+    public function setAlias(string $col, string $alias): self
     {
         $this->aliases[strtolower($col)] = $alias;
 
@@ -282,7 +282,7 @@ class Table implements \ArrayAccess
      *
      * @return Table  The table object (for fluent interface)
      */
-    public function setCompareMode(string $col, int $mode): Table
+    public function setCompareMode(string $col, int $mode): self
     {
         $this->compModes[strtolower($col)] = $mode;
 
@@ -321,7 +321,7 @@ class Table implements \ArrayAccess
      *
      * @return Table  The table object (for fluent interface)
      */
-    public function fromArray(array $source, callable $filter = null): Table
+    public function fromArray(array $source, callable $filter = null): self
     {
         foreach ($source as $key => $value) {
             if ($filter !== null) {
@@ -360,7 +360,7 @@ class Table implements \ArrayAccess
      *
      * @return Table  The table object (for fluent interface)
      */
-    public function clear(bool $unjoinTables = true): Table
+    public function clear(bool $unjoinTables = true): self
     {
         $this->initFetchVars($unjoinTables);
 
@@ -375,7 +375,7 @@ class Table implements \ArrayAccess
      *
      * @return Table  The table object (for fluent interface)
      */
-    public function setOrder(string $orderBy, string $orderDir = 'ASC'): Table
+    public function setOrder(string $orderBy, string $orderDir = 'ASC'): self
     {
         if (!is_numeric($orderBy)) {
             if (strpos($orderBy, '.') !== false) {
@@ -408,7 +408,7 @@ class Table implements \ArrayAccess
      *
      * @return Table  The table object (for fluent interface)
      */
-    public function join(Table $table, string $onCond, string $type = self::INNER_JOIN): Table
+    public function join(Table $table, string $onCond, string $type = self::INNER_JOIN): self
     {
         $reflection = new \ReflectionClass(__CLASS__);
         if (!in_array($type, $reflection->getConstants())) {
@@ -688,7 +688,7 @@ class Table implements \ArrayAccess
      *
      * @return Table  The table object (for fluent interface)
      */
-    public function insert(bool $replace = false): Table
+    public function insert(bool $replace = false): self
     {
         $arr = [];
         foreach ($this->fields as $col => $value) {
@@ -717,7 +717,7 @@ class Table implements \ArrayAccess
      *
      * @return Table  The table object (for fluent interface)
      */
-    public function update(string $where): Table
+    public function update(string $where): self
     {
         $arr = [];
         foreach ($this->fields as $col => $value) {
@@ -750,7 +750,7 @@ class Table implements \ArrayAccess
      *
      * @return Table  The table object (for fluent interface)
      */
-    public function delete(string $where = ''): Table
+    public function delete(string $where = ''): self
     {
         if (strlen($where) && (!is_string($where) || is_numeric($where))) {
             $message = 'WHERE parameter must be string or empty';

@@ -36,7 +36,7 @@ class Response
      *
      * @return Response  The response object (for fluent interface)
      */
-    public function setHeader(string $header, int $responseCode = null): Response
+    public function setHeader(string $header, int $responseCode = null): self
     {
         $this->headers[$header] = $responseCode;
 
@@ -48,7 +48,7 @@ class Response
      *
      * @return Response  The response object (for fluent interface)
      */
-    public function set404Header(): Response
+    public function set404Header(): self
     {
         return $this->setHeader('HTTP/1.0 404 Not Found');
     }
@@ -61,7 +61,7 @@ class Response
      *
      * @return Response  The response object (for fluent interface)
      */
-    public function setRedirectHeader($url, $responseCode = 302): Response
+    public function setRedirectHeader($url, $responseCode = 302): self
     {
         return $this->setHeader('Location: ' . $url, $responseCode);
     }
@@ -73,7 +73,7 @@ class Response
      *
      * @return Response  The response object (for fluent interface)
      */
-    public function setContentTypeHeader($contentType): Response
+    public function setContentTypeHeader($contentType): self
     {
         return $this->setHeader('Content-type: ' . $contentType);
     }
@@ -83,7 +83,7 @@ class Response
      *
      * @return Response  The response object (for fluent interface)
      */
-    public function setJsonHeader(): Response
+    public function setJsonHeader(): self
     {
         return $this->setContentTypeHeader('application/json');
     }
@@ -93,7 +93,7 @@ class Response
      *
      * @return Response  The response object (for fluent interface)
      */
-    public function setNoCacheHeader(): Response
+    public function setNoCacheHeader(): self
     {
         return $this->setHeader('Cache-Control: no-cache, must-revalidate')
             ->setHeader('Expires: Thu, 01 Jan 1970 00:00:00 GMT');
@@ -114,7 +114,7 @@ class Response
      *
      * @return Response  The response object (for fluent interface)
      */
-    public function clearHeaders(): Response
+    public function clearHeaders(): self
     {
         $this->headers = [];
         header_remove();
@@ -129,7 +129,7 @@ class Response
      *
      * @return Response The response object (for fluent interface)
      */
-    public function setContent(string $content = null): Response
+    public function setContent(string $content = null): self
     {
         $this->content = $content;
 
@@ -161,7 +161,7 @@ class Response
      *
      * @return Response  The response object (for fluent interface)
      */
-    public function sendHeaders(): Response
+    public function sendHeaders(): self
     {
         foreach ($this->headers as $header => $responseCode) {
             header($header, true, $responseCode);
@@ -175,7 +175,7 @@ class Response
      *
      * @return Response  The response object (for fluent interface)
      */
-    public function sendContent(): Response
+    public function sendContent(): self
     {
         echo $this->content;
 
@@ -187,7 +187,7 @@ class Response
      *
      * @return Response  The response object (for fluent interface)
      */
-    public function send(): Response
+    public function send(): self
     {
         return $this->sendHeaders()->sendContent();
     }

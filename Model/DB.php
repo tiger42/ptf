@@ -102,7 +102,7 @@ abstract class DB
      *
      * @return DB  Singleton instance of concrete DB class
      */
-    final public static function getInstance(DBConfig $config, Context $context, string $id = ''): DB
+    final public static function getInstance(DBConfig $config, Context $context, string $id = ''): self
     {
         $key = md5(serialize($config) . $id);
 

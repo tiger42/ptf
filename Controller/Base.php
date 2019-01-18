@@ -3,7 +3,6 @@
 namespace Ptf\Controller;
 
 use Ptf\App\Context;
-use Ptf\Controller\Base as BaseController;
 use Ptf\Controller\Base\Action\Base as BaseAction;
 
 /**
@@ -131,9 +130,9 @@ class Base
      *
      * @param string $route  The route to forward to
      *
-     * @return BaseController  The controller handling the route
+     * @return Base  The controller handling the route
      */
-    final public function forward(string $route): BaseController
+    final public function forward(string $route): self
     {
         $this->context->getLogger()->logSys(get_class($this) . '::' . __FUNCTION__, 'Forwarding to: ' . $route);
 

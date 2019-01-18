@@ -19,6 +19,7 @@ class Request
 
             return trim($addresses[0]);
         }
+
         return $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'] ?? '';
     }
 

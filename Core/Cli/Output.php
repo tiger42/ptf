@@ -28,7 +28,7 @@ class Output
      *
      * @return Output  The output object (for fluent interface)
      */
-    public function setContent(string $content): Output
+    public function setContent(string $content): self
     {
         $this->content = $content;
 
@@ -60,7 +60,7 @@ class Output
      *
      * @return Output  The output object (for fluent interface)
      */
-    public function display(): Output
+    public function display(): self
     {
         echo $this->content;
 

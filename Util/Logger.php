@@ -96,7 +96,7 @@ abstract class Logger
      *
      * @return Logger  Singleton instance of concrete Logger class
      */
-    final public static function getInstance(string $logName, Context $context, int $logLevelLimit = null): Logger
+    final public static function getInstance(string $logName, Context $context, int $logLevelLimit = null): self
     {
         $class = get_called_class();
         if (!isset(static::$instances[$class])) {

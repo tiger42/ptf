@@ -26,7 +26,7 @@ trait Singleton
      *
      * @return Singleton  The Singleton instance of the class
      */
-    final public static function getInstance()
+    final public static function getInstance(): self
     {
         if (static::$instance === null) {
             static::$instance = new static();
