@@ -10,28 +10,16 @@ use Ptf\Core\Exception\DBQuery as DBQueryException;
  */
 class MySQLi extends \Ptf\Model\DB
 {
-    /**
-     * MySQLi object
-     * @var \MySQLi
-     */
+    /** @var \MySQLi  MySQLi object */
     private $db;
 
-    /**
-     * Query result object
-     * @var \MySQLi_Result
-     */
+    /** @var \MySQLi_Result  Query result object */
     private $queryRes;
 
-    /**
-     * Number of rows of the last "SELECT" result
-     * @var int
-     */
+    /** @var int  Number of rows of the last "SELECT" result */
     private $numRows;
 
-    /**
-     * The number of affected rows after the last "INSERT", "UPDATE" or "DELETE" statement
-     * @var int
-     */
+    /** @var int  The number of affected rows after the last "INSERT", "UPDATE" or "DELETE" statement */
     private $affRows;
 
     /**

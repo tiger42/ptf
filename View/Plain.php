@@ -10,16 +10,10 @@ use Ptf\App\Context;
  */
 class Plain extends Base
 {
-    /**
-     * The base directory of the template files
-     * @var string
-     */
+    /** @var string  The base directory of the template files */
     protected $templateDir;
 
-    /**
-     * The registered function plugins
-     * @var array
-     */
+    /** @var array  The registered function plugins */
     protected $functionPlugins;
 
     /**

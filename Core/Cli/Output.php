@@ -7,10 +7,7 @@ namespace Ptf\Core\Cli;
  */
 class Output
 {
-    /**
-     * The content to display
-     * @var string
-     */
+    /** @var string  The content to display */
     protected $content;
 
     /**

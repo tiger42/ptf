@@ -10,22 +10,13 @@ use Ptf\Controller\Base\Action\Base as BaseAction;
  */
 class Base
 {
-    /**
-     * The controller's name
-     * @var string
-     */
+    /** @var string  The controller's name */
     protected $name;
 
-    /**
-     * The application's context
-     * @var Context
-     */
+    /** @var BaseAction  The application's context */
     protected $context;
 
-    /**
-     * The called action
-     * @var BaseAction
-     */
+    /** @var BaseAction  The called action */
     protected $action;
 
     /**

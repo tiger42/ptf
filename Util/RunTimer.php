@@ -7,10 +7,7 @@ namespace Ptf\Util;
  */
 class RunTimer
 {
-    /**
-     * Start time of the timer
-     * @var float
-     */
+    /** @var float  Start time of the timer */
     protected static $startTime;
 
     /**

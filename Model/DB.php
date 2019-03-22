@@ -12,46 +12,25 @@ use Ptf\Util\Logger;
  */
 abstract class DB
 {
-    /**
-     * Singleton instances of concrete DB classes
-     * @var DB[]
-     */
+    /** @var DB[]  Singleton instances of concrete DB classes */
     private static $instances = [];
 
-    /**
-     * ID of the current instance
-     * @var string
-     */
+    /** @var string  ID of the current instance */
     protected $instanceId;
 
-    /**
-     * The system logger
-     * @var Logger
-     */
+    /** @var Logger  The system logger */
     protected $logger;
 
-    /**
-     * The error logger
-     * @var Logger
-     */
+    /** @var Logger  The error logger */
     protected $errLogger;
 
-    /**
-     * The current configuration data
-     * @var DBConfig
-     */
+    /** @var DBConfig  The current configuration data */
     protected $config;
 
-    /**
-     * The application's context
-     * @var Context
-     */
+    /** @var Context  The application's context */
     protected $context;
 
-    /**
-     * Cache for column names per table
-     * @var array
-     */
+    /** @var array  Cache for column names per table */
     protected $columnNames;
 
     /**

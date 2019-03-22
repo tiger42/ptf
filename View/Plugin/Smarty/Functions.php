@@ -50,9 +50,9 @@ class Functions
      */
     public static function exec(array $params, Smarty $template): string
     {
-        /* @var $context \Ptf\App\Context */
+        /** @var \Ptf\App\Context $context */
         $context = $template->getTemplateVars('context');
-        /* @var $view View */
+        /** @var View $view */
         $view = $context->getView();
         $response = $context->getResponse();
 

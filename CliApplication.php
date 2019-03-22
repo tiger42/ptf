@@ -20,7 +20,7 @@ abstract class CliApplication extends Application
     {
         static::initAutoloader(Core\Autoloader::getInstance());
 
-        /* @var $context App\Context */
+        /** @var App\Context $context */
         $context = static::getContext();
 
         $args = $_SERVER['argv'];

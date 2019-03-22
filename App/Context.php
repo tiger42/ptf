@@ -12,58 +12,31 @@ abstract class Context
 {
     use \Ptf\Traits\Singleton;
 
-    /**
-     * The request object (for web applications only)
-     * @var Http\Request
-     */
+    /** @var Http\Request  The request object (for web applications only) */
     protected $request;
 
-    /**
-     * The response object (for web applications only)
-     * @var Http\Response
-     */
+    /** @var Http\Response  The response object (for web applications only) */
     protected $response;
 
-    /**
-     * The command line parameters (for CLI applications only)
-     * @var Cli\Params
-     */
+    /** @var Cli\Params  The command line parameters (for CLI applications only) */
     protected $cliParams;
 
-    /**
-     * The console output (for CLI applications only)
-     * @var Cli\Output
-     */
+    /** @var Cli\Output  The console output (for CLI applications only) */
     protected $cliOutput;
 
-    /**
-     * The application's view object
-     * @var \Ptf\View\Base
-     */
+    /** @var \Ptf\View\Base  The application's view object */
     protected $view;
 
-    /**
-     * Array of configured loggers
-     * @var \Ptf\Util\Logger[]
-     */
+    /** @var \Ptf\Util\Logger[]  Array of configured loggers */
     protected $loggers;
 
-    /**
-     * The called controller
-     * @var \Ptf\Controller\Base
-     */
+    /** @var \Ptf\Controller\Base  The called controller */
     protected $controller;
 
-    /**
-     * Array of the application's configuration objects
-     * @var Config[]
-     */
+    /** @var Config[]  Array of the application's configuration objects */
     protected $configs;
 
-    /**
-     * The route mapping table
-     * @var array
-     */
+    /** @var array  The route mapping table */
     protected $routingTable;
 
     /**
@@ -145,7 +118,7 @@ abstract class Context
     /**
      * Get the response object.
      *
-     * @return Http\Response The response object
+     * @return Http\Response  The response object
      */
     public function getResponse(): ?Http\Response
     {

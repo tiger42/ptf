@@ -7,16 +7,10 @@ namespace Ptf\Controller\Base\Action;
  */
 abstract class Base
 {
-    /**
-     * The action's name
-     * @var string
-     */
+    /** @var string  The action's name */
     protected $name;
 
-    /**
-     * The controller owning the action
-     * @var \Ptf\Controller\Base
-     */
+    /** @var \Ptf\Controller\Base  The controller owning the action */
     protected $controller;
 
     /**

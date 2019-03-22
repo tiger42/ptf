@@ -11,28 +11,16 @@ class Autoloader
 {
     use \Ptf\Traits\Singleton;
 
-    /**
-     * Namespace to base directory mapping
-     * @var array
-     */
+    /** @var array  Namespace to base directory mapping */
     private $nsMapping;
 
-    /**
-     * Class name to PHP filename mapping
-     * @var array
-     */
+    /** @var array  Class name to PHP filename mapping */
     private $fileMapping;
 
-    /**
-     * Name of the class mapping file
-     * @var string
-     */
+    /** @var string  Name of the class mapping file */
     private $cacheFilename;
 
-    /**
-     * Directories to search in for overridden framework classes
-     * @var string[]
-     */
+    /** @var string[]  Directories to search in for overridden framework classes */
     private $overrideDirs;
 
     /**

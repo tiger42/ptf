@@ -62,7 +62,7 @@ class Functions
      */
     public static function exec(array $params, View $view): string
     {
-        /* @var $context \Ptf\App\Context */
+        /** @var \Ptf\App\Context $context */
         $context  = $view['context'];
         $response = $context->getResponse();
 

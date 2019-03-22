@@ -7,11 +7,7 @@ namespace Ptf\Traits;
  */
 trait Singleton
 {
-    /**
-     * The Singleton instance of the class.
-     *
-     * @var Singleton
-     */
+    /** @var Singleton  The Singleton instance of the class */
     protected static $instance;
 
     /**

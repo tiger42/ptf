@@ -7,16 +7,10 @@ namespace Ptf\Util;
  */
 class IniFile
 {
-    /**
-     * The name of the INI file
-     * @var string
-     */
+    /** @var string  The name of the INI file */
     protected $filename;
 
-    /**
-     * Array that holds the INI file's data
-     * @var array
-     */
+    /** @var array  Array that holds the INI file's data */
     protected $data;
 
     /**

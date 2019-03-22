@@ -7,16 +7,10 @@ namespace Ptf\Core\Session;
  */
 class Memcache extends \Ptf\Core\Session
 {
-    /**
-     * Internal Memcache object
-     * @var Memcache
-     */
+    /** @var Memcache  Internal Memcache object */
     protected $memcache;
 
-    /**
-     * List of Memcache hosts
-     * @var string[]
-     */
+    /** @var string[]  List of Memcache hosts */
     protected $hosts;
 
     /**

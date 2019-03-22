@@ -7,10 +7,7 @@ namespace Ptf\Core\Cli;
  */
 class Params
 {
-    /**
-     * Array holding the CLI parameters
-     * @var array
-     */
+    /** @var array  Array holding the CLI parameters */
     protected $parameters;
 
     /**

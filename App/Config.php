@@ -9,10 +9,7 @@ abstract class Config implements \ArrayAccess
 {
     use \Ptf\Traits\ArrayAccess;
 
-    /**
-     * The configuration data
-     * @var array
-     */
+    /** @var array  The configuration data */
     protected $configData;
 
     /**

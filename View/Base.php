@@ -12,28 +12,16 @@ abstract class Base implements \ArrayAccess
 {
     use \Ptf\Traits\ArrayAccess;
 
-    /**
-     * The view's configuration
-     * @var ViewConfig
-     */
+    /** @var ViewConfig  The view's configuration */
     protected $config;
 
-    /**
-     * The application's context
-     * @var Context
-     */
+    /** @var Context  The application's context */
     protected $context;
 
-    /**
-     * Array of assigned template variables
-     * @var array
-     */
+    /** @var array  Array of assigned template variables */
     protected $assignedVars;
 
-    /**
-     * The template to display
-     * @var string
-     */
+    /** @var string  The template to display */
     protected $templateName;
 
     /**

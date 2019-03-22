@@ -15,10 +15,7 @@ class Smarty extends Base
     /** The Smarty main directory */
     protected const SMARTY_DIR = '3rdparty/smarty/libs/';
 
-    /**
-     * The internal Smarty object
-     * @var \Smarty_Internal_TemplateBase
-     */
+    /** @var \Smarty_Internal_TemplateBase  The internal Smarty object */
     protected $smarty;
 
     /**

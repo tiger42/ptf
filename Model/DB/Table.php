@@ -45,94 +45,49 @@ class Table implements \ArrayAccess
     /** Compare case-insensitive */
     public const COMP_CI   = 128;
 
-    /**
-     * The application's context
-     * @var Context
-     */
+    /** @var Context  The application's context */
     protected $context;
 
-    /**
-     * Database object
-     * @var DB
-     */
+    /** @var DB  Database object */
     protected $db;
 
-    /**
-     * The system logger
-     * @var Logger
-     */
+    /** @var Logger  The system logger */
     protected $logger;
 
-    /**
-     * The error logger
-     * @var Logger
-     */
+    /** @var Logger  The error logger */
     protected $errLogger;
 
-    /**
-     * Name of the database table
-     * @var string
-     */
+    /** @var string  Name of the database table */
     protected $tableName;
 
-    /**
-     * Quoted name of the database table
-     * @var string
-     */
+    /** @var string  Quoted name of the database table */
     protected $quotedName;
 
-    /**
-     * Name of the database
-     * @var string
-     */
+    /** @var string  Name of the database */
     protected $dbName;
 
-    /**
-     * "ORDER BY" columns and directions
-     * @var array
-     */
+    /** @var array  "ORDER BY" columns and directions */
     protected $order;
 
-    /**
-     * Array of member variables (for magic functions)
-     * @var array
-     */
+    /** @var array  Array of member variables (for magic functions) */
     protected $fields;
 
-    /**
-     * Aliases for table columns
-     * @var array
-     */
+    /** @var array  Aliases for table columns */
     protected $aliases;
 
-    /**
-     * Names of all table columns
-     * @var string[]
-     */
+    /** @var string[]  Names of all table columns */
     protected $columns;
 
-    /**
-     * Compare modes of the columns
-     * @var array
-     */
+    /** @var array  Compare modes of the columns */
     protected $compModes;
 
-    /**
-     * Joined table objects
-     * @var array
-     */
+    /** @var array  Joined table objects */
     protected $joinTables;
 
-    /**
-     * Has the fetch() function already been executed?
-     * @var bool
-     */
+    /** @var bool  Has the fetch() function already been executed? */
     protected $fetched;
 
-    /**
-     * Do no use the asterisk (*) operator in the next query
-     * @var bool
-     */
+    /** @var bool  Do no use the asterisk (*) operator in the next query */
     protected $suppressAsterisk;
 
     /**

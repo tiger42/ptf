@@ -9,28 +9,16 @@ abstract class Session
 {
     use \Ptf\Traits\Singleton;
 
-    /**
-     * The configuration object
-     * @var \Ptf\App\Config\Session
-     */
+    /** @var \Ptf\App\Config\Session  The configuration object */
     protected $config;
 
-    /**
-     * The application's context
-     * @var \Ptf\App\Context
-     */
+    /** @var \Ptf\App\Context  The application's context */
     protected $context;
 
-    /**
-     * The session path
-     * @var string
-     */
+    /** @var string  The session path */
     protected $path;
 
-    /**
-     * The name of the session
-     * @var string
-     */
+    /** @var string  The name of the session */
     protected $sessionName;
 
     /**

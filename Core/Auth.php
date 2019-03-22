@@ -9,22 +9,13 @@ abstract class Auth
 {
     use \Ptf\Traits\Singleton;
 
-    /**
-     * The configuration object
-     * @var \Ptf\App\Config\Auth
-     */
+    /** @var \Ptf\App\Config\Auth  The configuration object */
     protected $config;
 
-    /**
-     * The session object
-     * @var \Ptf\Core\Session
-     */
+    /** @var \Ptf\Core\Session  The session object */
     protected $session;
 
-    /**
-     * The application's context
-     * @var \Ptf\App\Context
-     */
+    /** @var \Ptf\App\Context  The application's context */
     protected $context;
 
     /**

@@ -24,16 +24,10 @@ use Ptf\Model\DB\Table as DBTable;
  */
 class DB extends \Ptf\Util\Logger
 {
-    /**
-     * Database table object for log table
-     * @var DBTable
-     */
+    /** @var DBTable  Database table object for log table */
     protected $logTable;
 
-    /**
-     * DB configuration object
-     * @var DBConfig
-     */
+    /** @var DBConfig  DB configuration object */
     protected $dbConfig;
 
     /**

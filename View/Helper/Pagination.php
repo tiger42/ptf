@@ -9,34 +9,19 @@ use Ptf\Util;
  */
 class Pagination
 {
-    /**
-     * The number of the current page
-     * @var int
-     */
+    /** @var int  The number of the current page */
     protected $curPage;
 
-    /**
-     * The count of list items per page
-     * @var int
-     */
+    /** @var int  The count of list items per page */
     protected $itemsPerPage;
 
-    /**
-     * The overall count of items
-     * @var int
-     */
+    /** @var int  The overall count of items */
     protected $itemCount;
 
-    /**
-     * The count of pages to show in the page list
-     * @var int
-     */
+    /** @var int  The count of pages to show in the page list */
     protected $listCount;
 
-    /**
-     * The overall count of pages
-     * @var int
-     */
+    /** @var int  The overall count of pages */
     protected $pageCount;
 
     /**

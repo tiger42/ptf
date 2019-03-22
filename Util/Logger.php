@@ -22,34 +22,19 @@ abstract class Logger
     /** Log level for fatal error messages */
     public const FATAL = 5;
 
-    /**
-     * Singleton instances of concrete Logger classes
-     * @var Logger[]
-     */
+    /** @var Logger[]  Singleton instances of concrete Logger classes */
     protected static $instances = [];
 
-    /**
-     * The name of the current log
-     * @var string
-     */
+    /** @var string  The name of the current log */
     protected $logName;
 
-    /**
-     * The logger's configured log level limit
-     * @var int
-     */
+    /** @var int  The logger's configured log level limit */
     protected $logLevelLimit;
 
-    /**
-     * Cache for available log levels
-     * @var array
-     */
+    /** @var array  Cache for available log levels */
     private $logLevels;
 
-    /**
-     * The application's context
-     * @var Context
-     */
+    /** @var Context  The application's context */
     protected $context;
 
     /**

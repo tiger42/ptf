@@ -9,10 +9,7 @@ use Ptf\Core\Exception\Logger as LoggerException;
  */
 class File extends \Ptf\Util\Logger
 {
-    /**
-     * File handle of log file
-     * @var resource
-     */
+    /** @var resource  File handle of log file */
     protected $logFile;
 
     /**

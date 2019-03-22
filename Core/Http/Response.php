@@ -7,16 +7,10 @@ namespace Ptf\Core\Http;
  */
 class Response
 {
-    /**
-     * The headers to send
-     * @var array
-     */
+    /** @var array  The headers to send */
     protected $headers;
 
-    /**
-     * The content to send
-     * @var string
-     */
+    /** @var string  The content to send */
     protected $content;
 
     /**

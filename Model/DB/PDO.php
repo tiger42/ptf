@@ -9,28 +9,16 @@ use Ptf\Core\Exception\DBQuery as DBQueryException;
  */
 abstract class PDO extends \Ptf\Model\DB
 {
-    /**
-     * PDO database object
-     * @var \PDO
-     */
+    /** @var \PDO  PDO database object */
     protected $db;
 
-    /**
-     * PDO statement object
-     * @var \PDOStatement
-     */
+    /** @var \PDOStatement  PDO statement object */
     protected $statement;
 
-    /**
-     * Number of rows of the last "SELECT" result
-     * @var int
-     */
+    /** @var int  Number of rows of the last "SELECT" result */
     protected $numRows;
 
-    /**
-     * The number of affected rows after the last "INSERT", "UPDATE" or "DELETE" statement
-     * @var int
-     */
+    /** @var int  The number of affected rows after the last "INSERT", "UPDATE" or "DELETE" statement */
     protected $affRows;
 
     /**
