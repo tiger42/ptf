@@ -181,13 +181,13 @@ class SmartyTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($view->isCached('test.tpl', 'testCacheId'));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $view = $this->createView();
         $view->clearAll();
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         @rmdir(sys_get_temp_dir() . '/ptf_test');
     }

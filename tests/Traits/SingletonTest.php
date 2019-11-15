@@ -4,11 +4,9 @@ namespace Ptf\Traits;
 
 class SingletonTest extends \PHPUnit\Framework\TestCase
 {
-    private $traitName = '\Ptf\Traits\Singleton';
-
     public function testConstruct()
     {
-        $singleton = $this->getObjectForTrait($this->traitName);
+        $singleton = MockSingleton::getInstance();
         $reflectionMethod = new \ReflectionMethod($singleton, '__construct');
 
         $this->assertTrue($reflectionMethod->isProtected());
@@ -17,21 +15,22 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
 
     public function testGetInstance()
     {
-        $singleton = $this->getObjectForTrait($this->traitName);
+        $singleton = MockSingleton::getInstance();
         $reflectionMethod = new \ReflectionMethod($singleton, 'getInstance');
 
         $this->assertTrue($reflectionMethod->isFinal());
 
-        $firstInstance = $singleton::getInstance();
+        $firstInstance = MockSingleton::getInstance();
         $firstInstance->foo = 'bar';
-        $secondInstance = $singleton::getInstance();
+        $secondInstance = MockSingleton::getInstance();
 
+        $this->assertSame('bar', $secondInstance->foo);
         $this->assertSame($firstInstance, $secondInstance);
     }
 
     public function testClone()
     {
-        $singleton = $this->getObjectForTrait($this->traitName);
+        $singleton = MockSingleton::getInstance();
         $reflectionMethod = new \ReflectionMethod($singleton, '__clone');
 
         $this->assertTrue($reflectionMethod->isPrivate());
@@ -40,10 +39,15 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
 
     public function testWakeup()
     {
-        $singleton = $this->getObjectForTrait($this->traitName);
+        $singleton = MockSingleton::getInstance();
         $reflectionMethod = new \ReflectionMethod($singleton, '__wakeup');
 
         $this->assertTrue($reflectionMethod->isPrivate());
         $this->assertTrue($reflectionMethod->isFinal());
     }
+}
+
+class MockSingleton
+{
+    use \Ptf\Traits\Singleton;
 }

@@ -1,6 +1,7 @@
 3rdparty/
 
 .gitignore
+.phpunit.result.cache
 coverage/
 
 # Eclipse IDE
