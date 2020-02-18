@@ -41,6 +41,7 @@ abstract class PDO extends \Ptf\Model\DB
     protected function runQuery(string $query): int
     {
         $statement = $this->db->query($query);
+
         if ($statement === false) {
             $error = $this->db->errorInfo();
             $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $error[2], \Ptf\Util\Logger::ERROR);
@@ -179,7 +180,7 @@ abstract class PDO extends \Ptf\Model\DB
      *
      * @return string  The unescaped string
      */
-    public function unEscapeString(string $string): string
+    public function unEscapeString(?string $string = ''): string
     {
         return stripslashes($string);
     }

@@ -235,7 +235,7 @@ class MySQLi extends \Ptf\Model\DB
      *
      * @return string  The unescaped string
      */
-    public function unEscapeString(string $string): string
+    public function unEscapeString(?string $string = ''): string
     {
         return stripslashes($string);
     }
