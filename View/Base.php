@@ -24,6 +24,9 @@ abstract class Base implements \ArrayAccess
     /** @var string  The template to display */
     protected $templateName;
 
+    /** @var string  The ID to use for caching */
+    protected $cacheId;
+
     /**
      * Initialize the member variables
      *
@@ -34,6 +37,7 @@ abstract class Base implements \ArrayAccess
     {
         $this->config  = $config;
         $this->context = $context;
+        $this->cacheId = null;
 
         $this->assignedVars = [
             'context' => $context
@@ -115,6 +119,16 @@ abstract class Base implements \ArrayAccess
     }
 
     /**
+     * Get the name of the set template.
+     *
+     * @return string  The template name
+     */
+    public function getTemplateName(): string
+    {
+        return $this->templateName;
+    }
+
+    /**
      * Set the name of the template to be rendered.
      *
      * @param string $templateName  The name of the template to be rendered
@@ -125,13 +139,23 @@ abstract class Base implements \ArrayAccess
     }
 
     /**
-     * Get the name of the set template.
+     * Get the current cache ID, if set.
      *
-     * @return string  The template name
+     * @return string  The cache ID
      */
-    public function getTemplateName(): string
+    public function getCacheId(): ?string
     {
-        return $this->templateName;
+        return $this->cacheId;
+    }
+
+    /**
+     * Set the ID to use for caching.
+     *
+     * @param string $cacheId  The cache ID to set
+     */
+    public function setCacheId(string $cacheId): void
+    {
+        $this->cacheId = $cacheId;
     }
 
     /**
