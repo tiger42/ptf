@@ -54,6 +54,7 @@ class SmartyTest extends \PHPUnit\Framework\TestCase
     {
         $view = $this->createView();
         $view['test'] = 'world';
+        $view->setCacheId('myCacheId');
         $view->render();
         $this->expectOutputString('foobarworldbaz');
     }
@@ -84,6 +85,7 @@ class SmartyTest extends \PHPUnit\Framework\TestCase
     {
         $view = $this->createView();
         $view['test'] = 'world';
+        $view->setCacheId('CACHE');
         $this->assertSame('foobarworldbaz', $view->fetch());
     }
 
@@ -179,6 +181,24 @@ class SmartyTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($view->isCached('test.tpl', 'testCacheId'));
         $view->clearCache();
         $this->assertFalse($view->isCached('test.tpl', 'testCacheId'));
+    }
+
+    public function testIsCached4()
+    {
+        $config = $this->createConfig();
+        $config->caching = 1;
+        $view = new \Ptf\View\Smarty($config, \Ptf\Application::getContext());
+        $view->setTemplateName('test.tpl');
+        $view->setCacheId('myCacheId');
+        $view->fetch();
+        $this->assertTrue($view->isCached());
+        $this->assertFalse($view->isCached('invalid.tpl'));
+        $this->assertFalse($view->isCached('invalid.tpl', 'myCacheId'));
+        $this->assertTrue($view->isCached('test.tpl'));
+        $this->assertFalse($view->isCached('test.tpl', 'otherCacheId'));
+        $this->assertTrue($view->isCached('test.tpl', 'myCacheId'));
+        $view->clearCache();
+        $this->assertFalse($view->isCached('test.tpl'));
     }
 
     public function tearDown(): void

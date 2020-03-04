@@ -181,7 +181,7 @@ class Smarty extends Base
             $templateName = $this->templateName;
         }
 
-        if ($this->cacheId !== null) {
+        if ($cacheId === null && $this->cacheId !== null) {
             $cacheId = $this->cacheId;
         }
 
@@ -204,7 +204,7 @@ class Smarty extends Base
         $this->context->getLogger()->logSys(__METHOD__, 'Rendering template: '
             . $this->config->getTemplateDir() . '/' . $this->templateName);
 
-        if ($this->cacheId !== null) {
+        if ($cacheId === null && $this->cacheId !== null) {
             $cacheId = $this->cacheId;
         }
 
@@ -229,7 +229,7 @@ class Smarty extends Base
         $this->context->getLogger()->logSys(__METHOD__, 'Fetching template: '
             . $this->config->getTemplateDir() . '/' . $this->templateName);
 
-        if ($this->cacheId !== null) {
+        if ($cacheId === null && $this->cacheId !== null) {
             $cacheId = $this->cacheId;
         }
 

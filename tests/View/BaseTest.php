@@ -51,6 +51,14 @@ class BaseTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($view->isCached());
     }
 
+    public function testCacheId()
+    {
+        $view = $this->createView();
+        $this->assertNull($view->getCacheId());
+        $view->setCacheId('myCacheId');
+        $this->assertSame('myCacheId', $view->getCacheId());
+    }
+
     public function testFetch404Page()
     {
         $view = $this->createView();
