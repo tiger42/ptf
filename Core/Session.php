@@ -103,14 +103,7 @@ abstract class Session
             return true;
         }
 
-        session_set_save_handler(
-            [$this, 'openSession'],
-            [$this, 'closeSession'],
-            [$this, 'readSession'],
-            [$this, 'writeSession'],
-            [$this, 'destroySession'],
-            [$this, 'gcSession']
-        );
+        $this->setSaveHandler();
 
         @session_start();
         if (!$this->isStarted()) {
@@ -129,6 +122,21 @@ abstract class Session
         );
 
         return true;
+    }
+
+    /**
+     * Register the session storage functions.
+     */
+    protected function setSaveHandler(): void
+    {
+        session_set_save_handler(
+            [$this, 'openSession'],
+            [$this, 'closeSession'],
+            [$this, 'readSession'],
+            [$this, 'writeSession'],
+            [$this, 'destroySession'],
+            [$this, 'gcSession']
+        );
     }
 
     /**
@@ -159,7 +167,7 @@ abstract class Session
      */
     final public function setMaxLifetime(int $maxLifetime): void
     {
-        init_set('session.gc_maxlifetime', $maxLifetime);
+        ini_set('session.gc_maxlifetime', $maxLifetime);
     }
 
     /**
