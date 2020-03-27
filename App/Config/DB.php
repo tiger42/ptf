@@ -16,6 +16,7 @@ class DB extends \Ptf\App\Config
             'driver'   => 'MySQLi',
             'port'     => '3306',
             'host'     => 'localhost',
+            'socket'   => '',
             'username' => null,
             'password' => null,
             'database' => null,
@@ -51,6 +52,16 @@ class DB extends \Ptf\App\Config
     public function getHost()
     {
         return $this->host;
+    }
+
+    /**
+     * Get the DB socket setting.
+     *
+     * @return string  The configured DB socket
+     */
+    public function getSocket()
+    {
+        return $this->socket;
     }
 
     /**

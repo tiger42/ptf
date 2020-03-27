@@ -16,8 +16,14 @@ class MySQL extends \Ptf\Model\DB\PDO
      */
     protected function connect(): void
     {
-        $dsn = 'mysql:dbname=' . $this->config->getDatabase() . ';host=' . $this->config->getHost()
-            . ';port=' . $this->config->getPort() . ';charset=' . $this->config->getCharset();
+        $socket = $this->config->getSocket();
+        if (strlen($socket)) {
+            $dsn = 'mysql:dbname=' . $this->config->getDatabase() . ';unix_socket=' . $socket
+                . ';charset=' . $this->config->getCharset();
+        } else {
+            $dsn = 'mysql:dbname=' . $this->config->getDatabase() . ';host=' . $this->config->getHost()
+                . ';port=' . $this->config->getPort() . ';charset=' . $this->config->getCharset();
+        }
 
         try {
             $this->db = new \PDO($dsn, $this->config->getUsername(), $this->config->getPassword());

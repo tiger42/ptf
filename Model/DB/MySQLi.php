@@ -37,13 +37,25 @@ class MySQLi extends \Ptf\Model\DB
      */
     protected function connect(): void
     {
-        $this->db = @new \MySQLi(
-            $this->config->getHost(),
-            $this->config->getUsername(),
-            $this->config->getPassword(),
-            $this->config->getDatabase(),
-            $this->config->getPort()
-        );
+        $socket = $this->config->getSocket();
+        if (strlen($socket)) {
+            $this->db = @new \MySQLi(
+                null,
+                $this->config->getUsername(),
+                $this->config->getPassword(),
+                $this->config->getDatabase(),
+                null,
+                $this->config->getSocket()
+            );
+        } else {
+            $this->db = @new \MySQLi(
+                $this->config->getHost(),
+                $this->config->getUsername(),
+                $this->config->getPassword(),
+                $this->config->getDatabase(),
+                $this->config->getPort()
+            );
+        }
 
         if ($this->db->connect_error) {
             $this->errLogger->logSys(get_class($this) . '::' . __FUNCTION__, $this->db->connect_error, \Ptf\Util\Logger::ERROR);
