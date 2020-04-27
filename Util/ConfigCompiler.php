@@ -28,10 +28,15 @@ class ConfigCompiler
             $confData = var_export($settings, true);
             $parent   = preg_replace('/_.*/', '', $section);
 
+            $parentClass = "\\Ptf\\App\\Config\\$parent";
+            if (!class_exists($parentClass)) {
+                $parentClass = '\\Ptf\\App\\Config';
+            }
+
             $conf = "<?php\n"
                 . "// Generated on: $now\n\n"
                 . "namespace $namespace\\App\\Config;\n\n"
-                . "class $section extends \\Ptf\\App\\Config\\$parent\n"
+                . "class $section extends $parentClass\n"
                 . "{\n"
                 . "    public function __construct()\n"
                 . "    {\n"
