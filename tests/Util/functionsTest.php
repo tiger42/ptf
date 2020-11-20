@@ -6,7 +6,7 @@ class FunctionsTest extends \PHPUnit\Framework\Testcase
 {
     public function testNow()
     {
-        $this->assertRegexp('/\d{4}-\d{2}-\d{2} \d{2}\:\d{2}\:\d{2}/', now());
+        $this->assertMatchesRegularExpression('/\d{4}-\d{2}-\d{2} \d{2}\:\d{2}\:\d{2}/', now());
     }
 
     public function testIsIntegerNumber()

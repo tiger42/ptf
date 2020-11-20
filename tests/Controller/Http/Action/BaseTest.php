@@ -18,7 +18,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
         } catch (\Ptf\Core\Exception\SystemExit $e) {
         }
         $content = ob_get_clean();
-        $this->assertRegExp('/<title>404 Not Found<\/title>.*<h1>Error 404<\/h1>/ms', $content);
+        $this->assertMatchesRegularExpression('/<title>404 Not Found<\/title>.*<h1>Error 404<\/h1>/ms', $content);
         $headers = $context->getResponse()->getHeaders();
         $this->assertSame(['HTTP/1.0 404 Not Found' => null], $headers);
         $context->getResponse()->clearHeaders();

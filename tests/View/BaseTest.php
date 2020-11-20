@@ -62,7 +62,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
     public function testFetch404Page()
     {
         $view = $this->createView();
-        $this->assertRegExp('/<title>404 Not Found<\/title>.*<h1>Error 404<\/h1>/ms', $view->fetch404Page());
+        $this->assertMatchesRegularExpression('/<title>404 Not Found<\/title>.*<h1>Error 404<\/h1>/ms', $view->fetch404Page());
     }
 
     private function createView()
