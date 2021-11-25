@@ -34,16 +34,15 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
         $reflectionMethod = new \ReflectionMethod($singleton, '__clone');
 
         $this->assertTrue($reflectionMethod->isPrivate());
-        $this->assertTrue($reflectionMethod->isFinal());
     }
 
     public function testWakeup()
     {
         $singleton = MockSingleton::getInstance();
-        $reflectionMethod = new \ReflectionMethod($singleton, '__wakeup');
+        $this->expectException('\\Exception');
+        $this->expectExceptionMessage('Ptf\Traits\MockSingleton::__wakeup: __wakeup of Singleton object is not allowed');
 
-        $this->assertTrue($reflectionMethod->isPrivate());
-        $this->assertTrue($reflectionMethod->isFinal());
+        $singleton->__wakeup();
     }
 }
 

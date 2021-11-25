@@ -35,16 +35,19 @@ trait Singleton
      *
      * @codeCoverageIgnore
      */
-    final private function __clone()
+    private function __clone()
     {
     }
 
     /**
      * Prevent Singleton instance of the class from being unserialized.
      *
+     * @throws \RuntimeException  If wakeup of object is attempted
+     *
      * @codeCoverageIgnore
      */
-    final private function __wakeup()
+    public function __wakeup()
     {
+        throw new \RuntimeException(get_class($this) . '::' . __FUNCTION__ . ': __wakeup of Singleton object is not allowed');
     }
 }
