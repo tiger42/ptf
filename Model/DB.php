@@ -61,14 +61,7 @@ abstract class DB
     /**
      * Prevent all child classes' Singleton instances from being cloned.
      */
-    final private function __clone()
-    {
-    }
-
-    /**
-     * Prevent all child classes' Singleton instances from being unserialized.
-     */
-    final private function __wakeup()
+    private function __clone()
     {
     }
 
