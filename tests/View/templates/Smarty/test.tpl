@@ -1,1 +1,1 @@
-foo{"bar"}{$test}ba{$param}z
+foo{"bar"}{$test|default:""}ba{$param|default:""}z
