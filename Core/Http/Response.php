@@ -158,6 +158,7 @@ class Response
     public function sendHeaders(): self
     {
         foreach ($this->headers as $header => $responseCode) {
+            $responseCode = $responseCode ?? 0;
             header($header, true, $responseCode);
         }
 
