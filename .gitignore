@@ -9,3 +9,5 @@ coverage/
 .project
 .settings/
 
+# VS Code IDE
+.vscode/
